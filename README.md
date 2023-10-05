@@ -1,6 +1,11 @@
 # PROG1180_Edge_Team
 # DO NOT EDIT IN MAIN BRANCH
 
+How we are going to code:
+1. Work in VSCode using the CodeTogether extension
+2. When done, copy the code from VSCode to the files in the part 2 branch
+3. Commit changes (only after getting approval from group)
+
 Roles:
 Main Communicator: Sean Johnston
 GitHub Manager: Aidan Dagan
