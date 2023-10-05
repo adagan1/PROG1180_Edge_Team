@@ -1,4 +1,5 @@
 # PROG1180_Edge_Team
+# DO NOT EDIT IN MAIN BRANCH
 
 Roles:
 Main Communicator: Sean Johnston
