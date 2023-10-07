@@ -5,6 +5,7 @@
     <title>Customer Page</title>
 </head>
 <body>
+    <script src="sitemap.js"></script>
     <header>
         <h1>Customer</h1>
         <nav>
@@ -16,9 +17,75 @@
             </ul>
         </nav>
     </header>
+
     <main>
-        <h2>Customer Page</h2>
-        <p>This is the about page of my website.</p>
+        <h2>Customer</h2>
+        <p>Search for a customer:</p>
+
+        <form>
+            <input type="text" name="search" placeholder="Search...">
+        </form>
+
+        <br>
+            <input type="submit" value="Search">
+
+        <h1>Customers</h1>
+        <p>Add Edit</p>
+        <!--<table border="1">
+            <tr>
+                <th>Customer ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>long</td>
+                <td>billi</td>
+                <td>(111) 111-1111</td>
+                <td>longbilli@longbilli.com</td>
+                <td>1, long billi street, long billi</td>
+                <td>Select</td>
+            </tr>
+        </table>-->
+        <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+              </tr>
+            </thead>
+            <tbody class="dataRows">
+              <!-- Data rows will be inserted here dynamically -->
+            </tbody>
+          </table>
+        <br>
+        <h1>Customer's Equipment</h1>
+        <table border="1">
+            <tr>
+                <th>Equipment ID</th>
+                <th>Brand</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Amount</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>long billi</td>
+                <td>type jawn</td>
+                <td>Lawnmower</td>
+                <td>$100.00</td>
+                <td>In Stock</td>
+                <td>4</td>
+            </tr>
+        </table>
     </main>
 </body>
 </html>
