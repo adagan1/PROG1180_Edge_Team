@@ -5,7 +5,7 @@ function generateRandomEquipment() {
     const randomName = `Brand${Math.floor(Math.random() * 10) + 1} ${randomEquipment}`;
     const description = `This is a ${randomEquipment} from Brand${Math.floor(Math.random() * 10) + 1}.`;
     const price = (Math.random() * 1000).toFixed(2); // Random price between 0 and 1000
-    const statuses = ["Available", "In Use", "Under Maintenance"];
+    const statuses = ["In stock", "Out of stock", "Delivering"];
     const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
     const amount = Math.floor(Math.random() * 10) + 1; // Random amount between 1 and 10
 
@@ -32,7 +32,7 @@ function fillTableWithRandomEquipment() {
     }
 }
 
-// Function to filter equipment based on the search input
+//Function to filter equipment based on the search input
 function filterEquipment() {
     const input = document.getElementById("searchInput");
     const filter = input.value.toLowerCase();
@@ -55,7 +55,6 @@ function filterEquipment() {
                 }
             }
         }
-
         if (found) {
             row.style.display = "";
         } else {
@@ -64,8 +63,8 @@ function filterEquipment() {
     }
 }
 
+//Fill table with randomly generated equipment
 document.addEventListener("DOMContentLoaded", function() {
-    // Your JavaScript code here
     document.getElementById("searchInput").addEventListener("input", filterEquipment);
     fillTableWithRandomEquipment();
 });
