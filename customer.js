@@ -25,7 +25,7 @@ function fillTableWithRandomPeople() {
     }
 }
 
-// Function to filter equipment based on the search input
+// Function to filter people based on the search input
 function filterCustomer() {
     const input = document.getElementById("searchInput");
     const filter = input.value.toLowerCase();
@@ -57,6 +57,7 @@ function filterCustomer() {
     }
 }
 
+//Fill table with randomly generated customers
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("searchInput").addEventListener("input", filterCustomer);
     fillTableWithRandomPeople();
