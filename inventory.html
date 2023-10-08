@@ -1,59 +1,62 @@
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="style.css">
-<html>
-<head>
-    <title>Inventory</title>
-</head>
-<body>
-    <header>
-        <h1>Inventory</h1>
-        <nav>
-            <ul>
-                <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Inventory</a></li>
-                <li><a href="customer.html">Customer</a></li>
-                <li><a href="services.html">Services</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <h2>Inventory</h2>
-        <p>Search for your product:</p>
-
-        <form>
-            <input type="text" name="search" placeholder="Search...">
-        </form>
-
-        <label for="category">Category:</label>
-        <select id="category">
-            <option value="all">All</option>
-            <option value="electronics">Electronics</option>
-            <option value="clothing">Clothing</option>
-            <option value="books">Books</option>
-        </select>
-
-        <label for="minPrice">Min Price:</label>
-        <input type="number" id="minPrice" min="0">
-        <label for="maxPrice">Max Price:</label>
-        <input type="number" id="maxPrice" min="0">
-
-        <br>
-            <input type="submit" value="Search">
-
-        <h1>Sample Table</h1>
-        <table id="peopleTable">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Generated people will be added here -->
-            </tbody>
-        </table>
-    </main>
+<script src="inventory.js"></script>
+<html lang="en">
+    <head>
+        <title>Inventory</title>
+    </head>
+    <body>
+        <header>
+            <h1>Inventory</h1>
+            <nav>
+                <ul>
+                    <li><a href="main.html">Home</a></li>
+                    <li><a href="inventory.html">Inventory</a></li>
+                    <li><a href="customer.html">Customer</a></li>
+                    <li><a href="services.html">Services</a></li>
+                </ul>
+            </nav>
+        </header>
+    
+        <main>
+            <h2>Inventory</h2>
+            <p>Search for your product:</p>
+    
+            <form>
+                <input type="text" name="search" placeholder="Search...">
+            </form>
+    
+            <label for="category">Category:</label>
+            <select id="category">
+                <option value="all">All</option>
+                <option value="electronics">Electronics</option>
+                <option value="clothing">Clothing</option>
+                <option value="books">Books</option>
+            </select>
+    
+            <label for="minPrice">Min Price:</label>
+            <input type="number" id="minPrice" min="0">
+            <label for="maxPrice">Max Price:</label>
+            <input type="number" id="maxPrice" min="0">
+    
+            <br>
+                <input type="submit" value="Search">
+    
+            <h1>Sample Table</h1>
+    <table id="equipmentTable">
+        <thead>
+            <tr>
+                <th>Equipment Type</th>
+                <th>Brand Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Generated equipment will be added here -->
+        </tbody>
+    </table>
 </body>
 </html>
