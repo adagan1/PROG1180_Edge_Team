@@ -19,7 +19,7 @@ function generateRandomEquipment() {
     };
 }
 
-// Function to fill the table with randomly generated equipment
+// Function to fill the equipment table with randomly generated equipment
 function fillTableWithRandomEquipment() {
     const table = document.getElementById("equipmentTable");
     const tbody = table.getElementsByTagName("tbody")[0];
@@ -32,5 +32,40 @@ function fillTableWithRandomEquipment() {
     }
 }
 
-// Call the function to populate the table when the page loads
-window.onload = fillTableWithRandomEquipment;
+// Function to filter equipment based on the search input
+function filterEquipment() {
+    const input = document.getElementById("searchInput");
+    const filter = input.value.toLowerCase();
+    const table = document.getElementById("equipmentTable");
+    const tbody = table.getElementsByTagName("tbody")[0];
+    const rows = tbody.getElementsByTagName("tr");
+
+    for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        const columns = row.getElementsByTagName("td");
+        let found = false;
+
+        for (let j = 0; j < columns.length; j++) {
+            const cell = columns[j];
+            if (cell) {
+                const text = cell.textContent.toLowerCase();
+                if (text.includes(filter)) {
+                    found = true;
+                    break;
+                }
+            }
+        }
+
+        if (found) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Your JavaScript code here
+    document.getElementById("searchInput").addEventListener("input", filterEquipment);
+    fillTableWithRandomEquipment();
+});
