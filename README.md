@@ -1,4 +1,12 @@
 # PROG1180_Edge_Team
+# DO NOT EDIT IN MAIN BRANCH
+
+How we are going to code:
+1. Copy the .git link from the green "Code" button
+2. Clone the repository in VSCode (needs Git installed)
+3. Work in VSCode using the CodeTogether extension
+4. When done, copy the code from VSCode to the files in the part 2 branch
+5. Commit changes (only after getting approval from group)
 
 Roles:
 Main Communicator: Sean Johnston
