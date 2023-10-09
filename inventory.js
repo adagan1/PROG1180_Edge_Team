@@ -30,7 +30,10 @@ function fillTableWithRandomEquipment() {
     for (let i = 0; i < 10; i++) { // Generate 10 random equipment
         const equipment = generateRandomEquipment();
         const row = document.createElement("tr");
-        row.innerHTML = `<td>${equipment.equipment}</td><td>${equipment.name}</td><td>${equipment.description}</td><td>$${equipment.price}</td><td>${equipment.status}</td><td>${equipment.amount}</td><td>${equipment.colour}</td>`;
+       row.innerHTML = `<td>${equipment.equipment}</td>
+        <td>${equipment.name}</td><td>${equipment.description}</td>
+        <td>$${equipment.price}</td><td>${equipment.status}</td>
+        <td>${equipment.amount}</td><td>${equipment.colour}</td>`;
         tbody.appendChild(row);
     }
 }
