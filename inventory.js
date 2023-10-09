@@ -7,7 +7,9 @@ function generateRandomEquipment() {
     const price = (Math.random() * 1000).toFixed(2); // Random price between 0 and 1000
     const statuses = ["In stock", "Out of stock", "Delivering"];
     const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
-    const amount = Math.floor(Math.random() * 10) + 1; // Random amount between 1 and 10
+    const amount = Math.floor(Math.random() * 10) + 1; // Random amount between 1 and 10\
+    const colour = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Pink", "White", "Grey", "Black"];
+    const randomColour = colour[Math.floor(Math.random() * colour.length)];
 
     return {
         equipment: randomEquipment,
@@ -16,6 +18,7 @@ function generateRandomEquipment() {
         price: price,
         status: randomStatus,
         amount: amount,
+        colour: randomColour
     };
 }
 
@@ -27,7 +30,10 @@ function fillTableWithRandomEquipment() {
     for (let i = 0; i < 10; i++) { // Generate 10 random equipment
         const equipment = generateRandomEquipment();
         const row = document.createElement("tr");
-        row.innerHTML = `<td>${equipment.equipment}</td><td>${equipment.name}</td><td>${equipment.description}</td><td>$${equipment.price}</td><td>${equipment.status}</td><td>${equipment.amount}</td>`;
+       row.innerHTML = `<td>${equipment.equipment}</td>
+        <td>${equipment.name}</td><td>${equipment.description}</td>
+        <td>$${equipment.price}</td><td>${equipment.status}</td>
+        <td>${equipment.amount}</td><td>${equipment.colour}</td>`;
         tbody.appendChild(row);
     }
 }

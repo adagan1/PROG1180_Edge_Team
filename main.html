@@ -2,24 +2,44 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <html>
 <head>
-    <title>Home Page</title>
+    <title>Emma's Small Engines</title>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Website</h1>
+    <!--<button id="toggleButton">Toggle Header</button>-->
+    <header id="header">
+        <h1>Emma's Small Engines</h1>
         <nav>
             <ul>
-                <li><a href="main.html">Home</a></li>                
-                <li><a href="inventory.html">Inventory</a></li>
-                <li><a href="customer.html">Customer</a></li>
+
             </ul>
         </nav>
     </header>
     <main>
-        <h2>Main Page</h2>
-        <p>This is the home page of my website.</p>
+        <h1>Sign In</h1>
+        <p id="loginStatus">Selected login: None</p>
+        <form id="loginForm">
+            <input type="button" value="Technician" id="technicianButton">
+            <input type="button" value="Sales Representative" id="salesRepButton">
+            <input type="button" value="Admin" id="adminButton">
+            <br>
+            <input type="text" id="username" placeholder="Username..." required><br>
+            <input type="password" id="password" placeholder="Password..." required><br>
+            <input type="submit" id="loginButton" value="Login">
+        </form>
+        
+        <div id="welcome-page" style="display: none;">
+            <h2 id="welcomeText">Welcome!</h2>
+            <p id="textParagraph">Where do you want to go?</p>         
+            <li><a href="inventory.html" style="display: block;" id="inventoryHref">Inventory</a></li>
+            <li><a href="customer.html" style="display: block;" id="customerHref">Customer</a></li>
+        </div>
+    
+        <div id="error-page" style="display: none;">
+            <h2>Error</h2>
+            <p>Incorrect username or password. Please try again.</p>
+        </div>
+
     </main>
+    <script src="main.js"></script>
 </body>
 </html>
-
-<!--Have a initial sign in for worker-->
