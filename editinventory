@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<script src="data.js"></script>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Equipment</title>
+</head>
+<body>
+    <h1>Edit Equipment</h1>
+    
+    <form id="editForm">
+        <!-- Input fields for editing equipment details -->
+        <label for="equipment">Equipment:</label>
+        <input type="text" id="equipment" name="equipment">
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description">
+        
+        <label for="price">Price:</label>
+        <input type="text" id="price" name="price">
+        
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status">
+        
+        <label for="amount">Amount:</label>
+        <input type="text" id="amount" name="amount">
+        
+        <label for="colour">Colour:</label>
+        <input type="text" id="colour" name="colour">
+        
+        <button type="button" id="saveButton">Save</button>
+    </form>
+    
+    <script src="editinventory.js"></script>
+</body>
+</html>
