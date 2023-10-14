@@ -1,70 +1,12 @@
-
-table{
-    width: 80%;
-    margin: 40px auto;
-    background: rgb(124,154,167);
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
 }
-
-table.list{
+h1{ 
     text-align: center;
-    width: 100%;
 }
-
-td{
-    border: 1px solid rgb(204,200,200);
-    text-align: left;
-    padding: 8px 15px;
-}
-
-tr:nth-child(even), table.list thread> tr{
-    background-color: rgb(204,200,200);
-}
-
-input[type="text"],input[type="number"]{
-    width:91%;
-    padding:12px 20px;
-    margin:8px 0;
-    display: inline-block;
-    border: 1px solid rgb(165,161,161);
-    border-radius: 4px;
-}
-
-input[type="submit"],input[type="reset"]{
-    background: #eee;
-    padding:6px 12px;
-    margin:15px 0 10px;
-    display: inline-block;
-    border: none;
-    border-radius: 30px;
-    font-size: 1rem;
-    cursor: pointer;
-    outline: none;
-}
-
-input[type="submit"]:hover{
-    background: #4b99d8;
-}
-
-input[type="reset"]:hover{
-    background: #4b99d8;
-}
-
-button{
-    background: #eee;
-    padding:6px 12px;
-    margin:15px 0 10px;
-    display: inline-block;
-    border: none;
-    border-radius: 30px;
-    font-size: 1rem;
-    cursor: pointer;
-    outline: none;
-}
-
-button:hover{
-    background:#4b99d8 ;
-}
-
 header {
     font-family: 'Courier New', Courier, monospace;
     background-color: #333;
@@ -72,7 +14,6 @@ header {
     padding: 10px;
     text-align: center;
 }
-
 nav ul {
     list-style-type: none;
     padding: 0;
@@ -84,4 +25,76 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     color: #fff;
+}
+main {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* For Tables */
+table {
+    border-collapse: collapse;
+    width: 90%;
+    margin: 20px auto;
+    font-family: Verdana, sans-serif;
+}
+
+th, td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+/* For Search */
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#searchInput {
+    width: 400px; /* Adjust the width as needed */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* For Main page */
+#loginForm{
+    text-align: center;
+}
+
+#welcome-page, #error-page{
+    text-align: center;
+    list-style-type: none;
+}
+
+#username, #password{
+    width: 200px; /* Adjust the width as needed */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+#links {
+    list-style-type: none;
+    padding: 0;
+}
+
+#links a {
+    text-decoration: none;
+    color: #007bff;
+    margin-right: 10px;
 }
