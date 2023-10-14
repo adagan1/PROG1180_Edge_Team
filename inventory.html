@@ -1,79 +1,42 @@
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="style.css">
+<script src="inventory.js"></script>
 <html lang="en">
-<head>
-    <title>Inventory</title>
-</head>
-<header>
-    <h1>Emma's Small Engines</h1>
-    <nav>
-        <ul>
-            <li><a href="main.html">Home</a></li>
-            <li><a href="inventory.html">Inventory</a></li>
-            <li><a href="customer.html">Customer</a></li>
-        </ul>
-    </nav>
-</header>
-<body>
-    <table>
-        <tr>
-            <td>
-                <form autocomplete="off" onsubmit="onFormSubmit(event)">
-                    <div>
-                        <label for="equipment">Equipment</label>
-                        <input type="text" name="equipment" id="equipment">
-                    </div>
-                    <div>
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name">
-                    </div>
-                    <div>
-                        <label for="description">Description</label>
-                        <input type="text" name="description" id="description">
-                    </div>
-                    <div>
-                        <label for="price">Price</label>
-                        <input type="number" name="price" id="price">
-                    </div>
-                    <div>
-                        <label for="status">Status</label>
-                        <input type="text" name="status" id="status">
-                    </div>
-                    <div>
-                        <label for="amount">Amount</label>
-                        <input type="number" name="amount" id="amount">
-                    </div>
-                    <div>
-                        <label for="colour">Colour</label>
-                        <input type="text" name="colour" id="colour">
-                    </div>
-                    <div class="form_action--button">
-                        <input type="submit" value="Submit">
-                        <input type="reset" value="Reset">
-                    </div>
-                </form>
-                
-                <td>
-                    <table class="list" id="storeList">
-                        <thead>
-                            <tr>
-                                <th>Equipment</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Amount</th>
-                                <th>Colour</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </td>
-            </td>
-        </tr>
+    <head>
+        <title>Inventory</title>
+    </head>
+    <body>
+        <header>
+            <h1>Emma's Small Engines</h1>
+            <nav>
+                <ul>
+                    <li><a href="main.html">Home</a></li>
+                    <li><a href="inventory.html">Inventory</a></li>
+                    <li><a href="customer.html">Customer</a></li>
+                </ul>
+            </nav>
+        </header>
+    
+    <main>
+    <h1>Inventory</h1>
+    <div class="center-container">
+        <input type="text" id="searchInput" placeholder="Search for Equipment, Brand, Description, Price, Status, or Amount...">
+    </div>
+    <table id="equipmentTable">
+        <thead>
+            <tr>
+                <th>Equipment</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Amount</th>
+                <th>Colour</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Generated equipment will be added here -->
+        </tbody>
     </table>
-    <script type="text/javascript" src="inventory.js"></script>
 </body>
 </html>
