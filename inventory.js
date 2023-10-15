@@ -18,78 +18,7 @@ const hardCodedEquipment = [
         amount: 0,
         colour: "Red"
     },
-    {
-        equipment: "Saw",
-        name: "Brand3 Saw",
-        description: "This is a Saw from Brand3.",
-        price: "180.00",
-        status: "In stock",
-        amount: 8,
-        colour: "Blue"
-    },
-    {
-        equipment: "Weedwacker",
-        name: "Brand4 Weedwacker",
-        description: "This is a Weedwacker from Brand4.",
-        price: "150.00",
-        status: "Delivering",
-        amount: 2,
-        colour: "Yellow"
-    },
-    {
-        equipment: "Wrench",
-        name: "Brand5 Wrench",
-        description: "This is a Wrench from Brand5.",
-        price: "90.00",
-        status: "In stock",
-        amount: 4,
-        colour: "Orange"
-    },
-    {
-        equipment: "Chainsaw",
-        name: "Brand6 Chainsaw",
-        description: "This is a Chainsaw from Brand6.",
-        price: "280.00",
-        status: "In stock",
-        amount: 6,
-        colour: "Black"
-    },
-    {
-        equipment: "Hammer",
-        name: "Brand7 Hammer",
-        description: "This is a Hammer from Brand7.",
-        price: "15.00",
-        status: "In stock",
-        amount: 10,
-        colour: "Grey"
-    },
-    {
-        equipment: "Screwdriver",
-        name: "Brand8 Screwdriver",
-        description: "This is a Screwdriver from Brand8.",
-        price: "10.00",
-        status: "Out of stock",
-        amount: 0,
-        colour: "Red"
-    },
-    {
-        equipment: "Shovel",
-        name: "Brand9 Shovel",
-        description: "This is a Shovel from Brand9.",
-        price: "30.00",
-        status: "In stock",
-        amount: 3,
-        colour: "Green"
-    },
-    {
-        equipment: "Rake",
-        name: "Brand10 Rake",
-        description: "This is a Rake from Brand10.",
-        price: "25.00",
-        status: "In stock",
-        amount: 7,
-        colour: "Yellow"
-    }
+    // Add more equipment items as needed
 ];
 
 // Function to fill the equipment table with hard-coded equipment and an Edit button
@@ -99,6 +28,40 @@ function fillTableWithHardCodedEquipment() {
 
     for (let i = 0; i < hardCodedEquipment.length; i++) {
         const equipment = hardCodedEquipment[i];
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${equipment.equipment}</td>
+            <td>${equipment.name}</td>
+            <td>${equipment.description}</td>
+            <td>$${equipment.price}</td>
+            <td>${equipment.status}</td>
+            <td>${equipment.amount}</td>
+            <td>${equipment.colour}</td>
+            <td><button onclick="editEquipment(${i})">Edit</button></td>
+        `;
+        tbody.appendChild(row);
+    }
+}
+
+// Function to initialize local storage with sample data
+function initializeLocalStorageWithData() {
+    // Store the sample data in local storage
+    localStorage.setItem("equipmentData", JSON.stringify(hardCodedEquipment));
+}
+
+// Function to fill the equipment table with data from local storage
+function fillTableWithEquipmentFromLocalStorage() {
+    // Retrieve the equipment data from local storage
+    const storedEquipmentData = JSON.parse(localStorage.getItem("equipmentData")) || [];
+
+    const table = document.getElementById("equipmentTable");
+    const tbody = table.getElementsByTagName("tbody")[0];
+
+    // Clear existing rows
+    tbody.innerHTML = "";
+
+    for (let i = 0; i < storedEquipmentData.length; i++) {
+        const equipment = storedEquipmentData[i];
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${equipment.equipment}</td>
@@ -145,13 +108,15 @@ function filterEquipment() {
     }
 }
 
-// Function to handle editing equipment
 function editEquipment(index) {
-    // You can access the equipment data in the hardCodedEquipment array using the index
+    // Get the equipment data to edit
     const equipmentToEdit = hardCodedEquipment[index];
 
-    // Redirect the user to the edit.html page with the equipment's index as a query parameter
-    window.location.href = `editinventory.html?index=${index}`;
+    // Convert the equipment data to a JSON string
+    const equipmentDataString = JSON.stringify(equipmentToEdit);
+
+    // Redirect to editinventory.html with equipment data as a parameter
+    window.location.href = `editinventory.html?equipmentData=${equipmentDataString}`;
 }
 
 // Fill table with hard-coded equipment and "Edit" buttons
