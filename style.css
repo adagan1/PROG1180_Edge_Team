@@ -22,6 +22,7 @@ header {
 header h1 {
     margin: 0;
     font-size: 36px;
+    padding-left: 20px;
 }
 
 nav ul {
@@ -42,7 +43,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #007bff; /* Change color on hover */
+    color: #007bff;
 }
 
 main {
@@ -75,14 +76,8 @@ tr:hover {
     transition: background-color 0.3s;
 }
 
-.center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 #searchInput {
-    width: 100%; /* Adjust the width as needed */
+    width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -156,3 +151,60 @@ button:hover {
 #equipmentTable {
     margin-top: 20px;
 }
+
+/* Add some basic CSS for the tabs and table visibility */
+.table {
+    display: none;
+}
+
+.table.active {
+    display: table;
+}
+
+/* For Main page */
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5; /* Background color */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+    padding: 20px; /* Spacing inside the container */
+    max-width: 700px; /* Maximum width for content */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+.center-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.center-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.center-container input[type="text"],
+.center-container input[type="number"],
+.center-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.center-container button {
+    background-color: #007BFF; /* Button background color */
+    color: #fff; /* Button text color */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.center-container button:hover {
+    background-color: #0056b3; /* Button color on hover */
+}
+
