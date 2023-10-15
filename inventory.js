@@ -137,6 +137,17 @@ function editEquipment(index) {
     window.location.href = `inventoryEdit.html?equipmentData=${equipmentDataString}`;
 }
 
+function createInventory(index) {
+    // Get the equipment data to edit
+    const inventoryToCreate = hardCodedEquipment[index];
+
+    // Convert the equipment data to a JSON string
+    const inventoryDataString = JSON.stringify(inventoryToCreate);
+
+    // Redirect to inventoryEdit.html with equipment data as a parameter
+    window.location.href = 'inventoryCreate.html?inventoryData=${inventoryDataString}';
+}
+
 // Fill table with hard-coded equipment and "Edit" buttons
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("searchInput").addEventListener("input", filterEquipment);
