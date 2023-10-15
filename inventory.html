@@ -1,52 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="customer.js"></script>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="inventory.js"></script>
-    <script src="data.js"></script>
-    <title>Inventory</title>
+    <title>Customer</title>
 </head>
 <body>
     <header>
-        <h1 id="centered-title">Emma's Small Engines</h1>
+        <h1>Emma's Small Engines</h1>
         <nav>
             <ul>
-                <li><a href="main.html">Home</a></li>
+                <li><a href="main.html">Home</a></li>               
                 <li><a href="inventory.html">Inventory</a></li>
                 <li><a href="customer.html">Customer</a></li>
+                <li><a href="tables.html">Tables</a></li>
             </ul>
         </nav>
     </header>
+<main>
+        <h1>Customer</h1>      
+    <div class="center-container">
+        <input type="text" id="searchInput" placeholder="Search for a customers name, age, or email...">
+    </div>
 
+    <div>
+        <button onclick="createCustomer()">Create Customer</button>
+    </div>
 
-    <main>
-        <h1>Inventory</h1>
-        <div class="center-container">
-            <input type="text" id="searchInput" placeholder="Search for Equipment, Brand, Description, Price, Status, or Amount...">
-
-        </div>
-        <div>
-        <button onclick="createInventory()">Create Inventory</button>
-        </div>
-        <table id="equipmentTable">
+    <table id="customerTable">
             <thead>
                 <tr>
-                    <th>Equipment</th>
                     <th>Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Amount</th>
-                    <th>Colour</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>City</th>
                     <th>Controls</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Generated equipment will be added here -->
+                <!-- Generated people will be added here -->
             </tbody>
-        </table>
-    </main>
+    </table>
+</main>
 </body>
 </html>
