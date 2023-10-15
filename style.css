@@ -7,10 +7,11 @@ body {
     background-position: center;
     height: 100vh;
     overflow: hidden;
-    background-color: #f2f2f2; /* Fallback background color */
+    background-color: #8d8d8d73; /* Fallback background color */
 }
 
 header {
+    font-family: 'Courier New', Courier, monospace;
     background-color: rgba(0, 0, 0, 0.7);
     color: #fff;
     padding: 20px 0;
@@ -50,6 +51,7 @@ main {
     max-width: 1400px;
     margin: 20px auto;
     padding: 20px;
+    border-radius: 10px; /* Rounded corners */
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -170,7 +172,6 @@ button:hover {
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
     padding: 20px; /* Spacing inside the container */
-    max-width: 700px; /* Maximum width for content */
     margin: 0 auto; /* Center the container horizontally */
 }
 
@@ -189,7 +190,6 @@ button:hover {
 .center-container textarea {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
@@ -208,3 +208,6 @@ button:hover {
     background-color: #0056b3; /* Button color on hover */
 }
 
+#createOrEditTitle {
+    text-align: center;
+}
