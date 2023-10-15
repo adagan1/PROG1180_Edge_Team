@@ -1,40 +1,32 @@
 <!DOCTYPE html>
-<script src="data.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="editinventory.js"></script>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Equipment</title>
-</head>
-<body>
-    <h1>Edit Equipment</h1>
+    <head>
+        <title>Edit Equipment</title>
+    </head>
+    <body>
+        <header>
+            <h1>Edit Equipment</h1>
+            <nav>
+                <ul>
+                    <li><a href="inventory.html">Back to Inventory</a></li>
+                </ul>
+            </nav>
+        </header>
     
-    <form id="editForm">
-        <!-- Input fields for editing equipment details -->
-        <label for="equipment">Equipment:</label>
-        <input type="text" id="equipment" name="equipment">
-        
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name">
-        
-        <label for="description">Description:</label>
-        <input type="text" id="description" name="description">
-        
-        <label for="price">Price:</label>
-        <input type="text" id="price" name="price">
-        
-        <label for="status">Status:</label>
-        <input type="text" id="status" name="status">
-        
-        <label for="amount">Amount:</label>
-        <input type="text" id="amount" name="amount">
-        
-        <label for="colour">Colour:</label>
-        <input type="text" id="colour" name="colour">
-        
-        <button type="button" id="saveButton">Save</button>
-    </form>
-    
-    <script src="editinventory.js"></script>
-</body>
+        <main>
+            <form id="editForm">
+                <div class="center-container">
+                    <input type="text" id="equipmentName" placeholder="Equipment Name">
+                    <input type="text" id="equipmentDescription" placeholder="Description">
+                    <input type="text" id="equipmentPrice" placeholder="Price">
+                    <input type="text" id="equipmentStatus" placeholder="Status">
+                    <input type="text" id="equipmentAmount" placeholder="Amount">
+                    <input type="text" id="equipmentColour" placeholder="Colour">
+                    <button type="button" id="saveButton">Save Changes</button>
+                </div>
+            </form>
+        </main>
+    </body>
 </html>
