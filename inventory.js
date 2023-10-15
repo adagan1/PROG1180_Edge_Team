@@ -18,6 +18,24 @@ const hardCodedEquipment = [
         amount: 0,
         colour: "Red"
     },
+    {
+        equipment: "Saw",
+        name: "Brand3 Saw",
+        description: "This is a Saw from Brand3.",
+        price: "100.00",
+        status: "In stock",
+        amount: 2,
+        colour: "Grey"
+    },
+    {
+        equipment: "Lawnmower",
+        name: "Brand1 Lawnmower",
+        description: "This is a Lawnmower from Brand1.",
+        price: "120.00",
+        status: "In stock",
+        amount: 10,
+        colour: "Green"
+    },
     // Add more equipment items as needed
 ];
 
@@ -115,8 +133,8 @@ function editEquipment(index) {
     // Convert the equipment data to a JSON string
     const equipmentDataString = JSON.stringify(equipmentToEdit);
 
-    // Redirect to editinventory.html with equipment data as a parameter
-    window.location.href = `editinventory.html?equipmentData=${equipmentDataString}`;
+    // Redirect to inventoryEdit.html with equipment data as a parameter
+    window.location.href = `inventoryEdit.html?equipmentData=${equipmentDataString}`;
 }
 
 // Fill table with hard-coded equipment and "Edit" buttons
