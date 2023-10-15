@@ -1,33 +1,48 @@
-<!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="style.css">
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emma's Small Engines</title>
-</head>
-<body>
-    <header>
-        <h1>Emma's Small Engines</h1>
-        <nav>
-            <ul>
-                <li><a href="main.html">Home</a></li>               
-                <li><a href="inventory.html">Inventory</a></li>
-                <li><a href="customer.html">Customer</a></li>
-            </ul>
-        </nav>
-    </header>
-    <div class="centered-title">
-        <<!-- Your page content goes here -->>
-    </div>
+//For login
+const loginStatus = document.getElementById('loginStatus');
 
-    <script>
-        window.addEventListener("scroll", function() {
-            const title = document.querySelector(".centered-title");
-            if (title) {
-                title.style.display = window.scrollY > 0 ? "block" : "none";
-            }
-        });
-    </script>
-</body>
-</html>
+const technicianButton = document.getElementById('technicianButton');
+const salesRepButton = document.getElementById('salesRepButton');
+const adminButton = document.getElementById('adminButton');
+
+technicianButton.addEventListener('click', () => {
+    // Change the text inside the <p> element
+    loginStatus.textContent = "Selected login: Technician";
+});
+
+salesRepButton.addEventListener('click', () => {
+    // Change the text inside the <p> element
+    loginStatus.textContent = "Selected login: Sales Representative";
+});
+
+adminButton.addEventListener('click', () => {
+    // Change the text inside the <p> element
+    loginStatus.textContent = "Selected login: Admin";
+});
+
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
+const loginButton = document.getElementById('loginButton');
+const welcomePage = document.getElementById('welcome-page');
+const errorPage = document.getElementById('error-page');
+const welcomeText = document.getElementById('welcomeText')
+
+loginButton.addEventListener('click', () => {
+    event.preventDefault();
+
+    const username = usernameInput.value;
+    const password = passwordInput.value;
+
+    // Check if the entered username and password are correct
+    if (username === 'username' && password === 'password') {
+        // Display the welcome page
+        welcomePage.style.display = 'block';
+        errorPage.style.display = 'none';
+        
+    }
+    else {
+        // Display the error page
+        welcomePage.style.display = 'none';
+        errorPage.style.display = 'block';
+    }
+});
