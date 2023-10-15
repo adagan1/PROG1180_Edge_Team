@@ -11,43 +11,41 @@
     <header>
         <h1>Emma's Small Engines</h1>
         <nav>
-            <ul>
-                <li><a href="main.html">Home</a></li>               
-                <li><a href="inventory.html">Inventory</a></li>
-                <li><a href="customer.html">Customer</a></li>
+            <ul>         
+                <li><a href="inventory.html">Back to Inventory</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <h1>Create Inventory</h1>
+        <h1 id="createOrEditTitle">Create Inventory</h1>
         <div class="center-container">
             <form id="createForm">
-                <div>
+                <div id="equipmentInfo">
                     <label for="equipment">Equipment:</label>
                     <input type="text" id="equipment" name="equipment" required>
                 </div>
-                <div>
+                <div id="nameInfo">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required>
                 </div>
-                <div>
+                <div id="descriptionInfo">
                     <label for="description">Description:</label>
-                    <textarea id="description" name="description" required></textarea>
-                </div>
-                <div>
+                    <input type="text" id="description" name="description" required>
+                </div> 
+                <div id="priceInfo">
                     <label for="price">Price:</label>
                     <input type="text" id="price" name="price" required>
                 </div>
-                <div>
+                <div id="statusInfo">
                     <label for="status">Status:</label>
                     <input type="text" id="status" name="status" required>
                 </div>
-                <div>
+                <div id="amountInfo">
                     <label for="amount">Amount:</label>
                     <input type="text" id="amount" name="amount" required>
                 </div>
-                <div>
+                <div id="colourInfo">
                     <label for="colour">Colour:</label>
                     <input type="text" id="colour" name="colour" required>
                 </div>
