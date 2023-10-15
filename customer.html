@@ -13,6 +13,7 @@
                 <li><a href="main.html">Home</a></li>               
                 <li><a href="inventory.html">Inventory</a></li>
                 <li><a href="customer.html">Customer</a></li>
+                <li><a href="tables.html">Tables</a></li>
             </ul>
         </nav>
     </header>
@@ -21,12 +22,21 @@
     <div class="center-container">
         <input type="text" id="searchInput" placeholder="Search for a customers name, age, or email...">
     </div>
+
+    <div>
+        <button onclick="createCustomer()">Create Customer</button>
+    </div>
+
     <table id="customerTable">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Age</th>
                     <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Controls</th>
                 </tr>
             </thead>
             <tbody>
