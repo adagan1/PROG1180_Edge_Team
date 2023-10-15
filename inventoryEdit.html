@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="style.css">
-<script src="editinventory.js"></script>
+<script src="inventoryEdit.js"></script>
 <html lang="en">
     <head>
         <title>Edit Equipment</title>
@@ -15,15 +15,15 @@
             </nav>
         </header>
     
-        <main>
+        <main id="editPageMain">
             <form id="editForm">
-                <div class="center-container">
+                <div class="edit-container">
                     <input type="text" id="equipmentName" placeholder="Equipment Name">
                     <input type="text" id="equipmentDescription" placeholder="Description">
                     <input type="text" id="equipmentPrice" placeholder="Price">
                     <input type="text" id="equipmentStatus" placeholder="Status">
                     <input type="text" id="equipmentAmount" placeholder="Amount">
-                    <input type="text" id="equipmentColour" placeholder="Colour">
+                    <input type="text" id="equipmentColour" placeholder="Colour">                   
                     <button type="button" id="saveButton">Save Changes</button>
                 </div>
             </form>
