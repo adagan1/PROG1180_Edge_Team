@@ -1,1 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="inventoryCreate.js"></script>
+    <title>Create Inventory</title>
+</head>
+<body>
+    <header>
+        <h1>Emma's Small Engines</h1>
+        <nav>
+            <ul>
+                <li><a href="main.html">Home</a></li>               
+                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="customer.html">Customer</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Create Inventory</h1>
+        <div class="center-container">
+            <form id="createForm">
+                <div>
+                    <label for="equipment">Equipment:</label>
+                    <input type="text" id="equipment" name="equipment" required>
+                </div>
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="description">Description:</label>
+                    <textarea id="description" name="description" required></textarea>
+                </div>
+                <div>
+                    <label for="price">Price:</label>
+                    <input type="text" id="price" name="price" required>
+                </div>
+                <div>
+                    <label for="status">Status:</label>
+                    <input type="text" id="status" name="status" required>
+                </div>
+                <div>
+                    <label for="amount">Amount:</label>
+                    <input type="text" id="amount" name="amount" required>
+                </div>
+                <div>
+                    <label for="colour">Colour:</label>
+                    <input type="text" id="colour" name="colour" required>
+                </div>
+                <div>
+                    <button type="button" onclick="createInventory()">Create Inventory</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
 
