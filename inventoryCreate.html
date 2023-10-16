@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="inventoryCreate.js"></script>
+    <title>Create Inventory</title>
+</head>
+<body>
+    <header>
+        <h1>Emma's Small Engines</h1>
+        <nav>
+            <ul>         
+                <li><a href="inventory.html">Back to Inventory</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1 id="createOrEditTitle">Create Inventory</h1>
+        <div class="center-container">
+            <form id="createForm">
+                <div id="equipmentInfo">
+                    <label for="equipment">Equipment:</label>
+                    <input type="text" id="equipment" name="equipment" required>
+                </div>
+                <div id="nameInfo">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div id="descriptionInfo">
+                    <label for="description">Description:</label>
+                    <input type="text" id="description" name="description" required>
+                </div> 
+                <div id="priceInfo">
+                    <label for="price">Price:</label>
+                    <input type="text" id="price" name="price" required>
+                </div>
+                <div id="statusInfo">
+                    <label for="status">Status:</label>
+                    <input type="text" id="status" name="status" required>
+                </div>
+                <div id="amountInfo">
+                    <label for="amount">Amount:</label>
+                    <input type="text" id="amount" name="amount" required>
+                </div>
+                <div id="colourInfo">
+                    <label for="colour">Colour:</label>
+                    <input type="text" id="colour" name="colour" required>
+                </div>
+                <div>
+                    <button type="button" onclick="createInventory()">Create Inventory</button>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

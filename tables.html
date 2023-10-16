@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="style.css">
+<html>
+<head>
+    <title>Tables</title>
+</head>
+<body>
+    <!--<button id="toggleButton">Toggle Header</button>-->
+    <header id="header">
+        <h1>Emma's Small Engines</h1>
+        <nav>
+            <ul>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="customer.html">Customer</a></li>
+                <li><a href="tables.html">Tables</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Tables</h1>
+        <div class="center-container">
+            <input type="text" id="searchInput" placeholder="Search..." oninput="filterTable()">
+        </div>
+        
+        <div id="tabs">
+            <button id="colorsTab" class="active" onclick="showTable('coloursTable')">Colors</button>
+            <button id="typesTab" onclick="showTable('typesTable')">Types</button>
+            <button id="citiesTab" onclick="showTable('citiesTable')">Cities</button>
+        </div>
+
+        <table id="coloursTable" class="table" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Colour</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Generated equipment will be added here -->
+            </tbody>
+        </table>
+
+        <table id="typesTable" class="table" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Type table data will be populated using JavaScript -->
+            </tbody>
+        </table>
+
+        <table id="citiesTable" class="table" border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- City table data will be populated using JavaScript -->
+            </tbody>
+        </table>
+    </main>
+    <script src="tables.js"></script>
+</body>
+</html>
