@@ -17,7 +17,6 @@ function createInventory() {
         city: city
     };
 
-    // You can save the new data to local storage, a database, or perform any necessary actions here
     // For this example, we'll log the new data to the console
     console.log("New Equipment Data:", newCustomer);
 
