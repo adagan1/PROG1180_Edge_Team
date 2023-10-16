@@ -135,7 +135,6 @@ function createCustomer(index) {
     window.location.href = `customerCreate.html?customerData=${customerDataString}`;
 }
 
-//Fill table with hard coded equipment
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("searchInput").addEventListener("input", filterCustomer);
     fillTableWithHardCodedEquipment();
