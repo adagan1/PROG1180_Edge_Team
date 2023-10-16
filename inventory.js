@@ -36,7 +36,6 @@ const hardCodedEquipment = [
         amount: 10,
         colour: "Green"
     },
-    // Add more equipment items as needed
 ];
 
 // Function to fill the equipment table with hard-coded equipment and an Edit button
