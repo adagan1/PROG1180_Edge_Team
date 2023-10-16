@@ -24,7 +24,6 @@ const hardCodedCustomer = [
         address: "6820 Far Crescent",
         city: "St Catharines"
     }
-    // Add more equipment items as needed
 ];
 
 // Function to fill the customer table with hard-coded customers and an Edit button
@@ -136,7 +135,7 @@ function createCustomer(index) {
     window.location.href = `customerCreate.html?customerData=${customerDataString}`;
 }
 
-//Fill table with randomly generated customers
+//Fill table with hard coded equipment
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("searchInput").addEventListener("input", filterCustomer);
     fillTableWithHardCodedEquipment();
