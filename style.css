@@ -11,6 +11,9 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Style the header */
@@ -18,19 +21,26 @@ header {
     background-color: #333;
     color: #fff;
     padding: 1rem;
+    padding-left: 30px;
+    display: flex;
+    justify-content: space-between; /* Align content horizontally */
+    align-items: center; /* Center content vertically */
+    width: 100%;
 }
 
 header h1 {
     font-size: 24px;
+    margin: 0; /* Remove default margin to align with the list */
 }
 
 /* Style the navigation menu */
 nav ul {
     list-style: none;
+    display: flex;
+    margin-right: 20px;
 }
 
 nav ul li {
-    display: inline;
     margin-right: 20px;
 }
 
@@ -43,19 +53,17 @@ nav a {
 /* Style the main content */
 main {
     padding: 2rem;
-    background-color: #fff; /* White background */
+    background-color: #fff;
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px; /* Rounded corners */
 }
 
 h1 {
     font-size: 28px;
     margin-bottom: 20px;
-}
-
-/* Centered container */
-.center-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 /* Style the input elements */
@@ -70,7 +78,7 @@ input[type="number"] {
 
 /* Style buttons */
 button {
-    background-color: #333;
+    background-color: #686868;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -140,4 +148,45 @@ button.active {
 
 .table.active {
     display: table;
+}
+
+/* Style the employee sections */
+section {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Style the Employee Resources list */
+#employee-resources ul {
+    list-style: none;
+    padding: 0;
+}
+
+#employee-resources li {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+#employee-resources li a {
+    color: #007BFF;
+    text-decoration: underline;
+}
+
+#employee-resources li a:hover {
+    color: #0056b3;
 }
