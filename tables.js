@@ -14,11 +14,11 @@ const colorsData = [
 ];
 
 const typesData = [
-    { id: 1, type: 'ball lawnmower' },
-    { id: 2, type: 'sack lawnmower' },
-    { id: 3, type: 'goku lawnmower' },
-    { id: 4, type: 'type jawn' },
-    { id: 5, type: 'top 10 minecraft mobs' }
+    { id: 1, type: 'Electric lawnmower' },
+    { id: 2, type: 'Gas powered lawnmower' },
+    { id: 3, type: 'Bagged lawnmower' },
+    { id: 4, type: 'Push Mower' },
+    { id: 5, type: 'Scythe' }
 ];
 
 const citiesData = [

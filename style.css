@@ -1,159 +1,142 @@
-body {
-    font-family: Arial, sans-serif;
+html, body, h1, h2, h3, p, ul, li, button, input {
     margin: 0;
     padding: 0;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    overflow: hidden;
-    background-color: #8d8d8d73; /* Fallback background color */
+    list-style: none;
+    text-decoration: none;
 }
 
-header {
-    font-family: 'Courier New', Courier, monospace;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 20px 0;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 36px;
-    padding-left: 20px;
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    padding-left: 50px;
+    display: flex;
+    justify-content: space-between; /* Align content horizontally */
+    align-items: center; /* Center content vertically */
+    width: 100%;
 }
 
+header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+/* Style the navigation menu */
 nav ul {
-    list-style-type: none;
-    padding: 0;
+    list-style: none;
     display: flex;
+    margin-right: 20px;
 }
 
 nav ul li {
     margin-right: 20px;
 }
 
-nav ul li a {
-    text-decoration: none;
+nav a {
     color: #fff;
-    font-size: 18px;
-    transition: color 0.3s;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-nav ul li a:hover {
-    color: #007bff;
-}
-
+/* Style the main content */
 main {
-    max-width: 1400px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 10px; /* Rounded corners */
+    padding: 2rem;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-table {
-    border-collapse: collapse;
     width: 100%;
-    margin: 20px 0;
-    font-family: Verdana, sans-serif;
+    max-width: 1400px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px; /* Rounded corners */
 }
 
-th, td {
-    border: 1px solid #ddd;
-    text-align: left;
-    padding: 12px;
+h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
 }
 
-th {
-    background-color: #f2f2f2;
-}
-
-tr:hover {
-    background-color: #f5f5f5;
-    transition: background-color 0.3s;
-}
-
-#searchInput {
+/* Style the input elements */
+input[type="text"],
+input[type="number"] {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
+    margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
-    outline: none;
 }
 
+/* Style buttons */
 button {
-    background-color: #007bff;
+    background-color: #686868;
     color: #fff;
+    padding: 10px 20px;
     border: none;
-    padding: 12px 20px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-weight: bold;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #555;
 }
 
-/* Additional styles for your dropdown menu */
-.dropdown {
-    position: relative;
-    display: inline-block;
-    margin-right: 20px;
-}
-
-.dropdown-button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    cursor: pointer;
-    display: block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    min-width: 160px;
-    z-index: 1;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.dropdown-content a {
-    color: #333;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    transition: background-color 0.3s;
-}
-
-.dropdown-content a:hover {
-    background-color: #f2f2f2;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.centered-title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    font-size: 36px;
-}
-
-#equipmentTable {
+/* Style tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
     margin-top: 20px;
 }
 
-/* Add some basic CSS for the tabs and table visibility */
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Apply styles specific to the tables */
+#tabs {
+    margin: 20px 0;
+}
+
+button.active {
+    background-color: #333;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 0.5rem;
+    }
+    header h1 {
+        font-size: 20px;
+    }
+    main {
+        padding: 1rem;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    .center-container {
+        align-items: stretch;
+    }
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+    }
+}
+
+/* Hide the centered title on scroll */
+.centered-title {
+    display: none;
+}
+
 .table {
     display: none;
 }
@@ -162,51 +145,43 @@ button:hover {
     display: table;
 }
 
-/* For Main page */
-.center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f5f5f5; /* Background color */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
-    padding: 20px; /* Spacing inside the container */
-    margin: 0 auto; /* Center the container horizontally */
-}
-
-.center-container form {
-    display: flex;
-    flex-direction: column;
-}
-
-.center-container label {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.center-container input[type="text"],
-.center-container input[type="number"],
-.center-container textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
+/* Style the employee sections */
+section {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
     border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.center-container button {
-    background-color: #007BFF; /* Button background color */
-    color: #fff; /* Button text color */
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
 }
 
-.center-container button:hover {
-    background-color: #0056b3; /* Button color on hover */
+p {
+    font-size: 16px;
+    color: #666;
 }
 
-#createOrEditTitle {
-    text-align: center;
+/* Style the Employee Resources list */
+#employee-resources ul {
+    list-style: none;
+    padding: 0;
+}
+
+#employee-resources li {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+#employee-resources li a {
+    color: #007BFF;
+    text-decoration: underline;
+}
+
+#employee-resources li a:hover {
+    color: #0056b3;
 }
