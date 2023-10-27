@@ -169,3 +169,9 @@ p {
 #employee-resources li a:hover {
     color: #0056b3;
 }
+
+
+#logo-link {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit the color from the parent element (h1) */
+}
