@@ -1,32 +1,32 @@
 // Hardcoded data for the colors and types tables
 const colorsData = [
-    { id: 1, name: 'Red' },
-    { id: 2, name: 'Green' },
-    { id: 3, name: 'Blue' },
-    { id: 4, name: 'Yellow' },
-    { id: 5, name: 'Purple' },
-    { id: 6, name: 'Pink' },
-    { id: 7, name: 'Orange' },
-    { id: 8, name: 'White' },
-    { id: 9, name: 'Brown' },
-    { id: 10, name: 'Grey' },
-    { id: 11, name: 'Black' }
+    { name: 'Red' },
+    { name: 'Green' },
+    { name: 'Blue' },
+    { name: 'Yellow' },
+    { name: 'Purple' },
+    { name: 'Pink' },
+    { name: 'Orange' },
+    { name: 'White' },
+    { name: 'Brown' },
+    { name: 'Grey' },
+    { name: 'Black' }
 ];
 
 const typesData = [
-    { id: 1, type: 'Electric lawnmower' },
-    { id: 2, type: 'Gas powered lawnmower' },
-    { id: 3, type: 'Bagged lawnmower' },
-    { id: 4, type: 'Push Mower' },
-    { id: 5, type: 'Scythe' }
+    { type: 'Electric lawnmower' },
+    { type: 'Gas powered lawnmower' },
+    { type: 'Bagged lawnmower' },
+    { type: 'Push Mower' },
+    { type: 'Scythe' }
 ];
 
 const citiesData = [
-    { id: 1, name: 'Niagara Falls' },
-    { id: 2, name: 'Toronto' },
-    { id: 3, name: 'Ottawa' },
-    { id: 4, name: 'Calgary' },
-    { id: 5, name: 'Winnipeg' }
+    { name: 'Niagara Falls' },
+    { name: 'Toronto' },
+    { name: 'Ottawa' },
+    { name: 'Calgary' },
+    { name: 'Winnipeg' }
 ];
 
 // Function to populate a table with data
