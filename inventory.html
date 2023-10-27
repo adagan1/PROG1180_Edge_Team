@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <h1 id="centered-title">Emma's Small Engines</h1>
+        <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
         <nav>
             <ul>
                 <li><a href="main.html">Home</a></li>
@@ -23,23 +23,19 @@
 
 
     <main>
-        <h1>Inventory</h1>
+        <h1>Equipment</h1>
         <div class="center-container">
             <input type="text" id="searchInput" placeholder="Search for Equipment, Brand, Description, Price, Status, or Amount...">
-
         </div>
         <div>
-        <button onclick="createInventory()">Add Inventory</button>
+        <button onclick="createInventory()">Create Inventory</button>
         </div>
         <table id="equipmentTable">
             <thead>
                 <tr>
-                    <th>Equipment</th>
                     <th>Name</th>
+                    <th>Brand</th>
                     <th>Description</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Amount</th>
                     <th>Colour</th>
                     <th>Controls</th>
                 </tr>
