@@ -1,39 +1,27 @@
 // Define an array of hard-coded equipment
 const hardCodedEquipment = [
     {
-        equipment: "Lawnmower",
-        name: "Brand1 Lawnmower",
+        name: "Lawnmower",
+        brand: "Brand1",
         description: "This is a Lawnmower from Brand1.",
-        price: "250.00",
-        status: "In stock",
-        amount: 5,
         colour: "Green"
     },
     {
-        equipment: "Drill",
-        name: "Brand2 Drill",
+        name: "Drill",
+        brand: "Brand2",
         description: "This is a Drill from Brand2.",
-        price: "120.00",
-        status: "Out of stock",
-        amount: 0,
         colour: "Red"
     },
     {
-        equipment: "Saw",
-        name: "Brand3 Saw",
+        name: "Saw",
+        brand: "Brand3",
         description: "This is a Saw from Brand3.",
-        price: "100.00",
-        status: "In stock",
-        amount: 2,
         colour: "Grey"
     },
     {
-        equipment: "Lawnmower",
-        name: "Brand1 Lawnmower",
+        name: "Lawnmower",
+        brand: "Brand1",
         description: "This is a Lawnmower from Brand1.",
-        price: "120.00",
-        status: "In stock",
-        amount: 10,
         colour: "Green"
     },
 ];
@@ -47,14 +35,15 @@ function fillTableWithHardCodedEquipment() {
         const equipment = hardCodedEquipment[i];
         const row = document.createElement("tr");
         row.innerHTML = `
-            <td>${equipment.equipment}</td>
             <td>${equipment.name}</td>
+            <td>${equipment.brand}</td>
             <td>${equipment.description}</td>
-            <td>$${equipment.price}</td>
-            <td>${equipment.status}</td>
-            <td>${equipment.amount}</td>
             <td>${equipment.colour}</td>
-            <td><button onclick="editEquipment(${i})">Edit</button></td>
+            <td>
+            <button onclick="editEquipment(${i})">Edit</button>&nbsp;
+            <button onclick="detailEquipment(${i})">Detail</button>
+            </td>
+            
         `;
         tbody.appendChild(row);
     }
@@ -81,12 +70,9 @@ function fillTableWithEquipmentFromLocalStorage() {
         const equipment = storedEquipmentData[i];
         const row = document.createElement("tr");
         row.innerHTML = `
-            <td>${equipment.equipment}</td>
             <td>${equipment.name}</td>
+            <td>${equipment.brand}</td>
             <td>${equipment.description}</td>
-            <td>$${equipment.price}</td>
-            <td>${equipment.status}</td>
-            <td>${equipment.amount}</td>
             <td>${equipment.colour}</td>
             <td><button onclick="editEquipment(${i})">Edit</button></td>
         `;
