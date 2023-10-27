@@ -10,20 +10,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Populate the input fields with the equipment data
             document.getElementById("equipmentName").value = equipmentToEdit.name;
+            document.getElementById("equipmentBrand").value = equipmentToEdit.brand;
             document.getElementById("equipmentDescription").value = equipmentToEdit.description;
-            document.getElementById("equipmentPrice").value = equipmentToEdit.price;
-            document.getElementById("equipmentStatus").value = equipmentToEdit.status;
-            document.getElementById("equipmentAmount").value = equipmentToEdit.amount;
             document.getElementById("equipmentColour").value = equipmentToEdit.colour;
 
             // Add an event listener to save changes
             document.getElementById("saveButton").addEventListener("click", function () {
                 // Update the equipment data with the new values
-                equipmentToEdit.name = document.getElementById("equipmentName").value;
+                equipmentToEdit.brand = document.getElementById("equipmentBrand").value;
                 equipmentToEdit.description = document.getElementById("equipmentDescription").value;
-                equipmentToEdit.price = document.getElementById("equipmentPrice").value;
-                equipmentToEdit.status = document.getElementById("equipmentStatus").value;
-                equipmentToEdit.amount = document.getElementById("equipmentAmount").value;
                 equipmentToEdit.colour = document.getElementById("equipmentColour").value;
 
                 // Update the data in local storage
@@ -48,3 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "inventory.html";
     }
 });
+
+function goToEquiptmentPage() {
+    window.location.href = "inventory.html";
+}
