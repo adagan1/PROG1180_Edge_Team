@@ -2,27 +2,30 @@
 const hardCodedCustomer = [
     {
         name: "Joe Jawndel",
-        age: 23,
         email: "JJawndel@gmail.com",
         phone: "905-221-3490",
         address: "1220 Royal lane",
-        city: "Niagara Falls"
+        city: "Niagara Falls",
+        postal: "A2V 3NM",
+        province: "Ontario"
     },
     {
         name: "Billy Talent",
-        age: 30,
         email: "BTalent@gmail.com",
         phone: "289-334-3420",
         address: "1810 Salty Springs",
-        city: "Welland"
+        city: "Welland",
+        postal: "A2V 3NM",
+        province: "Alberta"
     },
     {
         name: "Julio Mendes",
-        age: 19,
         email: "JMendes@hotmail.com",
         phone: "289-493-2061",
         address: "6820 Far Crescent",
-        city: "St Catharines"
+        city: "St Catharines",
+        postal: "A2V 3NM",
+        province: "Quebec"
     }
 ];
 
@@ -36,12 +39,16 @@ function fillTableWithHardCodedEquipment() {
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${customer.name}</td>
-            <td>${customer.age}</td>
             <td>${customer.email}</td>
             <td>${customer.phone}</td>
             <td>${customer.address}</td>
             <td>${customer.city}</td>
-            <td><button onclick="editCustomer(${i})">Edit</button></td>            
+            <td>${customer.postal}</td>
+            <td>${customer.province}</td>
+            <td>
+            <button onclick="editCustomer(${i})">Edit</button>&nbsp;
+            <button onclick="detailCustomer(${i})">Detail</button>
+            </td>
         `;
         tbody.appendChild(row);
     }
@@ -68,12 +75,13 @@ function fillTableWithEquipmentFromLocalStorage() {
         const customer = storedCustomerData[i];
         const row = document.createElement("tr");
         row.innerHTML = `
-            <td>${customer.name}</td>
-            <td>${customer.age}</td>
-            <td>${customer.email}</td>
-            <td>${customer.phone}</td>
-            <td>${customer.address}</td>
-            <td>${customer.city}</td>
+        <td>${customer.name}</td>
+        <td>${customer.email}</td>
+        <td>${customer.phone}</td>
+        <td>${customer.address}</td>
+        <td>${customer.city}</td>
+        <td>${customer.postal}</td>
+        <td>${customer.province}</td>
             <td><button onclick="editCustomer(${i})">Edit</button></td>
         `;
         tbody.appendChild(row);
