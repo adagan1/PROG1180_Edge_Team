@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            background-color: #3498db;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+        #customerDetails {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Customer Details</h1>
+    <div id="customerDetails">
+        <!-- Customer details will be displayed here using JavaScript -->
+    </div>
+
+    <script>
+        // Retrieve the selected customer data from sessionStorage
+        const customerDataString = sessionStorage.getItem("selectedCustomer");
+
+        if (customerDataString) {
+            // Parse the customer data JSON string
+            const customerData = JSON.parse(customerDataString);
+
+            // Display the customer details on the page
+            const customerDetails = document.getElementById("customerDetails");
+
+            // Create HTML elements to display the details
+            const detailsTable = document.createElement("table");
+
+            for (const key in customerData) {
+                const row = document.createElement("tr");
+                const cell1 = document.createElement("td");
+                const cell2 = document.createElement("td");
+
+                cell1.textContent = key;
+                cell2.textContent = customerData[key];
+
+                row.appendChild(cell1);
+                row.appendChild(cell2);
+
+                detailsTable.appendChild(row);
+            }
+
+            customerDetails.appendChild(detailsTable);
+        } else {
+            // Handle the case where customer data is not available
+            customerDetails.textContent = "Customer details not found.";
+        }
+    </script>
+</body>
+</html>
