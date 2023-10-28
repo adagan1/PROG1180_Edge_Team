@@ -133,6 +133,21 @@ function createInventory(index) {
     window.location.href = 'inventoryCreate.html?inventoryData=${inventoryDataString}';
 }
 
+// Function to display inventory details on a new page
+function detailEquipment(index) {
+    // Get the equipment data to display
+    const equipmentData = hardCodedEquipment[index];
+
+    // Convert the equipment data to a JSON string
+    const equipmentDataString = JSON.stringify(equipmentData);
+
+    // Store the selected equipment data in sessionStorage for access on the new page
+    sessionStorage.setItem("selectedEquipment", equipmentDataString);
+
+    // Redirect to the inventoryDetail.html page
+    window.location.href = "inventoryDetail.html";
+}
+
 // Fill table with hard-coded equipment and "Edit" buttons
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("searchInput").addEventListener("input", filterEquipment);
