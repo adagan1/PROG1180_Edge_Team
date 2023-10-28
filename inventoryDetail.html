@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory Details</title>
+</head>
+<body>
+    <h1>Inventory Details</h1>
+    <div id="equipmentDetails">
+        <!-- Equipment details will be displayed here using JavaScript -->
+    </div>
+
+    <script>
+        // Retrieve the selected equipment data from sessionStorage
+        const equipmentDataString = sessionStorage.getItem("selectedEquipment");
+
+        if (equipmentDataString) {
+            // Parse the equipment data JSON string
+            const equipmentData = JSON.parse(equipmentDataString);
+
+            // Display the equipment details on the page
+            const equipmentDetails = document.getElementById("equipmentDetails");
+
+            // Create HTML elements to display the details
+            const detailsTable = document.createElement("table");
+
+            for (const key in equipmentData) {
+                const row = document.createElement("tr");
+                const cell1 = document.createElement("td");
+                const cell2 = document.createElement("td");
+
+                cell1.textContent = key;
+                cell2.textContent = equipmentData[key];
+
+                row.appendChild(cell1);
+                row.appendChild(cell2);
+
+                detailsTable.appendChild(row);
+            }
+
+            equipmentDetails.appendChild(detailsTable);
+        } else {
+            // Handle the case where equipment data is not available
+            equipmentDetails.textContent = "Equipment details not found.";
+        }
+    </script>
+</body>
+</html>
