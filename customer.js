@@ -77,6 +77,12 @@ function editCustomer(index) {
     window.location.href = `customerEdit.html?customerData=${customerDataString}`;
 }
 
+// Function to navigate to the customerCreate.html page
+function createCustomer() {
+    // Redirect to the customerCreate.html page
+    window.location.href = "customerCreate.html";
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     fillTableWithCustomerData();
 });
