@@ -37,8 +37,6 @@ function fillTableWithHardCodedEquipment() {
         row.innerHTML = `
             <td>${equipment.name}</td>
             <td>${equipment.brand}</td>
-            <td>${equipment.description}</td>
-            <td>${equipment.colour}</td>
             <td>
             <button onclick="editEquipment(${i})">Edit</button>&nbsp;
             <button onclick="detailEquipment(${i})">Detail</button>
