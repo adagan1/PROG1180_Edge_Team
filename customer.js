@@ -33,20 +33,30 @@ const hardCodedCustomer = [
 function fillTableWithCustomerData() {
     const table = document.getElementById("customerTable");
     const tbody = table.getElementsByTagName("tbody")[0];
+    const searchInput = document.getElementById("searchInput");
+    const searchTerm = searchInput.value.toLowerCase();
+
+    // Clear the table
+    tbody.innerHTML = '';
 
     for (let i = 0; i < hardCodedCustomer.length; i++) {
         const customer = hardCodedCustomer[i];
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${customer.name}</td>
-            <td>${customer.email}</td>
-            <td>${customer.phone}</td>
-            <td>
-                <button onclick="editCustomer(${i})">Edit</button>
-                <button onclick="detailCustomer(${i})">Detail</button>
-            </td>
-        `;
-        tbody.appendChild(row);
+        const customerString = JSON.stringify(customer).toLowerCase();
+
+        // Check if the search term matches any part of the customer data
+        if (customerString.includes(searchTerm)) {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${customer.name}</td>
+                <td>${customer.email}</td>
+                <td>${customer.phone}</td>
+                <td>
+                    <button onclick="editCustomer(${i})">Edit</button>
+                    <button onclick="detailCustomer(${i})">Detail</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        }
     }
 }
 
@@ -85,4 +95,10 @@ function createCustomer() {
 
 document.addEventListener("DOMContentLoaded", function() {
     fillTableWithCustomerData();
+
+    // Add an event listener to the search input for real-time filtering
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", function() {
+        fillTableWithCustomerData();
+    });
 });
