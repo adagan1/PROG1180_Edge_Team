@@ -5,6 +5,12 @@ function createInventory() {
     const description = document.getElementById("description").value;
     const colour = document.getElementById("colour").value;
 
+    // Validate the required fields
+    if (name.trim() === "" || brand === "" || colour === "") {
+        alert("Please fill in all required fields.");
+        return;
+    }
+
     // Create an object with the new equipment data
     const newEquipment = {
         name: name,
