@@ -10,29 +10,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Populate the input fields with the equipment data
             document.getElementById("equipmentName").value = equipmentToEdit.name;
-            document.getElementById("equipmentBrand").value = equipmentToEdit.brand;
+            document.getElementById("brand").value = equipmentToEdit.brand;
             document.getElementById("equipmentDescription").value = equipmentToEdit.description;
-            document.getElementById("equipmentColour").value = equipmentToEdit.colour;
+            document.getElementById("colour").value = equipmentToEdit.colour;
 
             // Add an event listener to save changes
-            document.getElementById("saveButton").addEventListener("click", function () {
-                // Update the equipment data with the new values
-                equipmentToEdit.brand = document.getElementById("equipmentBrand").value;
-                equipmentToEdit.description = document.getElementById("equipmentDescription").value;
-                equipmentToEdit.colour = document.getElementById("equipmentColour").value;
+            const saveButton = document.getElementById("saveButton");
+            saveButton.addEventListener("click", function () {
+                // Validate the input fields
+                const name = document.getElementById("equipmentName").value;
+                const brand = document.getElementById("brand").value;
+                const description = document.getElementById("equipmentDescription").value;
+                const colour = document.getElementById("colour").value;
 
-                // Update the data in local storage
-                // Retrieve the existing equipment data
-                const storedEquipmentData = JSON.parse(localStorage.getItem("equipmentData")) || [];
+                if (name && brand && description && colour) {
+                    // All fields are filled, proceed with saving changes
+                    equipmentToEdit.name = name;
+                    equipmentToEdit.brand = brand;
+                    equipmentToEdit.description = description;
+                    equipmentToEdit.colour = colour;
 
-                // Update the equipment data in local storage
-                storedEquipmentData[equipmentToEdit.index] = equipmentToEdit;
+                    // Update the data in local storage
+                    const storedEquipmentData = JSON.parse(localStorage.getItem("equipmentData")) || [];
+                    storedEquipmentData[equipmentToEdit.index] = equipmentToEdit;
+                    localStorage.setItem("equipmentData", JSON.stringify(storedEquipmentData));
 
-                // Save the updated data back to local storage
-                localStorage.setItem("equipmentData", JSON.stringify(storedEquipmentData));
-
-                // Redirect back to the inventory page
-                window.location.href = "inventory.html";
+                    // Redirect back to the inventory page
+                    window.location.href = "inventory.html";
+                } else {
+                    // Display an alert if any required field is empty
+                    alert("Please fill in all the required fields.");
+                }
             });
         } catch (error) {
             console.error("Error parsing equipment data:", error);
@@ -44,6 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-function goToEquiptmentPage() {
+function goToEquipmentPage() {
     window.location.href = "inventory.html";
 }
