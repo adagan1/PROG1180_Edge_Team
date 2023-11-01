@@ -10,21 +10,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Populate the input fields with the customer data
             document.getElementById("customerName").value = customerToEdit.name;
-            document.getElementById("customerAge").value = customerToEdit.age;
             document.getElementById("customerEmail").value = customerToEdit.email;
             document.getElementById("customerPhone").value = customerToEdit.phone;
             document.getElementById("customerAddress").value = customerToEdit.address;
             document.getElementById("customerCity").value = customerToEdit.city;
+            document.getElementById("customerPostal").value = customerToEdit.postal;
+            document.getElementById("customerProvince").value = customerToEdit.province;
 
             // Add an event listener to save changes
             document.getElementById("saveButton").addEventListener("click", function () {
                 // Update the customer data with the new values
                 customerToEdit.name = document.getElementById("customerName").value;
-                customerToEdit.age = document.getElementById("customerAge").value;
                 customerToEdit.email = document.getElementById("customerEmail").value;
                 customerToEdit.phone = document.getElementById("customerPhone").value;
                 customerToEdit.address = document.getElementById("customerAddress").value;
                 customerToEdit.city = document.getElementById("customerCity").value;
+                customerToEdit.postal = document.getElementById("customerPostal").value;
+                customerToEdit.province = document.getElementById("customerProvince").value;
 
                 // Update the data in local storage
                 // Retrieve the existing customer data
@@ -47,4 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Invalid or missing customer data.");
         window.location.href = "customer.html";
     }
+
 });
+
+function goToCustomerPage() {
+    window.location.href = "customer.html";
+}

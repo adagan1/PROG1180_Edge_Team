@@ -47,7 +47,7 @@ nav a {
     font-weight: bold;
 }
 
-/* Style the main content */
+/* Style the main content, All Pages */
 main {
     padding: 2rem;
     background-color: #fff;
@@ -63,7 +63,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Style the input elements */
+/* Style the input elements, For search bar*/
 input[type="text"],
 input[type="number"] {
     width: 100%;
@@ -73,7 +73,7 @@ input[type="number"] {
     border-radius: 5px;
 }
 
-/* Style buttons */
+/* Style buttons, all pages buttons */
 button {
     background-color: #686868;
     color: #fff;
@@ -88,7 +88,7 @@ button:hover {
     background-color: #555;
 }
 
-/* Style tables */
+/* Style tables, Tables page */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -100,7 +100,11 @@ table th, table td {
     border: 1px solid #ccc;
 }
 
-/* Apply styles specific to the tables */
+#coloursTable, #typesTable, #citiesTable {
+    width: 500px;
+}
+
+/* Apply styles specific to the tables, Tables Page */
 #tabs {
     margin: 20px 0;
 }
@@ -110,29 +114,7 @@ button.active {
     color: #fff;
 }
 
-@media (max-width: 600px) {
-    header {
-        padding: 0.5rem;
-    }
-    header h1 {
-        font-size: 20px;
-    }
-    main {
-        padding: 1rem;
-    }
-    h1 {
-        font-size: 24px;
-    }
-    .center-container {
-        align-items: stretch;
-    }
-    input[type="text"],
-    input[type="number"] {
-        width: 100%;
-    }
-}
-
-/* Hide the centered title on scroll */
+/* Hide the centered title on scroll, Tables Page*/
 .centered-title {
     display: none;
 }
@@ -145,7 +127,8 @@ button.active {
     display: table;
 }
 
-/* Style the employee sections */
+
+/* Style the employee sections, Main Page*/
 section {
     margin: 20px 0;
     padding: 20px;
@@ -166,7 +149,8 @@ p {
     color: #666;
 }
 
-/* Style the Employee Resources list */
+
+/* Style the Employee Resources list, Main Page*/
 #employee-resources ul {
     list-style: none;
     padding: 0;
@@ -184,4 +168,10 @@ p {
 
 #employee-resources li a:hover {
     color: #0056b3;
+}
+
+
+#logo-link {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit the color from the parent element (h1) */
 }

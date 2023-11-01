@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="style.css">
 <html>
 <head>
-    <title>Tables</title>
+    <title>Maintenance</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+<style>
+    table {
+        text-align: center;
+    }
+</style>
 <body>
     <header id="header">
-        <h1>Emma's Small Engines</h1>
+        <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
         <nav>
             <ul>
                 <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="inventory.html">Equipment</a></li>
                 <li><a href="customer.html">Customer</a></li>
-                <li><a href="tables.html">Tables</a></li>
+                <li><a href="tables.html">Maintenance</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <h1>Tables</h1>
+        <h1>Maintenance</h1>
         <div class="center-container">
             <input type="text" id="searchInput" placeholder="Search..." oninput="filterTable()">
         </div>
@@ -29,12 +34,11 @@
         </div>
 
         <table id="coloursTable" class="table" border="1">
-            <col span="1" style="width: 10%;">
             <col span="1" style="width: 90%;">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Colour</th>
+                    <th>Controls</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,12 +47,11 @@
         </table>
 
         <table id="typesTable" class="table" border="1">
-            <col span="1" style="width: 10%;">
             <col span="1" style="width: 90%;">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Type</th>
+                    <th>Controls</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,12 +60,11 @@
         </table>
 
         <table id="citiesTable" class="table" border="1">
-            <col span="1" style="width: 10%;">
             <col span="1" style="width: 90%;">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>City</th>
+                    <th>Controls</th>
                 </tr>
             </thead>
             <tbody>
