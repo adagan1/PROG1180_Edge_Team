@@ -169,3 +169,30 @@ populateTable('citiesTable', citiesData);
 
 // Activate the "Colors" tab by default
 showTable('coloursTable');
+
+function makeButtonCreateColourByDefault() {
+    const createButton = document.getElementById('createButton');
+    createButton.onclick = function() {
+        window.location.href = 'coloursCreate.html';
+    }
+}
+
+// Function to make the add button work upon page load
+window.onload = function (buttonText, link) {
+    // Get the initially active tab (in this case, "Colors")
+    const createButton = document.getElementById('createButton');
+    createButton.textContent = buttonText;
+    createButton.textContent = 'Add Colour'
+    createButton.onclick = function () {
+        window.location.href = 'coloursCreate.html';
+    };
+}
+
+// Function to update the "Create" button text and link
+function updateCreateButton(buttonText, link) {
+    const createButton = document.getElementById('createButton');
+    createButton.textContent = buttonText;
+    createButton.onclick = function () {
+        window.location.href = link + '.html';
+    };
+}
