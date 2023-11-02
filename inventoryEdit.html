@@ -145,8 +145,17 @@
                         <option value="Gray">Gray</option>
                     </select>
                 </div>
-                                
-                <button type="button" id="saveButton" onclick="goToEquiptmentPage()">Save Changes</button>
+                <div>
+                    <label for="owner">Owner:</label>
+                    <select id="owner" name="owner" required>
+                        <option value="" disabled selected>Select an owner</option>
+                        <option value="Joe Jawndel">Joe Jawndel</option>
+                        <option value="Billy Talent">Billy Talent</option>
+                        <option value="Julio Mendes">Julio Mendes</option>
+                    </select>
+                </div>
+                         
+                <button type="button" id="saveButton" onclick="goToEquipmentPage()">Save Changes</button>
                 <button type="button" id="cancelButton" onclick="goToEquipmentPage()">Cancel</button>
             </div>
         </form>
