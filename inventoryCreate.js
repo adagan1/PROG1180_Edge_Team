@@ -5,8 +5,11 @@ function createInventory() {
     const description = document.getElementById("description").value;
     const colour = document.getElementById("colour").value;
 
+    // Get the selected owner from the dropdown list
+    const owner = document.getElementById("owner").value;
+
     // Validate the required fields
-    if (name.trim() === "" || brand === "" || colour === "") {
+    if (name.trim() === "" || brand === "" || colour === "" || owner === "") {
         alert("Please fill in all required fields.");
         return;
     }
@@ -16,7 +19,8 @@ function createInventory() {
         name: name,
         brand: brand,
         description: description,
-        colour: colour
+        colour: colour,
+        owner: owner
     };
 
     // For this example, we'll log the new data to the console
