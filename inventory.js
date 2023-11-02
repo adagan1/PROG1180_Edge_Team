@@ -4,25 +4,29 @@ const hardCodedEquipment = [
         name: "Lawnmower",
         brand: "Brand1",
         description: "This is a Lawnmower from Brand1.",
-        colour: "Green"
+        colour: "Green",
+        owner: "Joe Jawndel"
     },
     {
         name: "Drill",
         brand: "Brand2",
         description: "This is a Drill from Brand2.",
-        colour: "Red"
+        colour: "Red",
+        owner: "Billy Talent"
     },
     {
         name: "Saw",
         brand: "Brand3",
         description: "This is a Saw from Brand3.",
-        colour: "Grey"
+        colour: "Gray",
+        owner: "Julio Mendes"
     },
     {
         name: "Lawnmower",
         brand: "Brand1",
         description: "This is a Lawnmower from Brand1.",
-        colour: "Green"
+        colour: "Green",
+        owner: "Joe Jawndel"
     },
 ];
 
@@ -72,6 +76,7 @@ function fillTableWithEquipmentFromLocalStorage() {
             <td>${equipment.brand}</td>
             <td>${equipment.description}</td>
             <td>${equipment.colour}</td>
+            <td>${equipment.owner}</td>
             <td><button onclick="editEquipment(${i})">Edit</button></td>
         `;
         tbody.appendChild(row);
