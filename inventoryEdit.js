@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("equipmentDescription").value = equipmentToEdit.description;
             document.getElementById("colour").value = equipmentToEdit.colour;
 
+            // Handle the owner dropdown
+            const ownerDropdown = document.getElementById("owner");
+            ownerDropdown.value = equipmentToEdit.owner;
+
             // Add an event listener to save changes
             const saveButton = document.getElementById("saveButton");
             saveButton.addEventListener("click", function () {
@@ -22,13 +26,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 const brand = document.getElementById("brand").value;
                 const description = document.getElementById("equipmentDescription").value;
                 const colour = document.getElementById("colour").value;
+                const owner = ownerDropdown.value;
 
-                if (name && brand && description && colour) {
+                if (name && brand && description && colour && owner) {
                     // All fields are filled, proceed with saving changes
                     equipmentToEdit.name = name;
                     equipmentToEdit.brand = brand;
                     equipmentToEdit.description = description;
                     equipmentToEdit.colour = colour;
+                    equipmentToEdit.owner = owner;
 
                     // Update the data in local storage
                     const storedEquipmentData = JSON.parse(localStorage.getItem("equipmentData")) || [];
