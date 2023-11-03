@@ -14,7 +14,7 @@ const hardCodedCustomer = [
         email: "BTalent@gmail.com",
         phone: "289-334-3420",
         address: "1810 Salty Springs",
-        city: "Welland",
+        city: "Toronto",
         postal: "A2V 3NM",
         province: "Alberta"
     },
@@ -23,7 +23,7 @@ const hardCodedCustomer = [
         email: "JMendes@hotmail.com",
         phone: "289-493-2061",
         address: "6820 Far Crescent",
-        city: "St Catharines",
+        city: "Ottawa",
         postal: "A2V 3NM",
         province: "Quebec"
     }
