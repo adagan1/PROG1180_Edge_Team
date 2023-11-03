@@ -13,9 +13,22 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("customerEmail").value = customerToEdit.email;
             document.getElementById("customerPhone").value = customerToEdit.phone;
             document.getElementById("customerAddress").value = customerToEdit.address;
-            document.getElementById("customerCity").value = customerToEdit.city;
+            const customerCitySelect = document.getElementById("customerCity");
+            for (const option of customerCitySelect.options) {
+                if (option.value === customerToEdit.city) {
+                    option.selected = true;
+                    break; // Exit the loop once a match is found
+                }
+            }
             document.getElementById("customerPostal").value = customerToEdit.postal;
-            document.getElementById("customerProvince").value = customerToEdit.province;
+            //document.getElementById("customerProvince").value = customerToEdit.province;
+            const customerProvinceSelect = document.getElementById("customerProvince");
+            for (const option of customerProvinceSelect.options) {
+                if (option.value === customerToEdit.province) {
+                    option.selected = true;
+                    break; // Exit the loop once a match is found
+                }
+            }
 
             // Add an event listener to save changes
             document.getElementById("saveButton").addEventListener("click", function () {
