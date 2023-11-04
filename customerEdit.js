@@ -32,6 +32,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Add an event listener to save changes
             document.getElementById("saveButton").addEventListener("click", function () {
+                // Reset the input field outlines
+                resetInputOutlines();
+
                 // Validate the input fields
                 if (validateForm()) {
                     // Update the customer data with the new values
@@ -76,20 +79,55 @@ function validateForm() {
     const customerPostal = document.getElementById("customerPostal").value;
     const customerProvince = document.getElementById("customerProvince").value;
 
-    if (customerName === "" || customerEmail === "" || customerPhone === "" || customerAddress === "" || customerCity === "" || customerPostal === "" || customerProvince === "") {
-        alert("Please fill in all fields.");
-        return false;
+    const errorMessages = [];
+
+    if (customerName === "") {
+        errorMessages.push("Please fill in the 'Customer Name' field.");
+        document.getElementById("customerName").classList.add("invalid-input");
     }
 
-    const phonePattern = /^\d{3}-\d{3}-\d{4}$/;
-    if (!phonePattern.test(customerPhone)) {
-        alert("Please enter a valid phone number in the format xxx-xxx-xxxx.");
-        return false;
+    if (customerEmail === "") {
+        errorMessages.push("Please fill in the 'Email' field.");
+        document.getElementById("customerEmail").classList.add("invalid-input");
+    } else if (!validateEmail(customerEmail)) {
+        errorMessages.push("Please enter a valid email address.");
+        document.getElementById("customerEmail").classList.add("invalid-input");
     }
 
-    const postalPattern = /^[A-Za-z0-9\s]{6,10}$/;
-    if (!postalPattern.test(customerPostal)) {
-        alert("Please enter a valid postal code.");
+    if (customerPhone === "") {
+        errorMessages.push("Please fill in the 'Phone' field.");
+        document.getElementById("customerPhone").classList.add("invalid-input");
+    } else if (!validatePhone(customerPhone)) {
+        errorMessages.push("Please enter a valid phone number in the format xxx-xxx-xxxx.");
+        document.getElementById("customerPhone").classList.add("invalid-input");
+    }
+
+    if (customerAddress === "") {
+        errorMessages.push("Please fill in the 'Address' field.");
+        document.getElementById("customerAddress").classList.add("invalid-input");
+    }
+
+    if (customerCity === "") {
+        errorMessages.push("Please select a 'City'.");
+        document.getElementById("customerCity").classList.add("invalid-input");
+    }
+
+    if (customerPostal === "") {
+        errorMessages.push("Please fill in the 'Postal' field.");
+        document.getElementById("customerPostal").classList.add("invalid-input");
+    } else if (!validatePostalCode(customerPostal)) {
+        errorMessages.push("Please enter a valid postal code.");
+        document.getElementById("customerPostal").classList.add("invalid-input");
+    }
+
+    if (customerProvince === "") {
+        errorMessages.push("Please select a 'Province'.");
+        document.getElementById("customerProvince").classList.add("invalid-input");
+    }
+
+    if (errorMessages.length > 0) {
+        // Display error messages on the page
+        document.getElementById("errorContainer").innerHTML = errorMessages.join("<br>");
         return false;
     }
 
@@ -98,4 +136,27 @@ function validateForm() {
 
 function goToCustomerPage() {
     window.location.href = "customer.html";
+}
+
+function validateEmail(email) {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
+}
+
+function validatePhone(phone) {
+    const phonePattern = /^\d{3}-\d{3}-\d{4}$/;
+    return phonePattern.test(phone);
+}
+
+function validatePostalCode(postal) {
+    const postalPattern = /^[A-Za-z0-9\s]{6,10}$/;
+    return postalPattern.test(postal);
+}
+
+function resetInputOutlines() {
+    // Remove the 'invalid-input' class from all input fields and dropdown lists
+    const inputs = document.querySelectorAll("input, select");
+    inputs.forEach(input => {
+        input.classList.remove("invalid-input");
+    });
 }
