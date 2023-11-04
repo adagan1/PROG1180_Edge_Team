@@ -7,35 +7,32 @@
 </head>
 <body>
     <header>
-        <h1>Emma's Small Engines</h1>
+        <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
         <nav>
             <ul>
-                <li><a href="main.html">Home</a></li>               
-                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="inventory.html">Equipment</a></li>
                 <li><a href="customer.html">Customer</a></li>
-                <li><a href="tables.html">Tables</a></li>
+                <li><a href="tables.html">Maintenance</a></li>
             </ul>
         </nav>
     </header>
 <main>
         <h1>Customer</h1>      
     <div class="center-container">
-        <input type="text" id="searchInput" placeholder="Search for a customers name, age, or email...">
+        <input type="text" id="searchInput" placeholder="Search for a customers name, email, or phone.">
     </div>
 
     <div>
-        <button onclick="createCustomer()">Create Customer</button>
+        <button onclick="createCustomer()">Add Customer</button>
     </div>
 
     <table id="customerTable">
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Age</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    <th>Address</th>
-                    <th>City</th>
                     <th>Controls</th>
                 </tr>
             </thead>

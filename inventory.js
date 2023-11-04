@@ -1,40 +1,32 @@
 // Define an array of hard-coded equipment
 const hardCodedEquipment = [
     {
-        equipment: "Lawnmower",
-        name: "Brand1 Lawnmower",
+        name: "Lawnmower",
+        brand: "Brand1",
         description: "This is a Lawnmower from Brand1.",
-        price: "250.00",
-        status: "In stock",
-        amount: 5,
-        colour: "Green"
+        colour: "Green",
+        owner: "Joe Jawndel"
     },
     {
-        equipment: "Drill",
-        name: "Brand2 Drill",
+        name: "Drill",
+        brand: "Brand2",
         description: "This is a Drill from Brand2.",
-        price: "120.00",
-        status: "Out of stock",
-        amount: 0,
-        colour: "Red"
+        colour: "Red",
+        owner: "Billy Talent"
     },
     {
-        equipment: "Saw",
-        name: "Brand3 Saw",
+        name: "Saw",
+        brand: "Brand3",
         description: "This is a Saw from Brand3.",
-        price: "100.00",
-        status: "In stock",
-        amount: 2,
-        colour: "Grey"
+        colour: "Gray",
+        owner: "Julio Mendes"
     },
     {
-        equipment: "Lawnmower",
-        name: "Brand1 Lawnmower",
+        name: "Lawnmower",
+        brand: "Brand1",
         description: "This is a Lawnmower from Brand1.",
-        price: "120.00",
-        status: "In stock",
-        amount: 10,
-        colour: "Green"
+        colour: "Green",
+        owner: "Joe Jawndel"
     },
 ];
 
@@ -47,14 +39,13 @@ function fillTableWithHardCodedEquipment() {
         const equipment = hardCodedEquipment[i];
         const row = document.createElement("tr");
         row.innerHTML = `
-            <td>${equipment.equipment}</td>
             <td>${equipment.name}</td>
-            <td>${equipment.description}</td>
-            <td>$${equipment.price}</td>
-            <td>${equipment.status}</td>
-            <td>${equipment.amount}</td>
-            <td>${equipment.colour}</td>
-            <td><button onclick="editEquipment(${i})">Edit</button></td>
+            <td>${equipment.brand}</td>
+            <td>
+            <button onclick="editEquipment(${i})">Edit</button>&nbsp;
+            <button onclick="detailEquipment(${i})">Detail</button>
+            </td>
+            
         `;
         tbody.appendChild(row);
     }
@@ -81,13 +72,11 @@ function fillTableWithEquipmentFromLocalStorage() {
         const equipment = storedEquipmentData[i];
         const row = document.createElement("tr");
         row.innerHTML = `
-            <td>${equipment.equipment}</td>
             <td>${equipment.name}</td>
+            <td>${equipment.brand}</td>
             <td>${equipment.description}</td>
-            <td>$${equipment.price}</td>
-            <td>${equipment.status}</td>
-            <td>${equipment.amount}</td>
             <td>${equipment.colour}</td>
+            <td>${equipment.owner}</td>
             <td><button onclick="editEquipment(${i})">Edit</button></td>
         `;
         tbody.appendChild(row);
@@ -145,6 +134,21 @@ function createInventory(index) {
 
     // Redirect to inventoryEdit.html with equipment data as a parameter
     window.location.href = 'inventoryCreate.html?inventoryData=${inventoryDataString}';
+}
+
+// Function to display inventory details on a new page
+function detailEquipment(index) {
+    // Get the equipment data to display
+    const equipmentData = hardCodedEquipment[index];
+
+    // Convert the equipment data to a JSON string
+    const equipmentDataString = JSON.stringify(equipmentData);
+
+    // Store the selected equipment data in sessionStorage for access on the new page
+    sessionStorage.setItem("selectedEquipment", equipmentDataString);
+
+    // Redirect to the inventoryDetail.html page
+    window.location.href = "inventoryDetail.html";
 }
 
 // Fill table with hard-coded equipment and "Edit" buttons

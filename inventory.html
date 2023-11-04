@@ -6,41 +6,35 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="inventory.js"></script>
     <script src="data.js"></script>
-    <title>Inventory</title>
+    <title>Equipment</title>
 </head>
 <body>
     <header>
-        <h1 id="centered-title">Emma's Small Engines</h1>
+        <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
         <nav>
             <ul>
                 <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Inventory</a></li>
+                <li><a href="inventory.html">Equipment</a></li>
                 <li><a href="customer.html">Customer</a></li>
-                <li><a href="tables.html">Tables</a></li>
+                <li><a href="tables.html">Maintenance</a></li>
             </ul>
         </nav>
     </header>
 
 
     <main>
-        <h1>Inventory</h1>
+        <h1>Equipment</h1>
         <div class="center-container">
-            <input type="text" id="searchInput" placeholder="Search for Equipment, Brand, Description, Price, Status, or Amount...">
-
+            <input type="text" id="searchInput" placeholder="Search for equipment or its brand.">
         </div>
         <div>
-        <button onclick="createInventory()">Create Inventory</button>
+        <button onclick="createInventory()">Add Inventory</button>
         </div>
         <table id="equipmentTable">
             <thead>
                 <tr>
-                    <th>Equipment</th>
                     <th>Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th>Amount</th>
-                    <th>Colour</th>
+                    <th>Brand</th>
                     <th>Controls</th>
                 </tr>
             </thead>

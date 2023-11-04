@@ -1,48 +1,55 @@
 // Hardcoded data for the colors and types tables
 const colorsData = [
-    { id: 1, name: 'Red' },
-    { id: 2, name: 'Green' },
-    { id: 3, name: 'Blue' },
-    { id: 4, name: 'Yellow' },
-    { id: 5, name: 'Purple' },
-    { id: 6, name: 'Pink' },
-    { id: 7, name: 'Orange' },
-    { id: 8, name: 'White' },
-    { id: 9, name: 'Brown' },
-    { id: 10, name: 'Grey' },
-    { id: 11, name: 'Black' }
+    { name: 'Red' },
+    { name: 'Green' },
+    { name: 'Blue' },
+    { name: 'Yellow' },
+    { name: 'Purple' },
+    { name: 'Pink' },
+    { name: 'Orange' },
+    { name: 'White' },
+    { name: 'Brown' },
+    { name: 'Grey' },
+    { name: 'Black' }
 ];
 
 const typesData = [
-    { id: 1, type: 'Electric lawnmower' },
-    { id: 2, type: 'Gas powered lawnmower' },
-    { id: 3, type: 'Bagged lawnmower' },
-    { id: 4, type: 'Push Mower' },
-    { id: 5, type: 'Scythe' }
+    { type: 'Electric lawnmower' },
+    { type: 'Gas powered lawnmower' },
+    { type: 'Bagged lawnmower' },
+    { type: 'Push Mower' },
+    { type: 'Scythe' }
 ];
 
 const citiesData = [
-    { id: 1, name: 'Niagara Falls' },
-    { id: 2, name: 'Toronto' },
-    { id: 3, name: 'Ottawa' },
-    { id: 4, name: 'Calgary' },
-    { id: 5, name: 'Winnipeg' }
+    { name: 'Niagara Falls' },
+    { name: 'Toronto' },
+    { name: 'Ottawa' },
+    { name: 'Calgary' },
+    { name: 'Winnipeg' }
 ];
 
 // Function to populate a table with data
 function populateTable(tableId, data) {
     const table = document.getElementById(tableId);
     const tableBody = table.getElementsByTagName('tbody')[0];
-    tableBody.innerHTML = ''; // Clear the table
+
+    // Clear the existing table rows
+    tableBody.innerHTML = '';
 
     data.forEach(item => {
         const row = tableBody.insertRow();
-        for (const key in item) {
-            if (item.hasOwnProperty(key)) {
-                const cell = row.insertCell();
-                cell.textContent = item[key];
-            }
-        }
+        const cell = row.insertCell();
+        cell.textContent = item.name || item.type; // Use item.name for the cell content
+
+        // Add a Controls column for editing
+        const controlsCell = row.insertCell();
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.onclick = function () {
+            editItem(row, tableId);
+        };
+        controlsCell.appendChild(editButton);
     });
 }
 
@@ -82,16 +89,110 @@ function filterTable() {
     }
     
     const filteredData = data.filter(item => {
-        return Object.values(item).some(value => value.toString().toLowerCase().includes(searchTerm));
+        return (item.name || item.type).toLowerCase().includes(searchTerm); // Update this line to check both "name" and "type"
     });
 
     populateTable(activeTableId, filteredData);
 }
 
+// Function to handle editing an item
+function editItem(row, tableId) {
+    const data = getTableData(tableId);
+    const rowIndex = row.rowIndex - 1; // Subtract 1 to account for the header row
+    const cellToEdit = row.cells[0]; // Assuming you're editing the first cell
+
+    // Prompt the user for the new value
+    const newValue = prompt("Edit item:", data[rowIndex].name || data[rowIndex].type);
+
+    if (newValue !== null) {
+        if (data[rowIndex].name) {
+            data[rowIndex].name = newValue;
+        } else {
+            data[rowIndex].type = newValue;
+        }
+        cellToEdit.textContent = newValue; // Update the cell content
+    }
+}
+
+// Helper function to get data from a selected table
+function getTableData(tableId) {
+    let data;
+    if (tableId === 'coloursTable') {
+        data = colorsData;
+    } else if (tableId === 'typesTable') {
+        data = typesData;
+    } else if (tableId === 'citiesTable') {
+        data = citiesData;
+    }
+    return data;
+}
+
+// Update the table to include Edit buttons
+function updateTableWithEditButtons() {
+    const tables = document.getElementsByClassName('table');
+    for (const table of tables) {
+        const rows = table.rows;
+        for (let i = 1; i < rows.length; i++) {
+            const editCell = rows[i].insertCell(-1);
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.onclick = function () {
+                editItem(rows[i], table.id);
+            };
+            editCell.appendChild(editButton);
+        }
+    }
+}
+
+// Call the function to add Edit buttons when the page loads
+updateTableWithEditButtons();
+
 // Initial population of the colors and types tables
 populateTable('coloursTable', colorsData);
 populateTable('typesTable', typesData);
-populateTable('citiesTable', citiesData)
+populateTable('citiesTable', citiesData);
 
 // Activate the "Colors" tab by default
 showTable('coloursTable');
+
+// Add an event listener to the search input for real-time filtering
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+// Call the function to add Edit buttons when the page loads
+updateTableWithEditButtons();
+
+// Initial population of the colors and types tables
+populateTable('coloursTable', colorsData);
+populateTable('typesTable', typesData);
+populateTable('citiesTable', citiesData);
+
+// Activate the "Colors" tab by default
+showTable('coloursTable');
+
+function makeButtonCreateColourByDefault() {
+    const createButton = document.getElementById('createButton');
+    createButton.onclick = function() {
+        window.location.href = 'coloursCreate.html';
+    }
+}
+
+// Function to make the add button work upon page load
+window.onload = function (buttonText, link) {
+    // Get the initially active tab (in this case, "Colors")
+    const createButton = document.getElementById('createButton');
+    createButton.textContent = buttonText;
+    createButton.textContent = 'Add Colour'
+    createButton.onclick = function () {
+        window.location.href = 'coloursCreate.html';
+    };
+}
+
+// Function to update the "Create" button text and link
+function updateCreateButton(buttonText, link) {
+    const createButton = document.getElementById('createButton');
+    createButton.textContent = buttonText;
+    createButton.onclick = function () {
+        window.location.href = link + '.html';
+    };
+}
