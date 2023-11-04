@@ -78,7 +78,7 @@
         }
 
         button {
-            background-color: #686868;
+            background-color: #333;
             color: #fff;
             padding: 10px 20px;
             border: none;
@@ -89,10 +89,18 @@
             background-color: red;
         }
         button:hover {
-            background-color: #3a3a3a;
+            background-color: #555;
+        }
+        .invalid-input {
+            border: 1px solid red;
         }
         #description {
             resize: none; /* Prevent user from resizing the textarea */
+        }
+        input.invalid-input[type="text"],
+        input.invalid-input[type="email"],
+        input.invalid-input[type="tel"] {
+            border: 1px solid red;
         }
     </style>
     <!-- End Kyle Fix -->
@@ -158,18 +166,13 @@
                         <option value="Owner3">Julio Mendes</option>
                     </select>
                 </div>
-                
-                
+                <div id="errorContainer"></div> <!-- Container for error messages -->
                 <div>
-                    
-                    <button type="button" onclick="createInventory()">Save Changes</button>
-                    <button type="button" id="cancelButton" onclick="goToEquiptmentPage()">Cancel</button>
+                    <button type="button" id="createInventoryButton">Save Changes</button>
+                    <button type="button" id="cancelButton" onclick="goToEquipmentPage()">Cancel</button>
                 </div>
             </form>
         </div>
     </main>
-    
-    
-    
 </body>
 </html>
