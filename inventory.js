@@ -1,31 +1,35 @@
 // Define an array of hard-coded equipment
 const hardCodedEquipment = [
     {
-        name: "Lawnmower",
-        brand: "Brand1",
-        description: "This is a Lawnmower from Brand1.",
+        name: "Bagged Lawnmower",
+        brand: "Honda",
+        description: "This is a Lawnmower from Honda.",
         colour: "Green",
+        price: "299.99",
         owner: "Joe Jawndel"
     },
     {
         name: "Drill",
-        brand: "Brand2",
-        description: "This is a Drill from Brand2.",
+        brand: "Dewalt",
+        description: "This is a Drill from Dewalt.",
         colour: "Red",
+        price: "149.99",
         owner: "Billy Talent"
     },
     {
         name: "Saw",
-        brand: "Brand3",
-        description: "This is a Saw from Brand3.",
+        brand: "Craftsman",
+        description: "This is a Saw from Craftsman.",
         colour: "Gray",
+        price: "49.99",
         owner: "Julio Mendes"
     },
     {
-        name: "Lawnmower",
-        brand: "Brand1",
-        description: "This is a Lawnmower from Brand1.",
+        name: "Electric Lawnmower",
+        brand: "John Deere",
+        description: "This is a Lawnmower from John Deere.",
         colour: "Green",
+        price: "399.99",
         owner: "Joe Jawndel"
     },
 ];
