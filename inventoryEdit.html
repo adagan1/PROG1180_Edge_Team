@@ -88,7 +88,7 @@
             }
     
             button {
-                background-color: #686868;
+                background-color: #333;
                 color: #fff;
                 padding: 10px 20px;
                 border: none;
@@ -99,15 +99,23 @@
                 background-color: red;
             }
             button:hover {
-                background-color: #3a3a3a;
+                background-color: #555;
             }
             #description {
                 resize: none; /* Prevent user from resizing the textarea */
             }
+            .invalid-input {
+                border: 1px solid red;
+            }
+            input.invalid-input[type="text"],
+            input.invalid-input[type="email"],
+            input.invalid-input[type="tel"] {
+                border: 1px solid red;
+            }
         </style>
     
         
-    <main id="editPageMain">
+    <main>
         <h1>Edit Equipment</h1>
         <form id="editForm">
             <div class="edit-container">
@@ -119,10 +127,10 @@
                     <label for="brand">Brand:</label>
                     <select id="brand" name="brand" required>
                         <option value="" disabled selected>Select a brand</option>
-                        <option value="Brand1">Craftsman</option>
-                        <option value="Brand2">Dewalt</option>
-                        <option value="Brand3">Honda</option>
-                        <option value="Brand4">John Deere</option>
+                        <option value="Craftsman">Craftsman</option>
+                        <option value="Dewalt">Dewalt</option>
+                        <option value="Honda">Honda</option>
+                        <option value="John Deere">John Deere</option>
                     </select>
                 </div>
                 <div>
@@ -154,8 +162,10 @@
                         <option value="Julio Mendes">Julio Mendes</option>
                     </select>
                 </div>
-                         
-                <button type="button" id="saveButton" onclick="goToEquipmentPage()">Save Changes</button>
+
+                <div id="errorContainer" class="error"></div>
+
+                <button type="button" id="saveButton">Save Changes</button>
                 <button type="button" id="cancelButton" onclick="goToEquipmentPage()">Cancel</button>
             </div>
         </form>
