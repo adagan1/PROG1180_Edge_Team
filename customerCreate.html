@@ -1,182 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="customerCreate.js"></script>
-    <title>Create Customer</title>
-    <style>
-        h1 {
-            text-align: center;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+document.addEventListener("DOMContentLoaded", function () {
+    // Get the equipment data from the URL parameter as a JSON string
+    const urlParams = new URLSearchParams(window.location.search);
+    const equipmentDataString = urlParams.get("equipmentData");
 
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem;
-            padding-left: 50px;
-            display: flex;
-            justify-content: space-between; /* Align content horizontally */
-            align-items: center; /* Center content vertically */
-            width: 100%;
-        }
+    if (equipmentDataString) {
+        try {
+            // Parse the JSON data
+            const equipmentToEdit = JSON.parse(equipmentDataString);
 
-        header h1 {
-            margin: 0;
-        }
+            // Populate the input fields with the equipment data
+            document.getElementById("equipmentName").value = equipmentToEdit.name;
+            document.getElementById("brand").value = equipmentToEdit.brand;
+            document.getElementById("equipmentDescription").value = equipmentToEdit.description;
+            document.getElementById("colour").value = equipmentToEdit.colour;
 
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
+            // Handle the owner dropdown
+            const ownerDropdown = document.getElementById("owner");
+            ownerDropdown.value = equipmentToEdit.owner;
 
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
+            // Add an event listener to save changes
+            const saveButton = document.getElementById("saveButton");
+            saveButton.addEventListener("click", function () {
+                // Reset previous error styles and messages
+                resetValidationStyles();
+                const errorContainer = document.getElementById("errorContainer");
+                errorContainer.innerText = "";
 
-        main {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
+                // Validate the input fields
+                const name = document.getElementById("equipmentName").value;
+                const brand = document.getElementById("brand").value;
+                const description = document.getElementById("equipmentDescription").value;
+                const colour = document.getElementById("colour").value;
+                const owner = ownerDropdown.value;
 
-        form {
-            margin: 0;
-        }
+                if (name && brand && description && colour && owner) {
+                    // All fields are filled, proceed with saving changes
+                    equipmentToEdit.name = name;
+                    equipmentToEdit.brand = brand;
+                    equipmentToEdit.description = description;
+                    equipmentToEdit.colour = colour;
+                    equipmentToEdit.owner = owner;
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
+                    // Update the data in local storage
+                    const storedEquipmentData = JSON.parse(localStorage.getItem("equipmentData")) || [];
+                    storedEquipmentData[equipmentToEdit.index] = equipmentToEdit;
+                    localStorage.setItem("equipmentData", JSON.stringify(storedEquipmentData));
 
-        input[type="text"],
-        input[type="number"],
-        input[type="email"],
-        input[type="tel"],
-        select {
-            width: 40%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+                    // Redirect back to the inventory page
+                    window.location.href = "inventory.html";
+                } else {
+                    // Display error messages for missing or incorrect fields
+                    if (!name) {
+                        errorContainer.innerText += "Please enter a name.\n";
+                        document.getElementById("equipmentName").classList.add("invalid-input");
+                    }
+                    if (!brand) {
+                        errorContainer.innerText += "Please select a brand.\n";
+                        document.getElementById("brand").classList.add("invalid-input");
+                    }
+                    if (!description) {
+                        errorContainer.innerText += "Please enter equipment description.\n";
+                        document.getElementById("equipmentDescription").classList.add("invalid-input");
+                    }
+                    if (!colour) {
+                        errorContainer.innerText += "Please select a color.\n";
+                        document.getElementById("colour").classList.add("invalid-input");
+                    }
+                    if (!owner) {
+                        errorContainer.innerText += "Please select an owner.";
+                        ownerDropdown.classList.add("invalid-input");
+                    }
+                }
+            });
+        } catch (error) {
+            console.error("Error parsing equipment data:", error);
         }
+    } else {
+        // Handle missing or invalid equipment data
+        alert("Invalid or missing equipment data.");
+        window.location.href = "inventory.html";
+    }
+});
 
-        select {
-            height: 40px;
-        }
+function goToEquipmentPage() {
+    window.location.href = "inventory.html";
+}
 
-        button {
-            background-color: #686868;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-        }
-
-        button[id="cancelButton"] {
-            background-color: red;
-        }
-        button:hover {
-            background-color: #3a3a3a;
-        }
-    </style>
-    <!-- End Kyle Fix -->
-</head>
-<body>
-    <header>
-        <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
-        <nav>
-            <ul>
-                <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
-                <li><a href="customer.html">Customer</a></li>
-                <li><a href="tables.html">Maintenance</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <h1 id="createOrEditTitle">Add Customer</h1>
-        <div class="center-container">
-            <form id="createForm">                
-                <div>
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required placeholder="Enter name">
-                </div>
-                <div>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required placeholder="Enter email">
-                </div>
-                <div>
-                    <label for="phone">Phone:</label>
-                    <input type="tel" id="phone" name="phone" required placeholder="Enter phone number ex.(xxx-xxx-xxxx)">
-                </div>
-                <div>
-                    <label for="address">Address:</label>
-                    <input type="text" id="address" name="address" required placeholder="Enter address">
-                </div>
-                <div>
-                    <label for="city">City:</label>
-                    <select id="city" name="city" required>
-                        <option value="" disabled selected>Select a city</option>
-                        <option value="Niagara Falls">Niagara Falls</option>
-                        <option value="Toronto">Toronto</option>
-                        <option value="Ottawa">Ottawa</option>
-                        <option value="Calgary">Calgary</option>
-                        <option value="Winnipeg">Winnipeg</option>
-                    </select>
-                </div>  
-                <div>
-                    <label for="postal">Postal Code:</label>
-                    <input type="text" id="postal" name="postal" required placeholder="Enter postal code ex. XXX XXX">
-                </div>  
-                <div>
-                    <label for="province">Province:</label>
-                    <select id="province" name="province" required>
-                        <option value="" disabled selected>Select a province</option>
-                        <option value="Ontario">Ontario</option>
-                        <option value="Quebec">Quebec</option>
-                        <option value="Manitoba">Manitoba</option>
-                        <option value="Saskatchewan">Saskatchewan</option>
-                        <option value="Alberta">Alberta</option>
-                        <option value="British Columbia">British Columbia</option>
-                        <option value="Prince Edward Island">Prince Edward Island</option>
-                        <option value="Nova Scotia">Nova Scotia</option>
-                        <option value="New Brunswick">New Brunswick</option>
-                        <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
-                        <option value="Nunavut">Nunavut</option>
-                        <option value="Northwest Territories">Northwest Territories</option>
-                        <option value="Yukon">Yukon</option>
-                    </select>
-                </div>  
-                <div id="EquipmentInfo">
-                    <label for="EquipmentInfo">Equipment:</label>
-                    <select id="EquipmentInfo" name="Equipment" required>
-                        <option value="" disabled selected>Select a Equipment</option>
-                        <option value="Equipment1">Craftsman Bagged Lawnmower </option>
-                        <option value="Equipment2">Dewalt Drill</option>
-                        <option value="Equipment3">Craftsman Saw</option>
-                        <option value="Equipment4">John Deere Electric Lawnmower</option>
-                    </select>
-                </div>
-                <div>
-                    
-                    <button type="button" onclick="createCustomer()">Save Changes</button>
-                    <button type="button" id="cancelButton", onclick="goToCustomerPage()">Cancel</button>                  
-                </div>
-            </form>
-        </div>
-    </main>
-</body>
-</html>
+function resetValidationStyles() {
+    const elements = document.getElementsByClassName("invalid-input");
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].classList.remove("invalid-input");
+    }
+}
