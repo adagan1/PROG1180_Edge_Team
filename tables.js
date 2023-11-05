@@ -1,81 +1,258 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Maintenance</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<style>
-    table {
-        text-align: center;
+// Hardcoded data for the colors and types tables
+const colorsData = [
+    { name: 'Red' },
+    { name: 'Green' },
+    { name: 'Blue' },
+    { name: 'Yellow' },
+    { name: 'Purple' },
+    { name: 'Pink' },
+    { name: 'Orange' },
+    { name: 'White' },
+    { name: 'Brown' },
+    { name: 'Grey' },
+    { name: 'Black' }
+];
+
+const typesData = [
+    { type: 'Electric lawnmower' },
+    { type: 'Gas powered lawnmower' },
+    { type: 'Bagged lawnmower' },
+    { type: 'Push Mower' },
+    { type: 'Scythe' }
+];
+
+const citiesData = [
+    { name: 'Niagara Falls' },
+    { name: 'Toronto' },
+    { name: 'Ottawa' },
+    { name: 'Calgary' },
+    { name: 'Winnipeg' }
+];
+
+// Function to retrieve the query parameter value by name
+function getQueryParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
+// Determine the data type from the query parameter
+const dataType = getQueryParameter('dataType');
+
+if (dataType === 'colours') {
+    // Load colors data
+    populateTable('coloursTable', colorsData);
+    showTable('coloursTable');
+} else if (dataType === 'types') {
+    // Load types data
+    populateTable('typesTable', typesData);
+    showTable('typesTable');
+} else if (dataType === 'cities') {
+    // Load cities data
+    populateTable('citiesTable', citiesData);
+    showTable('citiesTable');
+} else {
+    // Handle the case when no valid data type is provided
+    showTable('coloursTable');
+}
+
+// Function to populate a table with data
+function populateTable(tableId, data) {
+    const table = document.getElementById(tableId);
+    const tableBody = table.getElementsByTagName('tbody')[0];
+
+    // Clear the existing table rows
+    tableBody.innerHTML = '';
+
+    data.forEach(item => {
+        const row = tableBody.insertRow();
+        const cell = row.insertCell();
+        cell.textContent = item.name || item.type; // Use item.name for the cell content
+
+        // Add a Controls column for editing and details
+        const controlsCell = row.insertCell();
+
+        // Create a container div to hold the buttons
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.style.textAlign = 'center'; // Center-align the buttons
+
+        // Add an "Edit" button
+        const editButton = document.createElement('button');
+        editButton.textContent = 'Edit';
+        editButton.onclick = function () {
+            editItem(row, tableId);
+        };
+
+        // Add a "Details" button
+        const detailsButton = document.createElement('button');
+        detailsButton.textContent = 'Details';
+        detailsButton.onclick = function () {
+            openDetailsWindow(row, tableId);
+        };
+
+        // Append both buttons to the container
+        buttonsContainer.appendChild(editButton);
+        buttonsContainer.appendChild(document.createTextNode('  '));
+        buttonsContainer.appendChild(detailsButton);
+
+        // Append the container to the controls cell
+        controlsCell.appendChild(buttonsContainer);
+    });
+}
+
+function openDetailsWindow(row, tableId) {
+    // Get the color data to display
+    const data = getTableData(tableId);
+    const rowIndex = row.rowIndex - 1;
+
+    // Store the selected color data in sessionStorage for access on the new page
+    sessionStorage.setItem("selectedValue", JSON.stringify(data[rowIndex].name || data[rowIndex].type || data[rowIndex].name ));
+
+    // Redirect to the coloursDetails.html page
+    if(tableId == "coloursTable"){
+        window.location.href = "coloursDetails.html";
     }
-</style>
-<body>
-    <header id="header">
-        <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
-        <nav>
-            <ul>
-                <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
-                <li><a href="customer.html">Customer</a></li>
-                <li><a href="tables.html">Maintenance</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <h1>Maintenance</h1>
-        <div class="center-container">
-            <input type="text" id="searchInput" placeholder="Search for colours, types, or cities..." oninput="filterTable()">
-        </div>
-        
-        <div id="tabs">
-            <button id="colorsTab" class="active" onclick="showTable('coloursTable'); updateCreateButton('Add Colour', 'coloursCreate')">Colours</button>
-            <button id="typesTab" onclick="showTable('typesTable'); updateCreateButton('Add Type', 'typesCreate')">Types</button>
-            <button id="citiesTab" onclick="showTable('citiesTable'); updateCreateButton('Add City', 'citiesCreate')">Cities</button>
-        </div>
+    if(tableId == "typesTable"){
+        window.location.href = "typesDetails.html";
+    }
+    if(tableId == "citiesTable"){
+        window.location.href = "citiesDetails.html";
+    }
+}
 
-        <div id="createButtonContainer">
-            <button onload="makeButtonCreateColourByDefault()" id="createButton">Add Colour</button>
-        </div>
 
-        <table id="coloursTable" class="table" border="1">
-            <col span="1" >
-            <thead>
-                <tr>
-                    <th>Colour</th>
-                    <th>Controls</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Generated equipment will be added here -->
-            </tbody>
-        </table>
+// Function to show a table and deactivate the other tab
+function showTable(tableId) {
+    const tabs = document.getElementById('tabs').getElementsByTagName('button');
+    for (const tab of tabs) {
+        tab.classList.remove('active');
+    }
+    
+    // Hide all tables
+    const allTables = document.getElementsByClassName('table');
+    for (const table of allTables) {
+        table.classList.remove('active');
+    }
+    
+    document.getElementById(tableId).classList.add('active');
+}
 
-        <table id="typesTable" class="table" border="1">
-            <col span="1" >
-            <thead>
-                <tr>
-                    <th>Type</th>
-                    <th>Controls</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Type table data will be populated using JavaScript -->
-            </tbody>
-        </table>
+// Function to filter the table based on user input
+function filterTable() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    
+    // Determine which table is currently active
+    const activeTableId = Array.from(document.getElementsByClassName('table active')).map(table => table.id)[0];
+    
+    // Determine the dataset based on the active table
+    let data;
+    if (activeTableId === 'coloursTable') {
+        data = colorsData;
+    } else if (activeTableId === 'typesTable') {
+        data = typesData;
+    } else if (activeTableId === 'citiesTable') {
+        data = citiesData;
+    } else {
+        return;
+    }
+    
+    const filteredData = data.filter(item => {
+        return (item.name || item.type).toLowerCase().includes(searchTerm); // Update this line to check both "name" and "type"
+    });
 
-        <table id="citiesTable" class="table" border="1">
-            <col span="1" >
-            <thead>
-                <tr>
-                    <th>City</th>
-                    <th>Controls</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- City table data will be populated using JavaScript -->
-            </tbody>
-        </table>
-    </main>
-    <script src="tables.js"></script>
-</body>
-</html>
+    populateTable(activeTableId, filteredData);
+}
+
+// Function to handle editing an item
+function editItem(row, tableId) {
+    const data = getTableData(tableId);
+    const rowIndex = row.rowIndex - 1; // Subtract 1 to account for the header row
+    const cellToEdit = row.cells[0]; // Assuming you're editing the first cell
+
+    // Prompt the user for the new value
+    const newValue = prompt("Edit item:", data[rowIndex].name || data[rowIndex].type);
+
+    if (newValue !== null) {
+        if (data[rowIndex].name) {
+            data[rowIndex].name = newValue;
+        } else {
+            data[rowIndex].type = newValue;
+        }
+        cellToEdit.textContent = newValue; // Update the cell content
+    }
+}
+
+// Helper function to get data from a selected table
+function getTableData(tableId) {
+    let data;
+    if (tableId === 'coloursTable') {
+        data = colorsData;
+    } else if (tableId === 'typesTable') {
+        data = typesData;
+    } else if (tableId === 'citiesTable') {
+        data = citiesData;
+    }
+    return data;
+}
+
+// Update the table to include Edit buttons
+function updateTableWithEditButtons() {
+    const tables = document.getElementsByClassName('table');
+    for (const table of tables) {
+        const rows = table.rows;
+        for (let i = 1; i < rows.length; i++) {
+            const editCell = rows[i].insertCell(-1);
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.onclick = function () {
+                editItem(rows[i], table.id);
+            };
+            editCell.appendChild(editButton);
+        }
+    }
+}
+
+// Call the function to add Edit buttons when the page loads
+updateTableWithEditButtons();
+
+// Add an event listener to the search input for real-time filtering
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+// Call the function to add Edit buttons when the page loads
+updateTableWithEditButtons();
+
+// Initial population of the colors and types tables
+populateTable('coloursTable', colorsData);
+populateTable('typesTable', typesData);
+populateTable('citiesTable', citiesData);
+
+// Activate the "Colors" tab by default
+//showTable('coloursTable');
+
+
+function makeButtonCreateColourByDefault() {
+    const createButton = document.getElementById('createButton');
+    createButton.onclick = function() {
+        window.location.href = 'coloursCreate.html';
+    }
+}
+
+// Function to make the add button work upon page load
+window.onload = function (buttonText, link) {
+    // Get the initially active tab (in this case, "Colors")
+    const createButton = document.getElementById('createButton');
+    createButton.textContent = buttonText;
+    createButton.textContent = 'Add Colour'
+    createButton.onclick = function () {
+        window.location.href = 'coloursCreate.html';
+    };
+}
+
+// Function to update the "Create" button text and link
+function updateCreateButton(buttonText, link) {
+    const createButton = document.getElementById('createButton');
+    createButton.textContent = buttonText;
+    createButton.onclick = function () {
+        window.location.href = link + '.html';
+    };
+}
