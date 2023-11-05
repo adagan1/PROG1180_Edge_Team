@@ -10,10 +10,12 @@
             <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
             <nav>
                 <ul>
-                    <li><a href="main.html">Home</a></li>
-                    <li><a href="inventory.html">Equipment</a></li>
-                    <li><a href="customer.html">Customer</a></li>
-                    <li><a href="tables.html">Maintenance</a></li>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="inventory.html">Equipment</a></li>
+                <li><a href="customer.html">Customer</a></li>
+                <li><a href="tables.html">Maintenance</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="repairs.html">Repairs</a></li>
                 </ul>
             </nav>
         </header>
@@ -31,8 +33,12 @@
             header {
                 background-color: #333;
                 color: #fff;
-                text-align: center;
-                padding: 10px 0;
+                padding: 1rem;
+                padding-left: 50px;
+                display: flex;
+                justify-content: space-between; /* Align content horizontally */
+                align-items: center; /* Center content vertically */
+                width: 100%;
             }
     
             header h1 {
@@ -100,10 +106,18 @@
             #description {
                 resize: none; /* Prevent user from resizing the textarea */
             }
+            .invalid-input {
+                border: 1px solid red;
+            }
+            input.invalid-input[type="text"],
+            input.invalid-input[type="email"],
+            input.invalid-input[type="tel"] {
+                border: 1px solid red;
+            }
         </style>
     
         
-    <main id="editPageMain">
+    <main>
         <h1>Edit Equipment</h1>
         <form id="editForm">
             <div class="edit-container">
@@ -115,15 +129,15 @@
                     <label for="brand">Brand:</label>
                     <select id="brand" name="brand" required>
                         <option value="" disabled selected>Select a brand</option>
-                        <option value="Brand1">Brand1</option>
-                        <option value="Brand2">Brand2</option>
-                        <option value="Brand3">Brand3</option>
-                        <option value="Brand4">Brand4</option>
+                        <option value="Craftsman">Craftsman</option>
+                        <option value="Dewalt">Dewalt</option>
+                        <option value="Honda">Honda</option>
+                        <option value="John Deere">John Deere</option>
                     </select>
                 </div>
                 <div>
                     <label for="equipmentDescription">Description:</label>
-                    <input type="text" id="equipmentDescription" name="equipmentDescription" placeholder="Enter equipment description" required>
+                    <input type="text" id="equipmentDescription" name="equipmentDescription" placeholder="Enter equipment description">
                 </div>
                 <div id="colourInfo">
                     <label for="colour">Colour:</label>
@@ -141,9 +155,20 @@
                         <option value="Gray">Gray</option>
                     </select>
                 </div>
-                                
-                <button type="button" id="saveButton" onclick="goToEquiptmentPage()">Save Changes</button>
-                <button type="button" id="cancelButton" onclick="goToEquiptmentPage()">Cancel</button>
+                <div>
+                    <label for="owner">Owner:</label>
+                    <select id="owner" name="owner" required>
+                        <option value="" disabled selected>Select an owner</option>
+                        <option value="Joe Jawndel">Joe Jawndel</option>
+                        <option value="Billy Talent">Billy Talent</option>
+                        <option value="Julio Mendes">Julio Mendes</option>
+                    </select>
+                </div>
+
+                <div id="errorContainer" class="error"></div>
+
+                <button type="button" id="saveButton">Save Changes</button>
+                <button type="button" id="cancelButton" onclick="goToEquipmentPage()">Cancel</button>
             </div>
         </form>
     </main>

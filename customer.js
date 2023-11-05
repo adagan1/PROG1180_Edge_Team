@@ -7,27 +7,31 @@ const hardCodedCustomer = [
         address: "1220 Royal Lane",
         city: "Niagara Falls",
         postal: "A2V 3NM",
-        province: "Ontario"
+        province: "Ontario",
+        Equipment: "Craftsman Bagged Lawnmower"
     },
     {
         name: "Billy Talent",
         email: "BTalent@gmail.com",
         phone: "289-334-3420",
         address: "1810 Salty Springs",
-        city: "Welland",
+        city: "Toronto",
         postal: "A2V 3NM",
-        province: "Alberta"
+        province: "Alberta",
+        Equipment: "Dewalt Drill"
     },
     {
         name: "Julio Mendes",
         email: "JMendes@hotmail.com",
         phone: "289-493-2061",
         address: "6820 Far Crescent",
-        city: "St Catharines",
+        city: "Ottawa",
         postal: "A2V 3NM",
-        province: "Quebec"
+        province: "Quebec",
+        Equipment: "Craftsman Saw"
     }
 ];
+
 
 // Function to fill the table with customer data, including "Edit" and "Detail" buttons
 function fillTableWithCustomerData() {

@@ -1,24 +1,12 @@
 <!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="style.css">
-<script src="customerEdit.js"></script>
 <html lang="en">
-    <head>
-        <title>Edit Customer</title>
-    </head>
-    <body>
-        <header>
-            <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
-            <nav>
-                <ul>
-                    <li><a href="main.html">Home</a></li>
-                    <li><a href="inventory.html">Equipment</a></li>
-                    <li><a href="customer.html">Customer</a></li>
-                    <li><a href="tables.html">Maintenance</a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <!-- Kyle Fix! -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="customerEdit.js"></script>
+    <title>Edit Customer</title>
+    <!-- Kyle Fix! -->
     <style>
         h1 {
             text-align: center;
@@ -33,8 +21,12 @@
         header {
             background-color: #333;
             color: #fff;
-            text-align: center;
-            padding: 10px 0;
+            padding: 1rem;
+            padding-left: 50px;
+            display: flex;
+            justify-content: space-between; /* Align content horizontally */
+            align-items: center; /* Center content vertically */
+            width: 100%;
         }
 
         header h1 {
@@ -86,22 +78,48 @@
         }
 
         button {
-            background-color: #333;
+            background-color: #686868;
             color: #fff;
             padding: 10px 20px;
             border: none;
             cursor: pointer;
         }
+
         button[id="cancelButton"] {
             background-color: red;
         }
 
         button:hover {
-            background-color: #555;
+            background-color: #3a3a3a;
+        }
+
+        .invalid-input {
+            border: 1px solid red;
+        }
+
+        input.invalid-input[type="text"],
+        input.invalid-input[type="email"],
+        input.invalid-input[type="tel"] {
+            border: 1px solid red;
         }
     </style>
     <!-- End Kyle Fix -->
-    
+</head>
+<body>
+    <header>
+        <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
+        <nav>
+            <ul>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="inventory.html">Equipment</a></li>
+                <li><a href="customer.html">Customer</a></li>
+                <li><a href="tables.html">Maintenance</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="repairs.html">Repairs</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main id="createPageMain">
         <h1>Edit Customer</h1>
         <form id="customerEditForm">
@@ -113,27 +131,54 @@
                 <input type="email" id="customerEmail" placeholder="Email" required>
                 
                 <label for="customerPhone">Phone:</label>
-                <input type="tel" id="customerPhone" placeholder="Phone" required pattern="[0-9]{10}">
+                <input type="tel" id="customerPhone" placeholder="Phone" required>
                 
                 <label for="customerAddress">Address:</label>
                 <input type="text" id="customerAddress" placeholder="Address" required>
-                
+
                 <label for="customerCity">City:</label>
-                <input type="text" id="customerCity" placeholder="City" required>
+                <select name="customerCity" id="customerCity">
+                    <option value="Niagara Falls">Niagara Falls</option>
+                    <option value="Toronto">Toronto</option>
+                    <option value="Ottawa">Ottawa</option>
+                    <option value="Calgary">Calgary</option>
+                    <option value="Winnipeg">Winnipeg</option>
+                </select>
                 
                 <label for="customerPostal">Postal:</label>
-                <input type="text" id="customerPostal" placeholder="Postal" required pattern="[A-Za-z0-9\s]{6,10}">
+                <input type="text" id="customerPostal" placeholder="Postal" required>
                 
                 <label for="customerProvince">Province:</label>
-                <input type="text" id="customerProvince" placeholder="Province" required>
-              
-                <br>
-                
-                <button type="button" id="saveButton" onclick="validateForm()">Save Changes</button>
-                <button type="button" id="cancelButton", onclick="goToCustomerPage()">Cancel</button>
+                <select name="customerProvince" id="customerProvince" required>
+                    <option value="Ontario">Ontario</option>
+                    <option value="Quebec">Quebec</option>
+                    <option value="Manitoba">Manitoba</option>
+                    <option value="Saskatchewan">Saskatchewan</option>
+                    <option value="Alberta">Alberta</option>
+                    <option value="British Columbia">British Columbia</option>
+                    <option value="Prince Edward Island">Prince Edward Island</option>
+                    <option value="Nova Scotia">Nova Scotia</option>
+                    <option value="New Brunswick">New Brunswick</option>
+                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                    <option value="Nunavut">Nunavut</option>
+                    <option value="Northwest Territories">Northwest Territories</option>
+                    <option value="Yukon">Yukon</option>
+                </select>
+                <div id="EquipmentInfo">
+                    <label for="EquipmentInfo">Equipment:</label>
+                    <select id="EquipmentInfo" name="Equipment" required>
+                        <option value="" disabled selected>Select Equipment</option>
+                        <option value="Equipment1">Craftsman Bagged Lawnmower</option>
+                        <option value="Equipment2">Dewalt Drill</option>
+                        <option value="Equipment3">Craftsman Saw</option>
+                        <option value="Equipment4">John Deere Electric Lawnmower</option>
+                    </select>
+                </div>
+                <div id="errorContainer"></div>
+                <button type="button" id="saveButton">Save Changes</button>
+                <button type="button" id="cancelButton" onclick="goToCustomerPage()">Cancel</button>
             </div>
         </form>
-    </main>    
-    
-    </body>
+    </main>
+</body>
 </html>
