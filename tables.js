@@ -29,32 +29,6 @@ const citiesData = [
     { name: 'Winnipeg' }
 ];
 
-// Function to retrieve the query parameter value by name
-function getQueryParameter(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
-}
-
-// Determine the data type from the query parameter
-const dataType = getQueryParameter('dataType');
-
-if (dataType === 'colours') {
-    // Load colors data
-    populateTable('coloursTable', colorsData);
-    showTable('coloursTable');
-} else if (dataType === 'types') {
-    // Load types data
-    populateTable('typesTable', typesData);
-    showTable('typesTable');
-} else if (dataType === 'cities') {
-    // Load cities data
-    populateTable('citiesTable', citiesData);
-    showTable('citiesTable');
-} else {
-    // Handle the case when no valid data type is provided
-    showTable('coloursTable');
-}
-
 // Function to populate a table with data
 function populateTable(tableId, data) {
     const table = document.getElementById(tableId);
@@ -68,57 +42,16 @@ function populateTable(tableId, data) {
         const cell = row.insertCell();
         cell.textContent = item.name || item.type; // Use item.name for the cell content
 
-        // Add a Controls column for editing and details
+        // Add a Controls column for editing
         const controlsCell = row.insertCell();
-
-        // Create a container div to hold the buttons
-        const buttonsContainer = document.createElement('div');
-        buttonsContainer.style.textAlign = 'center'; // Center-align the buttons
-
-        // Add an "Edit" button
         const editButton = document.createElement('button');
         editButton.textContent = 'Edit';
         editButton.onclick = function () {
             editItem(row, tableId);
         };
-
-        // Add a "Details" button
-        const detailsButton = document.createElement('button');
-        detailsButton.textContent = 'Details';
-        detailsButton.onclick = function () {
-            openDetailsWindow(row, tableId);
-        };
-
-        // Append both buttons to the container
-        buttonsContainer.appendChild(editButton);
-        buttonsContainer.appendChild(document.createTextNode('  '));
-        buttonsContainer.appendChild(detailsButton);
-
-        // Append the container to the controls cell
-        controlsCell.appendChild(buttonsContainer);
+        controlsCell.appendChild(editButton);
     });
 }
-
-function openDetailsWindow(row, tableId) {
-    // Get the color data to display
-    const data = getTableData(tableId);
-    const rowIndex = row.rowIndex - 1;
-
-    // Store the selected color data in sessionStorage for access on the new page
-    sessionStorage.setItem("selectedValue", JSON.stringify(data[rowIndex].name || data[rowIndex].type || data[rowIndex].name ));
-
-    // Redirect to the coloursDetails.html page
-    if(tableId == "coloursTable"){
-        window.location.href = "coloursDetails.html";
-    }
-    if(tableId == "typesTable"){
-        window.location.href = "typesDetails.html";
-    }
-    if(tableId == "citiesTable"){
-        window.location.href = "citiesDetails.html";
-    }
-}
-
 
 // Function to show a table and deactivate the other tab
 function showTable(tableId) {
@@ -214,6 +147,14 @@ function updateTableWithEditButtons() {
 // Call the function to add Edit buttons when the page loads
 updateTableWithEditButtons();
 
+// Initial population of the colors and types tables
+populateTable('coloursTable', colorsData);
+populateTable('typesTable', typesData);
+populateTable('citiesTable', citiesData);
+
+// Activate the "Colors" tab by default
+showTable('coloursTable');
+
 // Add an event listener to the search input for real-time filtering
 const searchInput = document.getElementById('searchInput');
 searchInput.addEventListener('input', filterTable);
@@ -227,8 +168,7 @@ populateTable('typesTable', typesData);
 populateTable('citiesTable', citiesData);
 
 // Activate the "Colors" tab by default
-//showTable('coloursTable');
-
+showTable('coloursTable');
 
 function makeButtonCreateColourByDefault() {
     const createButton = document.getElementById('createButton');
