@@ -86,7 +86,7 @@ function editRepair(index) {
 // Function to navigate to the customerCreate.html page
 function createRepair() {
     // Redirect to the customerCreate.html page
-    window.location.href = "repairCreate.html";
+    window.location.href = "repairsCreate.html";
 }
 
 document.addEventListener("DOMContentLoaded", function() {
