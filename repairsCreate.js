@@ -7,8 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Validate the input fields
         if (validateForm()) {
             // Get the data for the new repair report
-            const equipmentName = document.getElementById("equipmentName").value;
-            const brand = document.getElementById("brand").value;
+            const EquipmentInfo = document.getElementById("EquipmentInfo").value;
             const description = document.getElementById("description").value;
             const partsUsed = document.getElementById("partsUsed").value;
             const startTime = document.getElementById("startTime").value;
@@ -21,8 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Create an object with the new repairs report
             const newRepairsReport = {
-                equipmentName: equipmentName,
-                brand: brand,
+                EquipmentInfo: EquipmentInfo,
                 description: description,
                 partsUsed: partsUsed,
                 startTime: startTime,
@@ -42,8 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function validateForm() {
-const equipmentName = document.getElementById("equipmentName").value;
-const brand = document.getElementById("brand").value;
+const EquipmentInfo = document.getElementById("EquipmentInfo").value;
 const description = document.getElementById("description").value;
 const partsUsed = document.getElementById("partsUsed").value;
 const startTime = document.getElementById("startTime").value;
@@ -53,15 +50,14 @@ const endDate = document.getElementById("endDate").value;
 const owner = document.getElementById("owner").value;
 
 const errorMessages = [];
-
-if (equipmentName.trim() === "") {
-    errorMessages.push("Please fill in the 'Equipment Name' field.");
-    document.getElementById("equipmentName").classList.add("invalid-input");
+if (description === "") {
+    errorMessages.push("Please fill in the 'Description' field.");
+    document.getElementById("description").classList.add("invalid-input");
 }
 
-if (brand === "") {
-    errorMessages.push("Please select a 'Brand'.");
-    document.getElementById("brand").classList.add("invalid-input");
+if (EquipmentInfo === "") {
+    errorMessages.push("Please select an 'Equipment'.");
+    document.getElementById("EquipmentInfo").classList.add("invalid-input");
 }
 
 if (partsUsed === "") {

@@ -100,9 +100,11 @@
         }
         input.invalid-input[type="text"],
         input.invalid-input[type="email"],
-        input.invalid-input[type="tel"] {
-            border: 1px solid red;
-        }
+        input.invalid-input[type="tel"],
+        input.invalid-input[type="time"],
+        input.invalid-input[type="date"] {
+        border: 1px solid red;
+    }
     </style>
 </head>
 <body>
@@ -124,18 +126,14 @@
         <h1 id="createOrEditTitle">Add Repair report</h1>
         <div class="center-container">
             <form id="createForm">
-                <div id="nameInfo">
-                    <label for="equipmentName">Equipment name:</label>
-                    <input type="text" id="equipmentName" name="equipmentName" required placeholder="Enter equipment name">
-                </div>
-                <div id="brandInfo">
-                    <label for="brand">Brand:</label>
-                    <select id="brand" name="brand" required>
-                        <option value="" disabled selected>Select a brand</option>
-                        <option value="Brand1">Craftsman</option>
-                        <option value="Brand2">Dewalt</option>
-                        <option value="Brand3">Honda</option>
-                        <option value="Brand4">John Deere</option>
+                <div id="EquipmentInfo">
+                    <label for="EquipmentInfo">Equipment:</label>
+                    <select id="EquipmentInfo" name="Equipment" required>
+                        <option value="" disabled selected>Select a Equipment</option>
+                        <option value="Equipment1">Craftsman Bagged Lawnmower </option>
+                        <option value="Equipment2">Dewalt Drill</option>
+                        <option value="Equipment3">Craftsman Saw</option>
+                        <option value="Equipment4">John Deere Electric Lawnmower</option>
                     </select>
                 </div>
                 <div id="descriptionInfo">
