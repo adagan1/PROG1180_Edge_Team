@@ -68,7 +68,7 @@ function detailRepair(index) {
     sessionStorage.setItem("selectedRepair", repairDataString);
 
     // Redirect to the customerDetail.html page
-    window.location.href = "repairDetail.html";
+    window.location.href = "repairsDetails.html";
 }
 
 // Function to edit customer information
@@ -80,7 +80,7 @@ function editRepair(index) {
     const repairDataString = JSON.stringify(repairToEdit);
 
     // Redirect to customerEdit.html with customer data as a parameter
-    window.location.href = `repairEdit.html?repairData=${repairDataString}`;
+    window.location.href = `repairsEdit.html?repairData=${repairDataString}`;
 }
 
 // Function to navigate to the customerCreate.html page
@@ -98,3 +98,8 @@ document.addEventListener("DOMContentLoaded", function() {
         fillTableWithRepairData();
     });
 });
+
+//Function to go back to repairs page
+function goToRepairsPage() {
+    window.location.href = "repairs.html";
+}
