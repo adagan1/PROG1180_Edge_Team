@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maintenance</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Colours Details</title>
+    <style>
+        table {
+            text-align: center;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
+        <nav>
+            <ul>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="inventory.html">Equipment</a></li>
+                <li><a href="customer.html">Customer</a></li>
+                <li><a href="tables.html">Maintenance</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Types Details</h1>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Type</td>
+                        <td id="typeDetail"></td>
+                    </tr>
+                </tbody>
+            </table>
+    </main>
+    <button type="button" id="cancelButton", onclick="goToMaintenancePage()">Back to Maintenance</button> 
+    <script src="tables.js"></script>
+</body>
+<script>
+    // Retrieve the selected color data from sessionStorage
+    const typeDataString = sessionStorage.getItem("selectedValue");
+
+    if (typeDataString) {
+        // Parse the color data JSON string
+        const colorData = JSON.parse(typeDataString);
+
+        // Display the color details on the page
+        const colorDetailCell = document.getElementById("typeDetail");
+        colorDetailCell.textContent = colorData;
+    } else {
+        // Handle the case where color data is not available
+        const colorDetailCell = document.getElementById("typeDetail");
+        colorDetailCell.textContent = "Type details not found.";
+    }
+
+    // Function to navigate back to the maintenance page
+    function goToMaintenancePage() {
+        // Determine the data type based on the current page
+        let dataType;
+        if (window.location.pathname.includes('coloursDetails')) {
+            dataType = 'colours';
+        } else if (window.location.pathname.includes('typesDetails')) {
+            dataType = 'types';
+        } else if (window.location.pathname.includes('citiesDetails')) {
+            dataType = 'cities';
+        }
+
+        // Redirect to 'tables.html' with a query parameter
+        window.location.href = `tables.html?dataType=${dataType}`;
+    }
+</script>
+</html>
