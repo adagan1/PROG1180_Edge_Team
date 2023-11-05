@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Emma's Small Engines</title>  
+    <script src="repairs.js"></script>
+    <title>Repairs</title>  
 </head>
 <body>
     <header>
@@ -20,4 +21,28 @@
             </ul>
         </nav>
     </header>
+<main>
+    <h1>Repairs</h1>      
+    <div class="center-container">
+        <input type="text" id="searchInput" placeholder="Search for a repaired equipment...">
+    </div>
+
+    <div>
+        <button onclick="createRepair()">Add Repair Record</button>
+    </div>
+
+    <table id="repairsTable">
+            <thead>
+                <tr>
+                    <th>Equipment</th>
+                    <th>Description</th>
+                    <th>Customer</th>
+                    <th>Controls</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Generated people will be added here -->
+            </tbody>
+    </table>
+</main>
 </body>
