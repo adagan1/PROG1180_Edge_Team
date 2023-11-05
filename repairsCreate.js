@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Get the selected owner from the dropdown list
             const owner = document.getElementById("owner").value;
 
-            // Create an object with the new equipment data
+            // Create an object with the new repairs report
             const newRepairsReport = {
                 equipmentName: equipmentName,
                 brand: brand,
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // For this example, we'll log the new data to the console
             console.log("New RepairsReport Data:", newRepairsReport);
 
-            // Redirect back to the inventory page
+            // Redirect back to the repairs page
             window.location.href = "repairs.html";
         }
     });
