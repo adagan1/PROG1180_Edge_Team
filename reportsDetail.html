@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="reportsDetail.js"></script>
+    <title>Report Details</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            padding-left: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
+        <nav>
+            <ul>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="inventory.html">Equipment</a></li>
+                <li><a href="customer.html">Customer</a></li>
+                <li><a href="tables.html">Maintenance</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="repairs.html">Repairs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Report Details</h1>
+        <table id="reportDetailsTable">
+            <tr>
+                <th>Customer</th>
+                <td id="reportCustomer"></td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td id="reportDate"></td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td id="reportDescription"></td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td id="reportPrice"></td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td id="reportQuantity"></td>
+            </tr>
+            <tr>
+                <th>Total</th>
+                <td id="reportTotal"></td>
+            </tr>
+        </table>
+    </main>
+    <button type="button" id="cancelButton" onclick="goToReportsPage()">Back to Reports</button>
+</body>
+</html>
