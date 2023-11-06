@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Emma's Small Engines</title>  
+    <script src="reports.js"></script>
+    <title>Reports</title>
 </head>
 <body>
     <header>
@@ -20,4 +21,28 @@
             </ul>
         </nav>
     </header>
+    <main>
+        <h1>Reports</h1>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for reports...">
+        </div>
+        <div>
+            <button onclick="createReport()">Add Report</button>
+        </div>
+
+        <table id="reportTable">
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Quantity</th>
+                    <th>Controls</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Report data rows will be populated using JavaScript -->
+            </tbody>
+        </table>
+    </main>
 </body>
+</html>
