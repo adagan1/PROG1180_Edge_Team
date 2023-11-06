@@ -3,7 +3,7 @@ const hardCodedReports = [
     {
         customer: "Joe Jawndel",
         date: "2023-01-15",
-        description: "nut",
+        description: "Nuts",
         price: .50,
         quantity: 8,
         total: 4.52
@@ -11,7 +11,7 @@ const hardCodedReports = [
     {
         customer: "Billy Tallent",
         date: "2023-02-15",
-        description: "screws",
+        description: "Screws",
         price: 1,
         quantity: 11,
         total: 12.43
@@ -19,7 +19,7 @@ const hardCodedReports = [
     {
         customer: "Julio Mendes",
         date: "2023-03-15",
-        description: "bolts",
+        description: "Bolts",
         price: .60,
         quantity: 2,
         total: 1.36
