@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Get the colour data from the URL parameter as a JSON string
     const urlParams = new URLSearchParams(window.location.search);
     const colourDataString = urlParams.get("data");
-    const colorName = urlParams.get("colorName"); // Get the color name
+    const colourName = urlParams.get("colourName"); // Get the color name
 
     if (colourDataString) {
         try {
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const colourToEdit = JSON.parse(colourDataString);
         
             // Populate the input fields with the color data
-            document.getElementById("colourName").value = colorName; // Set the color name in the text box
+            document.getElementById("colourName").value = colourName; // Set the color name in the text box
         
             // Add an event listener to save changes
             document.getElementById("saveButton").addEventListener("click", function () {
@@ -50,7 +50,11 @@ function validateForm() {
     if (colourName === "") {
         errorMessages.push("Please fill in the 'Colour' field.");
         document.getElementById("colourName").classList.add("invalid-input");
+    } else if (!validateColour(colourName)) {
+        errorMessages.push("The 'Colour' field should only contain letters.");
+        document.getElementById("colourName").classList.add("invalid-input");
     }
+
     if (errorMessages.length > 0) {
         // Display error messages on the page
         document.getElementById("errorContainer").innerHTML = errorMessages.join("<br>");
@@ -59,13 +63,13 @@ function validateForm() {
     return true;
 }
 
-function goToTablesPage() {
-    window.location.href = "tables.html";
+function validateColour(name) {
+    const colourPattern = /^[A-Za-z\s]+$/;
+    return colourPattern.test(name);
 }
 
-function validateColour(name) {
-    const colourPattern = /^[^0-9]*$/;
-    return colourPattern.test(name);
+function goToTablesPage() {
+    window.location.href = "tables.html";
 }
 
 function resetInputOutlines() {
