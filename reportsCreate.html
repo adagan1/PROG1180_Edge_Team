@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="reportsCreate.js"></script>
+    <title>Create Report</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            padding-left: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        form {
+            margin: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"] {
+            width: 40%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px; /* Set the desired font size */
+        }
+
+        button {
+            background-color: #686868;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3a3a3a;
+        }
+
+        .invalid-input {
+        border: 1px solid red;
+        }
+
+        input.invalid-input[type="text"],
+        input.invalid-input[type="number"],
+        input.invalid-input[type="date"] {
+            border: 1px solid red;
+        }
+
+        button[id="cancelButton"] {
+            background-color: red;
+        }
+        #reportDescription {
+            resize: none; /* Prevent user from resizing the textarea */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
+        <nav>
+            <ul>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="inventory.html">Equipment</a></li>
+                <li><a href="customer.html">Customer</a></li>
+                <li><a href="tables.html">Maintenance</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="repairs.html">Repairs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Create Report</h1>
+        <form id="reportCreateForm">
+            <div class="create-container">
+                <label for="reportCustomer">Customer:</label>
+                <input type="text" id="reportCustomer" placeholder="Enter customer" required>
+                
+                <label for="reportDate">Date:</label>
+                <input type="date" id="reportDate" required>
+                
+                <div id="descriptionInfo">
+                    <label for="reportDescription">Description:</label>
+                    <textarea id="reportDescription" name="reportDescription" required placeholder="Enter item description" rows="5" cols="50"></textarea>
+                    <!-- The "rows" attribute determines the number of visible lines, and the "cols" attribute determines the number of visible columns -->
+                </div>
+
+                <label for="reportPrice">Price:</label>
+                <input type="number" id="reportPrice" placeholder="Enter price" required>
+
+                <label for="reportQuantity">Quantity:</label>
+                <input type="number" id="reportQuantity" placeholder="Enter quantity" required>
+
+                <label for="reportTotal">Total:</label>
+                <input type="number" id="reportTotal" placeholder="Enter total" required>
+                <div id="errorContainer"></div>
+                
+                <div id="errorContainer"></div>
+                <button type="button" id="createButton">Create Report</button>
+                <button type="button" id="cancelButton" onclick="goToReportsPage()">Cancel</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

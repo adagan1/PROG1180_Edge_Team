@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="inventoryCreate.js"></script>
-    <title>Create Equipment</title>
+    <script src="repairsCreate.js"></script>
+    <title>Emma's Small Engines</title>
     <style>
         h1 {
             text-align: center;
@@ -64,6 +64,8 @@
         input[type="number"],
         input[type="email"],
         input[type="tel"],
+        input[type="time"],
+        input[type="date"],
         select {
             width: 40%;
             padding: 10px;
@@ -93,14 +95,16 @@
         .invalid-input {
             border: 1px solid red;
         }
-        #description {
+        #description, #partsUsed {
             resize: none; /* Prevent user from resizing the textarea */
         }
         input.invalid-input[type="text"],
         input.invalid-input[type="email"],
-        input.invalid-input[type="tel"] {
-            border: 1px solid red;
-        }
+        input.invalid-input[type="tel"],
+        input.invalid-input[type="time"],
+        input.invalid-input[type="date"] {
+        border: 1px solid red;
+    }
     </style>
 </head>
 <body>
@@ -119,21 +123,17 @@
     </header>
 
     <main>
-        <h1 id="createOrEditTitle">Add Equipment</h1>
+        <h1 id="createOrEditTitle">Add Repair report</h1>
         <div class="center-container">
             <form id="createForm">
-                <div id="nameInfo">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required placeholder="Enter name">
-                </div>
-                <div id="brandInfo">
-                    <label for="brand">Brand:</label>
-                    <select id="brand" name="brand" required>
-                        <option value="" disabled selected>Select a brand</option>
-                        <option value="Brand1">Craftsman</option>
-                        <option value="Brand2">Dewalt</option>
-                        <option value="Brand3">Honda</option>
-                        <option value="Brand4">John Deere</option>
+                <div id="EquipmentInfo">
+                    <label for="EquipmentInfo">Equipment:</label>
+                    <select id="EquipmentInfo" name="Equipment" required>
+                        <option value="" disabled selected>Select a Equipment</option>
+                        <option value="Equipment1">Craftsman Bagged Lawnmower </option>
+                        <option value="Equipment2">Dewalt Drill</option>
+                        <option value="Equipment3">Craftsman Saw</option>
+                        <option value="Equipment4">John Deere Electric Lawnmower</option>
                     </select>
                 </div>
                 <div id="descriptionInfo">
@@ -141,21 +141,20 @@
                     <textarea id="description" name="description" required placeholder="Enter item description" rows="5" cols="50"></textarea>
                     <!-- The "rows" attribute determines the number of visible lines, and the "cols" attribute determines the number of visible columns -->
                 </div>
-                <div id="colourInfo">
-                    <label for="colour">Colour:</label>
-                    <select id="colour" name="colour" required>
-                        <option value="" disabled selected>Select a colour</option>
-                        <option value="Red">Red</option>
-                        <option value="Blue">Blue</option>
-                        <option value="Green">Green</option>
-                        <option value="Yellow">Yellow</option>
-                        <option value="Orange">Orange</option>
-                        <option value="Purple">Purple</option>
-                        <option value="Pink">Pink</option>
-                        <option value="Black">Black</option>
-                        <option value="White">White</option>
-                        <option value="Gray">Gray</option>
-                    </select>
+                <div id="partsUsedInfo">
+                    <label for="partsUsed">Parts used:</label>
+                    <textarea id="partsUsed" name="partsUsed" required placeholder="Enter parts used" rows="3" cols="50"></textarea>
+                    <!-- The "rows" attribute determines the number of visible lines, and the "cols" attribute determines the number of visible columns -->
+                </div>
+                <div id="startTimeInfo">
+                    <label for="startTime">Start Time:</label>
+                    <input type="time" id="startTime">
+                    <input type="date" id="startDate">
+                </div>
+                <div id="endTimeInfo">
+                    <label for="endTime">End Time:</label>
+                    <input type="time" id="endTime">
+                    <input type="date" id="endDate">
                 </div>
                 <div id="ownerInfo">
                     <label for="owner">Owner:</label>
@@ -168,8 +167,8 @@
                 </div>
                 <div id="errorContainer"></div> <!-- Container for error messages -->
                 <div>
-                    <button type="button" id="createInventoryButton">Save Changes</button>
-                    <button type="button" id="cancelButton" onclick="goToEquipmentPage()">Cancel</button>
+                    <button type="button" id="createRepairsButton">Save Changes</button>
+                    <button type="button" id="cancelButton" onclick="goToRepairsPage()">Cancel</button>
                 </div>
             </form>
         </div>

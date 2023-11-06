@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="inventoryCreate.js"></script>
+    <script src="repairs.js"></script>
     <style>
         h1 {
             text-align: center;
@@ -64,7 +64,7 @@
             text-align: left;
         }
     </style>
-    <title>Inventory Details</title>
+    <title>Repairs Details</title>
 </head>
 <body>
     <header>
@@ -81,58 +81,57 @@
         </nav>
     </header>
     <main>
-        <h1>Equipment Details</h1>
-        <div id="equipmentDetails">
-            <!-- Equipment details will be displayed here using JavaScript -->
+        <h1>Repair Details</h1>
+        <div id="repairDetails">
+            <!-- Repair details will be displayed here using JavaScript -->
         </div>
     </main>
     <script>
-        // Retrieve the selected equipment data from sessionStorage
-        const equipmentDataString = sessionStorage.getItem("selectedEquipment");
-
-        if (equipmentDataString) {
-            // Parse the equipment data JSON string
-            const equipmentData = JSON.parse(equipmentDataString);
-
-            // Display the equipment details on the page
-            const equipmentDetails = document.getElementById("equipmentDetails");
-
-            // Create HTML elements to display the details
-            const detailsTable = document.createElement("table");
-
-            // Define label mappings
+        // Mapping of keys to uppercase labels
             const labelMappings = {
-                name: "Name",
-                brand: "Brand",
+                equipment: "Equipment",
                 description: "Description",
-                price: "Price",
-                colour: "Colour",
-                owner: "Owner"
+                partsUsed: "Parts Used",
+                startTime: "Start Time",
+                endTime: "End Time",
+                customer: "Customer",
             };
 
-            for (const key in equipmentData) {
-                const row = document.createElement("tr");
-                const cell1 = document.createElement("td");
-                const cell2 = document.createElement("td");
+            // Retrieve the selected repair data from sessionStorage
+            const repairDataString = sessionStorage.getItem("selectedRepair");
 
-                cell1.textContent = labelMappings[key] || key;
-                cell2.textContent = equipmentData[key];
+            if (repairDataString) {
+                // Parse the repair data JSON string
+                const repairData = JSON.parse(repairDataString);
 
-                // Add a class to the left column for capitalization
-                cell1.classList.add("left");
+                // Display the repair details on the page
+                const repairDetails = document.getElementById("repairDetails");
 
-                row.appendChild(cell1);
-                row.appendChild(cell2);
+                // Create HTML elements to display the details
+                const detailsTable = document.createElement("table");
 
-                detailsTable.appendChild(row);
+                for (const key in repairData) {
+                    const row = document.createElement("tr");
+                    const cell1 = document.createElement("td");
+                    const cell2 = document.createElement("td");
+
+                    // Check if there is a mapping for the key, and use the uppercase label if available
+                    const label = labelMappings[key] || key;
+                    cell1.textContent = label;
+                    cell2.textContent = repairData[key];
+
+                    row.appendChild(cell1);
+                    row.appendChild(cell2);
+
+                    detailsTable.appendChild(row);
+                }
+
+                repairDetails.appendChild(detailsTable);
+            } else {
+                // Handle the case where repair data is not available
+                repairDetails.textContent = "Repair details not found.";
             }
-
-            equipmentDetails.appendChild(detailsTable);
-        } else {
-            // Handle the case where equipment data is not available
-            equipmentDetails.textContent = "Equipment details not found.";
-        }
     </script>
-    <button type="button" id="cancelButton" onclick="goToEquipmentPage()">Back to Equipment</button>
+    <button type="button" id="cancelButton" onclick="goToRepairsPage()">Back to Repairs</button>
 </body>
 </html>

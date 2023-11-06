@@ -1,5 +1,5 @@
-// Hardcoded data for the colors and types tables
-const colorsData = [
+// Hardcoded data for the colours and types tables
+const coloursData = [
     { name: 'Red' },
     { name: 'Green' },
     { name: 'Blue' },
@@ -79,7 +79,7 @@ function filterTable() {
     // Determine the dataset based on the active table
     let data;
     if (activeTableId === 'coloursTable') {
-        data = colorsData;
+        data = coloursData;
     } else if (activeTableId === 'typesTable') {
         data = typesData;
     } else if (activeTableId === 'citiesTable') {
@@ -95,30 +95,45 @@ function filterTable() {
     populateTable(activeTableId, filteredData);
 }
 
-// Function to handle editing an item
+// Function to handle editing an item and redirect to the appropriate edit page
 function editItem(row, tableId) {
-    const data = getTableData(tableId);
     const rowIndex = row.rowIndex - 1; // Subtract 1 to account for the header row
-    const cellToEdit = row.cells[0]; // Assuming you're editing the first cell
 
-    // Prompt the user for the new value
-    const newValue = prompt("Edit item:", data[rowIndex].name || data[rowIndex].type);
-
-    if (newValue !== null) {
-        if (data[rowIndex].name) {
-            data[rowIndex].name = newValue;
-        } else {
-            data[rowIndex].type = newValue;
-        }
-        cellToEdit.textContent = newValue; // Update the cell content
+    // Determine the edit page URL based on the active tab
+    let editPage;
+    let rowType; // Define a variable to store the row type
+    if (tableId === 'coloursTable') {
+        editPage = 'coloursEdit.html';
+        rowType = 'colour'; // Set the row type for colours
+    } else if (tableId === 'typesTable') {
+        editPage = 'typesEdit.html';
+        rowType = 'types'; // Set the row type for types
+    } else if (tableId === 'citiesTable') {
+        editPage = 'citiesEdit.html';
+        rowType = 'cities'; // Set the row type for cities
+    } else {
+        return;
     }
+
+    // Get the data for the selected row
+    const rowData = getTableData(tableId)[rowIndex];
+
+    // Encode the data as a JSON string
+    const jsonData = JSON.stringify(rowData);
+
+    // Pass the corresponding type name as a query parameter
+    const paramName = rowType === 'cities' ? 'citiesName' : (rowType === 'types' ? 'typesName' : 'colourName');
+    const typeName = rowData.name || rowData.type;
+    
+    // Redirect to the appropriate edit page with the JSON data and type name as query parameters
+    window.location.href = `${editPage}?data=${encodeURIComponent(jsonData)}&${paramName}=${encodeURIComponent(typeName)}`;
 }
 
 // Helper function to get data from a selected table
 function getTableData(tableId) {
     let data;
     if (tableId === 'coloursTable') {
-        data = colorsData;
+        data = coloursData;
     } else if (tableId === 'typesTable') {
         data = typesData;
     } else if (tableId === 'citiesTable') {
@@ -147,12 +162,12 @@ function updateTableWithEditButtons() {
 // Call the function to add Edit buttons when the page loads
 updateTableWithEditButtons();
 
-// Initial population of the colors and types tables
-populateTable('coloursTable', colorsData);
+// Initial population of the colours and types tables
+populateTable('coloursTable', coloursData);
 populateTable('typesTable', typesData);
 populateTable('citiesTable', citiesData);
 
-// Activate the "Colors" tab by default
+// Activate the "colours" tab by default
 showTable('coloursTable');
 
 // Add an event listener to the search input for real-time filtering
@@ -162,12 +177,12 @@ searchInput.addEventListener('input', filterTable);
 // Call the function to add Edit buttons when the page loads
 updateTableWithEditButtons();
 
-// Initial population of the colors and types tables
-populateTable('coloursTable', colorsData);
+// Initial population of the colours and types tables
+populateTable('coloursTable', coloursData);
 populateTable('typesTable', typesData);
 populateTable('citiesTable', citiesData);
 
-// Activate the "Colors" tab by default
+// Activate the "colours" tab by default
 showTable('coloursTable');
 
 function makeButtonCreateColourByDefault() {
@@ -179,7 +194,7 @@ function makeButtonCreateColourByDefault() {
 
 // Function to make the add button work upon page load
 window.onload = function (buttonText, link) {
-    // Get the initially active tab (in this case, "Colors")
+    // Get the initially active tab (in this case, "colours")
     const createButton = document.getElementById('createButton');
     createButton.textContent = buttonText;
     createButton.textContent = 'Add Colour'
