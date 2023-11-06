@@ -59,23 +59,23 @@ function showTable(tableId) {
     for (const tab of tabs) {
         tab.classList.remove('active');
     }
-
+    
     // Hide all tables
     const allTables = document.getElementsByClassName('table');
     for (const table of allTables) {
         table.classList.remove('active');
     }
-
+    
     document.getElementById(tableId).classList.add('active');
 }
 
 // Function to filter the table based on user input
 function filterTable() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-
+    
     // Determine which table is currently active
     const activeTableId = Array.from(document.getElementsByClassName('table active')).map(table => table.id)[0];
-
+    
     // Determine the dataset based on the active table
     let data;
     if (activeTableId === 'coloursTable') {
@@ -87,7 +87,7 @@ function filterTable() {
     } else {
         return;
     }
-
+    
     const filteredData = data.filter(item => {
         return (item.name || item.type).toLowerCase().includes(searchTerm); // Update this line to check both "name" and "type"
     });
@@ -95,23 +95,33 @@ function filterTable() {
     populateTable(activeTableId, filteredData);
 }
 
-// Function to handle editing an item
+// Function to handle editing an item and redirect to the appropriate edit page
 function editItem(row, tableId) {
-    const data = getTableData(tableId);
     const rowIndex = row.rowIndex - 1; // Subtract 1 to account for the header row
-    const cellToEdit = row.cells[0]; // Assuming you're editing the first cell
 
-    // Prompt the user for the new value
-    const newValue = prompt("Edit item:", data[rowIndex].name || data[rowIndex].type);
-
-    if (newValue !== null) {
-        if (data[rowIndex].name) {
-            data[rowIndex].name = newValue;
-        } else {
-            data[rowIndex].type = newValue;
-        }
-        cellToEdit.textContent = newValue; // Update the cell content
+    // Determine the edit page URL based on the active tab
+    let editPage;
+    if (tableId === 'coloursTable') {
+        editPage = 'coloursEdit.html';
+    } else if (tableId === 'typesTable') {
+        editPage = 'typesEdit.html';
+    } else if (tableId === 'citiesTable') {
+        editPage = 'citiesEdit.html';
+    } else {
+        return;
     }
+
+    // Get the data for the selected row
+    const rowData = getTableData(tableId)[rowIndex];
+
+    // Encode the data as a JSON string
+    const jsonData = JSON.stringify(rowData);
+
+    // Pass the color name as a query parameter
+    const colorName = rowData.name || rowData.type;
+    
+    // Redirect to the appropriate edit page with the JSON data and color name as query parameters
+    window.location.href = `${editPage}?data=${encodeURIComponent(jsonData)}&colorName=${encodeURIComponent(colorName)}`;
 }
 
 // Helper function to get data from a selected table
