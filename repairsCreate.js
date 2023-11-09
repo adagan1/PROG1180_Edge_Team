@@ -1,4 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Get the "New Customer" button and attach a click event listener to it
+    document.getElementById("newCustomerButton").addEventListener("click", function () {
+        window.location.href = "customerCreate.html"; // Redirects to the customer creation page
+    });
+
+    // Get the "New Equipment" button and attach a click event listener to it
+    document.getElementById("newEquipmentButton").addEventListener("click", function () {
+        window.location.href = "inventoryCreate.html"; // Redirects to the inventory creation page
+    });
     // Add an event listener to the "Save Changes" button
     document.getElementById("createRepairsButton").addEventListener("click", function () {
         // Reset the input field outlines
@@ -35,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Redirect back to the repairs page
             window.location.href = "repairs.html";
+
+            
         }
     });
 });
@@ -110,3 +121,5 @@ function resetInputOutlines() {
 function goToRepairsPage() {
     window.location.href = "repairs.html";
 }
+
+
