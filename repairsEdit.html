@@ -124,13 +124,18 @@
     <main>
         <h1>Edit Repair Record</h1>
         <form id="editForm">
-            <label for="equipment">Equipment:</label>
-            <select id="equipment" name="equipment" required>
-                <option value="Honda Bagged Lawnmower">Honda Bagged Lawnmower</option>
-                <option value="Dewalt Drill">Dewalt Drill</option>
-                <option value="John Deere Electric Lawnmower">John Deere Electric Lawnmower</option>
-                <!-- Add more equipment options here -->
-            </select>
+            <!-- Mohammads fix -->     <!-- no more use for dropdown box, uses a search for equipment -->
+            <div id="EquipmentInfo">
+                <label for="equipment">Equipment:</label>
+                <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
+                <datalist id="equipmentList">
+                    <option value="Craftsman Bagged Lawnmower">
+                    <option value="Dewalt Drill">
+                    <option value="Craftsman Saw">
+                    <option value="John Deere Electric Lawnmower">
+                    <!-- Add more equipment options here -->
+                </datalist>
+            </div>
 
             <label for="description">Description:</label>
             <textarea id="description" name="description" required placeholder="Enter item description" rows="5" cols="50"></textarea>
