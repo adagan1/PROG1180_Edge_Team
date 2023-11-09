@@ -126,16 +126,30 @@
         <h1 id="createOrEditTitle">Add Repair report</h1>
         <div class="center-container">
             <form id="createForm">
-                <div id="EquipmentInfo">
-                    <label for="EquipmentInfo">Equipment:</label>
-                    <select id="EquipmentInfo" name="Equipment" required>
-                        <option value="" disabled selected>Select a Equipment</option>
-                        <option value="Equipment1">Craftsman Bagged Lawnmower </option>
-                        <option value="Equipment2">Dewalt Drill</option>
-                        <option value="Equipment3">Craftsman Saw</option>
-                        <option value="Equipment4">John Deere Electric Lawnmower</option>
-                    </select>
-                </div>
+            </div>
+            <!-- Mohammads fix -->     <!-- no more use for dropdown box, uses a search for owners -->
+            <div id="ownerInfo">
+                <label for="owner">Owner:</label>
+                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
+                <datalist id="ownerList">
+                    <option value="Joe Jawndel">
+                    <option value="Billy Talent">
+                    <option value="Julio Mendes">
+                    <!-- Add more owners here -->
+                </datalist>
+            </div>
+                   <!-- Mohammads fix -->     <!-- no more use for dropdown box, uses a search for equipment -->
+            <div id="EquipmentInfo">
+                <label for="equipment">Equipment:</label>
+                <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
+                <datalist id="equipmentList">
+                    <option value="Craftsman Bagged Lawnmower">
+                    <option value="Dewalt Drill">
+                    <option value="Craftsman Saw">
+                    <option value="John Deere Electric Lawnmower">
+                    <!-- Add more equipment options here -->
+                </datalist>
+            </div>
                 <div id="descriptionInfo">
                     <label for="description">Description:</label>
                     <textarea id="description" name="description" required placeholder="Enter item description" rows="5" cols="50"></textarea>
@@ -155,16 +169,6 @@
                     <label for="endTime">End Time:</label>
                     <input type="time" id="endTime">
                     <input type="date" id="endDate">
-                </div>
-                <div id="ownerInfo">
-                    <label for="owner">Owner:</label>
-                    <select id="owner" name="owner" required>
-                        <option value="" disabled selected>Select an owner</option>
-                        <option value="Owner1">Joe Jawndel</option>
-                        <option value="Owner2">Billy Talent</option>
-                        <option value="Owner3">Julio Mendes</option>
-                    </select>
-                </div>
                 <div id="errorContainer"></div> <!-- Container for error messages -->
                 <div>
                     <button type="button" id="createRepairsButton">Save Changes</button>
@@ -173,5 +177,17 @@
             </form>
         </div>
     </main>
+    <script>
+        // Set the start time and date inputs to the current date and time 
+        // Mohammads Fix
+        document.addEventListener('DOMContentLoaded', function() {
+            var currentDateTime = new Date();
+            var currentDate = currentDateTime.toISOString().split('T')[0];
+            var currentTime = currentDateTime.toTimeString().split(' ')[0].substring(0, 5);
+            
+            document.getElementById('startDate').value = currentDate;
+            document.getElementById('startTime').value = currentTime;
+        });
+    </script>
 </body>
 </html>
