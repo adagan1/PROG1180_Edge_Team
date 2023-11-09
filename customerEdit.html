@@ -161,17 +161,23 @@
                     <option value="Nunavut">Nunavut</option>
                     <option value="Northwest Territories">Northwest Territories</option>
                     <option value="Yukon">Yukon</option>
-                </select>
-                <div id="EquipmentInfo">
-                    <label for="EquipmentInfo">Equipment:</label>
-                    <select id="EquipmentInfo" name="Equipment" required>
-                        <option value="" disabled selected>Select Equipment</option>
-                        <option value="Equipment1">Craftsman Bagged Lawnmower</option>
-                        <option value="Equipment2">Dewalt Drill</option>
-                        <option value="Equipment3">Craftsman Saw</option>
-                        <option value="Equipment4">John Deere Electric Lawnmower</option>
-                    </select>
-                </div>
+                </select> 
+                    <!-- Mohammads Fix -->                          
+                    <div id="EquipmentInfo">
+                        <label for="EquipmentInfo">Equipment:</label>
+                        <select id="EquipmentInfo" name="Equipment" required>
+                            <option value="" disabled selected>Select Equipment</option>
+                            <option value="Equipment1">Craftsman Bagged Lawnmower</option>
+                            <option value="Equipment2">Dewalt Drill</option>
+                            <option value="Equipment3">Craftsman Saw</option>
+                            <option value="Equipment4">John Deere Electric Lawnmower</option>
+                        </select>
+                        <!-- Add Equipment Button -->
+                        <button type="button" id="addEquipmentButton" onclick="openAddEquipmentPage()">Add Equipment</button>
+                    </div>
+                    <!-- Mohammads Fix -->
+
+
                 <div id="errorContainer"></div>
                 <button type="button" id="saveButton">Save Changes</button>
                 <button type="button" id="cancelButton" onclick="goToCustomerPage()">Cancel</button>
