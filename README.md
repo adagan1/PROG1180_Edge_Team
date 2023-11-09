@@ -17,3 +17,10 @@ Lead Designer: Kyle Zizian
 Lead Developer: Daniel Baptiste
 
 In P3 your goals are as follows:
+
+- Update the storyboard
+- Complete Ideation
+- Update the repairs page
+- make customers' names searchable instead of dropdown
+- make equipment names searchable instead of dropdown
+
