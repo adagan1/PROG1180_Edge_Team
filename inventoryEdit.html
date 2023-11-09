@@ -121,6 +121,17 @@
         <h1>Edit Equipment</h1>
         <form id="editForm">
             <div class="edit-container">
+               <!-- Mohammads Fix --> 
+                <div>
+                    <label for="owner">Owner:</label>
+                    <select id="owner" name="owner" required>
+                        <option value="" disabled selected>Select an owner</option>
+                        <option value="Joe Jawndel">Joe Jawndel</option>
+                        <option value="Billy Talent">Billy Talent</option>
+                        <option value="Julio Mendes">Julio Mendes</option>
+                    </select>
+                </div>
+                <!-- Mohammads Fix --> 
                 <div>
                     <label for="equipmentName">Name:</label>
                     <input type="text" id="equipmentName" name="equipmentName" placeholder="Enter name" required>
@@ -155,15 +166,7 @@
                         <option value="Gray">Gray</option>
                     </select>
                 </div>
-                <div>
-                    <label for="owner">Owner:</label>
-                    <select id="owner" name="owner" required>
-                        <option value="" disabled selected>Select an owner</option>
-                        <option value="Joe Jawndel">Joe Jawndel</option>
-                        <option value="Billy Talent">Billy Talent</option>
-                        <option value="Julio Mendes">Julio Mendes</option>
-                    </select>
-                </div>
+                
 
                 <div id="errorContainer" class="error"></div>
 
