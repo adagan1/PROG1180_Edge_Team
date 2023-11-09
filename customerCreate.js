@@ -110,3 +110,7 @@ function resetInputOutlines() {
         input.classList.remove("invalid-input");
     });
 }
+function openAddEquipmentPage() {
+    // Open the add equipment page
+    window.location.href = 'inventoryCreate.html';
+}
