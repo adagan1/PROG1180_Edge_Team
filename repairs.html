@@ -5,15 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="repairs.js"></script>
-    <title>Emma's Small Engines</title>  
+    <title>Emma's Small Engines - Repairs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            padding-left: 50px;
+            display: flex;
+            justify-content: space-between; /* Align content horizontally */
+            align-items: center; /* Center content vertically */
+            width: 100%;
+        }
+
+        header h1, header nav ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: inline-block;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .center-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        #searchInput {
+            width: 34.3%;
+            max-width: 150px;
+            padding: 5px;
+            display: inline-block;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin: 5px;
+            background-color: #000000;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #000000;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
-<style>
-    #searchInput {
-        width: 34.3%; /* Adjust the width as needed /
-        max-width: 150px; / Limit the maximum width */
-        display: block;
-    }
-</style>
 <body>
     <header>
         <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
@@ -24,32 +94,36 @@
                 <li><a href="customer.html">Customer</a></li>
                 <li><a href="tables.html">Maintenance</a></li>
                 <li><a href="reports.html">Reports</a></li>
-                <li><a href="repairs.html">Repairs</a></li>
+                <li><a href="repairs.html" class="active">Repairs</a></li>
             </ul>
         </nav>
     </header>
-<main>
-    <h1>Repairs</h1>      
-    <div class="center-container">
-        <input type="text" id="searchInput" placeholder="Search for a repaired equipment...">
-    </div>
+    <main>
+        <div class="center-container">
+            <input type="text" id="searchInput" placeholder="Filter by Name or ID">
+            <button onclick="createRepair()">New Repair Request</button>
+        </div>
 
-    <div>
-        <button onclick="createRepair()">New Repair Request</button>
-    </div>
+        <div id="statusTabs">
+            <button id="pendingTab" onclick="showPending()">Pending</button>
+            <button id="completeTab" onclick="showComplete()">Complete</button>
+        </div>
 
-    <table id="repairsTable">
+        <table id="repairsTable">
             <thead>
                 <tr>
-                    <th>Equipment</th>
-                    <th>Description</th>
+                    <th>RepairID</th>
+                    <th>Appliance SN</th>
                     <th>Customer</th>
-                    <th>Controls</th>
+                    <th>Tasks</th>
+                    <th>Date In</th>
+                    <th>Notes</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Generated people will be added here -->
+                <!-- Generated repair records will be added here -->
             </tbody>
-    </table>
-</main>
-</body>
+        </table>
+    </main>
+    </body>
+</html>
