@@ -135,24 +135,38 @@
                         <!-- Add more owners here -->
                     </datalist>
                 </div>
-                
+
                 <label for="reportDate">Date:</label>
                 <input type="date" id="reportDate" placeholder="Select a date" required>
-                
-                <div id="descriptionInfo">
-                    <label for="reportDescription">Description:</label>
-                    <textarea id="reportDescription" name="reportDescription" placeholder="Enter item description" rows="5" cols="50"></textarea>
+
+                <div id="warrantyFields" style="display: none;">
+                    <label for="warrantyStart">Warranty Start:</label>
+                    <input type="date" id="warrantyStart" placeholder="Select warranty start date">
+
+                    <label for="warrantyEnd">Warranty End:</label>
+                    <input type="date" id="warrantyEnd" placeholder="Select warranty end date">
+
+                    <label for="warrantyDetails">Warranty Details:</label>
+                    <input type="text" id="warrantyDetails" placeholder="Enter warranty details">
+
+                    <label for="additionalWarrantyInfo">Additional Warranty Info:</label>
+                    <textarea id="additionalWarrantyInfo" placeholder="Enter additional warranty info" rows="5" cols="50"></textarea>
                 </div>
 
-                <label for="reportPrice">Price:</label>
-                <input type="number" id="reportPrice"placeholder="Enter price" required>
+                <div id="salesFields">
+                    <label for="reportDescription">Description:</label>
+                    <textarea id="reportDescription" name="reportDescription" placeholder="Enter item description" rows="5" cols="50"></textarea>
 
-                <label for="reportQuantity">Quantity:</label>
-                <input type="number" id="reportQuantity" placeholder="Enter quantity" required>
+                    <label for="reportPrice">Price:</label>
+                    <input type="number" id="reportPrice" placeholder="Enter price" required>
 
-                <label for="reportTotal">Total:</label>
-                <input type="number" id="reportTotal" placeholder="Enter total" required>
-                
+                    <label for="reportQuantity">Quantity:</label>
+                    <input type="number" id="reportQuantity" placeholder="Enter quantity" required>
+
+                    <label for="reportTotal">Total:</label>
+                    <input type="number" id="reportTotal" placeholder="Enter total" required>
+                </div>
+
                 <div id="errorContainer"></div>
                 <button type="button" id="saveButton">Save Changes</button>
                 <button type="button" id="cancelButton" onclick="goToReportsPage()">Cancel</button>
