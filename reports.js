@@ -1,7 +1,8 @@
 // Sample data for reports
 const hardCodedReports = [
     {
-        customer: "Joe Jawndel",
+        owner: "Joe Jawndel",
+        category: "Sales",
         date: "2023-01-15",
         description: "Nuts",
         price: .50,
@@ -9,7 +10,8 @@ const hardCodedReports = [
         total: 4.52
     },
     {
-        customer: "Billy Tallent",
+        owner: "Billy Tallent",
+        category: "Sales",
         date: "2023-02-15",
         description: "Screws",
         price: 1,
@@ -17,12 +19,13 @@ const hardCodedReports = [
         total: 12.43
     },
     {
-        customer: "Julio Mendes",
-        date: "2023-03-15",
-        description: "Bolts",
-        price: .60,
-        quantity: 2,
-        total: 1.36
+        owner: "Julio Mendes",
+        category: "Warranty",
+        date: "2023-02-15",
+        warrantyStart: "2023-03-15",
+        warrantyEnd: "2023-06-10",
+        warrantyDetails: "Warranty is for the Screws",
+        additionalWarrantyInfo: "N/A"
     },
 ];
 
@@ -32,21 +35,34 @@ function fillTableWithReportData() {
     const tbody = table.getElementsByTagName("tbody")[0];
     const searchInput = document.getElementById("searchInput");
     const searchTerm = searchInput.value.toLowerCase();
+    const categoryFilter = document.getElementById("categoryFilter").value;
 
     // Clear the table
     tbody.innerHTML = '';
+
+    // Hide input fields when "Select a category" is chosen
+    const isSelectCategory = categoryFilter === 'all';
+    const inputFields = document.querySelectorAll("#createButton, #owner, #reportDate, #reportDescription, #reportPrice, #reportQuantity, #reportTotal");
+
+    inputFields.forEach(field => {
+        field.style.display = isSelectCategory ? 'none' : 'block';
+    });
+
+    // Ensure search input is always visible
+    searchInput.style.display = 'block';
 
     for (let i = 0; i < hardCodedReports.length; i++) {
         const report = hardCodedReports[i];
         const reportString = JSON.stringify(report).toLowerCase();
 
-        // Check if the search term matches any part of the report data
-        if (reportString.includes(searchTerm)) {
+        // Check if the search term matches any part of the report data and the category matches
+        if ((reportString.includes(searchTerm) || searchTerm === '') &&
+            (isSelectCategory || report.category.toLowerCase() === categoryFilter)) {
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td>${report.customer}</td>
+                <td>${report.owner}</td>
+                <td>${report.category}</td>
                 <td>${report.date}</td>
-                <td>${report.quantity}</td>
                 <td>
                     <button onclick="editReport(${i})">Edit</button>
                     <button onclick="detailReport(${i})">Detail</button>
@@ -56,6 +72,7 @@ function fillTableWithReportData() {
         }
     }
 }
+
 
 // Function to display report details when the "Detail" button is clicked
 function detailReport(index) {
