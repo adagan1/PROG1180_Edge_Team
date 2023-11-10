@@ -81,8 +81,8 @@
         <h1>Report Details</h1>
         <table id="reportDetailsTable">
             <tr>
-                <th>Customer</th>
-                <td id="reportCustomer"></td>
+                <th>Owner</th>
+                <td id="reportOwner"></td>
             </tr>
             <tr>
                 <th>Date</th>
@@ -103,6 +103,24 @@
             <tr>
                 <th>Total</th>
                 <td id="reportTotal"></td>
+            </tr>
+
+            <!-- Warranty-specific details -->
+            <tr id="warrantyStartRow" style="display: none;">
+                <th>Warranty Start</th>
+                <td id="warrantyStart"></td>
+            </tr>
+            <tr id="warrantyEndRow" style="display: none;">
+                <th>Warranty End</th>
+                <td id="warrantyEnd"></td>
+            </tr>
+            <tr id="warrantyDetailsRow" style="display: none;">
+                <th>Warranty Details</th>
+                <td id="warrantyDetails"></td>
+            </tr>
+            <tr id="additionalWarrantyInfoRow" style="display: none;">
+                <th>Additional Warranty Info</th>
+                <td id="additionalWarrantyInfo"></td>
             </tr>
         </table>
     </main>
