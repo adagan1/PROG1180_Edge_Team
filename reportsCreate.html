@@ -60,15 +60,18 @@
             margin-bottom: 5px;
         }
 
+        select,
         input[type="text"],
         input[type="date"],
-        input[type="number"] {
+        input[type="number"],
+        input[type="search"],
+        textarea {
             width: 40%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            font-size: 16px; /* Set the desired font size */
+            font-size: 16px;
         }
 
         button {
@@ -84,20 +87,16 @@
         }
 
         .invalid-input {
-        border: 1px solid red;
-        }
-
-        input.invalid-input[type="text"],
-        input.invalid-input[type="number"],
-        input.invalid-input[type="date"] {
             border: 1px solid red;
         }
 
         button[id="cancelButton"] {
             background-color: red;
         }
-        #reportDescription {
-            resize: none; /* Prevent user from resizing the textarea */
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -119,53 +118,208 @@
     <main>
         <h1>Create Report</h1>
         <form id="reportCreateForm">
-            <!--Mohammads Fix-->
-            <div id="ownerInfo">
+            <label for="reportCategory">Category:</label>
+            <select id="reportCategory" onchange="toggleFields()">
+                <option value="" disabled selected>Select a category</option>
+                <option value="warranty">Warranty</option>
+                <option value="sale">Sale</option>
+            </select>
+
+            <div id="warrantyFields" style="display: none;">
                 <label for="owner">Owner:</label>
                 <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
                 <datalist id="ownerList">
                     <option value="Joe Jawndel">
                     <option value="Billy Talent">
                     <option value="Julio Mendes">
-                    <!-- Add more owners here -->
                 </datalist>
-            
-            
-                
                 <label for="reportDate">Date:</label>
                 <input type="date" id="reportDate" required>
-                
-                <div id="descriptionInfo">
-                    <label for="reportDescription">Description:</label>
-                    <textarea id="reportDescription" name="reportDescription" required placeholder="Enter item description" rows="5" cols="50"></textarea>
-                    <!-- The "rows" attribute determines the number of visible lines, and the "cols" attribute determines the number of visible columns -->
-                </div>
+                <label for="warrantyStart">Warranty Start:</label>
+                <input type="date" id="warrantyStart" placeholder="Enter warranty period">
+                <label for="warrantyEnd">Warranty End:</label>
+                <input type="date" id="warrantyEnd" placeholder="Enter warranty period">
+                <label for="warrantyDetails">Warranty Details:</label>
+                <textarea id="warrantyDetails" placeholder="Enter warranty details" rows="5" cols="50"></textarea>
+                <label for="additionalWarrantyInfo">Additional Warranty Info:</label>
+                <input type="text" id="additionalWarrantyInfo" placeholder="Enter additional warranty info">
+            </div>
 
+            <div id="saleFields" style="display: none;">
+                <label for="owner">Owner:</label>
+                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
+                <datalist id="ownerList">
+                    <option value="Joe Jawndel">
+                    <option value="Billy Talent">
+                    <option value="Julio Mendes">
+                </datalist>
+                <label for="reportDate">Date:</label>
+                <input type="date" id="reportDate" required>
+                <label for="reportDescription">Description:</label>
+                <textarea id="reportDescription" name="reportDescription" required placeholder="Enter item description" rows="5" cols="50"></textarea>
                 <label for="reportPrice">Price:</label>
                 <input type="number" id="reportPrice" placeholder="Enter price" required>
-
                 <label for="reportQuantity">Quantity:</label>
                 <input type="number" id="reportQuantity" placeholder="Enter quantity" required>
-
                 <label for="reportTotal">Total:</label>
                 <input type="number" id="reportTotal" placeholder="Enter total" required>
-                <div id="errorContainer"></div>
-                
-                <div id="errorContainer"></div>
-                <button type="button" id="createButton">Create Report</button>
-                <button type="button" id="cancelButton" onclick="goToReportsPage()">Cancel</button>
             </div>
+
+            <div id="errorContainer"></div>
+            <button type="button" id="createButton">Create Report</button>
+            <button type="button" id="cancelButton" onclick="goToReportsPage()">Cancel</button>
         </form>
     </main>
 
     <script>
-        // Mohammad Fix
-        // Get the current date
-        const today = new Date();
-        const date = today.getFullYear()+'-'+(today.getMonth()+1).toString().padStart(2, '0')+'-'+today.getDate().toString().padStart(2, '0');
-        
-        // Set the value of the date input to the current date
-        document.getElementById('reportDate').value = date;
+        document.addEventListener("DOMContentLoaded", function () {
+            const categoryDropdown = document.getElementById("reportCategory");
+            const warrantyFields = document.getElementById("warrantyFields");
+            const saleFields = document.getElementById("saleFields");
+
+            function toggleFields() {
+                if (categoryDropdown.value === "warranty") {
+                    warrantyFields.style.display = "block";
+                    saleFields.style.display = "none";
+                } else if (categoryDropdown.value === "sale") {
+                    warrantyFields.style.display = "none";
+                    saleFields.style.display = "block";
+                } else {
+                    warrantyFields.style.display = "none";
+                    saleFields.style.display = "none";
+                }
+            }
+
+            warrantyFields.style.display = "none";
+            saleFields.style.display = "none";
+
+            categoryDropdown.addEventListener("change", toggleFields);
+
+            const createButton = document.getElementById("createButton");
+            createButton.addEventListener("click", function (event) {
+                event.preventDefault();
+                const reportCategory = categoryDropdown.value;
+                const reportOwnerInput = document.getElementById("owner");
+                const reportDateInput = document.getElementById("reportDate");
+                const reportDescriptionInput = document.getElementById("reportDescription");
+                const reportPriceInput = document.getElementById("reportPrice");
+                const reportQuantityInput = document.getElementById("reportQuantity");
+                const reportTotalInput = document.getElementById("reportTotal");
+                const warrantyStartInput = document.getElementById("warrantyStart");
+                const warrantyEndInput = document.getElementById("warrantyEnd");
+                const warrantyDetailsInput = document.getElementById("warrantyDetails");
+                const additionalWarrantyInfoInput = document.getElementById("additionalWarrantyInfo");
+
+                resetValidationStyles();
+                errorContainer.innerHTML = "";
+
+                let reportAdditionalInfo;
+                if (reportCategory === "warranty") {
+                    reportAdditionalInfo = {
+                        warrantyStart: warrantyStartInput.value,
+                        warrantyEnd: warrantyEndInput.value,
+                        warrantyDetails: warrantyDetailsInput.value,
+                        additionalWarrantyInfo: additionalWarrantyInfoInput.value,
+                    };
+
+                    if (reportAdditionalInfo.warrantyStart.trim() === "") {
+                        markInvalidInput(warrantyStartInput);
+                        displayError("Please enter the warranty start date.");
+                    }
+
+                    if (reportAdditionalInfo.warrantyEnd.trim() === "") {
+                        markInvalidInput(warrantyEndInput);
+                        displayError("Please enter the warranty end date.");
+                    }
+                } else {
+                    reportAdditionalInfo = {
+                        // Add sale-specific fields here
+                    };
+
+                    if (reportDescriptionInput.value.trim() === "") {
+                        markInvalidInput(reportDescriptionInput);
+                        displayError("Please enter a description for the sale.");
+                    }
+                }
+
+                const report = {
+                    category: reportCategory,
+                    owner: reportOwnerInput.value,
+                    date: reportDateInput.value,
+                    description: reportDescriptionInput.value,
+                    price: reportPriceInput.value,
+                    quantity: reportQuantityInput.value,
+                    total: reportTotalInput.value,
+                    additionalInfo: reportAdditionalInfo,
+                };
+
+                if (validateForm(report)) {
+                    window.location.href = "reports.html";
+                }
+            });
+        });
+
+        function goToReportsPage() {
+            window.location.href = "reports.html";
+        }
+
+        function validateForm(report) {
+            let isValid = true;
+
+            if (report.owner.trim() === "") {
+                markInvalidInput(document.getElementById("owner"));
+                displayError("Please enter the owner's name.");
+                isValid = false;
+            }
+
+            if (report.date.trim() === "") {
+                markInvalidInput(document.getElementById("reportDate"));
+                displayError("Please enter the report date.");
+                isValid = false;
+            }
+
+            if (report.category === "sale") {
+                if (report.description.trim() === "") {
+                    markInvalidInput(document.getElementById("reportDescription"));
+                    displayError("Please enter a description for the sale.");
+                    isValid = false;
+                }
+            }
+
+            if (report.category === "warranty") {
+                if (report.additionalInfo.warrantyStart.trim() === "") {
+                    markInvalidInput(document.getElementById("warrantyStart"));
+                    displayError("Please enter the warranty start date.");
+                    isValid = false;
+                }
+
+                if (report.additionalInfo.warrantyEnd.trim() === "") {
+                    markInvalidInput(document.getElementById("warrantyEnd"));
+                    displayError("Please enter the warranty end date.");
+                    isValid = false;
+                }
+            }
+
+            return isValid;
+        }
+
+        function markInvalidInput(inputElement) {
+            inputElement.classList.add("invalid-input");
+        }
+
+        function resetValidationStyles() {
+            const invalidInputs = document.querySelectorAll(".invalid-input");
+            invalidInputs.forEach((input) => {
+                input.classList.remove("invalid-input");
+            });
+        }
+
+        function displayError(message) {
+            const errorDiv = document.createElement("div");
+            errorDiv.classList.add("error-message");
+            errorDiv.textContent = message;
+            document.getElementById("errorContainer").appendChild(errorDiv);
+        }
     </script>
 </body>
 </html>
