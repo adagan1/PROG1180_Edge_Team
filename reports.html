@@ -33,6 +33,15 @@
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Search for reports...">
         </div>
+        <div class="filter-bar">
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter" onchange="fillTableWithReportData()">
+        <option value="all">All</option>
+        <option value="sales">Sales</option>
+        <option value="warranty">Warranty</option>
+    </select>
+</div>
+
         <div>
             <button onclick="createReport()">Add Report</button>
         </div>
@@ -40,9 +49,9 @@
         <table id="reportTable">
             <thead>
                 <tr>
-                    <th>Customer</th>
+                    <th>Owner</th>
+                    <th>Category</th>
                     <th>Date</th>
-                    <th>Quantity</th>
                     <th>Controls</th>
                 </tr>
             </thead>
