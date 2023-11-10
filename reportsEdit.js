@@ -9,30 +9,55 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectedReport = JSON.parse(selectedReportString);
 
     // Populate the form fields with the selected report data
-    const reportCustomerInput = document.getElementById("reportCustomer");
+    const reportOwnerInput = document.getElementById("owner");
     const reportDateInput = document.getElementById("reportDate");
     const reportDescriptionInput = document.getElementById("reportDescription");
     const reportPriceInput = document.getElementById("reportPrice");
     const reportQuantityInput = document.getElementById("reportQuantity");
     const reportTotalInput = document.getElementById("reportTotal");
+    const warrantyStartInput = document.getElementById("warrantyStart");
+    const warrantyEndInput = document.getElementById("warrantyEnd");
+    const warrantyDetailsInput = document.getElementById("warrantyDetails");
+    const additionalWarrantyInfoInput = document.getElementById("additionalWarrantyInfo");
 
-    reportCustomerInput.value = selectedReport.customer;
+    reportOwnerInput.value = selectedReport.owner;
     reportDateInput.value = selectedReport.date;
     reportDescriptionInput.value = selectedReport.description;
     reportPriceInput.value = selectedReport.price;
     reportQuantityInput.value = selectedReport.quantity;
     reportTotalInput.value = selectedReport.total;
 
+    // Check if the selected report category is 'Warranty'
+    if (selectedReport.category.toLowerCase() === 'warranty') {
+        // Populate the sales fields with the selected report data
+        document.getElementById('salesFields').style.display = 'none'; // Hide sales fields
+        document.getElementById('warrantyFields').style.display = 'block'; // Show warranty fields
+
+        // Populate the warranty fields with the example data
+        warrantyStartInput.value = selectedReport.warrantyStart || "";
+        warrantyEndInput.value = selectedReport.warrantyEnd || "";
+        warrantyDetailsInput.value = selectedReport.warrantyDetails || "";
+        additionalWarrantyInfoInput.value = selectedReport.additionalWarrantyInfo || "";
+    } else {
+        // Show sales fields and hide warranty fields
+        document.getElementById('salesFields').style.display = 'block';
+        document.getElementById('warrantyFields').style.display = 'none';
+    }
+
     const saveButton = document.getElementById("saveButton");
     saveButton.addEventListener("click", function () {
         // Get the edited report data
         const editedReport = {
-            customer: reportCustomerInput.value,
+            owner: reportOwnerInput.value,
             date: reportDateInput.value,
             description: reportDescriptionInput.value,
             price: reportPriceInput.value,
             quantity: reportQuantityInput.value,
             total: reportTotalInput.value,
+            warrantyStart: warrantyStartInput.value,
+            warrantyEnd: warrantyEndInput.value,
+            warrantyDetails: warrantyDetailsInput.value,
+            additionalWarrantyInfo: additionalWarrantyInfoInput.value,
         };
 
         // Perform form validation
@@ -57,8 +82,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const errorContainer = document.getElementById("errorContainer");
         errorContainer.innerHTML = "";
 
-        if (report.customer.trim() === "") {
-            displayError("Customer name is required.", "reportCustomer");
+        if (report.owner.trim() === "") {
+            displayError("Owner name is required.", "owner");
             isValid = false;
         }
 
@@ -95,6 +120,19 @@ document.addEventListener("DOMContentLoaded", function () {
         if (isNaN(report.total) || parseFloat(report.total) <= 0) {
             displayError("Total must be a positive number.", "reportTotal");
             isValid = false;
+        }
+
+        // Additional validation for warranty fields if the category is 'warranty'
+        if (report.category.toLowerCase() === 'warranty') {
+            if (report.warrantyStart.trim() === "") {
+                displayError("Warranty start date is required.", "warrantyStart");
+                isValid = false;
+            }
+
+            if (report.warrantyEnd.trim() === "") {
+                displayError("Warranty end date is required.", "warrantyEnd");
+                isValid = false;
+            }
         }
 
         return isValid;
