@@ -1,5 +1,6 @@
 const hardCodedRepair = [
     {
+        status: "In Progress",  
         equipment: "Honda Bagged Lawnmower",
         description: "Handle broke, cannot push.",
         startTime: "November 1, 11:34AM",
@@ -8,6 +9,7 @@ const hardCodedRepair = [
         customer: "Joe Jawndel"
     },
     {
+        status: "In Progress",  
         equipment: "Dewalt Drill",
         description: "Chuck cracked.",
         startTime: "November 2, 4:21PM",
@@ -16,6 +18,7 @@ const hardCodedRepair = [
         customer: "Billy Talent"
     },
     {
+        status: "Completed", 
         equipment: "John Deere Electric Lawnmower",
         description: "Both front wheels came off.",
         startTime: "November 4, 10:03AM",
@@ -24,28 +27,31 @@ const hardCodedRepair = [
         customer: "Joe Jawndel"
     }
 ];
-
-// Function to fill the table with customer data, including "Edit" and "Detail" buttons
 function fillTableWithRepairData() {
     const table = document.getElementById("repairsTable");
     const tbody = table.getElementsByTagName("tbody")[0];
     const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
     const searchTerm = searchInput.value.toLowerCase();
+    const selectedCategory = categoryFilter.value;
 
     // Clear the table
     tbody.innerHTML = '';
 
     for (let i = 0; i < hardCodedRepair.length; i++) {
         const repair = hardCodedRepair[i];
+        // Convert the status to lowercase for case-insensitive comparison
+        const statusLower = repair.status.toLowerCase();
         const repairString = JSON.stringify(repair).toLowerCase();
 
-        // Check if the search term matches any part of the customer data
-        if (repairString.includes(searchTerm)) {
+        // Check if the search term and category match the repair data
+        if (repairString.includes(searchTerm) && (selectedCategory === "all" || statusLower === selectedCategory)) {
             const row = document.createElement("tr");
             row.innerHTML = `
+                <td>${repair.status}</td>
+                <td>${repair.customer}</td>
                 <td>${repair.equipment}</td>
                 <td>${repair.description}</td>
-                <td>${repair.customer}</td>
                 <td>
                     <button onclick="editRepair(${i})">Edit</button>
                     <button onclick="detailRepair(${i})">Detail</button>
@@ -56,50 +62,54 @@ function fillTableWithRepairData() {
     }
 }
 
-// Function to display customer details when the "Detail" button is clicked
+
 function detailRepair(index) {
-    // Get the customer data to display
     const repairData = hardCodedRepair[index];
 
-    // Convert the customer data to a JSON string
     const repairDataString = JSON.stringify(repairData);
 
-    // Store the selected customer data in sessionStorage for access on the new page
     sessionStorage.setItem("selectedRepair", repairDataString);
 
-    // Redirect to the customerDetail.html page
     window.location.href = "repairsDetails.html";
 }
 
-// Function to edit customer information
 function editRepair(index) {
-    // Get the customer data to edit
     const repairToEdit = hardCodedRepair[index];
 
-    // Convert the customer data to a JSON string
     const repairDataString = JSON.stringify(repairToEdit);
 
-    // Redirect to customerEdit.html with customer data as a parameter
     window.location.href = `repairsEdit.html?repairData=${repairDataString}`;
 }
 
-// Function to navigate to the customerCreate.html page
 function createRepair() {
-    // Redirect to the customerCreate.html page
     window.location.href = "repairsCreate.html";
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     fillTableWithRepairData();
 
-    // Add an event listener to the search input for real-time filtering
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("input", function() {
         fillTableWithRepairData();
     });
 });
 
-//Function to go back to repairs page
 function goToRepairsPage() {
     window.location.href = "repairs.html";
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    fillTableWithRepairData();
+
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
+
+    searchInput.addEventListener("input", function() {
+        fillTableWithRepairData();
+    });
+
+    categoryFilter.addEventListener("change", function() {
+        fillTableWithRepairData();
+    });
+});
+
