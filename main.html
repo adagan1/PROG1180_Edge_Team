@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,27 +20,45 @@
             align-items: center; /* Center content vertically */
             width: 100%;
         }
-    
-        /* Centered title style */
-        .centered-title {
-            text-align: center;
-            margin: 2rem auto; /* Add margin for spacing */
+        /* Dashboard styles */
+        .dashboard {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 2rem;
         }
-    
-        /* Style for the tutorial section */
-        #Tutorial {
-            text-align: left;
-            margin: 0 auto; /* Center the section */
+        
+        .dashboard-section {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem;
+            width: calc(50% - 2rem);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-    
-        /* Style for tutorial headings */
-        #Tutorial h2 {
-            margin-top: 1.5rem; /* Add margin between headings */
+        
+        .dashboard-section h2 {
+            margin-bottom: 1rem;
         }
-    
-        /* Style for tutorial paragraphs */
-        #Tutorial p {
-            margin-bottom: 1rem; /* Add margin between paragraphs */
+        
+        .dashboard-section button {
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .dashboard-section button:hover {
+            background-color: #555;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .dashboard-section {
+                width: 100%;
+            }
         }
     </style>
     
@@ -70,28 +87,24 @@
            
         </section>
         
-        <section id="Tutorial">
-            <h2>How To Use</h2>
-            <p>This tutorial is designed to make your navigation of our various sections straightforward.</p>
-        
-            <h3>Equipment</h3>
-            <p>Explore features such as filtered search, addition, browsing equipment names and brands, editing, and accessing detailed information about inventory items.</p>
-        
-            <h3>Customer</h3>
-            <p>Manage customer information with ease. Utilize filtered search, addition, browsing by name, email, and phone, as well as the ability to edit customer details and access comprehensive customer profiles.</p>
-        
-            <h3>Maintenance</h3>
-            <p>Access and manage data tables on the website. Utilize filtered search, explore tables of information, add new tables, and edit fields within these tables.</p>
-        
-            <h3>Reports</h3>
-            <p>Stay informed by visiting the Reports page. Utilize filtered search and have the option to edit these reports or view detailed information about them.</p>
-        
-            <h3>Repairs</h3>
-            <p>Efficiently handle repair orders. Use the filtered search to find specific orders and their owners. Edit and access additional details with a simple click.</p>
-        </section>
-
-        <div class="centered-title">
-            <!-- Your additional page content goes here -->
+        <div class="dashboard">
+            <div class="dashboard-section">
+                <h2>Add a Customer</h2>
+                <p>Click the button to quickly add a customer.</p>
+                <button onclick="location.href='customerCreate.html'">Add a Customer</button>
+            </div>
+            
+            <div class="dashboard-section">
+                <h2>Create an Equipment</h2>
+                <p>Click the button to quickly create an appliance.</p>
+                <button onclick="location.href='inventoryCreate.html'">Add Equipment</button>
+            </div>
+            
+            <div class="dashboard-section">
+                <h2>Start a Repair Form</h2>
+                <p>Click the button to quickly start a repair.</p>
+                <button onclick="location.href='repairsCreate.html'">New Repair Request</button>
+            </div>
         </div>
 
         <script>
@@ -102,7 +115,7 @@
                 }
             });
         </script>
-    </main>
+    
 </body>
 </html>
 
