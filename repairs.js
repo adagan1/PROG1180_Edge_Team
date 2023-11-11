@@ -1,6 +1,6 @@
 const hardCodedRepair = [
     {
-        status: "In Progress",  
+        status: "In Progress",  // Added status
         equipment: "Honda Bagged Lawnmower",
         description: "Handle broke, cannot push.",
         startTime: "November 1, 11:34AM",
@@ -9,7 +9,7 @@ const hardCodedRepair = [
         customer: "Joe Jawndel"
     },
     {
-        status: "In Progress",  
+        status: "In Progress",  // Added status
         equipment: "Dewalt Drill",
         description: "Chuck cracked.",
         startTime: "November 2, 4:21PM",
@@ -18,7 +18,7 @@ const hardCodedRepair = [
         customer: "Billy Talent"
     },
     {
-        status: "Completed", 
+        status: "Completed",  // Added status
         equipment: "John Deere Electric Lawnmower",
         description: "Both front wheels came off.",
         startTime: "November 4, 10:03AM",
@@ -35,16 +35,13 @@ function fillTableWithRepairData() {
     const searchTerm = searchInput.value.toLowerCase();
     const selectedCategory = categoryFilter.value;
 
-    // Clear the table
     tbody.innerHTML = '';
 
     for (let i = 0; i < hardCodedRepair.length; i++) {
         const repair = hardCodedRepair[i];
-        // Convert the status to lowercase for case-insensitive comparison
         const statusLower = repair.status.toLowerCase();
         const repairString = JSON.stringify(repair).toLowerCase();
 
-        // Check if the search term and category match the repair data
         if (repairString.includes(searchTerm) && (selectedCategory === "all" || statusLower === selectedCategory)) {
             const row = document.createElement("tr");
             row.innerHTML = `
@@ -53,12 +50,24 @@ function fillTableWithRepairData() {
                 <td>${repair.equipment}</td>
                 <td>${repair.description}</td>
                 <td>
-                    <button onclick="editRepair(${i})">Edit</button>
-                    <button onclick="detailRepair(${i})">Detail</button>
+                    <button onclick="enterRepair(${i})">Enter</button>
                 </td>
             `;
             tbody.appendChild(row);
         }
+    }
+}
+
+function enterRepair(index) {
+    const repair = hardCodedRepair[index];
+    const repairDataString = JSON.stringify(repair);
+
+    sessionStorage.setItem("selectedRepair", repairDataString);
+
+    if (repair.status === "In Progress") {
+        window.location.href = `repairsEdit.html?repairData=${repairDataString}`;
+    } else if (repair.status === "Completed") {
+        window.location.href = "repairsDetails.html";
     }
 }
 
@@ -70,30 +79,38 @@ function detailRepair(index) {
 
     sessionStorage.setItem("selectedRepair", repairDataString);
 
+    
     window.location.href = "repairsDetails.html";
 }
 
+// Function to edit customer information
 function editRepair(index) {
+   
     const repairToEdit = hardCodedRepair[index];
 
     const repairDataString = JSON.stringify(repairToEdit);
 
+    
     window.location.href = `repairsEdit.html?repairData=${repairDataString}`;
 }
 
+// Function to navigate to the customerCreate.html page
 function createRepair() {
+    
     window.location.href = "repairsCreate.html";
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     fillTableWithRepairData();
 
+    // Add an event listener to the search input for real-time filtering
     const searchInput = document.getElementById("searchInput");
     searchInput.addEventListener("input", function() {
         fillTableWithRepairData();
     });
 });
 
+//Function to go back to repairs page
 function goToRepairsPage() {
     window.location.href = "repairs.html";
 }
@@ -101,6 +118,7 @@ function goToRepairsPage() {
 document.addEventListener("DOMContentLoaded", function() {
     fillTableWithRepairData();
 
+    // Add event listeners for real-time filtering
     const searchInput = document.getElementById("searchInput");
     const categoryFilter = document.getElementById("categoryFilter");
 
