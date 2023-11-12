@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const warrantyStartInput = document.getElementById("warrantyStart");
         const warrantyEndInput = document.getElementById("warrantyEnd");
         const warrantyDetailsInput = document.getElementById("warrantyDetails");
+        const equipmentDetailsInput = document.getElementById("equipment");
         const ordersDetailsInput = document.getElementById("orderDetails");
         const additionalWarrantyInfoInput = document.getElementById("additionalWarrantyInfo");       
 
@@ -65,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 warrantyEnd: warrantyEndInput.value,
                 warrantyDetails: warrantyDetailsInput.value,
                 additionalWarrantyInfo: additionalWarrantyInfoInput.value,
+                equipmentList: equipmentDetailsInput.value
             };
 
             if (reportAdditionalInfo.warrantyStart.trim() !== "" && reportAdditionalInfo.warrantyEnd.trim() !== "") {
@@ -118,7 +120,13 @@ function validateForm(report) {
         
         if (report.owner.trim() === "") {
             markInvalidInput(document.getElementById("owner"));
-            displayError("Please enter the owner's name.");
+            displayError("Please select the owner's name.");
+            isValid = false;
+        }
+
+        if (report.additionalInfo.equipmentList.trim() === "") {
+            markInvalidInput(document.getElementById("equipment"));
+            displayError("Please select the equipment.");
             isValid = false;
         }
     

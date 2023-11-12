@@ -11,9 +11,9 @@ const hardCodedReports = [
     },
     {
         owner: "Billy Tallent",
-        category: "Sales",
+        category: "Orders",
         date: "2023-02-15",
-        description: "Screws",
+        description: "Ordered a new honda lawnmower.",
         price: 1,
         quantity: 11,
         total: 12.43
