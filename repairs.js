@@ -50,7 +50,7 @@ function fillTableWithRepairData() {
                 <td>${repair.equipment}</td>
                 <td>${repair.description}</td>
                 <td>
-                    <button onclick="enterRepair(${i})">Enter</button>
+                    <button onclick="enterRepair(${i})">Access</button>
                 </td>
             `;
             tbody.appendChild(row);
