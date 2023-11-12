@@ -122,17 +122,6 @@
         <h1 id="createOrEditTitle">Add Equipment</h1>
         <div class="center-container">
             <form id="createForm">
-            </div>
-            <div id="ownerInfo">
-                <label for="owner">Owner:</label>
-                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
-                <datalist id="ownerList">
-                    <option value="Joe Jawndel">
-                    <option value="Billy Talent">
-                    <option value="Julio Mendes">
-                    <!-- Add more owners here -->
-                </datalist>
-            </div>
                 <div id="nameInfo">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required placeholder="Enter name">
@@ -167,6 +156,16 @@
                         <option value="White">White</option>
                         <option value="Gray">Gray</option>
                     </select>
+                </div>
+                <div id="ownerInfo">
+                    <label for="owner">Owner:</label>
+                    <select id="owner" name="owner" required>
+                        <option value="" disabled selected>Select an owner</option>
+                        <option value="Owner1">Joe Jawndel</option>
+                        <option value="Owner2">Billy Talent</option>
+                        <option value="Owner3">Julio Mendes</option>
+                    </select>
+                </div>
                 <div id="errorContainer"></div> <!-- Container for error messages -->
                 <div>
                     <button type="button" id="createInventoryButton">Save Changes</button>
