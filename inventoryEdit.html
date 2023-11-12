@@ -121,18 +121,6 @@
         <h1>Edit Equipment</h1>
         <form id="editForm">
             <div class="edit-container">
-               <!-- Mohammads Fix --> 
-               <div id="ownerInfo">
-                <label for="owner">Owner:</label>
-                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
-                <datalist id="ownerList">
-                    <option value="Joe Jawndel">
-                    <option value="Billy Talent">
-                    <option value="Julio Mendes">
-                    <!-- Add more owners here -->
-                </datalist>
-            </div>
-                <!-- Mohammads Fix --> 
                 <div>
                     <label for="equipmentName">Name:</label>
                     <input type="text" id="equipmentName" name="equipmentName" placeholder="Enter name" required>
@@ -167,7 +155,15 @@
                         <option value="Gray">Gray</option>
                     </select>
                 </div>
-                
+                <div>
+                    <label for="owner">Owner:</label>
+                    <select id="owner" name="owner" required>
+                        <option value="" disabled selected>Select an owner</option>
+                        <option value="Joe Jawndel">Joe Jawndel</option>
+                        <option value="Billy Talent">Billy Talent</option>
+                        <option value="Julio Mendes">Julio Mendes</option>
+                    </select>
+                </div>
 
                 <div id="errorContainer" class="error"></div>
 
