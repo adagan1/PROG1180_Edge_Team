@@ -59,16 +59,11 @@ function fillTableWithRepairData() {
 }
 
 function enterRepair(index) {
-    const repair = hardCodedRepair[index];
-    const repairDataString = JSON.stringify(repair);
+    const repairToEdit = hardCodedRepair[index];
 
-    sessionStorage.setItem("selectedRepair", repairDataString);
-
-    if (repair.status === "In Progress") {
-        window.location.href = `repairsEdit.html?repairData=${repairDataString}`;
-    } else if (repair.status === "Completed") {
-        window.location.href = "repairsDetails.html";
-    }
+    const repairDataString = JSON.stringify(repairToEdit);
+    
+    window.location.href = `repairSession.html?repairData=${repairDataString}`;
 }
 
 
@@ -81,17 +76,6 @@ function detailRepair(index) {
 
     
     window.location.href = "repairsDetails.html";
-}
-
-// Function to edit customer information
-function editRepair(index) {
-   
-    const repairToEdit = hardCodedRepair[index];
-
-    const repairDataString = JSON.stringify(repairToEdit);
-
-    
-    window.location.href = `repairsEdit.html?repairData=${repairDataString}`;
 }
 
 // Function to navigate to the customerCreate.html page
