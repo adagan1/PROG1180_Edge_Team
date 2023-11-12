@@ -9,8 +9,8 @@
 </head>
 <style>
     #searchInput {
-        width: 34.3%; /* Adjust the width as needed /
-        max-width: 150px; / Limit the maximum width */
+        width: 34.3%;
+        max-width: 150px;
         display: block;
     }
 </style>
@@ -34,13 +34,15 @@
             <input type="text" id="searchInput" placeholder="Search for reports...">
         </div>
         <div class="filter-bar">
-    <label for="categoryFilter">Filter by Category:</label>
-    <select id="categoryFilter" onchange="fillTableWithReportData()">
-        <option value="all">All</option>
-        <option value="sales">Sales</option>
-        <option value="warranty">Warranty</option>
-    </select>
-</div>
+            <label for="categoryFilter">Filter by Category:</label>
+            <select id="categoryFilter" onchange="fillTableWithReportData()">
+                <option value="all">All</option>
+                <option value="sales">Sales</option>
+                <option value="warranty">Warranty</option>
+                <!-- More categories can be added here -->
+            </select>
+            <button onclick="addNewCategory()">Add New Category</button>
+        </div>
 
         <div>
             <button onclick="createReport()">Add Report</button>
@@ -60,5 +62,18 @@
             </tbody>
         </table>
     </main>
+
+    <script>
+        function addNewCategory() {
+            var newCategory = prompt("Please enter the new category name:");
+            if (newCategory) {
+                var select = document.getElementById("categoryFilter");
+                var option = document.createElement("option");
+                option.value = newCategory.toLowerCase();
+                option.text = newCategory;
+                select.add(option);
+            }
+        }
+    </script>
 </body>
 </html>
