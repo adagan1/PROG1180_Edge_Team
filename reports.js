@@ -29,6 +29,19 @@ const hardCodedReports = [
     },
 ];
 
+// Function to add a new report category
+function addNewCategory() {
+    var newCategory = prompt("Please enter the new category name:");
+    if (newCategory) {
+        var select = document.getElementById("categoryFilter");
+        var option = document.createElement("option");
+        option.value = newCategory.toLowerCase();
+        option.text = newCategory;
+        select.add(option);
+    }
+}
+
+
 // Function to fill the table with report data, including "Edit" and "Detail" buttons
 function fillTableWithReportData() {
     const table = document.getElementById("reportTable");
@@ -40,24 +53,13 @@ function fillTableWithReportData() {
     // Clear the table
     tbody.innerHTML = '';
 
-    // Hide input fields when "Select a category" is chosen
-    const isSelectCategory = categoryFilter === 'all';
-    const inputFields = document.querySelectorAll("#createButton, #owner, #reportDate, #reportDescription, #reportPrice, #reportQuantity, #reportTotal");
-
-    inputFields.forEach(field => {
-        field.style.display = isSelectCategory ? 'none' : 'block';
-    });
-
-    // Ensure search input is always visible
-    searchInput.style.display = 'block';
-
     for (let i = 0; i < hardCodedReports.length; i++) {
         const report = hardCodedReports[i];
         const reportString = JSON.stringify(report).toLowerCase();
 
         // Check if the search term matches any part of the report data and the category matches
         if ((reportString.includes(searchTerm) || searchTerm === '') &&
-            (isSelectCategory || report.category.toLowerCase() === categoryFilter)) {
+            (categoryFilter === 'all' || report.category.toLowerCase() === categoryFilter)) {
             const row = document.createElement("tr");
             row.innerHTML = `
                 <td>${report.owner}</td>
@@ -72,6 +74,7 @@ function fillTableWithReportData() {
         }
     }
 }
+
 
 
 // Function to display report details when the "Detail" button is clicked
