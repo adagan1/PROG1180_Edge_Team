@@ -188,38 +188,10 @@
                 <div id="descriptionInfo">
                     <label for="description">Equipment Issue</label>
                     <textarea id="description" name="description" required placeholder="Enter equipment issue in detail" rows="5" cols="50"></textarea>
-                    <!-- The "rows" attribute determines the number of visible lines, and the "cols" attribute determines the number of visible columns -->
                 </div>
-                <!--<div id="partsUsedInfo">
-                    <label for="partsUsed">Parts used:</label>
-                    <textarea id="partsUsed" name="partsUsed" required placeholder="Enter parts used" rows="3" cols="50"></textarea>
-                     The "rows" attribute determines the number of visible lines, and the "cols" attribute determines the number of visible columns 
-                </div>
-                <div id="startTimeInfo">
-                    <label for="startTime">Start Time:</label>
-                    <input type="time" id="startTime">
-                    <input type="date" id="startDate">
-                </div>
-                <div id="endTimeInfo">
-                    <label for="endTime">End Time:</label>
-                    <input type="time" id="endTime">
-                    <input type="date" id="endDate">
-                <div id="errorContainer"></div> Container for error messages -->
-                <script>
-        // Set the start time and date inputs to the current date and time 
-        // Mohammads Fix
-        /*
-        document.addEventListener('DOMContentLoaded', function() {
-            var currentDateTime = new Date();
-            var currentDate = currentDateTime.toISOString().split('T')[0];
-            var currentTime = currentDateTime.toTimeString().split(' ')[0].substring(0, 5);
-            
-            document.getElementById('startDate').value = currentDate;
-            document.getElementById('startTime').value = currentTime;
-        });*/
-    </script>
                 <label for="warranty">Warranty:</label>
                 <input type="checkbox">
+                <div id="errorContainer"></div> <!-- Container for error messages -->
                 <div>
                     <button type="button" id="createRepairsButton">Send to Pending Repairs</button>
                     <button type="button" id="cancelButton" onclick="goToRepairsPage()">Cancel</button>

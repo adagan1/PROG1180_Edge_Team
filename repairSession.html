@@ -95,11 +95,10 @@
             border: 1px solid red;
         }
         .parts-container {
-            max-width: 400px;
+            max-width: 600px;
             margin: auto;
             background-color: #fff;
             padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .part-row {
@@ -121,15 +120,15 @@
         margin-right: 10px; /* Adjust as needed */
         }
 
-.part-select-container select,
-.quantity-input-container input {
-    width: 100%; /* This ensures the select and input take the full width of their containers */
-}
+        .part-select-container select,
+        .quantity-input-container input {
+            width: 100%; /* This ensures the select and input take the full width of their containers */
+        }
 
-/* Remove the margin-right for the last item in the part-row */
-.part-row > *:last-child {
-    margin-right: 0;
-}
+        /* Remove the margin-right for the last item in the part-row */
+        .part-row > *:last-child {
+            margin-right: 0;
+        }
 
         select, input {
             padding: 10px;
@@ -161,6 +160,10 @@
         input.invalid-input[type="time"],
         input.invalid-input[type="date"] {
         border: 1px solid red;
+    }
+
+    textarea {
+        resize: none;
     }
     </style>
     <title>Edit Repair</title>
@@ -227,7 +230,7 @@
             </select>
             <!-- Technician Notes -->
             <label for="technicianNotes">Technician Notes:</label>
-            <textarea id="technicianNotes" placeholder="Notes from the technician" rows="5" cols="50"></textarea>
+            <textarea id="technicianNotes" placeholder="Notes from the technician" rows="7" cols="70"></textarea>
             
             <div id="errorContainer"></div>
             

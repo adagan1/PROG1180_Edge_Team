@@ -24,8 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const endTime = document.getElementById("endTime").value;
             const endDate = document.getElementById("endDate").value;          
 
-            // Get the selected owner from the dropdown list
+            // Get the selected owner, and equipment from the dropdown list
             const owner = document.getElementById("owner").value;
+            const equipment = document.getElementById("equipment").value;
 
             // Create an object with the new repairs report
             const newRepairsReport = {
@@ -51,54 +52,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function validateForm() {
-const EquipmentInfo = document.getElementById("EquipmentInfo").value;
 const description = document.getElementById("description").value;
-const partsUsed = document.getElementById("partsUsed").value;
-const startTime = document.getElementById("startTime").value;
-const startDate = document.getElementById("startDate").value;
-const endTime = document.getElementById("endTime").value;
-const endDate = document.getElementById("endDate").value; 
 const owner = document.getElementById("owner").value;
+const equipment = document.getElementById("equipment").value;
 
 const errorMessages = [];
-if (description === "") {
-    errorMessages.push("Please fill in the 'Description' field.");
-    document.getElementById("description").classList.add("invalid-input");
-}
-
-if (EquipmentInfo === "") {
-    errorMessages.push("Please select an 'Equipment'.");
-    document.getElementById("EquipmentInfo").classList.add("invalid-input");
-}
-
-if (partsUsed === "") {
-    errorMessages.push("Please fill in the 'Parts used' field.");
-    document.getElementById("partsUsed").classList.add("invalid-input");
-}
-
-if (startTime === "") {
-    errorMessages.push("Please select a 'Start time'.");
-    document.getElementById("startTime").classList.add("invalid-input");
-}
-
-if (startDate === "") {
-    errorMessages.push("Please select a 'Start date'.");
-    document.getElementById("startDate").classList.add("invalid-input");
-}
-
-if (endTime === "") {
-    errorMessages.push("Please select a 'End time'.");
-    document.getElementById("endTime").classList.add("invalid-input");
-}
-
-if (endDate === "") {
-    errorMessages.push("Please select a 'End date'.");
-    document.getElementById("endDate").classList.add("invalid-input");
-}
-
 if (owner === "") {
     errorMessages.push("Please select an 'Owner'.");
     document.getElementById("owner").classList.add("invalid-input");
+}
+
+if (equipment === "") {
+    errorMessages.push("Please select an 'Equipment'.");
+    document.getElementById("equipment").classList.add("invalid-input");
+}
+
+if (description === "") {
+    errorMessages.push("Please fill in the 'Description' field.");
+    document.getElementById("description").classList.add("invalid-input");
 }
 
 if (errorMessages.length > 0) {

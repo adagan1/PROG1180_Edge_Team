@@ -75,8 +75,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-function goToEquipmentPage() {
-    window.location.href = "inventory.html";
+function goToRepairsPage() {
+    window.location.href = "repairs.html";
 }
 
 function resetValidationStyles() {
