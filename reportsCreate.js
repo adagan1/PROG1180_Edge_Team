@@ -50,6 +50,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const warrantyDetailsInput = document.getElementById("warrantyDetails");
         const equipmentDetailsInput = document.getElementById("equipment");
         const ordersDetailsInput = document.getElementById("orderDetails");
+        const ordersQuantityInput = document.getElementById("orderQuantity");
+        const ordersDateInput = document.getElementById("orderDate");
+        const arrivalDateInput = document.getElementById("arrivalDate");
+        const orderStatusInput = document.getElementById("status");
         const additionalWarrantyInfoInput = document.getElementById("additionalWarrantyInfo");       
 
         // Reset previous validation styles and error messages
@@ -92,10 +96,15 @@ document.addEventListener("DOMContentLoaded", function () {
         // Get orders-specific input values
         if (reportCategory === "orders") {
             reportAdditionalInfo = {
-                orderDetails: ordersDetailsInput.value
+                orderDetails: ordersDetailsInput.value,
+                orderQuantity: ordersQuantityInput.value,
+                orderDate: ordersDateInput.value,
+                arrivalDate: arrivalDateInput.value,
+                orderStatus: orderStatusInput.value
             }
         }
 
+        //non-specific
         const report = {
             category: reportCategory,
             owner: reportOwnerInput.value,
@@ -194,6 +203,30 @@ function validateForm(report) {
         if (report.additionalInfo.orderDetails.trim() === "") {
             markInvalidInput(document.getElementById("orderDetails"))
             displayError("Please enter order details.")
+            isValid = false;
+        }
+
+        if (report.additionalInfo.orderQuantity.trim() === "") {
+            markInvalidInput(document.getElementById("orderQuantity"))
+            displayError("Please enter a qauntity.")
+            isValid = false;
+        }
+
+        if (report.additionalInfo.orderDate.trim() === "") {
+            markInvalidInput(document.getElementById("orderDate"))
+            displayError("Please enter the order date.")
+            isValid = false;
+        }
+
+        if (report.additionalInfo.arrivalDate.trim() === "") {
+            markInvalidInput(document.getElementById("arrivalDate"))
+            displayError("Please enter the arrival date.")
+            isValid = false;
+        }
+
+        if (report.additionalInfo.orderStatus.trim() === "") {
+            markInvalidInput(document.getElementById("status"))
+            displayError("Please enter the status.")
             isValid = false;
         }
     }
