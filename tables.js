@@ -13,20 +13,20 @@ const coloursData = [
     { name: 'Black' }
 ];
 
-const typesData = [
-    { type: 'Electric lawnmower' },
-    { type: 'Gas powered lawnmower' },
-    { type: 'Bagged lawnmower' },
-    { type: 'Push Mower' },
-    { type: 'Scythe' }
-];
-
 const citiesData = [
     { name: 'Niagara Falls' },
     { name: 'Toronto' },
     { name: 'Ottawa' },
     { name: 'Calgary' },
     { name: 'Winnipeg' }
+];
+
+const typesData = [
+    { type: 'Electric lawnmower' },
+    { type: 'Gas powered lawnmower' },
+    { type: 'Bagged lawnmower' },
+    { type: 'Push Mower' },
+    { type: 'Scythe' }
 ];
 
 const partsData = [
@@ -45,7 +45,7 @@ function populateTable(tableId, data) {
     data.forEach(item => {
         const row = tableBody.insertRow();
         const cell = row.insertCell();
-        cell.textContent = item.name || item.type; 
+        cell.textContent = item.name || item.type;
 
         // Add a Controls column for editing
         const controlsCell = row.insertCell();

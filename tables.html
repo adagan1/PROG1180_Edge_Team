@@ -12,6 +12,9 @@
             max-width: 150px;
             display: block;
         }
+        main {
+            width: 50%;
+        }
     </style>
 </head>
 <body>
@@ -36,8 +39,8 @@
 
         <div id="tabs">
             <button id="colorsTab" class="active" onclick="showTable('coloursTable'); updateCreateButton('Add Colour', 'coloursCreate')">Colours</button>
-            <button id="typesTab" onclick="showTable('typesTable'); updateCreateButton('Add Type', 'typesCreate')">Types</button>
             <button id="citiesTab" onclick="showTable('citiesTable'); updateCreateButton('Add City', 'citiesCreate')">Cities</button>
+            <button id="typesTab" onclick="showTable('typesTable'); updateCreateButton('Add Type', 'typesCreate')">Types</button>
             <button id="partsTab" onclick="showTable('partsTable'); updateCreateButton('Add Part', 'partsCreate')">Parts</button>
         </div>
 
@@ -55,20 +58,20 @@
             <tbody></tbody>
         </table>
 
-        <table id="typesTable" class="table" border="1">
+        <table id="citiesTable" class="table" border="1">
             <thead>
                 <tr>
-                    <th>Type</th>
+                    <th>City</th>
                     <th>Controls</th>
                 </tr>
             </thead>
             <tbody></tbody>
         </table>
 
-        <table id="citiesTable" class="table" border="1">
+        <table id="typesTable" class="table" border="1">
             <thead>
                 <tr>
-                    <th>City</th>
+                    <th>Type</th>
                     <th>Controls</th>
                 </tr>
             </thead>
