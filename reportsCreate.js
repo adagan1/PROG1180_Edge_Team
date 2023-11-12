@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Hide the buttons when no category is selected
             createButton.setAttribute("hidden", true);
-            cancelButton.setAttribute("hidden", true);
         }
     }
 
