@@ -23,7 +23,7 @@ const partsData = [
 
 const brandsData = [
     { name: 'Honda' }, { name: 'Dewalt' }, { name: 'Craftsman' }, 
-    { name: 'John Deere' }, { name: 'Kobalt' }, { name: 'Ryobi' }, { name: 'Black+Decker' }
+    { name: 'John Deere' }
 ];
 
 // Add stock information to each part (example stock data)

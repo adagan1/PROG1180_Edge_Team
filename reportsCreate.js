@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const ordersDateInput = document.getElementById("orderDate");
         const arrivalDateInput = document.getElementById("arrivalDate");
         const orderStatusInput = document.getElementById("status");
+        const orderBrandInput = document.getElementById("brand")
         const additionalWarrantyInfoInput = document.getElementById("additionalWarrantyInfo");       
 
         // Reset previous validation styles and error messages
@@ -101,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 orderDate: ordersDateInput.value,
                 arrivalDate: arrivalDateInput.value,
                 orderStatus: orderStatusInput.value,
+                orderBrand: orderBrandInput.value
             }
         }
 
@@ -199,6 +201,11 @@ function validateForm(report) {
 
     // Orders validation
     if (report.category === "orders") {
+        if (report.additionalInfo.orderBrand.trim() === "") {
+            markInvalidInput(document.getElementById("brand"));
+            displayError("Please enter the brand.");
+            isValid = false;
+        }
 
         if (report.additionalInfo.orderDetails.trim() === "") {
             markInvalidInput(document.getElementById("orderDetails"))
@@ -208,7 +215,7 @@ function validateForm(report) {
 
         if (report.additionalInfo.orderQuantity.trim() === "") {
             markInvalidInput(document.getElementById("orderQuantity"))
-            displayError("Please enter a qauntity.")
+            displayError("Please enter a quantity.")
             isValid = false;
         }
 
