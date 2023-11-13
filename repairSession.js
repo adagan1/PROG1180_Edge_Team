@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         initialPartsDropdown.appendChild(option);
     });
 
-    //automatically fill start time
+    // Automatically fill start time
     var currentDateTime = new Date();
     var currentDate = currentDateTime.toISOString().split('T')[0];
     var currentTime = currentDateTime.toTimeString().split(' ')[0].substring(0, 5);
@@ -28,11 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('startDate').value = currentDate;
     document.getElementById('startTime').value = currentTime;
 
-    
-    
     // Retrieve and parse the repair session data
     let repairData = null;
-    
+
     if (repairDataString) {
         try {
             repairData = JSON.parse(repairDataString);
@@ -46,12 +44,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const completeButton = document.getElementById('completeButton');
         completeButton.style.display = 'none';
     }
+
     // Add click event listener to the complete button
-    completeButton.addEventListener('click', function() {
+    completeButton.addEventListener('click', function () {
         // Redirect to the repairs.html page
         window.location.href = 'repairs.html';
     });
-        
+
     if (repairDataString) {
         try {
             // Parse the JSON data
@@ -59,6 +58,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Populate the input fields with the equipment data
             document.getElementById("repairTitle").textContent = repairToEdit.customer + "'s " + repairToEdit.equipment;
+
+            // Display Repair ID in a label
+            document.getElementById("repairIdLabel").textContent = "Repair ID: " + repairToEdit.repairid;
+
             document.getElementById("description").value = repairToEdit.description;
 
             // Handle the customer dropdown
@@ -77,14 +80,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 const customer = document.getElementById("customer").value;
                 const brand = document.getElementById("brand").value;
                 const description = document.getElementById("equipmentDescription").value;
-                //const customer = customerDropdown.value;
 
-                if (name && brand && description && customer) {
+                if (customer && brand && description) {
                     // All fields are filled, proceed with saving changes
                     repairToEdit.customer = customer;
                     repairToEdit.brand = brand;
                     repairToEdit.description = description;
-                    repairToEdit.customer = customer;
 
                     // Update the data in local storage
                     const storedRepairData = JSON.parse(localStorage.getItem("equipmentData")) || [];
@@ -106,10 +107,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (!description) {
                         errorContainer.innerText += "Please enter equipment description.\n";
                         document.getElementById("equipmentDescription").classList.add("invalid-input");
-                    }
-                    if (!customer) {
-                        errorContainer.innerText += "Please select an customer.";
-                        customerDropdown.classList.add("invalid-input");
                     }
                 }
             });
@@ -155,7 +152,3 @@ function removeThisPartRow(button) {
     const partRow = button.parentElement;
     partRow.remove();
 }
-
-    
-    
-   
