@@ -2,6 +2,7 @@
 const hardCodedEquipment = [
     {
         name: "Bagged Lawnmower",
+        equipmentid: "JJBL01",
         brand: "Honda",
         description: "This is a Lawnmower from Honda.",
         colour: "Green",
@@ -10,6 +11,7 @@ const hardCodedEquipment = [
     },
     {
         name: "Drill",
+        equipmentid: "BTD01",
         brand: "Dewalt",
         description: "This is a Drill from Dewalt.",
         colour: "Red",
@@ -18,6 +20,7 @@ const hardCodedEquipment = [
     },
     {
         name: "Saw",
+        equipmentid: "JMS01",
         brand: "Craftsman",
         description: "This is a Saw from Craftsman.",
         colour: "Gray",
@@ -26,6 +29,7 @@ const hardCodedEquipment = [
     },
     {
         name: "Electric Lawnmower",
+        equipmentid: "JJEL01",
         brand: "John Deere",
         description: "This is a Lawnmower from John Deere.",
         colour: "Green",
