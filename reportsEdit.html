@@ -129,21 +129,22 @@
         <h1>Edit Report</h1>
         <form id="reportEditForm">
             <div class="edit-container">
-                <div id="ownerInfo">
-                    <label for="owner">Owner:</label>
-                    <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
-                    <datalist id="ownerList">
-                        <option value="Joe Jawndel">
-                        <option value="Billy Talent">
-                        <option value="Julio Mendes">
-                        <!-- Add more owners here -->
-                    </datalist>
-                </div>
-
-                <label for="reportDate">Date:</label>
-                <input type="date" id="reportDate" placeholder="Select a date" required>
 
                 <div id="warrantyFields" style="display: none;">
+                    <div id="ownerInfo">
+                        <label for="warrantyOwner">Owner:</label>
+                        <input type="search" id="warrantyOwner" name="warrantyOwner" list="ownerList" placeholder="Search for an owner" required>
+                        <datalist id="ownerList">
+                            <option value="Joe Jawndel">
+                            <option value="Billy Talent">
+                            <option value="Julio Mendes">
+                            <!-- Add more owners here -->
+                        </datalist>
+                    </div>
+    
+                    <label for="reportDate">Date:</label>
+                    <input type="date" id="reportDate" placeholder="Select a date" required>
+
                     <label for="warrantyStart">Warranty Start:</label>
                     <input type="date" id="warrantyStart" placeholder="Select warranty start date">
 
@@ -158,6 +159,20 @@
                 </div>
 
                 <div id="salesFields">
+                    <div id="ownerInfo">
+                        <label for="salesOwner">Owner:</label>
+                        <input type="search" id="salesOwner" name="salesOwner" list="ownerList" placeholder="Search for an owner" required>
+                        <datalist id="ownerList">
+                            <option value="Joe Jawndel">
+                            <option value="Billy Talent">
+                            <option value="Julio Mendes">
+                            <!-- Add more owners here -->
+                        </datalist>
+                    </div>
+    
+                    <label for="reportDate">Date:</label>
+                    <input type="date" id="reportDate" placeholder="Select a date" required>
+
                     <label for="reportDescription">Description:</label>
                     <textarea id="reportDescription" name="reportDescription" placeholder="Enter item description" rows="5" cols="50"></textarea>
 
@@ -169,6 +184,47 @@
 
                     <label for="reportTotal">Total:</label>
                     <input type="number" id="reportTotal" placeholder="Enter total" required>
+                </div>
+
+                <div id="orderFields" style="display: none;">
+                    <label for="brand">Brand:</label>
+                    <select id="brand" name="brand" required>
+                        <option value="" disabled selected>Select a brand</option>
+                        <option value="Brand1">Craftsman</option>
+                        <option value="Brand2">Dewalt</option>
+                        <option value="Brand3">Honda</option>
+                        <option value="Brand4">John Deere</option>
+                    </select>
+                    <label for="equipment">Equipment:</label>
+                    <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
+                    <datalist id="equipmentList">
+                        <option value="Honda bagged Lawnmower">
+                        <option value="Dewalt Drill">
+                        <option value="John Deere Electric Lawnmower">
+                    </datalist>
+    
+                    <label for="orderDetails">Order Details:</label>
+                    <textarea id="orderDetails" placeholder="Enter order details" rows="5" cols="50"></textarea>
+    
+                    <label for="orderQuantity">Quantity:</label>
+                    <input type="number" id="orderQuantity" placeholder="Enter quantity" required>
+    
+                    <label for="orderDate">Order Date:</label>
+                    <input type="date" id="orderDate" required>
+    
+                    <label for="arrivalDate">Arrival date:</label>
+                    <input type="date" id="arrivalDate" required>
+    
+                    <label for="status">Status:</label>
+                    <input type="search" id="status" name="status" list="statusList" placeholder="Select a status" required>
+                    <datalist id="statusList">
+                        <option value="Completed">
+                        <option value="Pending">
+                        <option value="Back-ordered">
+                    </datalist>
+    
+                    <label for="orderPrice">Price:</label>
+                    <input type="number" id="orderPrice" placeholder="Enter price" required>
                 </div>
 
                 <div id="errorContainer"></div>
