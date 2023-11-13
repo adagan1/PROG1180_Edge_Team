@@ -82,3 +82,8 @@ function resetInputOutlines() {
 function goToEquipmentPage() {
     window.location.href = "inventory.html";
 }
+
+
+function goToCreateCustomerPage() {
+    window.location.href = "customerCreate.html";
+}
