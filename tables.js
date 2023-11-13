@@ -11,14 +11,22 @@ const citiesData = [
     { name: 'Ottawa' }, { name: 'Calgary' }, { name: 'Winnipeg' }
 ];
 
-const typesData = [
-    { type: 'Electric lawnmower' }, { type: 'Gas powered lawnmower' }, 
-    { type: 'Bagged lawnmower' }, { type: 'Push Mower' }, { type: 'Scythe' }
+// Set fixed stock values for each part
+const partsData = [
+    { name: 'Bolt', stock: 50 },
+    { name: 'Screw', stock: 75 },
+    { name: 'Washer', stock: 100 },
+    { name: 'Nut', stock: 80 },
+    { name: 'Spring', stock: 60 }
 ];
 
-const partsData = [
-    { name: 'Bolt' }, { name: 'Screw' }, { name: 'Washer' }, 
-    { name: 'Nut' }, { name: 'Spring' }
+// Set fixed stock values for each type
+const typesData = [
+    { name: 'Electric lawnmower', stock: 30 },
+    { name: 'Gas powered lawnmower', stock: 25 },
+    { name: 'Bagged lawnmower', stock: 40 },
+    { name: 'Push Mower', stock: 35 },
+    { name: 'Scythe', stock: 20 }
 ];
 
 const brandsData = [
@@ -26,11 +34,7 @@ const brandsData = [
     { name: 'John Deere' }
 ];
 
-// Add stock information to each part (example stock data)
-partsData.forEach(part => part.stock = Math.floor(Math.random() * 100));
 
-// Add stock information to each part (example stock data)
-typesData.forEach(type => type.stock = Math.floor(Math.random() * 100));
 
 function populateTable(tableId, data) {
     const table = document.getElementById(tableId);
