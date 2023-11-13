@@ -92,3 +92,7 @@ function resetValidationStyles() {
         elements[i].classList.remove("invalid-input");
     }
 }
+
+function goToCreateCustomerPage() {
+    window.location.href = "customerCreate.html";
+}
