@@ -1,4 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const ownerInput = document.getElementById("owner");
+    const equipmentList = document.getElementById("equipmentList");
+
+    // Define the mapping of owners to their equipment
+    const ownerEquipmentMap = {
+        "Joe Jawndel": ["Honda Bagged Lawnmower"],
+        "Billy Talent": ["Dewalt Drill"],
+        "Julio Mendes": ["John Deere Electric Lawnmower"],
+    };
+    // Initialize equipment list (clear it or set default state)
+    updateEquipmentList(ownerInput.value, ownerEquipmentMap, equipmentList);
+
+    // Event listener for owner input changes
+    ownerInput.addEventListener("input", function() {
+        updateEquipmentList(this.value, ownerEquipmentMap, equipmentList);
+    });
     // Get the "New Customer" button and attach a click event listener to it
     document.getElementById("newCustomerButton").addEventListener("click", function () {
         window.location.href = "customerCreate.html"; // Redirects to the customer creation page
@@ -93,4 +109,18 @@ function goToRepairsPage() {
     window.location.href = "repairs.html";
 }
 
+function updateEquipmentList(ownerName, ownerEquipmentMap, equipmentList) {
+    equipmentList.innerHTML = ''; // Clear existing options
 
+    if (ownerEquipmentMap[ownerName]) {
+        ownerEquipmentMap[ownerName].forEach(function(equipment) {
+            const option = document.createElement("option");
+            option.value = equipment;
+            option.textContent = equipment;
+            equipmentList.appendChild(option);
+        });
+    } else {
+        // Handle the case when no owner is selected or owner is not in the map
+        // Optionally, add a default option or leave the list empty
+    }
+}

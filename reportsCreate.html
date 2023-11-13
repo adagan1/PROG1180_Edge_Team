@@ -1,229 +1,293 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="reportsCreate.js"></script>
-    <title>Create Report</title>
-    <style>
-        h1 {
-            text-align: center;
+document.addEventListener("DOMContentLoaded", function () {
+
+    const ownerInput = document.getElementById("owner");
+    const equipmentList = document.getElementById("equipmentList");
+
+    // Define the mapping of owners to their equipment
+    const ownerEquipmentMap = {
+        "Joe Jawndel": ["Honda Bagged Lawnmower"],
+        "Billy Talent": ["Dewalt Drill"],
+        "Julio Mendes": ["John Deere Electric Lawnmower"],
+        // Other mappings...
+    };
+
+    // Initialize equipment list (clear it or set default state)
+    updateEquipmentList(ownerInput.value, ownerEquipmentMap, equipmentList);
+
+    // Event listener for owner input changes
+    ownerInput.addEventListener("input", function() {
+        updateEquipmentList(this.value, ownerEquipmentMap, equipmentList);
+    });
+
+
+    const categoryDropdown = document.getElementById("reportCategory");
+    const errorContainer = document.getElementById("errorContainer");
+
+    // Function to toggle the visibility of input fields based on the selected category
+    function toggleFields() {
+        const createButton = document.getElementById("createButton");
+        const cancelButton = document.getElementById("cancelButton");
+        const errorContainer = document.getElementById("errorContainer");
+
+        // Reset previous validation styles and error messages
+        resetValidationStyles();
+        errorContainer.innerHTML = "";
+
+        if (categoryDropdown.value === "warranty" || categoryDropdown.value === "sale" || categoryDropdown.value === "orders") {
+            warrantyFields.style.display = categoryDropdown.value === "warranty" ? "block" : "none";
+            saleFields.style.display = categoryDropdown.value === "sale" ? "block" : "none";
+            orderFields.style.display = categoryDropdown.value === "orders" ? "block" : "none";
+
+            // Show the buttons when a category is selected
+            createButton.removeAttribute("hidden");
+            cancelButton.removeAttribute("hidden");
+        } else {
+            warrantyFields.style.display = "none";
+            saleFields.style.display = "none";
+            orderFields.style.display = "none";
+
+            // Hide the buttons when no category is selected
+            createButton.setAttribute("hidden", true);
         }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
+    }
+
+    // Attach the toggleFields function to the change event of the category dropdown
+    categoryDropdown.addEventListener("change", toggleFields);
+
+    const saveButton = document.getElementById("createButton");
+    saveButton.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        // Get the report data
+        const reportCategory = categoryDropdown.value;
+        const reportOwnerInput = document.getElementById("owner");
+        const reportDateInput = document.getElementById("reportDate");
+        const reportDescriptionInput = document.getElementById("reportDescription");
+        const reportPriceInput = document.getElementById("reportPrice");
+        const reportQuantityInput = document.getElementById("reportQuantity");
+        const reportTotalInput = document.getElementById("reportTotal");
+        const warrantyStartInput = document.getElementById("warrantyStart");
+        const warrantyEndInput = document.getElementById("warrantyEnd");
+        const warrantyDetailsInput = document.getElementById("warrantyDetails");
+        const equipmentDetailsInput = document.getElementById("equipment");
+        const ordersDetailsInput = document.getElementById("orderDetails");
+        const ordersQuantityInput = document.getElementById("orderQuantity");
+        const ordersDateInput = document.getElementById("orderDate");
+        const arrivalDateInput = document.getElementById("arrivalDate");
+        const orderStatusInput = document.getElementById("status");
+        const additionalWarrantyInfoInput = document.getElementById("additionalWarrantyInfo");       
+
+        // Reset previous validation styles and error messages
+        resetValidationStyles();
+        errorContainer.innerHTML = "";
+
+        // Depending on the selected category, get the corresponding input values
+        let reportAdditionalInfo;
+        if (reportCategory === "warranty") {
+            // Get warranty-specific input values
+            reportAdditionalInfo = {
+                warrantyStart: warrantyStartInput.value,
+                warrantyEnd: warrantyEndInput.value,
+                warrantyDetails: warrantyDetailsInput.value,
+                additionalWarrantyInfo: additionalWarrantyInfoInput.value,
+                equipmentList: equipmentDetailsInput.value
+            };
+
+            if (reportAdditionalInfo.warrantyStart.trim() !== "" && reportAdditionalInfo.warrantyEnd.trim() !== "") {
+                const start = new Date(reportAdditionalInfo.warrantyStart);
+                const end = new Date(reportAdditionalInfo.warrantyEnd);
+
+                if (start > end) {
+                    markInvalidInput(warrantyStartInput);
+                    markInvalidInput(warrantyEndInput);
+                    displayError("Warranty start date cannot be after the warranty end date.");
+                }
+            }
         }
 
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem;
-            padding-left: 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
+        // Get sales-specific input values
+        if (reportCategory === "sale") {
+            reportAdditionalInfo = {
+                salesPrice: reportPriceInput.value,
+                salesQuantity: reportQuantityInput.value,
+                salesTotal: reportTotalInput.value
+            }
         }
 
-        header h1 {
-            margin: 0;
+        // Get orders-specific input values
+        if (reportCategory === "orders") {
+            reportAdditionalInfo = {
+                orderDetails: ordersDetailsInput.value,
+                orderQuantity: ordersQuantityInput.value,
+                orderDate: ordersDateInput.value,
+                arrivalDate: arrivalDateInput.value,
+                orderStatus: orderStatusInput.value,
+            }
         }
 
-        nav ul {
-            list-style: none;
-            padding: 0;
+        //non-specific
+        const report = {
+            category: reportCategory,
+            owner: reportOwnerInput.value,
+            date: reportDateInput.value,
+            description: reportDescriptionInput.value,
+            additionalInfo: reportAdditionalInfo
+        };
+
+        // Perform form validation
+        if (validateForm(report)) {
+            window.location.href = "reports.html";
+        }
+    });
+
+function validateForm(report) {
+    // Flag to track whether the form is valid
+    let isValid = true;
+
+    // Validation for warranty
+    if (report.category === "warranty") {
+        
+        if (report.owner.trim() === "") {
+            markInvalidInput(document.getElementById("owner"));
+            displayError("Please select the owner's name.");
+            isValid = false;
         }
 
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
+        if (report.additionalInfo.equipmentList.trim() === "") {
+            markInvalidInput(document.getElementById("equipment"));
+            displayError("Please select the equipment.");
+            isValid = false;
+        }
+    
+        if (report.date.trim() === "") {
+            markInvalidInput(document.getElementById("reportDate"));
+            displayError("Please enter the report date.");
+            isValid = false;
         }
 
-        main {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-            text-align: center;
+        if (report.additionalInfo.warrantyStart.trim() === "") {
+            markInvalidInput(document.getElementById("warrantyStart"));
+            displayError("Please enter the warranty start date.");
+            isValid = false;
         }
 
-        form {
-            margin: 0;
+        if (report.additionalInfo.warrantyEnd.trim() === "") {
+            markInvalidInput(document.getElementById("warrantyEnd"));
+            displayError("Please enter the warranty end date.");
+            isValid = false;
         }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
+        if (report.additionalInfo.warrantyDetails.trim() === "") {
+            markInvalidInput(document.getElementById("warrantyDetails"));
+            displayError("Please enter the warranty details.");
+            isValid = false;
+        }
+    }
+
+    // Sales validation
+    if (report.category === "sale") {
+
+        if (report.owner.trim() === "") {
+            markInvalidInput(document.getElementById("owner"));
+            displayError("Please enter the owner's name.");
+            isValid = false;
+        }
+    
+        if (report.date.trim() === "") {
+            markInvalidInput(document.getElementById("reportDate"));
+            displayError("Please enter the report date.");
+            isValid = false;
         }
 
-        select,
-        input[type="text"],
-        input[type="date"],
-        input[type="number"],
-        input[type="search"],
-        textarea {
-            width: 40%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-            resize: none;
+        if (report.additionalInfo.salesPrice.trim() === "") {
+            markInvalidInput(document.getElementById("reportPrice"))
+            displayError("Please enter a price above the value of 0.")
+            isValid = false;
         }
 
-        button {
-            background-color: #686868;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
+        if (report.additionalInfo.salesQuantity.trim() === "") {
+            markInvalidInput(document.getElementById("reportQuantity"))
+            displayError("Please enter a quantity above the value of 0.")
+            isValid = false;
         }
 
-        button:hover {
-            background-color: #3a3a3a;
+        if (report.additionalInfo.salesTotal.trim() === "") {
+            markInvalidInput(document.getElementById("reportTotal"))
+            displayError("Please enter a total above the value of 0.")
+            isValid = false;
+        }
+    }
+
+    // Orders validation
+    if (report.category === "orders") {
+
+        if (report.additionalInfo.orderDetails.trim() === "") {
+            markInvalidInput(document.getElementById("orderDetails"))
+            displayError("Please enter order details.")
+            isValid = false;
         }
 
-        .invalid-input {
-            border: 1px solid red;
+        if (report.additionalInfo.orderQuantity.trim() === "") {
+            markInvalidInput(document.getElementById("orderQuantity"))
+            displayError("Please enter a qauntity.")
+            isValid = false;
         }
 
-        button[id="cancelButton"] {
-            background-color: red;
+        if (report.additionalInfo.orderDate.trim() === "") {
+            markInvalidInput(document.getElementById("orderDate"))
+            displayError("Please enter the order date.")
+            isValid = false;
         }
 
-        .error-message {
-            color: red;
-            margin-top: 5px;
+        if (report.additionalInfo.arrivalDate.trim() === "") {
+            markInvalidInput(document.getElementById("arrivalDate"))
+            displayError("Please enter the arrival date.")
+            isValid = false;
         }
-    </style>
-</head>
-<body>
-    <header>
-        <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
-        <nav>
-            <ul>
-                <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
-                <li><a href="customer.html">Customer</a></li>
-                <li><a href="tables.html">Maintenance</a></li>
-                <li><a href="reports.html">Reports</a></li>
-                <li><a href="repairs.html">Repairs</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <h1>Create Report</h1>
-        <form id="reportCreateForm">
-            <label for="reportCategory">Category:</label>
-            <select id="reportCategory" onchange="toggleFields()">
-                <option value="" disabled selected>Select a category</option>
-                <option value="warranty">Warranty</option>
-                <option value="sale">Sale</option>
-                <option value="orders">Orders</option>
-            </select>
+        if (report.additionalInfo.orderStatus.trim() === "") {
+            markInvalidInput(document.getElementById("status"))
+            displayError("Please enter the status.")
+            isValid = false;
+        }
+    }
+}
 
-            <div id="warrantyFields" style="display: none;">
-                <label for="owner">Owner:</label>
-                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
-                <datalist id="ownerList">
-                    <option value="Joe Jawndel">
-                    <option value="Billy Talent">
-                    <option value="Julio Mendes">
-                </datalist>
+function markInvalidInput(inputElement) {
+    inputElement.classList.add("invalid-input");
+}
 
-                <label for="equipment">Equipment:</label>
-                <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
-                <datalist id="equipmentList">
-                    <option value="Honda bagged Lawnmower">
-                    <option value="Dewalt Drill">
-                    <option value="John Deere Electric Lawnmower">
-                </datalist>
+function resetValidationStyles() {
+    const invalidInputs = document.querySelectorAll(".invalid-input");
+    invalidInputs.forEach((input) => {
+        input.classList.remove("invalid-input");
+    });
+}
 
-                <label for="reportDate">Date:</label>
-                <input type="date" id="reportDate" required>
-                <label for="warrantyStart">Warranty Start:</label>
-                <input type="date" id="warrantyStart" placeholder="Enter warranty period">
-                <label for="warrantyEnd">Warranty End:</label>
-                <input type="date" id="warrantyEnd" placeholder="Enter warranty period">
-                <label for="warrantyDetails">Warranty Details:</label>
-                <textarea id="warrantyDetails" placeholder="Enter warranty details" rows="5" cols="50"></textarea>
-                <label for="additionalWarrantyInfo">Additional Warranty Info:</label>
-                <input type="text" id="additionalWarrantyInfo" placeholder="Enter additional warranty info">
-            </div>
+function displayError(message) {
+    const errorDiv = document.createElement("div");
+    errorDiv.classList.add("error-message");
+    errorDiv.textContent = message;
+    document.getElementById("errorContainer").appendChild(errorDiv);
+}});
 
-            <div id="saleFields" style="display: none;">
-                <label for="owner">Owner:</label>
-                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
-                <datalist id="ownerList">
-                    <option value="Joe Jawndel">
-                    <option value="Billy Talent">
-                    <option value="Julio Mendes">
-                </datalist>
-                <label for="reportDate">Date:</label>
-                <input type="date" id="reportDate" required>
-                <label for="reportDescription">Item(s):</label>
-                <textarea id="reportDescription" name="reportDescription" required placeholder="Enter item description" rows="5" cols="50"></textarea>
-                <label for="reportPrice">Price:</label>
-                <input type="number" id="reportPrice" placeholder="Enter price" required>
-                <label for="reportQuantity">Quantity:</label>
-                <input type="number" id="reportQuantity" placeholder="Enter quantity" required>
-                <label for="reportTotal">Total:</label>
-                <input type="number" id="reportTotal" placeholder="Enter total" required>
-            </div>
 
-            <div id="orderFields" style="display: none;">
-                <div id="brandInfo">
-                    <label for="brand">Brand:</label>
-                    <select id="brand" name="brand" required>
-                        <option value="" disabled selected>Select a brand</option>
-                        <option value="Brand1">Craftsman</option>
-                        <option value="Brand2">Dewalt</option>
-                        <option value="Brand3">Honda</option>
-                        <option value="Brand4">John Deere</option>
-                    </select>
-                </div>
-                <label for="equipment">Equipment:</label>
-                <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
-                <datalist id="equipmentList">
-                    <option value="Honda bagged Lawnmower">
-                    <option value="Dewalt Drill">
-                    <option value="John Deere Electric Lawnmower">
-                </datalist>
+function goToReportsPage() {
+    window.location.href = "reports.html";
+}
 
-                <label for="orderDetails">Order Details:</label>
-                <textarea id="orderDetails" placeholder="Enter order details" rows="5" cols="50"></textarea>
+function updateEquipmentList(ownerName, ownerEquipmentMap, equipmentList) {
+    equipmentList.innerHTML = ''; // Clear existing options
 
-                <label for="orderQuantity">Quantity:</label>
-                <input type="number" id="orderQuantity" placeholder="Enter Quantity" required>
-
-                <label for="orderDate">Order Date:</label>
-                <input type="date" id="orderDate" required>
-
-                <label for="arrivalDate">Arrival date:</label>
-                <input type="date" id="arrivalDate" required>
-
-                <label for="status">Status:</label>
-                <input type="search" id="status" name="status" list="statusList" placeholder="Select a status" required>
-                <datalist id="statusList">
-                    <option value="Completed">
-                    <option value="Pending">
-                    <option value="Back-ordered">
-                </datalist>
-                <label for="reportQuantity">Quantity:</label>
-                <input type="number" id="reportQuantity" placeholder="Enter quantity" required>
-                <label for="reportPrice">Price:</label>
-                <input type="number" id="reportPrice" placeholder="Enter price" required>
-            </div>
-
-            <div id="errorContainer"></div>
-            <button type="button" id="createButton" hidden>Save Changes</button>
-            <button type="button" id="cancelButton" onclick="goToReportsPage()">Cancel</button>
-        </form>
-    </main>
-</body>
-</html>
+    if (ownerEquipmentMap[ownerName]) {
+        ownerEquipmentMap[ownerName].forEach(function(equipment) {
+            const option = document.createElement("option");
+            option.value = equipment;
+            option.textContent = equipment;
+            equipmentList.appendChild(option);
+        });
+    } else {
+        // Handle the case when no owner is selected or owner is not in the map
+        // Optionally, add a default option or leave the list empty
+    }
+}
