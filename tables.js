@@ -21,6 +21,11 @@ const partsData = [
     { name: 'Nut' }, { name: 'Spring' }
 ];
 
+const brandsData = [
+    { name: 'Honda' }, { name: 'Dewalt' }, { name: 'Craftsman' }, 
+    { name: 'John Deere' }, { name: 'Kobalt' }, { name: 'Ryobi' }, { name: 'Black+Decker' }
+];
+
 // Add stock information to each part (example stock data)
 partsData.forEach(part => part.stock = Math.floor(Math.random() * 100));
 
@@ -72,6 +77,7 @@ function filterTable() {
     else if (activeTableId === 'typesTable') { data = typesData; }
     else if (activeTableId === 'citiesTable') { data = citiesData; }
     else if (activeTableId === 'partsTable') { data = partsData; }
+    else if (activeTableId === 'brandsTable') { data = brandsData; }
 
     const filteredData = data.filter(item => (item.name || item.type).toLowerCase().includes(searchTerm));
     populateTable(activeTableId, filteredData);
@@ -98,6 +104,7 @@ function editItem(row, tableId) {
     else if (tableId === 'typesTable') { editPage = 'typesEdit.html'; rowType = 'type'; data = typesData; }
     else if (tableId === 'citiesTable') { editPage = 'citiesEdit.html'; rowType = 'city'; data = citiesData; }
     else if (tableId === 'partsTable') { editPage = 'partsEdit.html'; rowType = 'part'; data = partsData; }
+    else if (tableId === 'brandsTable') { editPage = 'brandsEdit.html'; rowType = 'brand'; data = brandsData; }
 
     const rowData = data[rowIndex];
     const jsonData = JSON.stringify(rowData);
@@ -119,6 +126,7 @@ window.onload = function () {
     populateTable('typesTable', typesData);
     populateTable('citiesTable', citiesData);
     populateTable('partsTable', partsData);
+    populateTable('brandsTable', brandsData)
     showTable('coloursTable');
     updateCreateButton('Add Colour', 'coloursCreate');
 
