@@ -42,6 +42,7 @@
             <button id="citiesTab" onclick="showTable('citiesTable'); updateCreateButton('Add City', 'citiesCreate')">Cities</button>
             <button id="typesTab" onclick="showTable('typesTable'); updateCreateButton('Add Type', 'typesCreate')">Types</button>
             <button id="partsTab" onclick="showTable('partsTable'); updateCreateButton('Add Part', 'partsCreate')">Parts</button>
+            <button id="brandsTab" onclick="showTable('brandsTable'); updateCreateButton('Add Brand', 'brandsCreate')">Brands</button>
         </div>
 
         <div id="createButtonContainer">
@@ -83,6 +84,16 @@
                 <tr>
                     <th>Part</th>
                     <th>Stock</th>
+                    <th>Controls</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <table id="brandsTable" class="table" border="1">
+            <thead>
+                <tr>
+                    <th>Brand</th>
                     <th>Controls</th>
                 </tr>
             </thead>
