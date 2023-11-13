@@ -1,16 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Get the type data from the URL parameter as a JSON string
     const urlParams = new URLSearchParams(window.location.search);
     const typeDataString = urlParams.get("data");
-    const typeName = urlParams.get("typeName"); // Get the type name
 
     if (typeDataString) {
         try {
-            // Parse the JSON data
             const typeToEdit = JSON.parse(typeDataString);
-        
-            // Populate the input fields with the type data
-            document.getElementById("typeName").value = typeName; // Set the type name in the text box
+            document.getElementById("typeName").value = typeToEdit.name;
+            document.getElementById("typeStock").value = typeToEdit.stock;// Set the type name in the text box
         
             // Add an event listener to save changes
             document.getElementById("saveButton").addEventListener("click", function () {
