@@ -60,15 +60,19 @@
             margin-bottom: 5px;
         }
 
+        select,
         input[type="text"],
         input[type="date"],
-        input[type="number"] {
+        input[type="number"],
+        input[type="search"],
+        textarea {
             width: 40%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            font-size: 16px; /* Set the desired font size */
+            font-size: 16px;
+            resize: none;
         }
 
         button {
@@ -84,20 +88,16 @@
         }
 
         .invalid-input {
-        border: 1px solid red;
-        }
-
-        input.invalid-input[type="text"],
-        input.invalid-input[type="number"],
-        input.invalid-input[type="date"] {
             border: 1px solid red;
         }
 
         button[id="cancelButton"] {
             background-color: red;
         }
-        #reportDescription {
-            resize: none; /* Prevent user from resizing the textarea */
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -119,33 +119,119 @@
     <main>
         <h1>Create Report</h1>
         <form id="reportCreateForm">
-            <div class="create-container">
-                <label for="reportCustomer">Customer:</label>
-                <input type="text" id="reportCustomer" placeholder="Enter customer" required>
-                
+            <label for="reportCategory">Category:</label>
+            <select id="reportCategory" onchange="toggleFields()">
+                <option value="" disabled selected>Select a category</option>
+                <option value="warranty">Warranty</option>
+                <option value="sale">Sale</option>
+                <option value="orders">Orders</option>
+            </select>
+
+                <div id="warrantyFields" style="display: none;">
+                <label for="owner">Brand:</label>
+                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
+                <datalist id="ownerList">
+                    <option value="Joe Jawndel">
+                    <option value="Billy Talent">
+                    <option value="Julio Mendes">
+                </datalist>
+
+                <label for="equipment">Equipment:</label>
+                <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
+                <datalist id="equipmentList">
+                    <option value="Honda bagged Lawnmower">
+                    <option value="Dewalt Drill">
+                    <option value="John Deere Electric Lawnmower">
+                </datalist>
+
                 <label for="reportDate">Date:</label>
                 <input type="date" id="reportDate" required>
-                
-                <div id="descriptionInfo">
-                    <label for="reportDescription">Description:</label>
-                    <textarea id="reportDescription" name="reportDescription" required placeholder="Enter item description" rows="5" cols="50"></textarea>
-                    <!-- The "rows" attribute determines the number of visible lines, and the "cols" attribute determines the number of visible columns -->
+                <label for="warrantyStart">Warranty Start:</label>
+                <input type="date" id="warrantyStart" placeholder="Enter warranty period">
+                <label for="warrantyEnd">Warranty End:</label>
+                <input type="date" id="warrantyEnd" placeholder="Enter warranty period">
+                <label for="warrantyDetails">Warranty Details:</label>
+                <textarea id="warrantyDetails" placeholder="Enter warranty details" rows="5" cols="50"></textarea>
+                <label for="additionalWarrantyInfo">Additional Warranty Info:</label>
+                <input type="text" id="additionalWarrantyInfo" placeholder="Enter additional warranty info">
+            </div>
+
+            <div id="saleFields" style="display: none;">
+                <label for="owner">Owner:</label>
+                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
+                <datalist id="ownerList">
+                    <option value="Joe Jawndel">
+                    <option value="Billy Talent">
+                    <option value="Julio Mendes">
+                </datalist>
+                <label for="reportDate">Date:</label>
+                <input type="date" id="reportDate" required>
+                <label for="reportDescription">Item(s):</label>
+                <textarea id="reportDescription" name="reportDescription" required placeholder="Enter item description" rows="5" cols="50"></textarea>
+                <label for="reportPrice">Price:</label>
+                <input type="number" id="reportPrice" placeholder="Enter price" required>
+                <label for="reportQuantity">Quantity:</label>
+                <input type="number" id="reportQuantity" placeholder="Enter quantity" required>
+                <label for="reportTotal">Total:</label>
+                <input type="number" id="reportTotal" placeholder="Enter total" required>
+            </div>
+
+            <div id="orderFields" style="display: none;">
+                <div id="brandInfo">
+                    <label for="brand">Brand:</label>
+                    <select id="brand" name="brand" required>
+                        <option value="" disabled selected>Select a brand</option>
+                        <option value="Brand1">Craftsman</option>
+                        <option value="Brand2">Dewalt</option>
+                        <option value="Brand3">Honda</option>
+                        <option value="Brand4">John Deere</option>
+                    </select>
                 </div>
+                <label for="equipment">Equipment:</label>
+                <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
+                <datalist id="equipmentList">
+                    <option value="Honda bagged Lawnmower">
+                    <option value="Dewalt Drill">
+                    <option value="John Deere Electric Lawnmower">
+                </datalist>
+
+                <label for="parts">Parts:</label>
+                <input type="search" id="parts" name="parts" list="partList" placeholder="Search for parts" required>
+                <datalist id="partList">
+                    <option value="Bolt">
+                    <option value="Screw">
+                    <option value="Washer">
+                    <option value="Nut">
+                    <option value="Spring">
+                </datalist>
+
+                <label for="orderDetails">Order Details:</label>
+                <textarea id="orderDetails" placeholder="Enter order details" rows="5" cols="50"></textarea>
+
+                <label for="orderQuantity">Quantity:</label>
+                <input type="number" id="orderQuantity" placeholder="Enter quantity" required>
+
+                <label for="orderDate">Order Date:</label>
+                <input type="date" id="orderDate" required>
+
+                <label for="arrivalDate">Arrival date:</label>
+                <input type="date" id="arrivalDate" required>
+
+                <label for="status">Status:</label>
+                <input type="search" id="status" name="status" list="statusList" placeholder="Select a status" required>
+                <datalist id="statusList">
+                    <option value="Completed">
+                    <option value="Pending">
+                    <option value="Back-ordered">
+                </datalist>
 
                 <label for="reportPrice">Price:</label>
                 <input type="number" id="reportPrice" placeholder="Enter price" required>
-
-                <label for="reportQuantity">Quantity:</label>
-                <input type="number" id="reportQuantity" placeholder="Enter quantity" required>
-
-                <label for="reportTotal">Total:</label>
-                <input type="number" id="reportTotal" placeholder="Enter total" required>
-                <div id="errorContainer"></div>
-                
-                <div id="errorContainer"></div>
-                <button type="button" id="createButton">Create Report</button>
-                <button type="button" id="cancelButton" onclick="goToReportsPage()">Cancel</button>
             </div>
+
+            <div id="errorContainer"></div>
+            <button type="button" id="createButton" hidden>Save Changes</button>
+            <button type="button" id="cancelButton" onclick="goToReportsPage()">Cancel</button>
         </form>
     </main>
 </body>

@@ -2,6 +2,7 @@
 const hardCodedCustomer = [
     {
         name: "Joe Jawndel",
+        customerid: "JJ3490",
         email: "JJawndel@gmail.com",
         phone: "905-221-3490",
         address: "1220 Royal Lane",
@@ -12,6 +13,7 @@ const hardCodedCustomer = [
     },
     {
         name: "Billy Talent",
+        customerid: "BT3420",
         email: "BTalent@gmail.com",
         phone: "289-334-3420",
         address: "1810 Salty Springs",
@@ -22,6 +24,7 @@ const hardCodedCustomer = [
     },
     {
         name: "Julio Mendes",
+        customerid: "JM2061",
         email: "JMendes@hotmail.com",
         phone: "289-493-2061",
         address: "6820 Far Crescent",

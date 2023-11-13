@@ -89,20 +89,21 @@
     <script>
         // Retrieve the selected customer data from sessionStorage
         const customerDataString = sessionStorage.getItem("selectedCustomer");
-
+    
         if (customerDataString) {
             // Parse the customer data JSON string
             const customerData = JSON.parse(customerDataString);
-
+    
             // Display the customer details on the page
             const customerDetails = document.getElementById("customerDetails");
-
+    
             // Create HTML elements to display the details
             const detailsTable = document.createElement("table");
-
+    
             // Define label mappings
             const labelMappings = {
                 name: "Name",
+                customerid: "Customer ID",
                 email: "Email",
                 phone: "Phone",
                 address: "Address",
@@ -110,23 +111,23 @@
                 postal: "Postal",
                 province: "Province"
             };
-
+    
             for (const key in customerData) {
                 const row = document.createElement("tr");
                 const cell1 = document.createElement("td");
                 const cell2 = document.createElement("td");
-
+    
                 cell1.textContent = labelMappings[key] || key;
                 cell2.textContent = customerData[key];
-
+    
                 cell1.classList.add("left"); // Add a class to the left column for capitalization
-
+    
                 row.appendChild(cell1);
                 row.appendChild(cell2);
-
+    
                 detailsTable.appendChild(row);
             }
-
+    
             customerDetails.appendChild(detailsTable);
         } else {
             // Handle the case where customer data is not available

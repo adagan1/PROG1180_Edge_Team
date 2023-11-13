@@ -159,4 +159,10 @@ function resetInputOutlines() {
     inputs.forEach(input => {
         input.classList.remove("invalid-input");
     });
+    
+}
+/*  Mohammads Fix */
+function openAddEquipmentPage() {
+    // Open the add equipment page
+    window.location.href = 'inventoryCreate.html';
 }

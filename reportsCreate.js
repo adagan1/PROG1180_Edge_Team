@@ -1,84 +1,262 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const createButton = document.getElementById("createButton");
-    createButton.addEventListener("click", function () {
+    const categoryDropdown = document.getElementById("reportCategory");
+    const errorContainer = document.getElementById("errorContainer");
+
+    // Function to toggle the visibility of input fields based on the selected category
+    function toggleFields() {
+        const createButton = document.getElementById("createButton");
+        const cancelButton = document.getElementById("cancelButton");
+        const errorContainer = document.getElementById("errorContainer");
+
+        // Reset previous validation styles and error messages
+        resetValidationStyles();
+        errorContainer.innerHTML = "";
+
+        if (categoryDropdown.value === "warranty" || categoryDropdown.value === "sale" || categoryDropdown.value === "orders") {
+            warrantyFields.style.display = categoryDropdown.value === "warranty" ? "block" : "none";
+            saleFields.style.display = categoryDropdown.value === "sale" ? "block" : "none";
+            orderFields.style.display = categoryDropdown.value === "orders" ? "block" : "none";
+
+            // Show the buttons when a category is selected
+            createButton.removeAttribute("hidden");
+            cancelButton.removeAttribute("hidden");
+        } else {
+            warrantyFields.style.display = "none";
+            saleFields.style.display = "none";
+            orderFields.style.display = "none";
+
+            // Hide the buttons when no category is selected
+            createButton.setAttribute("hidden", true);
+        }
+    }
+
+    // Attach the toggleFields function to the change event of the category dropdown
+    categoryDropdown.addEventListener("change", toggleFields);
+
+    const saveButton = document.getElementById("createButton");
+    saveButton.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
         // Get the report data
-        const reportCustomerInput = document.getElementById("reportCustomer");
+        const reportCategory = categoryDropdown.value;
+        const reportOwnerInput = document.getElementById("owner");
         const reportDateInput = document.getElementById("reportDate");
         const reportDescriptionInput = document.getElementById("reportDescription");
         const reportPriceInput = document.getElementById("reportPrice");
         const reportQuantityInput = document.getElementById("reportQuantity");
         const reportTotalInput = document.getElementById("reportTotal");
+        const warrantyStartInput = document.getElementById("warrantyStart");
+        const warrantyEndInput = document.getElementById("warrantyEnd");
+        const warrantyDetailsInput = document.getElementById("warrantyDetails");
+        const equipmentDetailsInput = document.getElementById("equipment");
+        const ordersDetailsInput = document.getElementById("orderDetails");
+        const ordersQuantityInput = document.getElementById("orderQuantity");
+        const ordersDateInput = document.getElementById("orderDate");
+        const arrivalDateInput = document.getElementById("arrivalDate");
+        const orderStatusInput = document.getElementById("status");
+        const orderBrandInput = document.getElementById("brand")
+        const additionalWarrantyInfoInput = document.getElementById("additionalWarrantyInfo");       
 
+        // Reset previous validation styles and error messages
+        resetValidationStyles();
+        errorContainer.innerHTML = "";
+
+        // Depending on the selected category, get the corresponding input values
+        let reportAdditionalInfo;
+        if (reportCategory === "warranty") {
+            // Get warranty-specific input values
+            reportAdditionalInfo = {
+                warrantyStart: warrantyStartInput.value,
+                warrantyEnd: warrantyEndInput.value,
+                warrantyDetails: warrantyDetailsInput.value,
+                additionalWarrantyInfo: additionalWarrantyInfoInput.value,
+                equipmentList: equipmentDetailsInput.value
+            };
+
+            if (reportAdditionalInfo.warrantyStart.trim() !== "" && reportAdditionalInfo.warrantyEnd.trim() !== "") {
+                const start = new Date(reportAdditionalInfo.warrantyStart);
+                const end = new Date(reportAdditionalInfo.warrantyEnd);
+
+                if (start > end) {
+                    markInvalidInput(warrantyStartInput);
+                    markInvalidInput(warrantyEndInput);
+                    displayError("Warranty start date cannot be after the warranty end date.");
+                }
+            }
+        }
+
+        // Get sales-specific input values
+        if (reportCategory === "sale") {
+            reportAdditionalInfo = {
+                salesPrice: reportPriceInput.value,
+                salesQuantity: reportQuantityInput.value,
+                salesTotal: reportTotalInput.value
+            }
+        }
+
+        // Get orders-specific input values
+        if (reportCategory === "orders") {
+            reportAdditionalInfo = {
+                orderDetails: ordersDetailsInput.value,
+                orderQuantity: ordersQuantityInput.value,
+                orderDate: ordersDateInput.value,
+                arrivalDate: arrivalDateInput.value,
+                orderStatus: orderStatusInput.value,
+                orderBrand: orderBrandInput.value
+            }
+        }
+
+        //non-specific
         const report = {
-            customer: reportCustomerInput.value,
+            category: reportCategory,
+            owner: reportOwnerInput.value,
             date: reportDateInput.value,
             description: reportDescriptionInput.value,
-            price: reportPriceInput.value,
-            quantity: reportQuantityInput.value,
-            total: reportTotalInput.value,
+            additionalInfo: reportAdditionalInfo
         };
 
         // Perform form validation
         if (validateForm(report)) {
-            // Save the new report data
-            // You can add your saving logic here
-
-            // After saving, redirect to the reports page
             window.location.href = "reports.html";
         }
     });
 
-    // Function to validate the form data
-    function validateForm(report) {
-        let isValid = true;
-        const errorContainer = document.getElementById("errorContainer");
-        errorContainer.innerHTML = "";
+function validateForm(report) {
+    // Flag to track whether the form is valid
+    let isValid = true;
 
-        if (report.customer.trim() === "") {
-            displayError("Customer name is required.", "reportCustomer");
+    // Validation for warranty
+    if (report.category === "warranty") {
+        
+        if (report.owner.trim() === "") {
+            markInvalidInput(document.getElementById("owner"));
+            displayError("Please select the owner's name.");
             isValid = false;
         }
 
+        if (report.additionalInfo.equipmentList.trim() === "") {
+            markInvalidInput(document.getElementById("equipment"));
+            displayError("Please select the equipment.");
+            isValid = false;
+        }
+    
         if (report.date.trim() === "") {
-            displayError("Date is required.", "reportDate");
+            markInvalidInput(document.getElementById("reportDate"));
+            displayError("Please enter the report date.");
             isValid = false;
         }
 
-        if (report.description.trim() === "") {
-            displayError("Description is required.", "reportDescription");
+        if (report.additionalInfo.warrantyStart.trim() === "") {
+            markInvalidInput(document.getElementById("warrantyStart"));
+            displayError("Please enter the warranty start date.");
             isValid = false;
         }
 
-        if (isNaN(report.price) || report.price <= 0) {
-            displayError("Price must be a positive number.", "reportPrice");
+        if (report.additionalInfo.warrantyEnd.trim() === "") {
+            markInvalidInput(document.getElementById("warrantyEnd"));
+            displayError("Please enter the warranty end date.");
             isValid = false;
         }
 
-        if (isNaN(report.quantity) || report.quantity <= 0) {
-            displayError("Quantity must be a positive number.", "reportQuantity");
+        if (report.additionalInfo.warrantyDetails.trim() === "") {
+            markInvalidInput(document.getElementById("warrantyDetails"));
+            displayError("Please enter the warranty details.");
             isValid = false;
         }
-
-        if (isNaN(report.total) || report.total <= 0) {
-            displayError("Total must be a positive number.", "reportTotal");
-            isValid = false;
-        }
-
-        return isValid;
     }
 
-    // Function to display an error message and highlight the input field
-    function displayError(message, inputId) {
-        const errorContainer = document.getElementById("errorContainer");
-        const errorMessage = document.createElement("p");
-        errorMessage.textContent = message;
-        errorContainer.appendChild(errorMessage);
+    // Sales validation
+    if (report.category === "sale") {
 
-        // Highlight the input field in red
-        const inputField = document.getElementById(inputId);
-        inputField.classList.add("invalid-input");
+        if (report.owner.trim() === "") {
+            markInvalidInput(document.getElementById("owner"));
+            displayError("Please enter the owner's name.");
+            isValid = false;
+        }
+    
+        if (report.date.trim() === "") {
+            markInvalidInput(document.getElementById("reportDate"));
+            displayError("Please enter the report date.");
+            isValid = false;
+        }
+
+        if (report.additionalInfo.salesPrice.trim() === "") {
+            markInvalidInput(document.getElementById("reportPrice"))
+            displayError("Please enter a price above the value of 0.")
+            isValid = false;
+        }
+
+        if (report.additionalInfo.salesQuantity.trim() === "") {
+            markInvalidInput(document.getElementById("reportQuantity"))
+            displayError("Please enter a quantity above the value of 0.")
+            isValid = false;
+        }
+
+        if (report.additionalInfo.salesTotal.trim() === "") {
+            markInvalidInput(document.getElementById("reportTotal"))
+            displayError("Please enter a total above the value of 0.")
+            isValid = false;
+        }
     }
-});
+
+    // Orders validation
+    if (report.category === "orders") {
+        if (report.additionalInfo.orderBrand.trim() === "") {
+            markInvalidInput(document.getElementById("brand"));
+            displayError("Please enter the brand.");
+            isValid = false;
+        }
+
+        if (report.additionalInfo.orderDetails.trim() === "") {
+            markInvalidInput(document.getElementById("orderDetails"))
+            displayError("Please enter order details.")
+            isValid = false;
+        }
+
+        if (report.additionalInfo.orderQuantity.trim() === "") {
+            markInvalidInput(document.getElementById("orderQuantity"))
+            displayError("Please enter a quantity.")
+            isValid = false;
+        }
+
+        if (report.additionalInfo.orderDate.trim() === "") {
+            markInvalidInput(document.getElementById("orderDate"))
+            displayError("Please enter the order date.")
+            isValid = false;
+        }
+
+        if (report.additionalInfo.arrivalDate.trim() === "") {
+            markInvalidInput(document.getElementById("arrivalDate"))
+            displayError("Please enter the arrival date.")
+            isValid = false;
+        }
+
+        if (report.additionalInfo.orderStatus.trim() === "") {
+            markInvalidInput(document.getElementById("status"))
+            displayError("Please enter the status.")
+            isValid = false;
+        }
+    }
+}
+
+function markInvalidInput(inputElement) {
+    inputElement.classList.add("invalid-input");
+}
+
+function resetValidationStyles() {
+    const invalidInputs = document.querySelectorAll(".invalid-input");
+    invalidInputs.forEach((input) => {
+        input.classList.remove("invalid-input");
+    });
+}
+
+function displayError(message) {
+    const errorDiv = document.createElement("div");
+    errorDiv.classList.add("error-message");
+    errorDiv.textContent = message;
+    document.getElementById("errorContainer").appendChild(errorDiv);
+}});
+
 
 function goToReportsPage() {
     window.location.href = "reports.html";

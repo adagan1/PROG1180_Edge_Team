@@ -102,7 +102,7 @@ table th, table td {
     border: 1px solid #ccc;
 }
 
-#coloursTable, #typesTable, #citiesTable {
+#coloursTable, #typesTable, #citiesTable, #partsTable, #brandsTable {
     width: 500px;
 }
 

@@ -1,7 +1,8 @@
 // Sample data for reports
 const hardCodedReports = [
     {
-        customer: "Joe Jawndel",
+        owner: "Joe Jawndel",
+        category: "Sales",
         date: "2023-01-15",
         description: "Nuts",
         price: .50,
@@ -9,22 +10,42 @@ const hardCodedReports = [
         total: 4.52
     },
     {
-        customer: "Billy Tallent",
+        //Is actually brand
+        owner: "Honda",
+        category: "Orders",
+        equipment: "Honda Bagged Lawnmower",
+        orderDetails: "Ordered a new honda lawnmower.",
         date: "2023-02-15",
-        description: "Screws",
-        price: 1,
-        quantity: 11,
-        total: 12.43
+        arrivalDate: "2023-04-1",
+        orderStatus: "Pending",
+        quantity: 1,
+        price: 199.95,
+        total: 225.94
     },
     {
-        customer: "Julio Mendes",
-        date: "2023-03-15",
-        description: "Bolts",
-        price: .60,
-        quantity: 2,
-        total: 1.36
+        owner: "Julio Mendes",
+        equipment: "N/A",
+        category: "Warranty",
+        date: "2023-02-15",
+        warrantyStart: "2023-03-15",
+        warrantyEnd: "2023-06-10",
+        warrantyDetails: "Warranty is for the Screws",
+        additionalWarrantyInfo: "N/A"
     },
 ];
+
+// Function to add a new report category
+function addNewCategory() {
+    var newCategory = prompt("Please enter the new category name:");
+    if (newCategory) {
+        var select = document.getElementById("categoryFilter");
+        var option = document.createElement("option");
+        option.value = newCategory.toLowerCase();
+        option.text = newCategory;
+        select.add(option);
+    }
+}
+
 
 // Function to fill the table with report data, including "Edit" and "Detail" buttons
 function fillTableWithReportData() {
@@ -32,6 +53,7 @@ function fillTableWithReportData() {
     const tbody = table.getElementsByTagName("tbody")[0];
     const searchInput = document.getElementById("searchInput");
     const searchTerm = searchInput.value.toLowerCase();
+    const categoryFilter = document.getElementById("categoryFilter").value;
 
     // Clear the table
     tbody.innerHTML = '';
@@ -40,13 +62,14 @@ function fillTableWithReportData() {
         const report = hardCodedReports[i];
         const reportString = JSON.stringify(report).toLowerCase();
 
-        // Check if the search term matches any part of the report data
-        if (reportString.includes(searchTerm)) {
+        // Check if the search term matches any part of the report data and the category matches
+        if ((reportString.includes(searchTerm) || searchTerm === '') &&
+            (categoryFilter === 'all' || report.category.toLowerCase() === categoryFilter)) {
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td>${report.customer}</td>
+                <td>${report.owner}</td>
+                <td>${report.category}</td>
                 <td>${report.date}</td>
-                <td>${report.quantity}</td>
                 <td>
                     <button onclick="editReport(${i})">Edit</button>
                     <button onclick="detailReport(${i})">Detail</button>
@@ -56,6 +79,8 @@ function fillTableWithReportData() {
         }
     }
 }
+
+
 
 // Function to display report details when the "Detail" button is clicked
 function detailReport(index) {
