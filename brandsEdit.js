@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Get the brands data from the URL parameter as a JSON string
+    // Get the brand data from the URL parameter as a JSON string
     const urlParams = new URLSearchParams(window.location.search);
-    const brandsDataString = urlParams.get("data");
-    const brandsName = urlParams.get("brandsName"); // Get the brands name
+    const brandDataString = urlParams.get("data");
+    const brandName = urlParams.get("brandName"); // Get the brand name
 
-    if (brandsDataString) {
+    if (brandDataString) {
         try {
             // Parse the JSON data
-            const brandsToEdit = JSON.parse(brandsDataString);
+            const brandToEdit = JSON.parse(brandDataString);
         
-            // Populate the input fields with the brands data
-            document.getElementById("brandsName").value = brandsName; // Set the brands name in the text box
+            // Populate the input fields with the brand data
+            document.getElementById("brandName").value = brandName; // Set the brand name in the text box
         
             // Add an event listener to save changes
             document.getElementById("saveButton").addEventListener("click", function () {
@@ -19,40 +19,40 @@ document.addEventListener("DOMContentLoaded", function () {
         
                 // Validate the input fields
                 if (validateForm()) {
-                    // Update the brands data with the new values
-                    brandsToEdit.name = document.getElementById("brandsName").value;
+                    // Update the brand data with the new values
+                    brandToEdit.name = document.getElementById("brandName").value;
         
                     // Update the data in local storage
-                    // Retrieve the existing brands data
-                    const storedBrandsData = JSON.parse(localStorage.getItem("brandsData")) || [];
+                    // Retrieve the existing brand data
+                    const storedbrandData = JSON.parse(localStorage.getItem("brandData")) || [];
         
-                    // Update the brands data in local storage
-                    storedBrandsData[brandsToEdit.index] = brandsToEdit;
+                    // Update the brand data in local storage
+                    storedbrandData[brandToEdit.index] = brandToEdit;
         
                     // Save the updated data back to local storage
-                    localStorage.setItem("brandsData", JSON.stringify(storedBrandsData));
+                    localStorage.setItem("brandData", JSON.stringify(storedbrandData));
         
-                    // Redirect back to the brands page
+                    // Redirect back to the brand page
                     window.location.href = "tables.html";
                 }
             });
         } catch (error) {
-            console.error("Error parsing brands data:", error); // Define the 'error' variable
+            console.error("Error parsing brand data:", error); // Define the 'error' variable
         }
     }
 });
 
 function validateForm() {
-    const brandsName = document.getElementById("brandsName").value;
+    const brandName = document.getElementById("brandName").value;
 
     const errorMessages = [];
 
-    if (brandsName === "") {
-        errorMessages.push("Please fill in the 'Brands' field.");
-        document.getElementById("brandsName").classList.add("invalid-input");
-    } else if (!validateBrands(brandsName)) {
-        errorMessages.push("The 'Brands' field should only contain letters.");
-        document.getElementById("brandsName").classList.add("invalid-input");
+    if (brandName === "") {
+        errorMessages.push("Please fill in the 'brand' field.");
+        document.getElementById("brandName").classList.add("invalid-input");
+    } else if (!validatebrand(brandName)) {
+        errorMessages.push("The 'brand' field should only contain letters.");
+        document.getElementById("brandName").classList.add("invalid-input");
     }
 
     if (errorMessages.length > 0) {
@@ -63,9 +63,9 @@ function validateForm() {
     return true;
 }
 
-function validateBrands(name) {
-    const brandsPattern = /^[A-Za-z\s]+$/;
-    return brandsPattern.test(name);
+function validatebrand(name) {
+    const brandPattern = /^[A-Za-z\s]+$/;
+    return brandPattern.test(name);
 }
 
 

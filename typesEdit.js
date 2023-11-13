@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Get the type data from the URL parameter as a JSON string
     const urlParams = new URLSearchParams(window.location.search);
-    const typesDataString = urlParams.get("data");
-    const typesName = urlParams.get("typesName"); // Get the type name
+    const typeDataString = urlParams.get("data");
+    const typeName = urlParams.get("typeName"); // Get the type name
 
-    if (typesDataString) {
+    if (typeDataString) {
         try {
             // Parse the JSON data
-            const typesToEdit = JSON.parse(typesDataString);
+            const typeToEdit = JSON.parse(typeDataString);
         
             // Populate the input fields with the type data
-            document.getElementById("typesName").value = typesName; // Set the type name in the text box
+            document.getElementById("typeName").value = typeName; // Set the type name in the text box
         
             // Add an event listener to save changes
             document.getElementById("saveButton").addEventListener("click", function () {
@@ -20,17 +20,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Validate the input fields
                 if (validateForm()) {
                     // Update the type data with the new values
-                    typesToEdit.name = document.getElementById("typesName").value;
+                    typeToEdit.name = document.getElementById("typeName").value;
         
                     // Update the data in local storage
                     // Retrieve the existing type data
-                    const storedtypeData = JSON.parse(localStorage.getItem("typesData")) || [];
+                    const storedtypeData = JSON.parse(localStorage.getItem("typeData")) || [];
         
                     // Update the type data in local storage
-                    storedtypeData[typesToEdit.index] = typesToEdit;
+                    storedtypeData[typeToEdit.index] = typeToEdit;
         
                     // Save the updated data back to local storage
-                    localStorage.setItem("typesData", JSON.stringify(storedtypeData));
+                    localStorage.setItem("typeData", JSON.stringify(storedtypeData));
         
                     // Redirect back to the type page
                     window.location.href = "tables.html";
@@ -43,16 +43,16 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function validateForm() {
-    const typesName = document.getElementById("typesName").value;
+    const typeName = document.getElementById("typeName").value;
 
     const errorMessages = [];
 
-    if (typesName === "") {
+    if (typeName === "") {
         errorMessages.push("Please fill in the 'type' field.");
-        document.getElementById("typesName").classList.add("invalid-input");
-    } else if (!validatetype(typesName)) {
+        document.getElementById("typeName").classList.add("invalid-input");
+    } else if (!validatetype(typeName)) {
         errorMessages.push("The 'type' field should only contain letters.");
-        document.getElementById("typesName").classList.add("invalid-input");
+        document.getElementById("typeName").classList.add("invalid-input");
     }
 
     if (errorMessages.length > 0) {
@@ -64,8 +64,8 @@ function validateForm() {
 }
 
 function validatetype(name) {
-    const typesPattern = /^[A-Za-z\s]+$/;
-    return typesPattern.test(name);
+    const typePattern = /^[A-Za-z\s]+$/;
+    return typePattern.test(name);
 }
 
 
