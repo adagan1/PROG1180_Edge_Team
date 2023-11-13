@@ -1,6 +1,7 @@
 const hardCodedRepair = [
     {
         status: "In Progress",  // Added status
+        repairid: "JJ001",
         equipment: "Honda Bagged Lawnmower",
         description: "Handle broke, cannot push.",
         startTime: "November 1, 11:34AM",
@@ -10,6 +11,7 @@ const hardCodedRepair = [
     },
     {
         status: "In Progress",  // Added status
+        repairid: "BT001",
         equipment: "Dewalt Drill",
         description: "Chuck cracked.",
         startTime: "November 2, 4:21PM",
@@ -19,6 +21,7 @@ const hardCodedRepair = [
     },
     {
         status: "Completed",  // Added status
+        repairid: "JJ002",
         equipment: "John Deere Electric Lawnmower",
         description: "Both front wheels came off.",
         startTime: "November 4, 10:03AM",
