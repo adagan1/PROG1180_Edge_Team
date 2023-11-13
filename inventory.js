@@ -1,40 +1,40 @@
 // Define an array of hard-coded equipment
 const hardCodedEquipment = [
     {
+        owner: "Joe Jawndel",
         name: "Bagged Lawnmower",
         equipmentid: "JJBL01",
         brand: "Honda",
         description: "This is a Lawnmower from Honda.",
         colour: "Green",
-        price: "299.99",
-        owner: "Joe Jawndel"
+        price: "299.99"
     },
     {
+        owner: "Billy Talent",
         name: "Drill",
         equipmentid: "BTD01",
         brand: "Dewalt",
         description: "This is a Drill from Dewalt.",
         colour: "Red",
-        price: "149.99",
-        owner: "Billy Talent"
+        price: "149.99"
     },
     {
+        owner: "Julio Mendes",
         name: "Saw",
         equipmentid: "JMS01",
         brand: "Craftsman",
         description: "This is a Saw from Craftsman.",
         colour: "Gray",
-        price: "49.99",
-        owner: "Julio Mendes"
+        price: "49.99"
     },
     {
+        owner: "Joe Jawndel",
         name: "Electric Lawnmower",
         equipmentid: "JJEL01",
         brand: "John Deere",
         description: "This is a Lawnmower from John Deere.",
         colour: "Green",
-        price: "399.99",
-        owner: "Joe Jawndel"
+        price: "399.99"
     },
 ];
 
@@ -80,11 +80,12 @@ function fillTableWithEquipmentFromLocalStorage() {
         const equipment = storedEquipmentData[i];
         const row = document.createElement("tr");
         row.innerHTML = `
+            <td>${equipment.owner}</td>
             <td>${equipment.name}</td>
             <td>${equipment.brand}</td>
             <td>${equipment.description}</td>
             <td>${equipment.colour}</td>
-            <td>${equipment.owner}</td>
+            
             <td><button onclick="editEquipment(${i})">Edit</button></td>
         `;
         tbody.appendChild(row);
