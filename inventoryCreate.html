@@ -64,6 +64,8 @@
         input[type="number"],
         input[type="email"],
         input[type="tel"],
+        input[type="time"],
+        input[type="date"],
         select {
             width: 40%;
             padding: 10px;
@@ -93,14 +95,48 @@
         .invalid-input {
             border: 1px solid red;
         }
-        #description {
+        #description, #partsUsed {
             resize: none; /* Prevent user from resizing the textarea */
         }
-        input.invalid-input[type="text"],
-        input.invalid-input[type="email"],
-        input.invalid-input[type="tel"] {
-            border: 1px solid red;
-        }
+        input.invalid-input[type="text"]{
+        border: 1px solid red;
+    }
+    /* Increase padding inside the form */
+    form {
+        padding: 8px;
+    }
+    /* Increase the size of the equipment issue box */
+    #descriptionInfo textarea {
+        width: 95%; 
+        height: 150px; 
+        padding: 10px; 
+        margin-bottom: 20px; 
+    }
+
+    /* Input and button styling */
+    input, button {
+        padding: 10px;
+        margin-bottom: 20px; 
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    /* Style adjustments for buttons next to inputs */
+    .input-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .input-group input,
+    .input-group button {
+        flex: 1;
+        margin: 0;
+    }
+    .input-group button {
+        white-space: nowrap;
+        flex: none;
+    }
     </style>
 </head>
 <body>
@@ -122,6 +158,18 @@
         <h1 id="createOrEditTitle">Add Equipment</h1>
         <div class="center-container">
             <form id="createForm">
+                <div id="ownerInfo">
+                    <label for="owner">Owner:</label>
+                    <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
+                    <datalist id="ownerList">
+                        <option value="Joe Jawndel">
+                        <option value="Billy Talent">
+                        <option value="Julio Mendes">
+                        <!-- Add more owners here -->
+                    </datalist>
+                    <button type="button" onclick="goToCreateCustomerPage()" id="newCustomerButton">New Customer</button>
+                </div>
+
                 <div id="nameInfo">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required placeholder="Enter name">
@@ -157,15 +205,7 @@
                         <option value="Gray">Gray</option>
                     </select>
                 </div>
-                <div id="ownerInfo">
-                    <label for="owner">Owner:</label>
-                    <select id="owner" name="owner" required>
-                        <option value="" disabled selected>Select an owner</option>
-                        <option value="Owner1">Joe Jawndel</option>
-                        <option value="Owner2">Billy Talent</option>
-                        <option value="Owner3">Julio Mendes</option>
-                    </select>
-                </div>
+                
                 <div id="errorContainer"></div> <!-- Container for error messages -->
                 <div>
                     <button type="button" id="createInventoryButton">Save Changes</button>
