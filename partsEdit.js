@@ -1,16 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Get the part data from the URL parameter as a JSON string
     const urlParams = new URLSearchParams(window.location.search);
     const partsDataString = urlParams.get("data");
-    const partName = urlParams.get("partName"); // Get the part name
 
     if (partsDataString) {
         try {
-            // Parse the JSON data
             const partToEdit = JSON.parse(partsDataString);
-        
-            // Populate the input fields with the part data
-            document.getElementById("partName").value = partName; // Set the part name in the text box
+            document.getElementById("partName").value = partToEdit.name;
+            document.getElementById("partStock").value = partToEdit.stock; // Set the part name in the text box
         
             // Add an event listener to save changes
             document.getElementById("saveButton").addEventListener("click", function () {
