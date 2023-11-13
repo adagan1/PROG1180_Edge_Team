@@ -21,99 +21,136 @@
         </header>
         <style>
             h1 {
-                text-align: center;
-            }
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f4;
-                margin: 0;
-                padding: 0;
-            }
-    
-            header {
-                background-color: #333;
-                color: #fff;
-                padding: 1rem;
-                padding-left: 50px;
-                display: flex;
-                justify-content: space-between; /* Align content horizontally */
-                align-items: center; /* Center content vertically */
-                width: 100%;
-            }
-    
-            header h1 {
-                margin: 0;
-            }
-    
-            nav ul {
-                list-style: none;
-                padding: 0;
-            }
-    
-            nav ul li {
-                display: inline;
-                margin-right: 20px;
-            }
-    
-            main {
-                max-width: 600px;
-                margin: 0 auto;
-                background-color: #fff;
-                padding: 20px;
-                box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-                text-align: center;
-            }
-    
-            form {
-                margin: 0;
-            }
-    
-            label {
-                display: block;
-                margin-bottom: 5px;
-            }
-    
-            input[type="text"],
-            input[type="number"],
-            input[type="email"],
-            input[type="tel"],
-            select {
-                width: 40%;
-                padding: 10px;
-                margin-bottom: 15px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-    
-            select {
-                height: 40px;
-            }
-    
-            button {
-                background-color: #333;
-                color: #fff;
-                padding: 10px 20px;
-                border: none;
-                cursor: pointer;
-            }
-    
-            button[id="cancelButton"] {
-                background-color: red;
-            }
-            button:hover {
-                background-color: #555;
-            }
-            #description {
-                resize: none; /* Prevent user from resizing the textarea */
-            }
-            .invalid-input {
-                border: 1px solid red;
-            }
-            input.invalid-input[type="text"],
-            input.invalid-input[type="email"],
-            input.invalid-input[type="tel"] {
-                border: 1px solid red;
-            }
+            text-align: center;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            padding-left: 50px;
+            display: flex;
+            justify-content: space-between; /* Align content horizontally */
+            align-items: center; /* Center content vertically */
+            width: 100%;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        form {
+            margin: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="time"],
+        input[type="date"],
+        select {
+            width: 40%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        select {
+            height: 40px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button[id="cancelButton"] {
+            background-color: red;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .invalid-input {
+            border: 1px solid red;
+        }
+        #description, #partsUsed {
+            resize: none; /* Prevent user from resizing the textarea */
+        }
+        input.invalid-input[type="text"]{
+        border: 1px solid red;
+    }
+    /* Increase padding inside the form */
+    form {
+        padding: 8px;
+    }
+    /* Increase the size of the equipment issue box */
+    #equipmentDescription {
+        resize: none; /* Prevent user from resizing the textarea */
+        width: 95%;
+        height: 150px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    /* Input and button styling */
+    input, button {
+        padding: 10px;
+        margin-bottom: 20px; 
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    /* Style adjustments for buttons next to inputs */
+    .input-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .input-group input,
+    .input-group button {
+        flex: 1;
+        margin: 0;
+    }
+    .input-group button {
+        white-space: nowrap;
+        flex: none;
+    }
         </style>
     
         
@@ -121,6 +158,17 @@
         <h1>Edit Equipment</h1>
         <form id="editForm">
             <div class="edit-container">
+                <div id="ownerInfo">
+                    <label for="owner">Owner:</label>
+                    <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
+                    <datalist id="ownerList">
+                        <option value="Joe Jawndel">
+                        <option value="Billy Talent">
+                        <option value="Julio Mendes">
+                        <!-- Add more owners here -->
+                    </datalist>
+                    <button type="button" onclick="goToCreateCustomerPage()" id="newCustomerButton">New Customer</button>
+                </div>
                 <div>
                     <label for="equipmentName">Name:</label>
                     <input type="text" id="equipmentName" name="equipmentName" placeholder="Enter name" required>
@@ -135,9 +183,10 @@
                         <option value="John Deere">John Deere</option>
                     </select>
                 </div>
-                <div>
-                    <label for="equipmentDescription">Description:</label>
-                    <input type="text" id="equipmentDescription" name="equipmentDescription" placeholder="Enter equipment description">
+                <div id="descriptionInfo">
+                    <label for="description">Description:</label>
+                    <textarea id="equipmentDescription" name="description" required placeholder="Enter item description" rows="5" cols="50"></textarea>
+                    <!-- The "rows" attribute determines the number of visible lines, and the "cols" attribute determines the number of visible columns -->
                 </div>
                 <div id="colourInfo">
                     <label for="colour">Colour:</label>
@@ -153,15 +202,6 @@
                         <option value="Black">Black</option>
                         <option value="White">White</option>
                         <option value="Gray">Gray</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="owner">Owner:</label>
-                    <select id="owner" name="owner" required>
-                        <option value="" disabled selected>Select an owner</option>
-                        <option value="Joe Jawndel">Joe Jawndel</option>
-                        <option value="Billy Talent">Billy Talent</option>
-                        <option value="Julio Mendes">Julio Mendes</option>
                     </select>
                 </div>
 
