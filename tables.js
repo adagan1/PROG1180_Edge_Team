@@ -29,6 +29,9 @@ const brandsData = [
 // Add stock information to each part (example stock data)
 partsData.forEach(part => part.stock = Math.floor(Math.random() * 100));
 
+// Add stock information to each part (example stock data)
+typesData.forEach(type => type.stock = Math.floor(Math.random() * 100));
+
 function populateTable(tableId, data) {
     const table = document.getElementById(tableId);
     const tableBody = table.getElementsByTagName('tbody')[0];
@@ -39,8 +42,8 @@ function populateTable(tableId, data) {
         const cell = row.insertCell();
         cell.textContent = item.name || item.type;
 
-        // Add a Stock column for parts
-        if (tableId === 'partsTable') {
+        // Add a Stock column for parts and types
+        if (tableId === 'partsTable' || tableId === 'typesTable') {
             const stockCell = row.insertCell();
             stockCell.textContent = item.stock;
         }
@@ -51,6 +54,7 @@ function populateTable(tableId, data) {
         // Create Edit button
         const editButton = document.createElement('button');
         editButton.textContent = 'Edit';
+        editButton.style.marginRight = '10px'; // Added margin to the right of the Edit button for spacing
         editButton.onclick = function () {
             editItem(row, tableId);
         };
@@ -60,6 +64,8 @@ function populateTable(tableId, data) {
         if (tableId === 'partsTable' || tableId === 'typesTable') {
             const orderMoreButton = document.createElement('button');
             orderMoreButton.textContent = 'Order More';
+            // Optionally, add margin for order more button if needed
+            // orderMoreButton.style.marginLeft = '10px';
             orderMoreButton.onclick = function () {
                 orderMorePartsOrTypes(item);
             };
@@ -67,6 +73,7 @@ function populateTable(tableId, data) {
         }
     });
 }
+
 
 function filterTable() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
