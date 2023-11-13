@@ -10,16 +10,20 @@ const hardCodedReports = [
         total: 4.52
     },
     {
-        owner: "Billy Tallent",
+        owner: "Billy Talent",
         category: "Orders",
+        equipment: "Honda Bagged Lawnmower",
+        orderDetails: "Ordered a new honda lawnmower.",
         date: "2023-02-15",
-        description: "Ordered a new honda lawnmower.",
-        price: 1,
-        quantity: 11,
-        total: 12.43
+        arrivalDate: "2023-04-1",
+        orderStatus: "Pending",
+        quantity: 1,
+        price: 199.95,
+        total: 225.94
     },
     {
         owner: "Julio Mendes",
+        equipment: "N/A",
         category: "Warranty",
         date: "2023-02-15",
         warrantyStart: "2023-03-15",

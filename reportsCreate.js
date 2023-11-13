@@ -100,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 orderQuantity: ordersQuantityInput.value,
                 orderDate: ordersDateInput.value,
                 arrivalDate: arrivalDateInput.value,
-                orderStatus: orderStatusInput.value
+                orderStatus: orderStatusInput.value,
             }
         }
 
