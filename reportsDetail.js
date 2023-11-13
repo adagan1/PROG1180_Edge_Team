@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (selectedReport.category == "Orders") {
         reportDetailsTable.innerHTML += `
             <tr>
-                <th>Owner</th>
+                <th>Brand</th>
                 <td>${selectedReport.owner}</td>
             </tr>
             <tr>
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${selectedReport.orderStatus}</td>
             </tr>
             <tr>
-                <th>Qauntity</th>
+                <th>Quantity</th>
                 <td>${selectedReport.quantity}</td>
             </tr>
             <tr>

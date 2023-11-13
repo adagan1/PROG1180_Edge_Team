@@ -10,7 +10,8 @@ const hardCodedReports = [
         total: 4.52
     },
     {
-        owner: "Billy Talent",
+        //Is actually brand
+        owner: "Honda",
         category: "Orders",
         equipment: "Honda Bagged Lawnmower",
         orderDetails: "Ordered a new honda lawnmower.",

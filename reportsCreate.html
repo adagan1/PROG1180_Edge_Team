@@ -177,13 +177,16 @@
             </div>
 
             <div id="orderFields" style="display: none;">
-                <label for="owner">Owner:</label>
-                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
-                <datalist id="ownerList">
-                    <option value="Joe Jawndel">
-                    <option value="Billy Talent">
-                    <option value="Julio Mendes">
-                </datalist>
+                <div id="brandInfo">
+                    <label for="brand">Brand:</label>
+                    <select id="brand" name="brand" required>
+                        <option value="" disabled selected>Select a brand</option>
+                        <option value="Brand1">Craftsman</option>
+                        <option value="Brand2">Dewalt</option>
+                        <option value="Brand3">Honda</option>
+                        <option value="Brand4">John Deere</option>
+                    </select>
+                </div>
                 <label for="equipment">Equipment:</label>
                 <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
                 <datalist id="equipmentList">
