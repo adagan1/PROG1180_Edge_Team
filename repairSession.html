@@ -94,74 +94,16 @@
         .invalid-input {
             border: 1px solid red;
         }
-        .parts-container {
-            max-width: 600px;
-            margin: auto;
-            background-color: #fff;
-            padding: 20px;
-        }
-
-        .part-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .part-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-        }
-
-        .part-select-container,
-        .quantity-input-container {
-        flex: 1; /* This will allow both the select container and the quantity input container to grow and take up equal space */
-        margin-right: 10px; /* Adjust as needed */
-        }
-
-        .part-select-container select,
-        .quantity-input-container input {
-            width: 100%; /* This ensures the select and input take the full width of their containers */
-        }
-
-        /* Remove the margin-right for the last item in the part-row */
-        .part-row > *:last-child {
-            margin-right: 0;
-        }
-
-        select, input {
-            padding: 10px;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        
-
-        .quantity-input {
-            width: 60px;
-        }
-
-        .add-part-button {
-            padding: 10px 20px;
-            background-color: #333;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        .add-part-button:hover {
-            background-color: #555;
-        }
-        input.invalid-input[type="text"],
-        input.invalid-input[type="email"],
-        input.invalid-input[type="tel"],
-        input.invalid-input[type="time"],
-        input.invalid-input[type="date"] {
-        border: 1px solid red;
-    }
-
+        .remove-part-button {
+    margin-left: 5px; /* Space between the input and the button */
+    padding: 5px 10px; /* Increase padding for a larger button */
+    font-size: 18px; /* Bigger font size for the '-' symbol */
+    line-height: 1.3; /* Align with the input field */
+    vertical-align: middle; /* Align vertically */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border: 1px solid #ccc; /* Optional: add a border */
+    background-color: #000000; /* Optional: background color */
+}
     textarea {
         resize: none;
     }
@@ -191,21 +133,15 @@
             
             
             <div class="parts-container">
-                <label for="Parts">Parts used for repair:</label>
+                <label>Parts used for repair:</label>
                 <div id="parts-list">
                     <div class="part-row">
-                        <div class="part-select-container">
-                            <label for="part-select">Part</label>
-                            <select id="part-select">
-                                <option value="">Select Part</option>
-                                <option value="">Bolt</option>
-                                <!-- Dynamically add part options here -->
-                            </select>
-                        </div>
-                        <div class="quantity-input-container">
-                            <label for="quantity-input-1">Quantity</label>
-                            <input type="number" id="quantity-input-1" class="quantity-input" value="1" min="1">
-                        </div>
+                        <select class="part-select">
+                            <option value="">Select Part</option>
+                            <!-- Add other part options here -->
+                        </select>
+                        <input type="number" class="quantity-input" value="1" min="1">
+                        <button type="button" class="remove-part-button" onclick="removeThisPartRow(this)">-</button>
                     </div>
                 </div>
                 <button type="button" class="add-part-button" onclick="addPartRow()">Add Part</button>
@@ -234,6 +170,7 @@
             
             <div id="errorContainer"></div>
             
+            <button type="button" id="completeButton">Complete</button>
             <button type="button" id="saveButton">Save Changes</button>
             <button type="button" id="cancelButton" onclick="goToRepairsPage()">Cancel</button>
         </form>
