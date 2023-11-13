@@ -9,11 +9,18 @@
 </head>
 <style>
     #searchInput {
-        width: 34.3%;
-        max-width: 150px;
+        width: 40.3%; /* Adjust the width as needed */
+        max-width: 150px; /* Limit the maximum width */
+        margin-bottom: 20px; /* Add space below the search input */
         display: block;
     }
+
+    /* Style for the div containing the Add Report button */
+    .add-report-button-container {
+        margin-top: 10px; /* Add space above the button */
+    }
 </style>
+
 <body>
     <header>
         <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
@@ -43,9 +50,11 @@
     </select>
 </div>
 
-        <div>
-            <button onclick="createReport()">Add Report</button>
-        </div>
+<div class="add-report-button-container" 
+     style="margin-top: 20px;">
+    <button onclick="createReport()">Add Report</button>
+</div>
+
 
         <table id="reportTable">
             <thead>

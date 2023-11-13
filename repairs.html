@@ -9,8 +9,15 @@
     <style>
         #searchInput {
             width: 40.3%; /* Adjust the width as needed */
-            max-width: 200px; /* Limit the maximum width */
+            max-width: 150px; /* Limit the maximum width */
+            margin-bottom: 20px;
             display: block;
+        }
+        
+
+        /* Style for the div containing the Add Repair button */
+        .add-repair-button-container {
+            margin-top: 10px; /* Add space above the button */
         }
     </style>
 </head>
@@ -41,7 +48,7 @@
                 <option value="completed">Completed</option>
             </select>
         </div>
-        <div>
+        <div style="margin-top: 20px;">
             <button onclick="createRepair()">Add Repair Record</button>
         </div>
         <table id="repairsTable">
