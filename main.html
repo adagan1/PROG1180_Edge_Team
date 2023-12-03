@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -5,22 +6,20 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Emma's Small Engines</title>
     <style>
-        /* Add CSS for larger text size */
         main {
             font-size: 20px; /* Base font size for the body */
         }
-        
+
         header {
             background-color: #333;
             color: #fff;
             padding: 1rem;
-            padding-left: 50px;
             display: flex;
             justify-content: space-between; /* Align content horizontally */
             align-items: center; /* Center content vertically */
             width: 100%;
         }
-        /* Adjusting the dashboard layout to fit 2x2 */
+
         .dashboard {
             display: grid;
             grid-template-columns: repeat(2, 1fr); /* Two columns */
@@ -29,7 +28,6 @@
             margin: 2rem auto; /* Center the dashboard with automatic margins */
         }
 
-        /* Style for individual dashboard sections */
         .dashboard-section {
             border: 1px solid #ddd;
             border-radius: 4px;
@@ -38,7 +36,6 @@
             text-align: center; /* Center text inside the sections */
         }
 
-        /* Style for buttons inside the dashboard sections */
         .dashboard-section button {
             width: 80%; /* Full width */
             padding: 10px 15px;
@@ -54,17 +51,114 @@
             background-color: #555;
         }
 
-        /* Responsive adjustments for very narrow screens */
         @media (max-width: 600px) {
             .dashboard {
                 grid-template-columns: 1fr; 
             }
         }
+
+         .logout-button {
+            display: none; /* Initially hidden */
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+        }
+
+        .logout-button:hover {
+            background-color: #555;
+        }
+
+        .login-form {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .login-input {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .login-button {
+            width: 85%;
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #555;
+        }
+        /* Style for login dropdown */
+        .login-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .login-dropdown-content {
+            display: none;
+            position: absolute;
+            left: 0; 
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+
+        .login-dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .login-dropdown-content a:hover {background-color: #f1f1f1;}
+
+        .login-dropdown:hover .login-dropdown-content {
+            display: block;
+        }
+
+        .login-button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .login-button:hover, .login-button:focus {
+            background-color: #555;
+        }
     </style>
-    
 </head>
 <body>
-    <header>
+    
+    <div class="login-form" id="loginForm">
+        <h2> Emma's Small Engine Repair Employee Login</h2>
+        <input type="text" id="username" class="login-input" placeholder="Username"><br>
+        <input type="password" id="password" class="login-input" placeholder="Password"><br>
+        <button class="login-button" onclick="login()">Login</button>
+    </div>
+    <header style="display: none;" id="headerContent">
         <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
         <nav>
             <ul>
@@ -77,51 +171,141 @@
             </ul>
         </nav>
     </header>
-    <main>
+    <main style="display: none;" id="mainContent">
         <section id="employee-welcome">
-            <h2>Welcome Employees</h2>
+            <h2 id="welcome-title">Welcome Employees</h2>
             <ul>
-                <li>Welcome to Emma's Small Engines Employee Portal.</li>
-                
+                <li id="welcome-message">Welcome to Emma's Small Engines Employee Portal.</li>
             </ul>
-           
         </section>
         
         <div class="dashboard">
-            <div class="dashboard-section">
+            <div class="dashboard-section" id="addCustomerSection" style="display: none;">
                 <h2>Add a Customer</h2>
                 <p>Click the button to quickly add a customer.</p>
                 <button onclick="location.href='customerCreate.html'">Add a Customer</button>
             </div>
             
             <div class="dashboard-section">
-                <h2>Create an Equipment</h2>
+                <h2>Add a Equipment</h2>
                 <p>Click the button to quickly create an appliance.</p>
                 <button onclick="location.href='inventoryCreate.html'">Add Equipment</button>
             </div>
             
-            <div class="dashboard-section">
+            <div class="dashboard-section" id="createReportSection">
                 <h2>Create a Report</h2>
                 <p>Click the button to quickly Generate a report.</p>
                 <button onclick="location.href='reportsCreate.html'">Generate a Report</button>
             </div>
 
-            <div class="dashboard-section">
-                <h2>Start a Repair Form</h2>
+            <div class="dashboard-section" id="startRepairSection">
+                <h2>Start a Repair </h2>
                 <p>Click the button to quickly start a repair.</p>
                 <button onclick="location.href='repairsCreate.html'">New Repair Request</button>
             </div>
+            
+            <div class="dashboard-section" id="repairsSection">
+                <h2> Manage Repairs</h2>
+                <p>Click the button to view and manage repairs.</p>
+                <button onclick="location.href='repairs.html'">View Repairs</button>
+            </div>
+            
         </div>
+    </main>
 
-        <script>
-            window.addEventListener("scroll", function() {
-                const title = document.querySelector(".centered-title");
-                if (title) {
-                    title.style.display = window.scrollY > 0 ? "block" : "none";
+    <button class="logout-button" id="logoutButton" onclick="logout()" style="position: fixed; bottom: 10px; left: 10px;">Logout</button>
+
+    <script>
+
+        function logout() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('headerContent').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('logoutButton').style.display = 'none';
+
+        }
+
+            function login() {
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
+
+                if (password === '123') {
+                    document.getElementById('loginForm').style.display = 'none';
+                    document.getElementById('headerContent').style.display = 'block';
+                    document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('logoutButton').style.display = 'block';
+
+
+                    if (username === 'sales') {
+                        showOnlyAddCustomer();
+                    } else if (username === 'tech') {
+                        showTechnicianSections();
+                    } else if (username === 'admin') {
+                        showAllSections();
+                    } else {
+                        alert('Invalid username');
+                        resetLoginForm();
+                    }
+                } else {
+                    alert('Invalid password');
+                    resetLoginForm();
                 }
-            });
-        </script>
-    
+            }
+
+            function resetLoginForm() {
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('headerContent').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'none';
+                document.getElementById('logoutButton').style.display = 'none';
+
+            }
+
+            function updateWelcomeSection(role) {
+                const welcomeTitle = document.getElementById('welcome-title');
+                const welcomeMessage = document.getElementById('welcome-message');
+                if (role === 'sales') {
+                    welcomeTitle.textContent = 'Welcome Sales Associate';
+                    welcomeMessage.textContent = 'Access your sales associate tools here.';
+                } else if (role === 'tech') {
+                    welcomeTitle.textContent = 'Welcome Technician';
+                    welcomeMessage.textContent = 'Access your technician tools here.';
+                } else if (role === 'admin') {
+                    welcomeTitle.textContent = 'Welcome Admin';
+                    welcomeMessage.textContent = 'Access your admin tools here.';
+                }
+            }
+
+            function hideAllSections() {
+                document.querySelectorAll('.dashboard-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+            }
+
+            function showOnlyAddCustomer() {
+                hideAllSections();
+                document.getElementById('addCustomerSection').style.display = 'block';
+                updateWelcomeSection('sales');
+            }
+
+            function showTechnicianSections() {
+                hideAllSections();
+                document.getElementById('createReportSection').style.display = 'block';
+                document.getElementById('startRepairSection').style.display = 'block';
+                document.getElementById('repairsSection').style.display = 'block';
+                updateWelcomeSection('tech');
+            }
+
+            function showAllSections() {
+                document.querySelectorAll('.dashboard-section').forEach(section => {
+                    section.style.display = 'block';
+                });
+                updateWelcomeSection('admin');
+            }
+</script>
+      
 </body>
 </html>
+
 
