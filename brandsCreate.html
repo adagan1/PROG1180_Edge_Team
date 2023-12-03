@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="brandsCreate.js"></script>
     <title>Create Brand</title>
-    <!-- Kyle Fix! -->
     <style>
         h1 {
             text-align: center;
@@ -123,5 +121,28 @@
             </form>
         </div>
     </main>
+
+<script>
+    function createBrand() {
+    // Get the data for the new maintenance item
+    const name = document.getElementById("brandName").value;
+
+    // Create an object with the new equipment data
+    const newCity = {
+        name: name
+    };
+
+    // For this example, we'll log the new data to the console
+    console.log("New Maintenance Data:", newCity);
+
+    // Redirect back to the inventory page
+    window.location.href = "tables.html";
+}
+
+function goToMaintenancePage() {
+    window.location.href = "tables.html";
+}
+</script>
+
 </body>
 </html>

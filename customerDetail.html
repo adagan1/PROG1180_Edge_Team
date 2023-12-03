@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="customerCreate.js"></script>
     <style>
         h1 {
             text-align: center;
@@ -134,6 +133,13 @@
             customerDetails.textContent = "Customer details not found.";
         }
     </script>
-    <button type="button" id="cancelButton", onclick="goToCustomerPage()">Back to Customer</button>       
+    <button type="button" id="cancelButton", onclick="goToCustomerPage()">Back to Customer</button>
+    
+<script>
+    function goToCustomerPage() {
+    window.location.href = "customer.html";
+}
+</script>
+
 </body>
 </html>
