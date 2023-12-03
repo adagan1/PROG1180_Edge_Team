@@ -106,6 +106,27 @@
     textarea {
         resize: none;
     }
+    /* Border box for parts used for repair*/
+    .parts-container {
+    border: 2px solid #333; 
+    padding: 15px; /* Adds some space inside the box */
+    margin-top: 20px; /* Adds space above the box */
+    margin-bottom: 20px; /* Adds space below the box */
+    background-color: #fff; /* Sets a background color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+    border-radius: 5px; /* Rounds the corners of the box */
+}
+    /* Border box for Time session used in repair*/
+    .time-container {
+    border: 2px solid #333; /* Adds a solid border */
+    padding: 15px; /* Adds some space inside the box */
+    margin-top: 20px; /* Adds space above the box */
+    margin-bottom: 20px; /* Adds space below the box */
+    background-color: #fff; /* Sets a background color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+    border-radius: 5px; /* Rounds the corners of the box */
+}
+
     </style>
     <title>Edit Repair</title>
 </head>
@@ -150,16 +171,23 @@
                 <button type="button" class="add-part-button" onclick="addPartRow()">Add Part</button>
             </div>
             
-    <div id="startTimeInfo">
+    <!-- Time Information Container -->
+        <div class="time-container">
+            <label>Time Information:</label>
+            <div id="time-list">
+                <div class="time-row">
+                    <h3>Session 1</h3>
                     <label for="startTime">Start Time:</label>
-                    <input type="time" id="startTime">
-                    <input type="date" id="startDate">
-            </div>
-            <div id="endTimeInfo">
+                    <input type="time" class="startTime">
+                    <input type="date" class="startDate">
                     <label for="endTime">End Time:</label>
-                    <input type="time" id="endTime">
-                    <input type="date" id="endDate">
+                    <input type="time" class="endTime">
+                    <input type="date" class="endDate">
+                    <button type="button" class="remove-time-button" onclick="removeThisTimeRow(this)">-</button>
+                </div>
             </div>
+            <button type="button" class="add-time-button" onclick="addTimeRow()">Add Time</button>
+        </div>
              <!-- Technician and Time Information -->
             <label for="technician">Technician:</label>
             <select id="technician">
@@ -201,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
         option.text = part.name;
         initialPartsDropdown.appendChild(option);
     });
-
+    renumberSessions();
     // Automatically fill start time
     var currentDateTime = new Date();
     var currentDate = currentDateTime.toISOString().split('T')[0];
@@ -333,6 +361,43 @@ function addPartRow() {
 function removeThisPartRow(button) {
     const partRow = button.parentElement;
     partRow.remove();
+}
+let sessionCounter = 1; // Start with 1 for the first session
+
+function addTimeRow() {
+    const timeList = document.getElementById("time-list");
+    const newRow = document.createElement("div");
+    newRow.className = 'time-row';
+
+    // Increment session counter for each new session
+    sessionCounter++;
+
+    newRow.innerHTML = `
+        <h3>Session ${sessionCounter}</h3>
+        <label for="startTime">Start Time:</label>
+        <input type="time" class="startTime">
+        <input type="date" class="startDate">
+        <label for="endTime">End Time:</label>
+        <input type="time" class="endTime">
+        <input type="date" class="endDate">
+        <button type="button" class="remove-time-button" onclick="removeThisTimeRow(this)">-</button>
+    `;
+
+    timeList.appendChild(newRow);
+    renumberSessions(); // Renumber sessions after adding a new one
+}
+
+function removeThisTimeRow(button) {
+    const timeRow = button.parentElement;
+    timeRow.remove();
+    renumberSessions(); // Renumber sessions after removing one
+}
+function renumberSessions() {
+    const timeRows = document.querySelectorAll('.time-row');
+    timeRows.forEach((row, index) => {
+        // Update the session number, index starts from 0, so add 1 for session number
+        row.querySelector('h3').textContent = `Session ${index + 1}`;
+    });
 }
 </script>
 
