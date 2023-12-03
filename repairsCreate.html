@@ -184,6 +184,13 @@
                 </datalist>
                 <button type="button" id="newEquipmentButton">New Equipment</button>
             </div>
+
+                <div id="sessionInfo">
+                    <label for="startTime">Start Time:</label>
+                    <input type="time" id="startTime">
+                    <input type="date" id="startDate">
+                </div>
+
                 <div id="descriptionInfo">
                     <label for="description">Equipment Issue</label>
                     <textarea id="description" name="description" required placeholder="Enter equipment issue in detail" rows="5" cols="50"></textarea>
@@ -203,6 +210,14 @@
     document.addEventListener("DOMContentLoaded", function () {
     const ownerInput = document.getElementById("owner");
     const equipmentList = document.getElementById("equipmentList");
+
+    // Automatically fill start time
+    var currentDateTime = new Date();
+    var currentDate = currentDateTime.toISOString().split('T')[0];
+    var currentTime = currentDateTime.toTimeString().split(' ')[0].substring(0, 5);
+
+    document.getElementById('startDate').value = currentDate;
+    document.getElementById('startTime').value = currentTime;
 
     // Define the mapping of owners to their equipment
     const ownerEquipmentMap = {
