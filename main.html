@@ -14,9 +14,10 @@
             background-color: #333;
             color: #fff;
             padding: 1rem;
+            padding-left: 50px;
             display: flex;
-            justify-content: space-between; /* Align content horizontally */
-            align-items: center; /* Center content vertically */
+            justify-content: space-between;
+            align-items: center;
             width: 100%;
         }
 
@@ -151,16 +152,9 @@
     </style>
 </head>
 <body>
-    
-    <div class="login-form" id="loginForm">
-        <h2> Emma's Small Engine Repair Employee Login</h2>
-        <input type="text" id="username" class="login-input" placeholder="Username"><br>
-        <input type="password" id="password" class="login-input" placeholder="Password"><br>
-        <button class="login-button" onclick="login()">Login</button>
-    </div>
-    <header style="display: none;" id="headerContent">
+    <header>
         <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
-        <nav>
+        <nav style="display: none;" id="headerContent">
             <ul>
                 <li><a href="main.html">Home</a></li>
                 <li><a href="inventory.html">Equipment</a></li>
@@ -171,6 +165,14 @@
             </ul>
         </nav>
     </header>
+
+    <div class="login-form" id="loginForm">
+        <h2> Emma's Small Engine Repair Employee Login</h2>
+        <input type="text" id="username" class="login-input" placeholder="Username"><br>
+        <input type="password" id="password" class="login-input" placeholder="Password"><br>
+        <button class="login-button" onclick="login()">Login</button>
+    </div>
+    
     <main style="display: none;" id="mainContent">
         <section id="employee-welcome">
             <h2 id="welcome-title">Welcome Employees</h2>
