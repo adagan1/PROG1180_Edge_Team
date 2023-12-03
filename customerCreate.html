@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="customerCreate.js"></script>
     <title>Create Customer</title>
-    <!-- Kyle Fix! -->
     <style>
         h1 {
             text-align: center;
@@ -24,8 +23,8 @@
             padding: 1rem;
             padding-left: 50px;
             display: flex;
-            justify-content: space-between; /* Align content horizontally */
-            align-items: center; /* Center content vertically */
+            justify-content: space-between; /* Align content horizontally /
+            align-items: center; / Center content vertically */
             width: 100%;
         }
 
@@ -78,21 +77,28 @@
         }
 
         button {
-            background-color: #333;
+            background-color: #686868;
             color: #fff;
             padding: 10px 20px;
             border: none;
             cursor: pointer;
         }
+
         button[id="cancelButton"] {
             background-color: red;
         }
-
         button:hover {
-            background-color: #555;
+            background-color: #3a3a3a;
+        }
+        .invalid-input {
+        border: 1px solid red;
+        }
+        input.invalid-input[type="text"],
+        input.invalid-input[type="email"],
+        input.invalid-input[type="tel"] {
+            border: 1px solid red;
         }
     </style>
-    <!-- End Kyle Fix -->
 </head>
 <body>
     <header>
@@ -103,6 +109,8 @@
                 <li><a href="inventory.html">Equipment</a></li>
                 <li><a href="customer.html">Customer</a></li>
                 <li><a href="tables.html">Maintenance</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="repairs.html">Repairs</a></li>
             </ul>
         </nav>
     </header>
@@ -161,6 +169,19 @@
                         <option value="Yukon">Yukon</option>
                     </select>
                 </div>  
+                <div id="EquipmentInfo">
+                    <label for="EquipmentInfo">Equipment:</label>
+                    <select id="EquipmentInfo" name="Equipment" required>
+                        <option value="" disabled selected>Select Equipment</option>
+                        <option value="Equipment1">Craftsman Bagged Lawnmower</option>
+                        <option value="Equipment2">Dewalt Drill</option>
+                        <option value="Equipment3">Craftsman Saw</option>
+                        <option value="Equipment4">John Deere Electric Lawnmower</option>
+                    </select>
+                    <!-- Add Equipment Button -->
+                    <button type="button" id="addEquipmentButton" onclick="openAddEquipmentPage()">Add Equipment</button>
+                </div>
+                <div id="errorContainer"></div> <!-- Container for error messages -->
                 <div>
                     
                     <button type="button" onclick="createCustomer()">Save Changes</button>

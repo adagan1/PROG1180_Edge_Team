@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="reports.js"></script>
+    <title>Reports</title>
+</head>
+<style>
+    #searchInput {
+        width: 40.3%; /* Adjust the width as needed */
+        max-width: 150px; /* Limit the maximum width */
+        margin-bottom: 20px; /* Add space below the search input */
+        display: block;
+    }
+
+    /* Style for the div containing the Add Report button */
+    .add-report-button-container {
+        margin-top: 10px; /* Add space above the button */
+    }
+</style>
+
+<body>
+    <header>
+        <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
+        <nav>
+            <ul>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="inventory.html">Equipment</a></li>
+                <li><a href="customer.html">Customer</a></li>
+                <li><a href="tables.html">Maintenance</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="repairs.html">Repairs</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Reports</h1>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search for reports...">
+        </div>
+        <div class="filter-bar">
+    <label for="categoryFilter">Filter by Category:</label>
+    <select id="categoryFilter" onchange="fillTableWithReportData()">
+        <option value="all">All</option>
+        <option value="sales">Sales</option>
+        <option value="warranty">Warranty</option>
+        <option value="orders">Orders</option>
+    </select>
+</div>
+
+<div class="add-report-button-container" 
+     style="margin-top: 20px;">
+    <button onclick="createReport()">Add Report</button>
+</div>
+
+
+        <table id="reportTable">
+            <thead>
+                <tr>
+                    <th>Owner/Brand</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Controls</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Report data rows will be populated using JavaScript -->
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        function addNewCategory() {
+            var newCategory = prompt("Please enter the new category name:");
+            if (newCategory) {
+                var select = document.getElementById("categoryFilter");
+                var option = document.createElement("option");
+                option.value = newCategory.toLowerCase();
+                option.text = newCategory;
+                select.add(option);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -21,6 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
             // Add an event listener to save changes
             const saveButton = document.getElementById("saveButton");
             saveButton.addEventListener("click", function () {
+                // Reset previous error styles and messages
+                resetValidationStyles();
+                const errorContainer = document.getElementById("errorContainer");
+                errorContainer.innerText = "";
+
                 // Validate the input fields
                 const name = document.getElementById("equipmentName").value;
                 const brand = document.getElementById("brand").value;
@@ -44,8 +49,27 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Redirect back to the inventory page
                     window.location.href = "inventory.html";
                 } else {
-                    // Display an alert if any required field is empty
-                    alert("Please fill in all the required fields.");
+                    // Display error messages for missing or incorrect fields
+                    if (!name) {
+                        errorContainer.innerText += "Please enter a name.\n";
+                        document.getElementById("equipmentName").classList.add("invalid-input");
+                    }
+                    if (!brand) {
+                        errorContainer.innerText += "Please select a brand.\n";
+                        document.getElementById("brand").classList.add("invalid-input");
+                    }
+                    if (!description) {
+                        errorContainer.innerText += "Please enter equipment description.\n";
+                        document.getElementById("equipmentDescription").classList.add("invalid-input");
+                    }
+                    if (!colour) {
+                        errorContainer.innerText += "Please select a color.\n";
+                        document.getElementById("colour").classList.add("invalid-input");
+                    }
+                    if (!owner) {
+                        errorContainer.innerText += "Please select an owner.";
+                        ownerDropdown.classList.add("invalid-input");
+                    }
                 }
             });
         } catch (error) {
@@ -60,4 +84,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function goToEquipmentPage() {
     window.location.href = "inventory.html";
+}
+
+function resetValidationStyles() {
+    const elements = document.getElementsByClassName("invalid-input");
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].classList.remove("invalid-input");
+    }
+}
+
+function goToCreateCustomerPage() {
+    window.location.href = "customerCreate.html";
 }

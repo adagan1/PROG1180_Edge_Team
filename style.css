@@ -85,12 +85,14 @@ button {
 }
 
 button:hover {
-    background-color: #555;
+    background-color: #3a3a3a;
 }
 
 /* Style tables, Tables page */
 table {
-    width: 100%;
+    align-items: center;
+    text-align: center;
+    width: auto;
     border-collapse: collapse;
     margin-top: 20px;
 }
@@ -100,7 +102,7 @@ table th, table td {
     border: 1px solid #ccc;
 }
 
-#coloursTable, #typesTable, #citiesTable {
+#coloursTable, #typesTable, #citiesTable, #partsTable, #brandsTable {
     width: 500px;
 }
 

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="repairs.js"></script>
+    <title>Emma's Small Engines</title>
+    <style>
+        #searchInput {
+            width: 40.3%; /* Adjust the width as needed */
+            max-width: 150px; /* Limit the maximum width */
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+
+        /* Style for the div containing the Add Repair button */
+        .add-repair-button-container {
+            margin-top: 10px; /* Add space above the button */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
+        <nav>
+            <ul>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="inventory.html">Equipment</a></li>
+                <li><a href="customer.html">Customer</a></li>
+                <li><a href="tables.html">Maintenance</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="repairs.html">Repairs</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Repairs</h1>
+        <div class="center-container">
+            <input type="text" id="searchInput" placeholder="Search for a repair...">
+        </div>
+        <div class="filter-bar">
+            <label for="categoryFilter">Filter by Status:</label>
+            <select id="categoryFilter" onchange="fillTableWithRepairData()">
+                <option value="all">All</option>
+                <option value="in progress">In Progress</option>
+                <option value="completed">Completed</option>
+            </select>
+        </div>
+        <div style="margin-top: 20px;">
+            <button onclick="createRepair()">Add Repair Record</button>
+        </div>
+        <table id="repairsTable">
+            <thead>
+                <tr>
+                    <th>Status</th> 
+                    <th>Customer</th>
+                    <th>Equipment</th>
+                    <th>Issue</th>
+                    <th>Session</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Generated repair records will be added here, ensure to match the order of columns -->
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

@@ -1,198 +1,158 @@
-// Hardcoded data for the colors and types tables
-const colorsData = [
-    { name: 'Red' },
-    { name: 'Green' },
-    { name: 'Blue' },
-    { name: 'Yellow' },
-    { name: 'Purple' },
-    { name: 'Pink' },
-    { name: 'Orange' },
-    { name: 'White' },
-    { name: 'Brown' },
-    { name: 'Grey' },
-    { name: 'Black' }
-];
-
-const typesData = [
-    { type: 'Electric lawnmower' },
-    { type: 'Gas powered lawnmower' },
-    { type: 'Bagged lawnmower' },
-    { type: 'Push Mower' },
-    { type: 'Scythe' }
+// Hardcoded data for the tables
+const coloursData = [
+    { name: 'Red' }, { name: 'Green' }, { name: 'Blue' }, 
+    { name: 'Yellow' }, { name: 'Purple' }, { name: 'Pink' },
+    { name: 'Orange' }, { name: 'White' }, { name: 'Brown' },
+    { name: 'Grey' }, { name: 'Black' }
 ];
 
 const citiesData = [
-    { name: 'Niagara Falls' },
-    { name: 'Toronto' },
-    { name: 'Ottawa' },
-    { name: 'Calgary' },
-    { name: 'Winnipeg' }
+    { name: 'Niagara Falls' }, { name: 'Toronto' }, 
+    { name: 'Ottawa' }, { name: 'Calgary' }, { name: 'Winnipeg' }
 ];
 
-// Function to populate a table with data
+// Set fixed stock values for each part
+const partsData = [
+    { name: 'Bolt', stock: 50 },
+    { name: 'Screw', stock: 75 },
+    { name: 'Washer', stock: 100 },
+    { name: 'Nut', stock: 80 },
+    { name: 'Spring', stock: 60 }
+];
+
+// Set fixed stock values for each type
+const typesData = [
+    { name: 'Electric lawnmower', stock: 30 },
+    { name: 'Gas powered lawnmower', stock: 25 },
+    { name: 'Bagged lawnmower', stock: 40 },
+    { name: 'Push Mower', stock: 35 },
+    { name: 'Scythe', stock: 20 }
+];
+
+const brandsData = [
+    { name: 'Honda' }, { name: 'Dewalt' }, { name: 'Craftsman' }, 
+    { name: 'John Deere' }
+];
+
+
+
 function populateTable(tableId, data) {
     const table = document.getElementById(tableId);
     const tableBody = table.getElementsByTagName('tbody')[0];
-
-    // Clear the existing table rows
     tableBody.innerHTML = '';
 
     data.forEach(item => {
         const row = tableBody.insertRow();
         const cell = row.insertCell();
-        cell.textContent = item.name || item.type; // Use item.name for the cell content
+        cell.textContent = item.name || item.type;
 
-        // Add a Controls column for editing
+        // Add a Stock column for parts and types
+        if (tableId === 'partsTable' || tableId === 'typesTable') {
+            const stockCell = row.insertCell();
+            stockCell.textContent = item.stock;
+        }
+
+        // Add a Controls column for editing and ordering more
         const controlsCell = row.insertCell();
+        
+        // Create Edit button
         const editButton = document.createElement('button');
         editButton.textContent = 'Edit';
+        editButton.style.marginRight = '10px'; // Added margin to the right of the Edit button for spacing
         editButton.onclick = function () {
             editItem(row, tableId);
         };
         controlsCell.appendChild(editButton);
+
+        // Create Order More button (only for parts and types tables)
+        if (tableId === 'partsTable' || tableId === 'typesTable') {
+            const orderMoreButton = document.createElement('button');
+            orderMoreButton.textContent = 'Order More';
+            // Optionally, add margin for order more button if needed
+            // orderMoreButton.style.marginLeft = '10px';
+            orderMoreButton.onclick = function () {
+                orderMorePartsOrTypes(item);
+            };
+            controlsCell.appendChild(orderMoreButton);
+        }
     });
 }
 
-// Function to show a table and deactivate the other tab
+
+function filterTable() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const activeTableId = Array.from(document.getElementsByClassName('table active')).map(table => table.id)[0];
+
+    let data;
+    if (activeTableId === 'coloursTable') { data = coloursData; }
+    else if (activeTableId === 'typesTable') { data = typesData; }
+    else if (activeTableId === 'citiesTable') { data = citiesData; }
+    else if (activeTableId === 'partsTable') { data = partsData; }
+    else if (activeTableId === 'brandsTable') { data = brandsData; }
+
+    const filteredData = data.filter(item => (item.name || item.type).toLowerCase().includes(searchTerm));
+    populateTable(activeTableId, filteredData);
+}
+
 function showTable(tableId) {
     const tabs = document.getElementById('tabs').getElementsByTagName('button');
     for (const tab of tabs) {
         tab.classList.remove('active');
     }
-    
-    // Hide all tables
+
     const allTables = document.getElementsByClassName('table');
     for (const table of allTables) {
         table.classList.remove('active');
     }
-    
+
     document.getElementById(tableId).classList.add('active');
 }
 
-// Function to filter the table based on user input
-function filterTable() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    
-    // Determine which table is currently active
-    const activeTableId = Array.from(document.getElementsByClassName('table active')).map(table => table.id)[0];
-    
-    // Determine the dataset based on the active table
-    let data;
-    if (activeTableId === 'coloursTable') {
-        data = colorsData;
-    } else if (activeTableId === 'typesTable') {
-        data = typesData;
-    } else if (activeTableId === 'citiesTable') {
-        data = citiesData;
-    } else {
-        return;
-    }
-    
-    const filteredData = data.filter(item => {
-        return (item.name || item.type).toLowerCase().includes(searchTerm); // Update this line to check both "name" and "type"
-    });
-
-    populateTable(activeTableId, filteredData);
-}
-
-// Function to handle editing an item
 function editItem(row, tableId) {
-    const data = getTableData(tableId);
-    const rowIndex = row.rowIndex - 1; // Subtract 1 to account for the header row
-    const cellToEdit = row.cells[0]; // Assuming you're editing the first cell
+    const rowIndex = row.rowIndex - 1;
+    let editPage, rowType, data;
+    if (tableId === 'coloursTable') { editPage = 'coloursEdit.html'; rowType = 'colour'; data = coloursData; }
+    else if (tableId === 'typesTable') { editPage = 'typesEdit.html'; rowType = 'type'; data = typesData; }
+    else if (tableId === 'citiesTable') { editPage = 'citiesEdit.html'; rowType = 'city'; data = citiesData; }
+    else if (tableId === 'partsTable') { editPage = 'partsEdit.html'; rowType = 'part'; data = partsData; }
+    else if (tableId === 'brandsTable') { editPage = 'brandsEdit.html'; rowType = 'brand'; data = brandsData; }
 
-    // Prompt the user for the new value
-    const newValue = prompt("Edit item:", data[rowIndex].name || data[rowIndex].type);
-
-    if (newValue !== null) {
-        if (data[rowIndex].name) {
-            data[rowIndex].name = newValue;
-        } else {
-            data[rowIndex].type = newValue;
-        }
-        cellToEdit.textContent = newValue; // Update the cell content
-    }
+    const rowData = data[rowIndex];
+    const jsonData = JSON.stringify(rowData);
+    const paramName = `${rowType}Name`;
+    const typeName = rowData.name || rowData.type;
+    window.location.href = `${editPage}?data=${encodeURIComponent(jsonData)}&${paramName}=${encodeURIComponent(typeName)}`;
 }
 
-// Helper function to get data from a selected table
-function getTableData(tableId) {
-    let data;
-    if (tableId === 'coloursTable') {
-        data = colorsData;
-    } else if (tableId === 'typesTable') {
-        data = typesData;
-    } else if (tableId === 'citiesTable') {
-        data = citiesData;
-    }
-    return data;
-}
-
-// Update the table to include Edit buttons
-function updateTableWithEditButtons() {
-    const tables = document.getElementsByClassName('table');
-    for (const table of tables) {
-        const rows = table.rows;
-        for (let i = 1; i < rows.length; i++) {
-            const editCell = rows[i].insertCell(-1);
-            const editButton = document.createElement('button');
-            editButton.textContent = 'Edit';
-            editButton.onclick = function () {
-                editItem(rows[i], table.id);
-            };
-            editCell.appendChild(editButton);
-        }
-    }
-}
-
-// Call the function to add Edit buttons when the page loads
-updateTableWithEditButtons();
-
-// Initial population of the colors and types tables
-populateTable('coloursTable', colorsData);
-populateTable('typesTable', typesData);
-populateTable('citiesTable', citiesData);
-
-// Activate the "Colors" tab by default
-showTable('coloursTable');
-
-// Add an event listener to the search input for real-time filtering
-const searchInput = document.getElementById('searchInput');
-searchInput.addEventListener('input', filterTable);
-
-// Call the function to add Edit buttons when the page loads
-updateTableWithEditButtons();
-
-// Initial population of the colors and types tables
-populateTable('coloursTable', colorsData);
-populateTable('typesTable', typesData);
-populateTable('citiesTable', citiesData);
-
-// Activate the "Colors" tab by default
-showTable('coloursTable');
-
-function makeButtonCreateColourByDefault() {
-    const createButton = document.getElementById('createButton');
-    createButton.onclick = function() {
-        window.location.href = 'coloursCreate.html';
-    }
-}
-
-// Function to make the add button work upon page load
-window.onload = function (buttonText, link) {
-    // Get the initially active tab (in this case, "Colors")
-    const createButton = document.getElementById('createButton');
-    createButton.textContent = buttonText;
-    createButton.textContent = 'Add Colour'
-    createButton.onclick = function () {
-        window.location.href = 'coloursCreate.html';
-    };
-}
-
-// Function to update the "Create" button text and link
 function updateCreateButton(buttonText, link) {
     const createButton = document.getElementById('createButton');
     createButton.textContent = buttonText;
     createButton.onclick = function () {
         window.location.href = link + '.html';
     };
+}
+
+window.onload = function () {
+    populateTable('coloursTable', coloursData);
+    populateTable('typesTable', typesData);
+    populateTable('citiesTable', citiesData);
+    populateTable('partsTable', partsData);
+    populateTable('brandsTable', brandsData)
+    showTable('coloursTable');
+    updateCreateButton('Add Colour', 'coloursCreate');
+
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', filterTable);
+};
+
+// Function for handling the order more action
+function orderMoreParts(row, part) {
+    // Redirect to the reportsCreate.html page
+    window.location.href = 'reportsCreate.html';
+}
+
+// Function for handling the order more action for parts or types
+function orderMorePartsOrTypes(row, item) {
+    // Redirect to the reportsCreate.html page
+    window.location.href = 'reportsCreate.html';
 }

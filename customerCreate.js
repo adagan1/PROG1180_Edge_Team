@@ -1,42 +1,85 @@
 function createCustomer() {
-    // Get the data for the new customer
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-    const address = document.getElementById("address").value;
-    const city = document.getElementById("city").value;
-    const postal = document.getElementById("postal").value;
-    const province = document.getElementById("province").value;
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+    const address = document.getElementById("address");
+    const city = document.getElementById("city");
+    const postal = document.getElementById("postal");
+    const province = document.getElementById("province");
+    const equipment = document.getElementById("EquipmentInfo");
+    const errorContainer = document.getElementById("errorContainer");
 
-    // Input validation
-    if (!name || !email || !phone || !address || !city || !postal || !province) {
-        // Show an error message if any of the fields are empty
-        alert("Please fill in all the required fields.");
-    } else if (!validateEmail(email)) {
-        // Show an error message if the email is not valid
-        alert("Please enter a valid email address.");
-    } else if (!validatePhone(phone)) {
-        // Show an error message if the phone number is not in the correct format
-        alert("Please enter a valid phone number (xxx-xxx-xxxx).");
-    } else if (!validatePostalCode(postal)) {
-        // Show an error message if the postal code is not in the correct format
-        alert("Please enter a valid postal code (XXX XXX).");
+    // Clear previous error messages and reset input field outlines
+    errorContainer.innerHTML = "";
+    resetInputOutlines();
+
+    let errorMessages = [];
+
+    if (!name.value) {
+        errorMessages.push("Please fill in the 'Name' field.");
+        name.classList.add("invalid-input");
+    }
+
+    if (!email.value) {
+        errorMessages.push("Please fill in the 'Email' field.");
+        email.classList.add("invalid-input");
+    } else if (!validateEmail(email.value)) {
+        errorMessages.push("Please enter a valid email address.");
+        email.classList.add("invalid-input");
+    }
+
+    if (!phone.value) {
+        errorMessages.push("Please fill in the 'Phone' field.");
+        phone.classList.add("invalid-input");
+    } else if (!validatePhone(phone.value)) {
+        errorMessages.push("Please enter a valid phone number (xxx-xxx-xxxx).");
+        phone.classList.add("invalid-input");
+    }
+
+    if (!address.value) {
+        errorMessages.push("Please fill in the 'Address' field.");
+        address.classList.add("invalid-input");
+    }
+
+    if (!city.value) {
+        errorMessages.push("Please select a city.");
+        city.classList.add("invalid-input");
+    }
+
+    if (!postal.value) {
+        errorMessages.push("Please fill in the 'Postal Code' field.");
+        postal.classList.add("invalid-input");
+    } else if (!validatePostalCode(postal.value)) {
+        errorMessages.push("Please enter a valid postal code (XXX XXX).");
+        postal.classList.add("invalid-input");
+    }
+
+    if (!province.value) {
+        errorMessages.push("Please select a province.");
+        province.classList.add("invalid-input");
+    }
+
+    if (equipment.value === "") {
+        errorMessages.push("Please select an 'Equipment'.");
+        equipment.classList.add("invalid-input");
+    }
+
+    if (errorMessages.length > 0) {
+        // Display error messages on the page
+        errorContainer.innerHTML = errorMessages.join("<br>");
     } else {
-        // Create an object with the new customer data
         const newCustomer = {
-            name: name,
-            email: email,
-            phone: phone,
-            address: address,
-            city: city,
-            postal: postal,
-            province: province
+            name: name.value,
+            email: email.value,
+            phone: phone.value,
+            address: address.value,
+            city: city.value,
+            postal: postal.value,
+            province: province.value,
+            equipment: equipment.value
         };
 
-        // For this example, we'll log the new data to the console
         console.log("New Customer Data:", newCustomer);
-
-        // Redirect back to the customer page
         window.location.href = "customer.html";
     }
 }
@@ -46,19 +89,28 @@ function goToCustomerPage() {
 }
 
 function validateEmail(email) {
-    // Email validation regex pattern
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
 }
 
 function validatePhone(phone) {
-    // Phone number validation regex pattern (xxx-xxx-xxxx)
     const phonePattern = /^\d{3}-\d{3}-\d{4}$/;
     return phonePattern.test(phone);
 }
 
 function validatePostalCode(postal) {
-    // Postal code validation regex pattern (XXX XXX)
     const postalPattern = /^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$/;
     return postalPattern.test(postal);
+}
+
+function resetInputOutlines() {
+    // Remove the 'invalid-input' class from all input fields and dropdown lists
+    const inputs = document.querySelectorAll("input, select");
+    inputs.forEach(input => {
+        input.classList.remove("invalid-input");
+    });
+}
+function openAddEquipmentPage() {
+    // Open the add equipment page
+    window.location.href = 'inventoryCreate.html';
 }

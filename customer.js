@@ -2,32 +2,39 @@
 const hardCodedCustomer = [
     {
         name: "Joe Jawndel",
+        customerid: "JJ3490",
         email: "JJawndel@gmail.com",
         phone: "905-221-3490",
         address: "1220 Royal Lane",
         city: "Niagara Falls",
         postal: "A2V 3NM",
-        province: "Ontario"
+        province: "Ontario",
+        Equipment: "Craftsman Bagged Lawnmower"
     },
     {
         name: "Billy Talent",
+        customerid: "BT3420",
         email: "BTalent@gmail.com",
         phone: "289-334-3420",
         address: "1810 Salty Springs",
         city: "Toronto",
         postal: "A2V 3NM",
-        province: "Alberta"
+        province: "Alberta",
+        Equipment: "Dewalt Drill"
     },
     {
         name: "Julio Mendes",
+        customerid: "JM2061",
         email: "JMendes@hotmail.com",
         phone: "289-493-2061",
         address: "6820 Far Crescent",
         city: "Ottawa",
         postal: "A2V 3NM",
-        province: "Quebec"
+        province: "Quebec",
+        Equipment: "Craftsman Saw"
     }
 ];
+
 
 // Function to fill the table with customer data, including "Edit" and "Detail" buttons
 function fillTableWithCustomerData() {

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="inventoryCreate.js"></script>
-    <title>Create Equipment</title>
+    <script src="repairsCreate.js"></script>
+    <title>Emma's Small Engines</title>
     <style>
         h1 {
             text-align: center;
@@ -137,6 +137,7 @@
         white-space: nowrap;
         flex: none;
     }
+   
     </style>
 </head>
 <body>
@@ -155,64 +156,49 @@
     </header>
 
     <main>
-        <h1 id="createOrEditTitle">Add Equipment</h1>
+        <h1 id="createOrEditTitle">New Repair Request</h1>
         <div class="center-container">
             <form id="createForm">
-                <div id="ownerInfo">
-                    <label for="owner">Owner:</label>
-                    <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
-                    <datalist id="ownerList">
-                        <option value="Joe Jawndel">
-                        <option value="Billy Talent">
-                        <option value="Julio Mendes">
-                        <!-- Add more owners here -->
-                    </datalist>
-                    <button type="button" onclick="goToCreateCustomerPage()" id="newCustomerButton">New Customer</button>
-                </div>
-
-                <div id="nameInfo">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required placeholder="Enter name">
-                </div>
-                <div id="brandInfo">
-                    <label for="brand">Brand:</label>
-                    <select id="brand" name="brand" required>
-                        <option value="" disabled selected>Select a brand</option>
-                        <option value="Brand1">Craftsman</option>
-                        <option value="Brand2">Dewalt</option>
-                        <option value="Brand3">Honda</option>
-                        <option value="Brand4">John Deere</option>
-                    </select>
-                </div>
+            </div>
+            <!-- Mohammads fix -->     <!-- no more use for dropdown box, uses a search for owners -->
+            <div id="ownerInfo">
+                <label for="owner">Owner:</label>
+                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
+                <datalist id="ownerList">
+                    <option value="Joe Jawndel">
+                    <option value="Billy Talent">
+                    <option value="Julio Mendes">
+                    <!-- Add more owners here -->
+                </datalist>
+                <button type="button" id="newCustomerButton">New Customer</button>
+            </div>
+            
+            <div id="EquipmentInfo">
+                <label for="equipment">Equipment:</label>
+                <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
+                <datalist id="equipmentList">
+                    <option value="Craftsman Bagged Lawnmower">
+                    <option value="Dewalt Drill">
+                    <option value="Craftsman Saw">
+                    <option value="John Deere Electric Lawnmower">
+                    <!-- Add more equipment options here -->
+                </datalist>
+                <button type="button" id="newEquipmentButton">New Equipment</button>
+            </div>
                 <div id="descriptionInfo">
-                    <label for="description">Description:</label>
-                    <textarea id="description" name="description" required placeholder="Enter item description" rows="5" cols="50"></textarea>
-                    <!-- The "rows" attribute determines the number of visible lines, and the "cols" attribute determines the number of visible columns -->
+                    <label for="description">Equipment Issue</label>
+                    <textarea id="description" name="description" required placeholder="Enter equipment issue in detail" rows="5" cols="50"></textarea>
                 </div>
-                <div id="colourInfo">
-                    <label for="colour">Colour:</label>
-                    <select id="colour" name="colour" required>
-                        <option value="" disabled selected>Select a colour</option>
-                        <option value="Red">Red</option>
-                        <option value="Blue">Blue</option>
-                        <option value="Green">Green</option>
-                        <option value="Yellow">Yellow</option>
-                        <option value="Orange">Orange</option>
-                        <option value="Purple">Purple</option>
-                        <option value="Pink">Pink</option>
-                        <option value="Black">Black</option>
-                        <option value="White">White</option>
-                        <option value="Gray">Gray</option>
-                    </select>
-                </div>
-                
+                <label for="warranty">Warranty:</label>
+                <input type="checkbox">
                 <div id="errorContainer"></div> <!-- Container for error messages -->
                 <div>
-                    <button type="button" id="createInventoryButton">Save Changes</button>
-                    <button type="button" id="cancelButton" onclick="goToEquipmentPage()">Cancel</button>
+                    <button type="button" id="createRepairsButton">Send to Pending Repairs</button>
+                    <button type="button" id="cancelButton" onclick="goToRepairsPage()">Cancel</button>
                 </div>
             </form>
         </div>
     </main>
+    
 </body>
 </html>

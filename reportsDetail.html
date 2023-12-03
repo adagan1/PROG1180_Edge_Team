@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="coloursCreate.js"></script>
-    <title>Create Colour</title>
-    <!-- Kyle Fix! -->
+    <script src="reportsDetail.js"></script>
+    <title>Report Details</title>
     <style>
         h1 {
             text-align: center;
@@ -24,8 +23,8 @@
             padding: 1rem;
             padding-left: 50px;
             display: flex;
-            justify-content: space-between; /* Align content horizontally */
-            align-items: center; /* Center content vertically */
+            justify-content: space-between;
+            align-items: center;
             width: 100%;
         }
 
@@ -52,47 +51,16 @@
             text-align: center;
         }
 
-        form {
-            margin: 0;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        input[type="email"],
-        input[type="tel"],
-        select {
-            width: 40%;
-            padding: 10px;
-            margin-bottom: 15px;
+        th, td {
             border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        select {
-            height: 40px;
-        }
-
-        button {
-            background-color: #686868;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-        }
-
-        button[id="cancelButton"] {
-            background-color: red;
-        }
-        button:hover {
-            background-color: #3a3a3a;
+            padding: 10px;
         }
     </style>
-    <!-- End Kyle Fix -->
 </head>
 <body>
     <header>
@@ -110,19 +78,14 @@
     </header>
 
     <main>
-        <h1 id="createOrEditTitle">Add Colour</h1>
-        <div class="center-container">
-            <form id="createForm">                
-                <div>
-                    <label for="name">Name:</label>
-                    <input type="text" id="colourName" name="name" required placeholder="Enter colour name">
-                </div>
-                <div>
-                    <button type="button" onclick="createColour()">Save Changes</button>
-                    <button type="button" id="cancelButton", onclick="goToMaintenancePage()">Cancel</button>
-                </div>
-            </form>
-        </div>
+        <h1>Report Details</h1>
+        <table id="reportDetailsTable">
+            <tr>
+                <th>Owner</th>
+                <td id="reportOwner"></td>
+            </tr>
+        </table>
     </main>
+    <button type="button" id="cancelButton" onclick="goToReportsPage()">Back to Reports</button>
 </body>
 </html>

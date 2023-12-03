@@ -6,108 +6,308 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Emma's Small Engines</title>
     <style>
-        /* Add CSS for larger text size */
         main {
             font-size: 20px; /* Base font size for the body */
         }
-        
+
         header {
             background-color: #333;
             color: #fff;
             padding: 1rem;
             padding-left: 50px;
             display: flex;
-            justify-content: space-between; /* Align content horizontally */
-            align-items: center; /* Center content vertically */
+            justify-content: space-between;
+            align-items: center;
             width: 100%;
         }
 
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns */
+            grid-gap: 1rem; /* Space between boxes */
+            max-width: 900px; /* Adjust width as needed */
+            margin: 2rem auto; /* Center the dashboard with automatic margins */
+        }
+
+        .dashboard-section {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Center text inside the sections */
+        }
+
+        .dashboard-section button {
+            width: 80%; /* Full width */
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px; 
+        }
+
+        .dashboard-section button:hover {
+            background-color: #555;
+        }
+
+        @media (max-width: 600px) {
+            .dashboard {
+                grid-template-columns: 1fr; 
+            }
+        }
+
+         .logout-button {
+            display: none; /* Initially hidden */
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+        }
+
+        .logout-button:hover {
+            background-color: #555;
+        }
+
+        .login-form {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .login-input {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .login-button {
+            width: 85%;
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #555;
+        }
+        /* Style for login dropdown */
+        .login-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .login-dropdown-content {
+            display: none;
+            position: absolute;
+            left: 0; 
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+
+        .login-dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .login-dropdown-content a:hover {background-color: #f1f1f1;}
+
+        .login-dropdown:hover .login-dropdown-content {
+            display: block;
+        }
+
+        .login-button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .login-button:hover, .login-button:focus {
+            background-color: #555;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
-        <nav>
+        <nav style="display: none;" id="headerContent">
             <ul>
                 <li><a href="main.html">Home</a></li>
                 <li><a href="inventory.html">Equipment</a></li>
                 <li><a href="customer.html">Customer</a></li>
                 <li><a href="tables.html">Maintenance</a></li>
+                <li><a href="reports.html">Reports</a></li>
+                <li><a href="repairs.html">Repairs</a></li>
             </ul>
         </nav>
     </header>
-    <main>
+
+    <div class="login-form" id="loginForm">
+        <h2> Emma's Small Engine Repair Employee Login</h2>
+        <input type="text" id="username" class="login-input" placeholder="Username"><br>
+        <input type="password" id="password" class="login-input" placeholder="Password"><br>
+        <button class="login-button" onclick="login()">Login</button>
+    </div>
+    
+    <main style="display: none;" id="mainContent">
         <section id="employee-welcome">
-            <h2>Welcome Employees</h2>
-            <p>Welcome to Emma's Small Engines Employee Portal. We are delighted to have you as a part of our team. Here, you'll find a wealth of resources and information to help you thrive in your role and contribute to our collective success.
-
-                Whether you're a new hire or a seasoned team member, this portal is designed to provide you with essential tools, updates, and announcements that support your journey with us. Our commitment to your growth and well-being is paramount, and we encourage you to explore the following sections to make the most of your experience:
-            
-                <strong>Announcements and Updates:</strong> Stay informed about the latest company news, policy changes, and important updates that impact our employees.
-            
-                <strong>Employee Resources:</strong> Access key documents, such as our Employee Handbook, Benefits Information, HR Policies, and more. These resources are here to assist you in your day-to-day activities and decision-making.
-            
-                Your contribution is essential to our ongoing success, and we look forward to working together to achieve our goals. If you have any questions, concerns, or suggestions, please don't hesitate to reach out to our HR department. We're here to support you every step of the way.</p>
-        </section>
-
-        <section id="announcements">
-            <h2>Announcements and Updates</h2>
+            <h2 id="welcome-title">Welcome Employees</h2>
             <ul>
-                <li>
-                    <strong>New Product Launch:</strong> We're excited to announce the launch of our latest product, the "TurboTiller 9000." This powerful tiller offers enhanced efficiency and durability, making it a game-changer for garden enthusiasts.
-                </li>
-                <li>
-                    <strong>Employee of the Month:</strong> Congratulations to Sarah Williams, our Employee of the Month! Sarah's dedication and hard work have greatly contributed to our success.
-                </li>
-                <li>
-                    <strong>Upcoming Company Picnic:</strong> Get ready for some fun in the sun! Our annual company picnic is just around the corner. Stay tuned for details on games, delicious food, and a day of team bonding.
-                </li>
-                <li>
-                    <strong>Community Outreach:</strong> We're proud to support our local community by participating in a neighborhood clean-up initiative. Join us in giving back and making our town a cleaner, greener place.
-                </li>
-                <li>
-                    <strong>Safety First:</strong> Safety is our top priority. We've recently completed a series of safety workshops and training sessions to ensure the well-being of our employees and customers.
-                </li>
-                <li>
-                    <strong>Innovation in the Workshop:</strong> Our engineers are hard at work developing eco-friendly engines. Stay tuned for exciting updates on our progress toward a more sustainable future.
-                </li>
-                <li>
-                    <strong>New Employee Benefits:</strong> We're enhancing our employee benefits package to provide better health coverage, wellness programs, and professional development opportunities.
-                </li>
-                <li>
-                    <strong>Customer Testimonials:</strong> We love hearing from our satisfied customers. Check out the latest testimonials on our website to see how Emma's Small Engines products are making a difference.
-                </li>
-                <li>
-                    <strong>Employee Appreciation Day:</strong> Mark your calendars for Employee Appreciation Day! It's our way of saying thank you to our incredible team for their dedication and hard work.
-                </li>
-                <li>
-                    <strong>Charity Drive:</strong> Join us in our upcoming charity drive to support a local children's hospital. Your contributions can make a positive impact on young lives in need.
-                </li>
+                <li id="welcome-message">Welcome to Emma's Small Engines Employee Portal.</li>
             </ul>
         </section>
+        
+        <div class="dashboard">
+            <div class="dashboard-section" id="addCustomerSection" style="display: none;">
+                <h2>Add a Customer</h2>
+                <p>Click the button to quickly add a customer.</p>
+                <button onclick="location.href='customerCreate.html'">Add a Customer</button>
+            </div>
+            
+            <div class="dashboard-section">
+                <h2>Add a Equipment</h2>
+                <p>Click the button to quickly create an appliance.</p>
+                <button onclick="location.href='inventoryCreate.html'">Add Equipment</button>
+            </div>
+            
+            <div class="dashboard-section" id="createReportSection">
+                <h2>Create a Report</h2>
+                <p>Click the button to quickly Generate a report.</p>
+                <button onclick="location.href='reportsCreate.html'">Generate a Report</button>
+            </div>
 
-        <section id="employee-resources">
-            <h2>Employee Resources</h2>
-            <ul>
-                <li><a>Employee Handbook</a></li>
-                <li><a>Benefits Information</a></li>
-                <li><a>HR Policies</a></li>
-                
-            </ul>
-        </section>
-
-        <div class="centered-title">
-            <!-- Your additional page content goes here -->
+            <div class="dashboard-section" id="startRepairSection">
+                <h2>Start a Repair </h2>
+                <p>Click the button to quickly start a repair.</p>
+                <button onclick="location.href='repairsCreate.html'">New Repair Request</button>
+            </div>
+            
+            <div class="dashboard-section" id="repairsSection">
+                <h2> Manage Repairs</h2>
+                <p>Click the button to view and manage repairs.</p>
+                <button onclick="location.href='repairs.html'">View Repairs</button>
+            </div>
+            
         </div>
-
-        <script>
-            window.addEventListener("scroll", function() {
-                const title = document.querySelector(".centered-title");
-                if (title) {
-                    title.style.display = window.scrollY > 0 ? "block" : "none";
-                }
-            });
-        </script>
     </main>
+
+    <button class="logout-button" id="logoutButton" onclick="logout()" style="position: fixed; bottom: 10px; left: 10px;">Logout</button>
+
+    <script>
+
+        function logout() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('headerContent').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('logoutButton').style.display = 'none';
+
+        }
+
+            function login() {
+                var username = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
+
+                if (password === '123') {
+                    document.getElementById('loginForm').style.display = 'none';
+                    document.getElementById('headerContent').style.display = 'block';
+                    document.getElementById('mainContent').style.display = 'block';
+                    document.getElementById('logoutButton').style.display = 'block';
+
+
+                    if (username === 'sales') {
+                        showOnlyAddCustomer();
+                    } else if (username === 'tech') {
+                        showTechnicianSections();
+                    } else if (username === 'admin') {
+                        showAllSections();
+                    } else {
+                        alert('Invalid username');
+                        resetLoginForm();
+                    }
+                } else {
+                    alert('Invalid password');
+                    resetLoginForm();
+                }
+            }
+
+            function resetLoginForm() {
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('headerContent').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'none';
+                document.getElementById('logoutButton').style.display = 'none';
+
+            }
+
+            function updateWelcomeSection(role) {
+                const welcomeTitle = document.getElementById('welcome-title');
+                const welcomeMessage = document.getElementById('welcome-message');
+                if (role === 'sales') {
+                    welcomeTitle.textContent = 'Welcome Sales Associate';
+                    welcomeMessage.textContent = 'Access your sales associate tools here.';
+                } else if (role === 'tech') {
+                    welcomeTitle.textContent = 'Welcome Technician';
+                    welcomeMessage.textContent = 'Access your technician tools here.';
+                } else if (role === 'admin') {
+                    welcomeTitle.textContent = 'Welcome Admin';
+                    welcomeMessage.textContent = 'Access your admin tools here.';
+                }
+            }
+
+            function hideAllSections() {
+                document.querySelectorAll('.dashboard-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+            }
+
+            function showOnlyAddCustomer() {
+                hideAllSections();
+                document.getElementById('addCustomerSection').style.display = 'block';
+                updateWelcomeSection('sales');
+            }
+
+            function showTechnicianSections() {
+                hideAllSections();
+                document.getElementById('createReportSection').style.display = 'block';
+                document.getElementById('startRepairSection').style.display = 'block';
+                document.getElementById('repairsSection').style.display = 'block';
+                updateWelcomeSection('tech');
+            }
+
+            function showAllSections() {
+                document.querySelectorAll('.dashboard-section').forEach(section => {
+                    section.style.display = 'block';
+                });
+                updateWelcomeSection('admin');
+            }
+</script>
+      
 </body>
 </html>
+
+
