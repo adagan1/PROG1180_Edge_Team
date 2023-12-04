@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Emma's Small Engines</title>
+    <title>Emma's Small Engines - New Repair Request</title>
     <style>
         h1 {
             text-align: center;
@@ -94,49 +94,49 @@
         .invalid-input {
             border: 1px solid red;
         }
-        #description, #partsUsed {
-            resize: none; /* Prevent user from resizing the textarea */
+
+        #errorContainer {
+            color: red;
         }
-        input.invalid-input[type="text"]{
-        border: 1px solid red;
-    }
-    /* Increase padding inside the form */
-    form {
-        padding: 8px;
-    }
-    /* Increase the size of the equipment issue box */
-    #descriptionInfo textarea {
-        width: 95%; 
-        height: 150px; 
-        padding: 10px; 
-        margin-bottom: 20px; 
-    }
+        
+        /* Increase padding inside the form */
+        form {
+            padding: 8px;
+        }
 
-    /* Input and button styling */
-    input, button {
-        padding: 10px;
-        margin-bottom: 20px; 
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
+        /* Increase the size of the equipment issue box */
+        #descriptionInfo textarea {
+            width: 95%; 
+            height: 150px; 
+            padding: 10px; 
+            margin-bottom: 20px; 
+        }
 
-    /* Style adjustments for buttons next to inputs */
-    .input-group {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
+        /* Input and button styling */
+        input, button {
+            padding: 10px;
+            margin-bottom: 20px; 
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
-    .input-group input,
-    .input-group button {
-        flex: 1;
-        margin: 0;
-    }
-    .input-group button {
-        white-space: nowrap;
-        flex: none;
-    }
-   
+        /* Style adjustments for buttons next to inputs */
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-group input,
+        .input-group button {
+            flex: 1;
+            margin: 0;
+        }
+
+        .input-group button {
+            white-space: nowrap;
+            flex: none;
+        }
     </style>
 </head>
 <body>
@@ -157,46 +157,32 @@
         <h1 id="createOrEditTitle">New Repair Request</h1>
         <div class="center-container">
             <form id="createForm">
-            </div>
-            <!-- Mohammads fix -->     <!-- no more use for dropdown box, uses a search for owners -->
-            <div id="ownerInfo">
-                <label for="owner">Owner:</label>
-                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
-                <datalist id="ownerList">
-                    <option value="Joe Jawndel">
-                    <option value="Billy Talent">
-                    <option value="Julio Mendes">
-                    <!-- Add more owners here -->
-                </datalist>
-                <button type="button" id="newCustomerButton">New Customer</button>
-            </div>
-            
-            <div id="EquipmentInfo">
-                <label for="equipment">Equipment:</label>
-                <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
-                <datalist id="equipmentList">
-                    <option value="Craftsman Bagged Lawnmower">
-                    <option value="Dewalt Drill">
-                    <option value="Craftsman Saw">
-                    <option value="John Deere Electric Lawnmower">
-                    <!-- Add more equipment options here -->
-                </datalist>
-                <button type="button" id="newEquipmentButton">New Equipment</button>
-            </div>
+                <div id="ownerInfo">
+                    <label for="owner">Owner:</label>
+                    <input type="text" id="owner" name="owner" value="" readonly>
+                </div>
+
+                <div id="EquipmentInfo">
+                    <label for="equipment">Equipment:</label>
+                    <input type="text" id="equipment" name="equipment" value="" readonly>
+                </div>
 
                 <div id="sessionInfo">
                     <label for="startTime">Start Time:</label>
-                    <input type="time" id="startTime">
-                    <input type="date" id="startDate">
+                    <input type="time" id="startTime" name="startTime" readonly>
+                    <input type="date" id="startDate" name="startDate" readonly>
                 </div>
 
                 <div id="descriptionInfo">
                     <label for="description">Equipment Issue</label>
                     <textarea id="description" name="description" required placeholder="Enter equipment issue in detail" rows="5" cols="50"></textarea>
                 </div>
+
                 <label for="warranty">Warranty:</label>
                 <input type="checkbox">
+
                 <div id="errorContainer"></div> <!-- Container for error messages -->
+
                 <div>
                     <button type="button" id="createRepairsButton">Send to Pending Repairs</button>
                     <button type="button" id="cancelButton" onclick="goToRepairsPage()">Cancel</button>
@@ -204,143 +190,85 @@
             </form>
         </div>
     </main>
-    
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const ownerInput = document.getElementById("owner");
-    const equipmentList = document.getElementById("equipmentList");
 
-    // Automatically fill start time
-    var currentDateTime = new Date();
-    var currentDate = currentDateTime.toISOString().split('T')[0];
-    var currentTime = currentDateTime.toTimeString().split(' ')[0].substring(0, 5);
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Retrieve the selected customer name and equipment from sessionStorage
+            const selectedCustomerName = sessionStorage.getItem("selectedCustomerName") || "";
+            const selectedEquipmentName = sessionStorage.getItem("selectedEquipmentName") || "";
 
-    document.getElementById('startDate').value = currentDate;
-    document.getElementById('startTime').value = currentTime;
+            // Fill in the owner and equipment fields
+            document.getElementById("owner").value = selectedCustomerName;
+            document.getElementById("equipment").value = selectedEquipmentName;
 
-    // Define the mapping of owners to their equipment
-    const ownerEquipmentMap = {
-        "Joe Jawndel": ["Honda Bagged Lawnmower"],
-        "Billy Talent": ["Dewalt Drill"],
-        "Julio Mendes": ["John Deere Electric Lawnmower"],
-    };
-    // Initialize equipment list (clear it or set default state)
-    updateEquipmentList(ownerInput.value, ownerEquipmentMap, equipmentList);
+            // Automatically fill start time
+            var currentDateTime = new Date();
+            var currentDate = currentDateTime.toISOString().split('T')[0];
+            var currentTime = currentDateTime.toTimeString().split(' ')[0].substring(0, 5);
 
-    // Event listener for owner input changes
-    ownerInput.addEventListener("input", function() {
-        updateEquipmentList(this.value, ownerEquipmentMap, equipmentList);
-    });
-    // Get the "New Customer" button and attach a click event listener to it
-    document.getElementById("newCustomerButton").addEventListener("click", function () {
-        window.location.href = "customerCreate.html"; // Redirects to the customer creation page
-    });
+            document.getElementById('startDate').value = currentDate;
+            document.getElementById('startTime').value = currentTime;
 
-    // Get the "New Equipment" button and attach a click event listener to it
-    document.getElementById("newEquipmentButton").addEventListener("click", function () {
-        window.location.href = "inventoryCreate.html"; // Redirects to the inventory creation page
-    });
-    // Add an event listener to the "Save Changes" button
-    document.getElementById("createRepairsButton").addEventListener("click", function () {
-        // Reset the input field outlines
-        resetInputOutlines();
+            // Add an event listener to the "Send to Pending Repairs" button
+            document.getElementById("createRepairsButton").addEventListener("click", function () {
+                // Reset the input field outlines
+                resetInputOutlines();
 
-        // Validate the input fields
-        if (validateForm()) {
-            // Get the data for the new repair report
-            const EquipmentInfo = document.getElementById("EquipmentInfo").value;
-            const description = document.getElementById("description").value;
-            const partsUsed = document.getElementById("partsUsed").value;
-            const startTime = document.getElementById("startTime").value;
-            const startDate = document.getElementById("startDate").value;
-            const endTime = document.getElementById("endTime").value;
-            const endDate = document.getElementById("endDate").value;          
+                // Validate the input fields
+                if (validateForm()) {
+                    // Get the data for the new repair report
+                    const EquipmentInfo = document.getElementById("EquipmentInfo").value;
+                    const description = document.getElementById("description").value;
+                    const startTime = document.getElementById("startTime").value;
+                    const startDate = document.getElementById("startDate").value;
 
-            // Get the selected owner, and equipment from the dropdown list
-            const owner = document.getElementById("owner").value;
-            const equipment = document.getElementById("equipment").value;
+                    // Create an object with the new repairs report
+                    const newRepairsReport = {
+                        EquipmentInfo: EquipmentInfo,
+                        description: description,
+                        startTime: startTime,
+                        startDate: startDate
+                    };
 
-            // Create an object with the new repairs report
-            const newRepairsReport = {
-                EquipmentInfo: EquipmentInfo,
-                description: description,
-                partsUsed: partsUsed,
-                startTime: startTime,
-                startDate: startDate,
-                endTime: endTime,
-                endDate: endDate,
-                owner: owner
-            };
+                    // For this example, we'll log the new data to the console
+                    console.log("New RepairsReport Data:", newRepairsReport);
 
-            // For this example, we'll log the new data to the console
-            console.log("New RepairsReport Data:", newRepairsReport);
-
-            // Redirect back to the repairs page
-            window.location.href = "repairs.html";
-
-            
-        }
-    });
-});
-
-function validateForm() {
-const description = document.getElementById("description").value;
-const owner = document.getElementById("owner").value;
-const equipment = document.getElementById("equipment").value;
-
-const errorMessages = [];
-if (owner === "") {
-    errorMessages.push("Please select an 'Owner'.");
-    document.getElementById("owner").classList.add("invalid-input");
-}
-
-if (equipment === "") {
-    errorMessages.push("Please select an 'Equipment'.");
-    document.getElementById("equipment").classList.add("invalid-input");
-}
-
-if (description === "") {
-   errorMessages.push("Please fill in the 'Description' field.");
-   document.getElementById("description").classList.add("invalid-input");
-}
-
-if (errorMessages.length > 0) {
-    // Display error messages on the page
-    document.getElementById("errorContainer").innerHTML = errorMessages.join("<br>");
-    return false;
-}
-
-return true;
-}
-
-function resetInputOutlines() {
-    // Remove the 'invalid-input' class from all input fields and dropdown lists
-    const inputs = document.querySelectorAll("input, select");
-    inputs.forEach(input => {
-        input.classList.remove("invalid-input");
-    });
-}
-
-function goToRepairsPage() {
-    window.location.href = "repairs.html";
-}
-
-function updateEquipmentList(ownerName, ownerEquipmentMap, equipmentList) {
-    equipmentList.innerHTML = ''; // Clear existing options
-
-    if (ownerEquipmentMap[ownerName]) {
-        ownerEquipmentMap[ownerName].forEach(function(equipment) {
-            const option = document.createElement("option");
-            option.value = equipment;
-            option.textContent = equipment;
-            equipmentList.appendChild(option);
+                    // Redirect back to the repairs page
+                    window.location.href = "repairs.html";
+                }
+            });
         });
-    } else {
-        // Handle the case when no owner is selected or owner is not in the map
-        // Optionally, add a default option or leave the list empty
-    }
-}
-</script>
+
+        function validateForm() {
+            const description = document.getElementById("description").value;
+
+            const errorMessages = [];
+            if (description === "") {
+                errorMessages.push("Please fill in the 'Description' field.");
+                document.getElementById("description").classList.add("invalid-input");
+            }
+
+            if (errorMessages.length > 0) {
+                // Display error messages on the page
+                document.getElementById("errorContainer").innerHTML = errorMessages.join("<br>");
+                return false;
+            }
+
+            return true;
+        }
+
+        function resetInputOutlines() {
+            // Remove the 'invalid-input' class from all input fields and dropdown lists
+            const inputs = document.querySelectorAll("input, select");
+            inputs.forEach(input => {
+                input.classList.remove("invalid-input");
+            });
+        }
+
+        function goToRepairsPage() {
+            window.location.href = "repairs.html";
+        }
+    </script>
 
 </body>
 </html>
