@@ -177,8 +177,8 @@
                 <div class="time-row">
                     <h3>Session 1</h3>
                     <label for="startTime">Start Time:</label>
-                    <input type="time" class="startTime">
-                    <input type="date" class="startDate">
+                    <input id="startTime" type="time" class="startTime">
+                    <input id="startDate" type="date" class="startDate">
                     <label for="endTime">End Time:</label>
                     <input type="time" class="endTime">
                     <input type="date" class="endDate">
@@ -234,7 +234,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var currentDate = currentDateTime.toISOString().split('T')[0];
     var currentTime = currentDateTime.toTimeString().split(' ')[0].substring(0, 5);
 
-    
+    document.getElementById('startDate').value = currentDate;
+    document.getElementById('startTime').value = currentTime;
 
     // Retrieve and parse the repair session data
     let repairData = null;
@@ -271,6 +272,8 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("repairIdLabel").textContent = "Repair ID: " + repairToEdit.repairid;
 
             document.getElementById("description").value = repairToEdit.description;
+
+
 
             // Handle the customer dropdown
             const customerDropdown = document.getElementById("customer");
