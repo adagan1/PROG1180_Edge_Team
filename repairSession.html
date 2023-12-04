@@ -127,88 +127,81 @@
     border-radius: 5px; /* Rounds the corners of the box */
 }
 
-    </style>
-    <title>Edit Repair</title>
+</style>
+<title>Edit Repair</title>
 </head>
 <body>
-    <header>
-        <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
-        <nav>
-            <ul>
-                <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
-                <li><a href="customer.html">Customer</a></li>
-                <li><a href="tables.html">Maintenance</a></li>
-                <li><a href="reports.html">Reports</a></li>
-                <li><a href="repairs.html">Repairs</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <h1 id="repairTitle">Repair Session</h1>
-        <form id="editForm">
-            <label id="repairIdLabel"></label>
+<header>
+    <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
+    <nav>
+        <ul>
+            <li><a href="main.html">Home</a></li>
+            <li><a href="customer.html">Customer</a></li>
+            <li><a href="tables.html">Maintenance</a></li>
+            <li><a href="reports.html">Reports</a></li>
+            <li><a href="repairs.html">Repairs</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1 id="repairTitle">Repair Session</h1>
+    <form id="editForm">
+        <label id="repairIdLabel"></label>
 
-            <label for="warranty">Warranty:</label>
-                <input type="checkbox">
+        <label for="warranty">Warranty:</label>
+            <input type="checkbox">
 
-            <label for="description">Issue:</label>
-            <textarea id="description" name="description" placeholder="Enter item description" rows="7" cols="70"></textarea>
-            
-            
-            <div class="parts-container">
-                <label>Parts used for repair:</label>
-                <div id="parts-list">
-                    <div class="part-row">
-                        <select class="part-select">
-                            <option value="">Select Part</option>
-                            <!-- Add other part options here -->
-                        </select>
-                        <input type="number" class="quantity-input" value="1" min="1">
-                        <button type="button" class="remove-part-button" onclick="removeThisPartRow(this)">-</button>
-                    </div>
-                </div>
-                <button type="button" class="add-part-button" onclick="addPartRow()">Add Part</button>
-            </div>
-            
-    <!-- Time Information Container -->
-        <div class="time-container">
-            <label>Time Information:</label>
-            <div id="time-list">
-                <div class="time-row">
-                    <h3>Session 1</h3>
-                    <label for="startTime">Start Time:</label>
-                    <input type="time" class="startTime">
-                    <input type="date" class="startDate">
-                    <label for="endTime">End Time:</label>
-                    <input type="time" class="endTime">
-                    <input type="date" class="endDate">
-                    <button type="button" class="remove-time-button" onclick="removeThisTimeRow(this)">-</button>
+        <label for="description">Issue:</label>
+        <textarea id="description" name="description" placeholder="Enter item description" rows="7" cols="70"></textarea>
+        
+        
+        <div class="parts-container">
+            <label>Parts used for repair:</label>
+            <div id="parts-list">
+                <div class="part-row">
+                    <select class="part-select">
+                        <option value="">Select Part</option>
+                        <!-- Add other part options here -->
+                    </select>
+                    <input type="number" class="quantity-input" value="1" min="1">
+                    <button type="button" class="remove-part-button" onclick="removeThisPartRow(this)">-</button>
                 </div>
             </div>
-            <button type="button" class="add-time-button" onclick="addTimeRow()">Add Time</button>
+            <button type="button" class="add-part-button" onclick="addPartRow()">Add Part</button>
         </div>
-             <!-- Technician and Time Information -->
-            <label for="technician">Technician:</label>
-            <select id="technician">
-                <option value="">Select Technician</option>
-                <option value="Eugene">Eugene</option>
-                <option value="Sarah">Sarah</option>
-            </select>
-            <!-- Technician Notes -->
-            <label for="technicianNotes">Technician Notes:</label>
-            <textarea id="technicianNotes" placeholder="Notes from the technician" rows="7" cols="70"></textarea>
-            
-            <div id="errorContainer"></div>
-            
-            <button type="button" id="completeButton">Complete</button>
-            <button type="button" id="saveButton">Save Changes</button>
-            <button type="button" id="cancelButton" onclick="goToRepairsPage()">Cancel</button>
-        </form>
-    </main>
-
+        
+<div id="startTimeInfo">
+                <label for="startTime">Start Time:</label>
+                <input type="time" id="startTime">
+                <input type="date" id="startDate">
+        </div>
+        <div id="endTimeInfo">
+                <label for="endTime">End Time:</label>
+                <input type="time" id="endTime">
+                <input type="date" id="endDate">
+        </div>
+         <!-- Technician and Time Information -->
+        <label for="technician">Technician:</label>
+        <select id="technician">
+            <option value="">Select Technician</option>
+            <option value="Eugene">Eugene</option>
+            <option value="Sarah">Sarah</option>
+        </select>
+        <!-- Technician Notes -->
+        <label for="technicianNotes">Technician Notes:</label>
+        <textarea id="technicianNotes" placeholder="Notes from the technician" rows="7" cols="70"></textarea>
+        
+        <div id="errorContainer"></div>
+        
+        <button type="button" id="completeButton">Complete</button>
+        <button type="button" id="saveButton">Save Changes</button>
+        <button type="button" id="cancelButton" onclick="goToRepairsPage()">Cancel</button>
+    </form>
+</main>
+</body>
+</html>
 <script>
-    const partsData = [
+   const partsData = [
     { name: 'Bolt' },
     { name: 'Screw' },
     { name: 'Washer' },
@@ -229,7 +222,7 @@ document.addEventListener("DOMContentLoaded", function () {
         option.text = part.name;
         initialPartsDropdown.appendChild(option);
     });
-    renumberSessions();
+
     // Automatically fill start time
     var currentDateTime = new Date();
     var currentDate = currentDateTime.toISOString().split('T')[0];
@@ -361,43 +354,6 @@ function addPartRow() {
 function removeThisPartRow(button) {
     const partRow = button.parentElement;
     partRow.remove();
-}
-let sessionCounter = 1; // Start with 1 for the first session
-
-function addTimeRow() {
-    const timeList = document.getElementById("time-list");
-    const newRow = document.createElement("div");
-    newRow.className = 'time-row';
-
-    // Increment session counter for each new session
-    sessionCounter++;
-
-    newRow.innerHTML = `
-        <h3>Session ${sessionCounter}</h3>
-        <label for="startTime">Start Time:</label>
-        <input type="time" class="startTime">
-        <input type="date" class="startDate">
-        <label for="endTime">End Time:</label>
-        <input type="time" class="endTime">
-        <input type="date" class="endDate">
-        <button type="button" class="remove-time-button" onclick="removeThisTimeRow(this)">-</button>
-    `;
-
-    timeList.appendChild(newRow);
-    renumberSessions(); // Renumber sessions after adding a new one
-}
-
-function removeThisTimeRow(button) {
-    const timeRow = button.parentElement;
-    timeRow.remove();
-    renumberSessions(); // Renumber sessions after removing one
-}
-function renumberSessions() {
-    const timeRows = document.querySelectorAll('.time-row');
-    timeRows.forEach((row, index) => {
-        // Update the session number, index starts from 0, so add 1 for session number
-        row.querySelector('h3').textContent = `Session ${index + 1}`;
-    });
 }
 </script>
 
