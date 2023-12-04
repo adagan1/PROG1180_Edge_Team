@@ -1,3 +1,4 @@
+<!--Kyles fix-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -157,11 +158,11 @@
         <nav style="display: none;" id="headerContent">
             <ul>
                 <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
-                <li><a href="customer.html">Customer</a></li>
-                <li><a href="tables.html">Maintenance</a></li>
-                <li><a href="reports.html">Reports</a></li>
-                <li><a href="repairs.html">Repairs</a></li>
+                <li style="display: none;" id="equipmentLink"><a href="inventory.html">Equipment</a></li>
+                <li style="display: none;" id="customerLink"><a href="customer.html">Customer</a></li>
+                <li style="display: none;" id="maintenanceLink"><a href="tables.html">Maintenance</a></li>
+                <li style="display: none;" id="reportsLink"><a href="reports.html">Reports</a></li>
+                <li style="display: none;" id="repairsLink"><a href="repairs.html">Repairs</a></li>
             </ul>
         </nav>
     </header>
@@ -288,6 +289,7 @@
             function showOnlyAddCustomer() {
                 hideAllSections();
                 document.getElementById('addCustomerSection').style.display = 'block';
+                document.getElementById('customerLink').style.display = 'block';
                 updateWelcomeSection('sales');
             }
 
@@ -296,10 +298,18 @@
                 document.getElementById('createReportSection').style.display = 'block';
                 document.getElementById('startRepairSection').style.display = 'block';
                 document.getElementById('repairsSection').style.display = 'block';
+                document.getElementById('repairsLink').style.display = 'block';
+                document.getElementById('reportsLink').style.display = 'block';
                 updateWelcomeSection('tech');
             }
 
             function showAllSections() {
+                document.getElementById('equipmentLink').style.display = 'block';
+                document.getElementById('customerLink').style.display = 'block';
+                document.getElementById('maintenanceLink').style.display = 'block';
+                document.getElementById('reportsLink').style.display = 'block';
+                document.getElementById('repairsLink').style.display = 'block';
+
                 document.querySelectorAll('.dashboard-section').forEach(section => {
                     section.style.display = 'block';
                 });
