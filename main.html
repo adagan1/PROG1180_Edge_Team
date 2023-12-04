@@ -184,31 +184,19 @@
         
         <div class="dashboard">
             <div class="dashboard-section" id="addCustomerSection" style="display: none;">
-                <h2>Add a Customer</h2>
+                <h2>Manage Customers</h2>
                 <p>Click the button to quickly add a customer.</p>
                 <button onclick="location.href='customerCreate.html'">Add a Customer</button>
             </div>
-            
-            <div class="dashboard-section">
-                <h2>Add a Equipment</h2>
-                <p>Click the button to quickly create an appliance.</p>
-                <button onclick="location.href='inventoryCreate.html'">Add Equipment</button>
-            </div>
-            
+                       
             <div class="dashboard-section" id="createReportSection">
-                <h2>Create a Report</h2>
+                <h2>Manage Reports</h2>
                 <p>Click the button to quickly Generate a report.</p>
                 <button onclick="location.href='reportsCreate.html'">Generate a Report</button>
             </div>
-
-            <div class="dashboard-section" id="startRepairSection">
-                <h2>Start a Repair </h2>
-                <p>Click the button to quickly start a repair.</p>
-                <button onclick="location.href='repairsCreate.html'">New Repair Request</button>
-            </div>
-            
+        
             <div class="dashboard-section" id="repairsSection">
-                <h2> Manage Repairs</h2>
+                <h2>Manage Repairs</h2>
                 <p>Click the button to view and manage repairs.</p>
                 <button onclick="location.href='repairs.html'">View Repairs</button>
             </div>
@@ -296,7 +284,6 @@
             function showTechnicianSections() {
                 hideAllSections();
                 document.getElementById('createReportSection').style.display = 'block';
-                document.getElementById('startRepairSection').style.display = 'block';
                 document.getElementById('repairsSection').style.display = 'block';
                 document.getElementById('repairsLink').style.display = 'block';
                 document.getElementById('reportsLink').style.display = 'block';
@@ -304,7 +291,6 @@
             }
 
             function showAllSections() {
-                document.getElementById('equipmentLink').style.display = 'block';
                 document.getElementById('customerLink').style.display = 'block';
                 document.getElementById('maintenanceLink').style.display = 'block';
                 document.getElementById('reportsLink').style.display = 'block';
