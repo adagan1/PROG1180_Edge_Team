@@ -145,7 +145,6 @@
         <nav>
             <ul>
                 <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
                 <li><a href="customer.html">Customer</a></li>
                 <li><a href="tables.html">Maintenance</a></li>
                 <li><a href="reports.html">Reports</a></li>
@@ -301,8 +300,8 @@ if (equipment === "") {
 }
 
 if (description === "") {
-    errorMessages.push("Please fill in the 'Description' field.");
-    document.getElementById("description").classList.add("invalid-input");
+   errorMessages.push("Please fill in the 'Description' field.");
+   document.getElementById("description").classList.add("invalid-input");
 }
 
 if (errorMessages.length > 0) {

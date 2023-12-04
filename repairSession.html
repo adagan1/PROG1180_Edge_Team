@@ -136,7 +136,6 @@
         <nav>
             <ul>
                 <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
                 <li><a href="customer.html">Customer</a></li>
                 <li><a href="tables.html">Maintenance</a></li>
                 <li><a href="reports.html">Reports</a></li>
@@ -183,7 +182,7 @@
                     <label for="endTime">End Time:</label>
                     <input type="time" class="endTime">
                     <input type="date" class="endDate">
-                    <button type="button" class="remove-time-button" onclick="removeThisTimeRow(this)">-</button>
+                    
                 </div>
             </div>
             <button type="button" class="add-time-button" onclick="addTimeRow()">Add Time</button>
@@ -206,7 +205,8 @@
             <button type="button" id="cancelButton" onclick="goToRepairsPage()">Cancel</button>
         </form>
     </main>
-
+</body>
+</html>
 <script>
     const partsData = [
     { name: 'Bolt' },
@@ -229,14 +229,12 @@ document.addEventListener("DOMContentLoaded", function () {
         option.text = part.name;
         initialPartsDropdown.appendChild(option);
     });
-    renumberSessions();
     // Automatically fill start time
     var currentDateTime = new Date();
     var currentDate = currentDateTime.toISOString().split('T')[0];
     var currentTime = currentDateTime.toTimeString().split(' ')[0].substring(0, 5);
 
-    document.getElementById('startDate').value = currentDate;
-    document.getElementById('startTime').value = currentTime;
+    
 
     // Retrieve and parse the repair session data
     let repairData = null;
