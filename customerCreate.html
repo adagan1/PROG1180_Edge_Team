@@ -303,10 +303,15 @@ function resetInputOutlines() {
     });
 }
 function openAddEquipmentPage() {
-    // Open the add equipment page
-    window.location.href = 'inventoryCreate.html';
-}
+    // Get the customer's name
+    const customerName = document.getElementById("name").value;
 
+    // Encode the customer's name as a parameter in the URL
+    const encodedName = encodeURIComponent(customerName);
+
+    // Open the add equipment page with the customer's name as a parameter
+    window.location.href = `inventoryCreate.html?customerName=${encodedName}`;
+}
 </script>
 
 </body>
