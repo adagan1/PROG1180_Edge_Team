@@ -165,7 +165,6 @@
                         <option value="Julio Mendes">
                         <!-- Add more owners here -->
                     </datalist>
-                    <button type="button" onclick="goToCreateCustomerPage()" id="newCustomerButton">New Customer</button>
                 </div>
                 <div id="serialInfo">
                     <label for="serial">Serial Number:</label>
@@ -211,14 +210,21 @@
                 <div id="errorContainer"></div> <!-- Container for error messages -->
                 <div>
                     <button type="button" id="createInventoryButton">Save Changes</button>
-                    <button type="button" id="cancelButton" onclick="goToEquipmentPage()">Cancel</button>
+                    <button type="button" id="cancelButton" onclick="goToCreateCustomerPage()">Cancel</button>
                 </div>
             </form>
         </div>
     </main>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    // Parse the URL parameters to get the customer's name
+    const urlParams = new URLSearchParams(window.location.search);
+    const customerName = urlParams.get('customerName');
+
+    // Set the customer's name as the default value for the owner input field
+    document.getElementById("owner").value = customerName;
+
     // Add an event listener to the "Save Changes" button
     document.getElementById("createInventoryButton").addEventListener("click", function () {
         // Reset the input field outlines
@@ -247,8 +253,8 @@
             // For this example, we'll log the new data to the console
             console.log("New Equipment Data:", newEquipment);
 
-            // Redirect back to the inventory page
-            window.location.href = "inventory.html";
+            // Redirect back to the customer creation page
+            window.location.href = "customerCreate.html";
         }
     });
 });
@@ -299,8 +305,8 @@ function resetInputOutlines() {
     });
 }
 
-function goToEquipmentPage() {
-    window.location.href = "inventory.html";
+function goToCustomerPage() {
+    window.location.href = "customer.html";
 }
 
 
