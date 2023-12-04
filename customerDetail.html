@@ -138,6 +138,7 @@
                 }
             });
         });
+        
     
         function displayCustomerDetails(customerData) {
             const customerDetails = document.getElementById("customerDetails");
@@ -178,7 +179,7 @@
                 row.appendChild(createCell(customerData.Repair));
             } else {
                 const repairCell = row.insertCell(-1);
-                repairCell.appendChild(createAddRepairButton());
+                repairCell.appendChild(createAddRepairButton(customerData.name, customerData.Equipment));
             }
         }
     
@@ -187,16 +188,19 @@
             cell.textContent = text;
             return cell;
         }
-        function createAddRepairButton() {
+        function createAddRepairButton(customerName, equipment) {
             const button = document.createElement("button");
             button.textContent = "Repair";
-            button.onclick = function() { createRepair(); };
+            button.onclick = function() { createRepair(customerName, equipment); };
             return button;
         }
 
         // Define the createRepair function or ensure it's defined elsewhere
-        function createRepair() {
-        window.location.href = "repairsCreate.html";
+        function createRepair(customerName, equipment) {
+            // Save customer name and equipment to sessionStorage
+            sessionStorage.setItem("selectedCustomerName", customerName);
+            sessionStorage.setItem("selectedEquipmentName", equipment);
+            window.location.href = "repairsCreate.html";
         }
     
         function goToCustomerPage() {
