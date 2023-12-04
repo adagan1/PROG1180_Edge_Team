@@ -24,3 +24,4 @@ For the Final Presentation, the goals are as follows:
 - finish up reports
 - Practice the pitch. ( we are convincing him on why he should select us and our software)
 
+Test
