@@ -17,13 +17,16 @@
         <nav>
             <ul>
                 <li><a href="main.html">Home</a></li>
-                <li><a href="customer.html">Customer</a></li>
-                <li><a href="tables.html">Maintenance</a></li>
-                <li><a href="reports.html">Reports</a></li>
-                <li><a href="repairs.html">Repairs</a></li>
+                <li style="display: none;" id="customerLink"><a href="customer.html">Customer</a></li>
+                <li style="display: none;" id="maintenanceLink"><a href="tables.html">Maintenance</a></li>
+                <li style="display: none;" id="reportsLink"><a href="reports.html">Reports</a></li>
+                <li style="display: none;" id="repairsLink"><a href="repairs.html">Repairs</a></li>
             </ul>
         </nav>
     </header>
+
+    <button class="logout-button" id="logoutButton" onclick="location.href='login.html'" style="position: fixed; top: 70px; right: 10px;">Logout</button>
+
 <main>
         <h1>Customer</h1>      
     <div class="center-container">
@@ -50,7 +53,7 @@
 </main>
 
 <script>
-    // Define an array of hard-coded customer data
+// Define an array of hard-coded customer data
 const hardCodedCustomer = [
     {
         name: "Joe Jawndel",
@@ -161,6 +164,23 @@ document.addEventListener("DOMContentLoaded", function() {
         fillTableWithCustomerData();
     });
 });
+
+//check for roles
+const userRole = sessionStorage.getItem('userRole');
+    if (userRole === 'sales') {
+        document.getElementById('customerLink').style.display = 'block';
+    } else if (userRole === 'tech') {
+        document.getElementById('repairsLink').style.display = 'block';
+        document.getElementById('reportsLink').style.display = 'block';
+    } else if (userRole === 'admin') {
+        document.getElementById('customerLink').style.display = 'block';
+        document.getElementById('maintenanceLink').style.display = 'block';
+        document.getElementById('reportsLink').style.display = 'block';
+        document.getElementById('repairsLink').style.display = 'block';
+    } else {
+        // Redirect to login page if user role is not set
+        window.location.href = 'main.html';
+    }
 </script>
 
 </body>

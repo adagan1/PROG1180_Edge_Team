@@ -131,33 +131,25 @@
         .login-button:hover, .login-button:focus {
             background-color: #555;
         }
-
     </style>
 </head>
 <body>
     <header>
         <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
-        <nav style="display: none;" id="headerContent">
+        <nav id="headerContent">
             <ul>
                 <li><a href="main.html">Home</a></li>
                 <li style="display: none;" id="customerLink"><a href="customer.html">Customer</a></li>
                 <li style="display: none;" id="maintenanceLink"><a href="tables.html">Maintenance</a></li>
                 <li style="display: none;" id="reportsLink"><a href="reports.html">Reports</a></li>
-                <li style="display: none;" id="repairsLink"><a href="repairs.html">Repairs</a></li>           
+                <li style="display: none;" id="repairsLink"><a href="repairs.html">Repairs</a></li>         
             </ul>
         </nav>
     </header>
 
-    <button class="logout-button" id="logoutButton" onclick="logout()" style="position: fixed; top: 70px; right: 10px; display: none;">Logout</button>
+    <button class="logout-button" id="logoutButton" onclick="logout()" style="position: fixed; top: 70px; right: 10px;">Logout</button>
 
-
-    <div class="login-form" id="loginForm">
-        <h2> Emma's Small Engines Login</h2>
-        <input type="textArea" id="username" class="login-input" placeholder="Username"><br>
-        <button class="login-button" onclick="login()">Login</button>
-    </div>
-    
-    <main style="display: none;" id="mainContent">
+    <main id="mainContent">
         <section id="employee-welcome">
             <h2 id="welcome-title">Welcome Employees</h2>
             <ul>
@@ -166,19 +158,19 @@
         </section>
         
         <div class="dashboard">
-            <div class="dashboard-section" id="addCustomerSection" style="display: none;">
+            <div style="display: none;" class="dashboard-section" id="addCustomerSection">
                 <h2>Manage Customers</h2>
                 <p>Click the button to create or view customers.</p>
                 <button onclick="location.href='customer.html'">View Customers</button>
             </div>
                        
-            <div class="dashboard-section" id="createReportSection">
+            <div style="display: none;" class="dashboard-section" id="createReportSection">
                 <h2>Manage Reports</h2>
                 <p>Click the button to create or view reports.</p>
                 <button onclick="location.href='reports.html'">View Reports</button>
             </div>
         
-            <div class="dashboard-section" id="repairsSection">
+            <div style="display: none;" class="dashboard-section" id="repairsSection">
                 <h2>Manage Repairs</h2>
                 <p>Click the button to view or manage repairs.</p>
                 <button onclick="location.href='repairs.html'">View Repairs</button>
@@ -188,36 +180,29 @@
     </main>
 
     <script>
+        //check for roles
+        const userRole = sessionStorage.getItem('userRole');
+            if (userRole === 'sales') {
+                document.getElementById('customerLink').style.display = 'block';
+                showOnlyAddCustomer()
+            } else if (userRole === 'tech') {
+                document.getElementById('repairsLink').style.display = 'block';
+                document.getElementById('reportsLink').style.display = 'block';
+                showTechnicianSections()
+            } else if (userRole === 'admin') {
+                document.getElementById('customerLink').style.display = 'block';
+                document.getElementById('maintenanceLink').style.display = 'block';
+                document.getElementById('reportsLink').style.display = 'block';
+                document.getElementById('repairsLink').style.display = 'block';
+                showAllSections()
+            } else {
+                // Redirect to login page if user role is not set
+                window.location.href = 'main.html';
+            }
 
         function logout() {
-            document.getElementById('loginForm').style.display = 'block';
-            document.getElementById('headerContent').style.display = 'none';
-            document.getElementById('mainContent').style.display = 'none';
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-            document.getElementById('logoutButton').style.display = 'none';
-
+            window.location.href = "login.html";
         }
-
-            function login() {
-                var username = document.getElementById('username').value;
-
-                    document.getElementById('loginForm').style.display = 'none';
-                    document.getElementById('headerContent').style.display = 'block';
-                    document.getElementById('mainContent').style.display = 'block';
-                    document.getElementById('logoutButton').style.display = 'block';
-
-                if (username === 'sales') {
-                    showOnlyAddCustomer();
-                } else if (username === 'tech') {
-                    showTechnicianSections();
-                } else if (username === 'admin') {
-                    showAllSections();
-                } else {
-                    alert('Invalid username');
-                    resetLoginForm();
-                }
-            }
 
             function resetLoginForm() {
                 document.getElementById('loginForm').style.display = 'block';
