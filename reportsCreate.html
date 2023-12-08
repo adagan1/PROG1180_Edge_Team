@@ -121,25 +121,25 @@
             <select id="reportCategory" onchange="toggleFields()">
                 <option value="" disabled selected>Select a category</option>
                 <option value="warranty">Warranty</option>
-                <option value="sale">Sale</option>
+                <option value="weeklyReport">Weekly Report</option>
                 <option value="orders">Orders</option>
-            </select>
+            </select>           
 
                 <div id="warrantyFields" style="display: none;">
-                <label for="owner">Brand:</label>
-                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
+                <label for="owner">Manufacturer:</label>
+                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for manufacturer" required>
                 <datalist id="ownerList">
-                    <option value="Joe Jawndel">
-                    <option value="Billy Talent">
-                    <option value="Julio Mendes">
+                    <option value="Honda">
+                    <option value="Dewalt">
+                    <option value="John Deere">
                 </datalist>
 
                 <label for="equipment">Equipment:</label>
                 <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
                 <datalist id="equipmentList">
-                    <option value="Honda bagged Lawnmower">
-                    <option value="Dewalt Drill">
-                    <option value="John Deere Electric Lawnmower">
+                    <option value="Lawnmower">
+                    <option value="Drill">
+                    <option value="Electric Lawnmower">
                 </datalist>
 
                 <label for="reportDate">Date:</label>
@@ -148,46 +148,41 @@
                 <input type="date" id="warrantyStart" placeholder="Enter warranty period">
                 <label for="warrantyEnd">Warranty End:</label>
                 <input type="date" id="warrantyEnd" placeholder="Enter warranty period">
-                <label for="warrantyDetails">Warranty Details:</label>
+                <label for="warrantyDetails">Additional Details:</label>
                 <textarea id="warrantyDetails" placeholder="Enter warranty details" rows="5" cols="50"></textarea>
-                <label for="additionalWarrantyInfo">Additional Warranty Info:</label>
-                <input type="text" id="additionalWarrantyInfo" placeholder="Enter additional warranty info">
+                
             </div>
 
-            <div id="saleFields" style="display: none;">
-                <label for="owner">Owner:</label>
-                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
-                <datalist id="ownerList">
+            <div id="weeklyFields" style="display: none;">
+                <label for="ownerWeekly">Owner:</label>
+                <input type="search" id="ownerWeekly" name="ownerWeekly" list="ownerListWeekly" placeholder="Search for an owner" required>
+                <datalist id="ownerListWeekly">
                     <option value="Joe Jawndel">
                     <option value="Billy Talent">
                     <option value="Julio Mendes">
                 </datalist>
-                <label for="reportDate">Date:</label>
-                <input type="date" id="reportDate" required>
-                <label for="reportDescription">Item(s):</label>
-                <textarea id="reportDescription" name="reportDescription" required placeholder="Enter item description" rows="5" cols="50"></textarea>
-                <label for="reportPrice">Price:</label>
-                <input type="number" id="reportPrice" placeholder="Enter price" required>
-                <label for="reportQuantity">Quantity:</label>
-                <input type="number" id="reportQuantity" placeholder="Enter quantity" required>
-                <label for="reportTotal">Total:</label>
-                <input type="number" id="reportTotal" placeholder="Enter total" required>
+                <label for="reportDateWeekly">Date:</label>
+                <input type="date" id="reportDateWeekly" required>
+                <label for="tasksCompleted">Tasks Completed:</label>
+                <input type="text" id="tasksCompleted" placeholder="Enter tasks completed" required>
+                <label for="hoursWorked">Hours Worked:</label>
+                <input type="number" id="hoursWorked" placeholder="Enter hours worked" required>
+                <label for="comments">Comments:</label>
+                <textarea id="comments" name="comments" required placeholder="Enter additional comments" rows="5" cols="50"></textarea>
             </div>
 
             <div id="orderFields" style="display: none;">
-                <div id="brandInfo">
-                    <label for="brand">Brand:</label>
-                    <select id="brand" name="brand" required>
-                        <option value="" disabled selected>Select a brand</option>
-                        <option value="Brand1">Craftsman</option>
-                        <option value="Brand2">Dewalt</option>
-                        <option value="Brand3">Honda</option>
-                        <option value="Brand4">John Deere</option>
-                    </select>
-                </div>
-                <label for="equipment">Equipment:</label>
-                <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
-                <datalist id="equipmentList">
+                <label for="brand">Brand:</label>
+                <select id="brand" name="brand" required>
+                    <option value="" disabled selected>Select a brand</option>
+                    <option value="Brand1">Craftsman</option>
+                    <option value="Brand2">Dewalt</option>
+                    <option value="Brand3">Honda</option>
+                    <option value="Brand4">John Deere</option>
+                </select>
+                <label for="equipmentOrder">Equipment:</label>
+                <input type="search" id="equipmentOrder" name="equipmentOrder" list="equipmentListOrder" placeholder="Search for equipment" required>
+                <datalist id="equipmentListOrder">
                     <option value="Honda bagged Lawnmower">
                     <option value="Dewalt Drill">
                     <option value="John Deere Electric Lawnmower">
@@ -223,9 +218,10 @@
                     <option value="Back-ordered">
                 </datalist>
 
-                <label for="reportPrice">Price:</label>
-                <input type="number" id="reportPrice" placeholder="Enter price" required>
+                <label for="reportPriceOrder">Price:</label>
+                <input type="number" id="reportPriceOrder" placeholder="Enter price" required>
             </div>
+
 
             <div id="errorContainer"></div>
             <button type="button" id="createButton" hidden>Save Changes</button>
@@ -235,36 +231,37 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-    const categoryDropdown = document.getElementById("reportCategory");
-    const errorContainer = document.getElementById("errorContainer");
-
-    // Function to toggle the visibility of input fields based on the selected category
-    function toggleFields() {
-        const createButton = document.getElementById("createButton");
-        const cancelButton = document.getElementById("cancelButton");
+        const categoryDropdown = document.getElementById("reportCategory");
         const errorContainer = document.getElementById("errorContainer");
 
-        // Reset previous validation styles and error messages
-        resetValidationStyles();
-        errorContainer.innerHTML = "";
+        // Function to toggle the visibility of input fields based on the selected category
+        function toggleFields() {
+            const createButton = document.getElementById("createButton");
+            const cancelButton = document.getElementById("cancelButton");
+            const errorContainer = document.getElementById("errorContainer");
 
-        if (categoryDropdown.value === "warranty" || categoryDropdown.value === "sale" || categoryDropdown.value === "orders") {
-            warrantyFields.style.display = categoryDropdown.value === "warranty" ? "block" : "none";
-            saleFields.style.display = categoryDropdown.value === "sale" ? "block" : "none";
-            orderFields.style.display = categoryDropdown.value === "orders" ? "block" : "none";
+            // Reset previous validation styles and error messages
+            resetValidationStyles();
+            errorContainer.innerHTML = "";
 
-            // Show the buttons when a category is selected
-            createButton.removeAttribute("hidden");
-            cancelButton.removeAttribute("hidden");
-        } else {
-            warrantyFields.style.display = "none";
-            saleFields.style.display = "none";
-            orderFields.style.display = "none";
+            if (categoryDropdown.value === "warranty" || categoryDropdown.value === "weeklyReport" || categoryDropdown.value === "orders") {
+                warrantyFields.style.display = categoryDropdown.value === "warranty" ? "block" : "none";
+                weeklyFields.style.display = categoryDropdown.value === "weeklyReport" ? "block" : "none";
+                orderFields.style.display = categoryDropdown.value === "orders" ? "block" : "none";
 
-            // Hide the buttons when no category is selected
-            createButton.setAttribute("hidden", true);
+                // Show the buttons when a category is selected
+                createButton.removeAttribute("hidden");
+                cancelButton.removeAttribute("hidden");
+            } else {
+                warrantyFields.style.display = "none";
+                weeklyFields.style.display = "none";
+                orderFields.style.display = "none";
+
+                // Hide the buttons when no category is selected
+                createButton.setAttribute("hidden", true);
+            }
         }
-    }
+
 
     // Attach the toggleFields function to the change event of the category dropdown
     categoryDropdown.addEventListener("change", toggleFields);
@@ -321,13 +318,13 @@
             }
         }
 
-        // Get sales-specific input values
-        if (reportCategory === "sale") {
+        // Get weekly report-specific input values
+        if (reportCategory === "weeklyReport") {
             reportAdditionalInfo = {
-                salesPrice: reportPriceInput.value,
-                salesQuantity: reportQuantityInput.value,
-                salesTotal: reportTotalInput.value
-            }
+                tasksCompleted: document.getElementById("tasksCompleted").value,
+                hoursWorked: document.getElementById("hoursWorked").value,
+                comments: document.getElementById("comments").value
+            };
         }
 
         // Get orders-specific input values
@@ -401,40 +398,39 @@ function validateForm(report) {
         }
     }
 
-    // Sales validation
-    if (report.category === "sale") {
+        // Weekly Report validation
+    if (report.category === "weeklyReport") {
 
-        if (report.owner.trim() === "") {
-            markInvalidInput(document.getElementById("owner"));
-            displayError("Please enter the owner's name.");
-            isValid = false;
-        }
-    
-        if (report.date.trim() === "") {
-            markInvalidInput(document.getElementById("reportDate"));
-            displayError("Please enter the report date.");
-            isValid = false;
-        }
-
-        if (report.additionalInfo.salesPrice.trim() === "") {
-            markInvalidInput(document.getElementById("reportPrice"))
-            displayError("Please enter a price above the value of 0.")
-            isValid = false;
-        }
-
-        if (report.additionalInfo.salesQuantity.trim() === "") {
-            markInvalidInput(document.getElementById("reportQuantity"))
-            displayError("Please enter a quantity above the value of 0.")
-            isValid = false;
-        }
-
-        if (report.additionalInfo.salesTotal.trim() === "") {
-            markInvalidInput(document.getElementById("reportTotal"))
-            displayError("Please enter a total above the value of 0.")
-            isValid = false;
-        }
+    if (report.owner.trim() === "") {
+        markInvalidInput(document.getElementById("owner"));
+        displayError("Please enter the owner's name.");
+        isValid = false;
     }
 
+    if (report.date.trim() === "") {
+        markInvalidInput(document.getElementById("reportDate"));
+        displayError("Please enter the report date.");
+        isValid = false;
+    }
+
+    if (report.additionalInfo.tasksCompleted.trim() === "") {
+        markInvalidInput(document.getElementById("tasksCompleted"));
+        displayError("Please enter tasks completed.");
+        isValid = false;
+    }
+
+    if (report.additionalInfo.hoursWorked.trim() === "") {
+        markInvalidInput(document.getElementById("hoursWorked"));
+        displayError("Please enter hours worked.");
+        isValid = false;
+    }
+
+    if (report.additionalInfo.comments.trim() === "") {
+        markInvalidInput(document.getElementById("comments"));
+        displayError("Please enter additional comments.");
+        isValid = false;
+    }
+    }
     // Orders validation
     if (report.category === "orders") {
         if (report.additionalInfo.orderBrand.trim() === "") {
