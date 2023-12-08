@@ -169,7 +169,6 @@
     <div class="login-form" id="loginForm">
         <h2> Emma's Small Engines Login</h2>
         <input type="textArea" id="username" class="login-input" placeholder="Username"><br>
-        <input type="password" id="password" class="login-input" placeholder="Password"><br>
         <button class="login-button" onclick="login()">Login</button>
     </div>
     
@@ -203,7 +202,7 @@
         </div>
     </main>
 
-    <button class="logout-button" id="logoutButton" onclick="logout()" style="position: fixed; bottom: 10px; left: 10px;">Logout</button>
+    <button class="logout-button" id="logoutButton" onclick="logout()" style="position: fixed; top: 70px; right: 10px;">Logout</button>
 
     <script>
 
@@ -219,27 +218,15 @@
 
             function login() {
                 var username = document.getElementById('username').value;
-                var password = document.getElementById('password').value;
 
-                if (password === '') {
-                    document.getElementById('loginForm').style.display = 'none';
-                    document.getElementById('headerContent').style.display = 'block';
-                    document.getElementById('mainContent').style.display = 'block';
-                    document.getElementById('logoutButton').style.display = 'block';
-
-
-                    if (username === 'sales') {
-                        showOnlyAddCustomer();
-                    } else if (username === 'tech') {
-                        showTechnicianSections();
-                    } else if (username === 'admin') {
-                        showAllSections();
-                    } else {
-                        alert('Invalid username');
-                        resetLoginForm();
-                    }
+                if (username === 'sales') {
+                    showOnlyAddCustomer();
+                } else if (username === 'tech') {
+                    showTechnicianSections();
+                } else if (username === 'admin') {
+                    showAllSections();
                 } else {
-                    alert('Invalid password');
+                    alert('Invalid username');
                     resetLoginForm();
                 }
             }
