@@ -155,7 +155,7 @@
 
             <div id="weeklyFields" style="display: none;">
                 <label for="ownerWeekly">Owner:</label>
-                <input type="search" id="ownerWeekly" name="ownerWeekly" list="ownerListWeekly" placeholder="Search for an owner" required>
+                <input type="search" id="ownerWeekly" name="ownerWeekly" list="ownerListWeekly" placeholder="Enter your name" required>
                 <datalist id="ownerListWeekly">
                     <option value="Joe Jawndel">
                     <option value="Billy Talent">
@@ -233,6 +233,13 @@
     document.addEventListener("DOMContentLoaded", function () {
         const categoryDropdown = document.getElementById("reportCategory");
         const errorContainer = document.getElementById("errorContainer");
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById("reportDate").value = today;
+        document.getElementById("warrantyStart").value = today;
+        document.getElementById("warrantyEnd").value = today;
+        document.getElementById("reportDateWeekly").value = today;
+        document.getElementById("orderDate").value = today;
+        document.getElementById("arrivalDate").value = today;
 
         // Function to toggle the visibility of input fields based on the selected category
         function toggleFields() {
