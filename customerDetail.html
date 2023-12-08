@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="customerCreate.js"></script>
     <style>
         h1 {
             text-align: center;
@@ -63,6 +62,23 @@
             padding: 10px;
             text-align: left;
         }
+
+        #equipmentButton {
+            padding: 10px 15px; /* Add padding */
+            width: auto; /* Set width to auto */
+            max-width: 200px; /* Set a maximum width */
+            margin: 10px 0; /* Add some margin */
+            margin-bottom: 0;
+            /* You can add more styles here as needed */
+        }
+
+        #cancelButton {
+        padding: 10px 15px; /* Add padding */
+        width: auto; /* Set width to auto */
+        max-width: 200px; /* Set a maximum width */
+        margin: 10px 0; /* Add some margin */
+        /* You can add more styles here as needed */
+    }
     </style>
     <title>Customer Details</title>
 </head>
@@ -72,7 +88,6 @@
         <nav>
             <ul>
                 <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
                 <li><a href="customer.html">Customer</a></li>
                 <li><a href="tables.html">Maintenance</a></li>
                 <li><a href="reports.html">Reports</a></li>
@@ -85,22 +100,49 @@
         <div id="customerDetails">
             <!-- Customer details will be displayed here using JavaScript -->
         </div>
+        <!-- Equipment Details Button -->
+    <button type="button" id="equipmentButton">Show Equipment Details</button>
+
+    <!-- Hidden Equipment Details Table -->
+    <div id="equipmentDetails" style="display: none;">
+        <table>
+            <!-- Table rows will be inserted here using JavaScript -->
+        </table>
+    </div>
+        <button type="button" id="cancelButton", onclick="goToCustomerPage()">Back to Customer</button>
+
     </main>
     <script>
-        // Retrieve the selected customer data from sessionStorage
-        const customerDataString = sessionStorage.getItem("selectedCustomer");
+        document.addEventListener("DOMContentLoaded", function () {
+            // Retrieve the selected customer data from sessionStorage
+            const customerDataString = sessionStorage.getItem("selectedCustomer");
     
-        if (customerDataString) {
-            // Parse the customer data JSON string
-            const customerData = JSON.parse(customerDataString);
+            if (customerDataString) {
+                const customerData = JSON.parse(customerDataString);
+                displayCustomerDetails(customerData);
+            } else {
+                document.getElementById("customerDetails").textContent = "Customer details not found.";
+            }
     
-            // Display the customer details on the page
+            const equipmentButton = document.getElementById("equipmentButton");
+            const equipmentDetails = document.getElementById("equipmentDetails");
+    
+            equipmentButton.addEventListener("click", function() {
+                if (equipmentDetails.style.display === "none" && customerDataString) {
+                    displayEquipmentDetails(JSON.parse(customerDataString));
+                    equipmentDetails.style.display = "block";
+                    this.textContent = "Hide Equipment Details";
+                } else {
+                    equipmentDetails.style.display = "none";
+                    this.textContent = "Show Equipment Details";
+                }
+            });
+        });
+        
+    
+        function displayCustomerDetails(customerData) {
             const customerDetails = document.getElementById("customerDetails");
-    
-            // Create HTML elements to display the details
             const detailsTable = document.createElement("table");
-    
-            // Define label mappings
             const labelMappings = {
                 name: "Name",
                 customerid: "Customer ID",
@@ -110,30 +152,61 @@
                 city: "City",
                 postal: "Postal",
                 province: "Province"
+                // Do not add Equipment here as it will be displayed separately
             };
     
             for (const key in customerData) {
-                const row = document.createElement("tr");
-                const cell1 = document.createElement("td");
-                const cell2 = document.createElement("td");
-    
-                cell1.textContent = labelMappings[key] || key;
-                cell2.textContent = customerData[key];
-    
-                cell1.classList.add("left"); // Add a class to the left column for capitalization
-    
-                row.appendChild(cell1);
-                row.appendChild(cell2);
-    
-                detailsTable.appendChild(row);
+                if (key !== 'Equipment') {
+                    const row = document.createElement("tr");
+                    row.appendChild(createCell(labelMappings[key] || key));
+                    row.appendChild(createCell(customerData[key]));
+                    detailsTable.appendChild(row);
+                }
             }
-    
             customerDetails.appendChild(detailsTable);
-        } else {
-            // Handle the case where customer data is not available
-            customerDetails.textContent = "Customer details not found.";
+        }
+    
+        function displayEquipmentDetails(customerData) {
+            const equipmentTable = document.getElementById("equipmentDetails").querySelector("table");
+            equipmentTable.innerHTML = "";
+
+            const row = equipmentTable.insertRow(-1);
+            row.appendChild(createCell('Equipment'));
+            row.appendChild(createCell(customerData.Equipment));
+
+            // Add repair details or a button to add repair record
+            if (customerData.Repair) {
+                row.appendChild(createCell(customerData.Repair));
+            } else {
+                const repairCell = row.insertCell(-1);
+                repairCell.appendChild(createAddRepairButton(customerData.name, customerData.Equipment));
+            }
+        }
+    
+        function createCell(text) {
+            const cell = document.createElement("td");
+            cell.textContent = text;
+            return cell;
+        }
+        function createAddRepairButton(customerName, equipment) {
+            const button = document.createElement("button");
+            button.textContent = "Repair";
+            button.onclick = function() { createRepair(customerName, equipment); };
+            return button;
+        }
+
+        // Define the createRepair function or ensure it's defined elsewhere
+        function createRepair(customerName, equipment) {
+            // Save customer name and equipment to sessionStorage
+            sessionStorage.setItem("selectedCustomerName", customerName);
+            sessionStorage.setItem("selectedEquipmentName", equipment);
+            window.location.href = "repairsCreate.html";
+        }
+    
+        function goToCustomerPage() {
+            window.location.href = "customer.html";
         }
     </script>
-    <button type="button" id="cancelButton", onclick="goToCustomerPage()">Back to Customer</button>       
+    
 </body>
 </html>

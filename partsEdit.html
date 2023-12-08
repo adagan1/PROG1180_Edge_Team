@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="style.css">
-<script src="partsEdit.js"></script>
 <html lang="en">
     <head>
         <title>Edit Parts</title>
@@ -11,7 +10,6 @@
             <nav>
                 <ul>
                 <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
                 <li><a href="customer.html">Customer</a></li>
                 <li><a href="tables.html">Maintenance</a></li>
                 <li><a href="reports.html">Reports</a></li>
@@ -137,5 +135,84 @@
         </form>
     </main>
     
-    </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const partsDataString = urlParams.get("data");
+
+    if (partsDataString) {
+        try {
+            const partToEdit = JSON.parse(partsDataString);
+            document.getElementById("partName").value = partToEdit.name;
+            document.getElementById("partStock").value = partToEdit.stock; // Set the part name in the text box
+        
+            // Add an event listener to save changes
+            document.getElementById("saveButton").addEventListener("click", function () {
+                // Reset the input field outlines
+                resetInputOutlines();
+        
+                // Validate the input fields
+                if (validateForm()) {
+                    // Update the part data with the new values
+                    partToEdit.name = document.getElementById("partName").value;
+        
+                    // Update the data in local storage
+                    // Retrieve the existing part data
+                    const storedPartData = JSON.parse(localStorage.getItem("partsData")) || [];
+        
+                    // Update the part data in local storage
+                    storedPartData[partToEdit.index] = partToEdit;
+        
+                    // Save the updated data back to local storage
+                    localStorage.setItem("partsData", JSON.stringify(storedPartData));
+        
+                    // Redirect back to the part page
+                    window.location.href = "tables.html";
+                }
+            });
+        } catch (error) {
+            console.error("Error parsing part data:", error);
+        }
+    }
+});
+
+function validateForm() {
+    const partName = document.getElementById("partName").value;
+    const errorMessages = [];
+
+    if (partName === "") {
+        errorMessages.push("Please fill in the 'part' field.");
+        document.getElementById("partName").classList.add("invalid-input");
+    } else if (!validatePart(partName)) {
+        errorMessages.push("The 'part' field should only contain letters.");
+        document.getElementById("partName").classList.add("invalid-input");
+    }
+
+    if (errorMessages.length > 0) {
+        // Display error messages on the page
+        document.getElementById("errorContainer").innerHTML = errorMessages.join("<br>");
+        return false;
+    }
+    return true;
+}
+
+function validatePart(name) {
+    const partPattern = /^[A-Za-z\s]+$/;
+    return partPattern.test(name);
+}
+
+function goToTablesPage() {
+    window.location.href = "tables.html";
+}
+
+function resetInputOutlines() {
+    // Remove the 'invalid-input' class from all input fields
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach(input => {
+        input.classList.remove("invalid-input");
+    });
+}
+</script>
+
+</body>
 </html>

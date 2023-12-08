@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="inventoryCreate.js"></script>
     <title>Create Equipment</title>
     <style>
         h1 {
@@ -145,7 +144,6 @@
         <nav>
             <ul>
                 <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
                 <li><a href="customer.html">Customer</a></li>
                 <li><a href="tables.html">Maintenance</a></li>
                 <li><a href="reports.html">Reports</a></li>
@@ -167,9 +165,15 @@
                         <option value="Julio Mendes">
                         <!-- Add more owners here -->
                     </datalist>
-                    <button type="button" onclick="goToCreateCustomerPage()" id="newCustomerButton">New Customer</button>
                 </div>
-
+                <div id="serialInfo">
+                    <label for="serial">Serial Number:</label>
+                    <input type="text" id="serial" name="serial" required placeholder="Serial #">
+                </div>
+                <div id="modelInfo">
+                    <label for="model">Model Number:</label>
+                    <input type="text" id="model" name="model" required placeholder="Model #">
+                </div>
                 <div id="nameInfo">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required placeholder="Enter name">
@@ -209,10 +213,123 @@
                 <div id="errorContainer"></div> <!-- Container for error messages -->
                 <div>
                     <button type="button" id="createInventoryButton">Save Changes</button>
-                    <button type="button" id="cancelButton" onclick="goToEquipmentPage()">Cancel</button>
+                    <button type="button" id="cancelButton" onclick="goToCreateCustomerPage()">Cancel</button>
                 </div>
             </form>
         </div>
     </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    // Parse the URL parameters to get the customer's name
+    const urlParams = new URLSearchParams(window.location.search);
+    const customerName = urlParams.get('customerName');
+
+    // Set the customer's name as the default value for the owner input field
+    document.getElementById("owner").value = customerName;
+
+    // Add an event listener to the "Save Changes" button
+    document.getElementById("createInventoryButton").addEventListener("click", function () {
+        // Reset the input field outlines
+        resetInputOutlines();
+
+        // Validate the input fields
+        if (validateForm()) {
+            // Get the data for the new inventory item
+            const name = document.getElementById("name").value;
+            const brand = document.getElementById("brand").value;
+            const description = document.getElementById("description").value;
+            const colour = document.getElementById("colour").value;
+
+            // Get the selected owner from the dropdown list
+            const owner = document.getElementById("owner").value;
+
+            // Create an object with the new equipment data
+            const newEquipment = {
+                name: name,
+                brand: brand,
+                description: description,
+                colour: colour,
+                owner: owner
+            };
+
+            // For this example, we'll log the new data to the console
+            console.log("New Equipment Data:", newEquipment);
+
+            // Redirect back to the customer creation page
+            window.location.href = "customerCreate.html";
+        }
+    });
+});
+
+function validateForm() {
+    const name = document.getElementById("name").value;
+    const brand = document.getElementById("brand").value;
+    const serial = document.getElementById("serial").value;
+    const model = document.getElementById("model").value;
+    const description = document.getElementById("description").value;
+    const colour = document.getElementById("colour").value;
+    const owner = document.getElementById("owner").value;
+
+    const errorMessages = [];
+
+    if (name.trim() === "") {
+        errorMessages.push("Please fill in the 'Name' field.");
+        document.getElementById("name").classList.add("invalid-input");
+    }
+
+    if (brand === "") {
+        errorMessages.push("Please select a 'Brand'.");
+        document.getElementById("brand").classList.add("invalid-input");
+    }
+
+    if (serial === "" || /[a-zA-Z]/.test(serial)) {
+        errorMessages.push("Please input a valid 'Serial Number'.");
+        document.getElementById("serial").classList.add("invalid-input");
+    }
+
+    if (model === "" || /[a-zA-Z]/.test(model)) {
+        errorMessages.push("Please input a valid 'Model Number'.");
+        document.getElementById("model").classList.add("invalid-input");
+    }
+
+    if (colour === "") {
+        errorMessages.push("Please select a 'Colour'.");
+        document.getElementById("colour").classList.add("invalid-input");
+    }
+
+    if (owner === "") {
+        errorMessages.push("Please select an 'Owner'.");
+        document.getElementById("owner").classList.add("invalid-input");
+    }
+
+    if (errorMessages.length > 0) {
+        // Display error messages on the page
+        document.getElementById("errorContainer").innerHTML = errorMessages.join("<br>");
+        return false;
+    }
+
+    return true;
+}
+
+function resetInputOutlines() {
+    // Remove the 'invalid-input' class from all input fields and dropdown lists
+    const inputs = document.querySelectorAll("input, select");
+    inputs.forEach(input => {
+        input.classList.remove("invalid-input");
+    });
+}
+
+function goToCustomerPage() {
+    window.location.href = "customer.html";
+}
+
+
+function goToCreateCustomerPage() {
+    window.location.href = "customerCreate.html";
+}
+
+</script>
+
 </body>
 </html>

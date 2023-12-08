@@ -58,24 +58,6 @@
             }
         }
 
-         .logout-button {
-            display: none; /* Initially hidden */
-            padding: 10px 15px;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
-        }
-
-        .logout-button:hover {
-            background-color: #555;
-        }
-
         .login-form {
             width: 300px;
             margin: 50px auto;
@@ -86,11 +68,11 @@
         }
 
         .login-input {
-            width: 80%;
+            width: 50%;
             padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 4px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
+            border-radius: 4px;
         }
 
         .login-button {
@@ -149,6 +131,7 @@
         .login-button:hover, .login-button:focus {
             background-color: #555;
         }
+
     </style>
 </head>
 <body>
@@ -157,19 +140,20 @@
         <nav style="display: none;" id="headerContent">
             <ul>
                 <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
-                <li><a href="customer.html">Customer</a></li>
-                <li><a href="tables.html">Maintenance</a></li>
-                <li><a href="reports.html">Reports</a></li>
-                <li><a href="repairs.html">Repairs</a></li>
+                <li style="display: none;" id="customerLink"><a href="customer.html">Customer</a></li>
+                <li style="display: none;" id="maintenanceLink"><a href="tables.html">Maintenance</a></li>
+                <li style="display: none;" id="reportsLink"><a href="reports.html">Reports</a></li>
+                <li style="display: none;" id="repairsLink"><a href="repairs.html">Repairs</a></li>           
             </ul>
         </nav>
     </header>
 
+    <button class="logout-button" id="logoutButton" onclick="logout()" style="position: fixed; top: 70px; right: 10px; display: none;">Logout</button>
+
+
     <div class="login-form" id="loginForm">
-        <h2> Emma's Small Engine Repair Employee Login</h2>
-        <input type="text" id="username" class="login-input" placeholder="Username"><br>
-        <input type="password" id="password" class="login-input" placeholder="Password"><br>
+        <h2> Emma's Small Engines Login</h2>
+        <input type="textArea" id="username" class="login-input" placeholder="Username"><br>
         <button class="login-button" onclick="login()">Login</button>
     </div>
     
@@ -183,39 +167,25 @@
         
         <div class="dashboard">
             <div class="dashboard-section" id="addCustomerSection" style="display: none;">
-                <h2>Add a Customer</h2>
-                <p>Click the button to quickly add a customer.</p>
-                <button onclick="location.href='customerCreate.html'">Add a Customer</button>
+                <h2>Manage Customers</h2>
+                <p>Click the button to create or view customers.</p>
+                <button onclick="location.href='customer.html'">View Customers</button>
             </div>
-            
-            <div class="dashboard-section">
-                <h2>Add a Equipment</h2>
-                <p>Click the button to quickly create an appliance.</p>
-                <button onclick="location.href='inventoryCreate.html'">Add Equipment</button>
-            </div>
-            
+                       
             <div class="dashboard-section" id="createReportSection">
-                <h2>Create a Report</h2>
-                <p>Click the button to quickly Generate a report.</p>
-                <button onclick="location.href='reportsCreate.html'">Generate a Report</button>
+                <h2>Manage Reports</h2>
+                <p>Click the button to create or view reports.</p>
+                <button onclick="location.href='reports.html'">View Reports</button>
             </div>
-
-            <div class="dashboard-section" id="startRepairSection">
-                <h2>Start a Repair </h2>
-                <p>Click the button to quickly start a repair.</p>
-                <button onclick="location.href='repairsCreate.html'">New Repair Request</button>
-            </div>
-            
+        
             <div class="dashboard-section" id="repairsSection">
-                <h2> Manage Repairs</h2>
-                <p>Click the button to view and manage repairs.</p>
+                <h2>Manage Repairs</h2>
+                <p>Click the button to view or manage repairs.</p>
                 <button onclick="location.href='repairs.html'">View Repairs</button>
             </div>
             
         </div>
     </main>
-
-    <button class="logout-button" id="logoutButton" onclick="logout()" style="position: fixed; bottom: 10px; left: 10px;">Logout</button>
 
     <script>
 
@@ -231,27 +201,20 @@
 
             function login() {
                 var username = document.getElementById('username').value;
-                var password = document.getElementById('password').value;
 
-                if (password === '123') {
                     document.getElementById('loginForm').style.display = 'none';
                     document.getElementById('headerContent').style.display = 'block';
                     document.getElementById('mainContent').style.display = 'block';
                     document.getElementById('logoutButton').style.display = 'block';
 
-
-                    if (username === 'sales') {
-                        showOnlyAddCustomer();
-                    } else if (username === 'tech') {
-                        showTechnicianSections();
-                    } else if (username === 'admin') {
-                        showAllSections();
-                    } else {
-                        alert('Invalid username');
-                        resetLoginForm();
-                    }
+                if (username === 'sales') {
+                    showOnlyAddCustomer();
+                } else if (username === 'tech') {
+                    showTechnicianSections();
+                } else if (username === 'admin') {
+                    showAllSections();
                 } else {
-                    alert('Invalid password');
+                    alert('Invalid username');
                     resetLoginForm();
                 }
             }
@@ -288,18 +251,25 @@
             function showOnlyAddCustomer() {
                 hideAllSections();
                 document.getElementById('addCustomerSection').style.display = 'block';
+                document.getElementById('customerLink').style.display = 'block';
                 updateWelcomeSection('sales');
             }
 
             function showTechnicianSections() {
                 hideAllSections();
                 document.getElementById('createReportSection').style.display = 'block';
-                document.getElementById('startRepairSection').style.display = 'block';
                 document.getElementById('repairsSection').style.display = 'block';
+                document.getElementById('repairsLink').style.display = 'block';
+                document.getElementById('reportsLink').style.display = 'block';
                 updateWelcomeSection('tech');
             }
 
             function showAllSections() {
+                document.getElementById('customerLink').style.display = 'block';
+                document.getElementById('maintenanceLink').style.display = 'block';
+                document.getElementById('reportsLink').style.display = 'block';
+                document.getElementById('repairsLink').style.display = 'block';
+
                 document.querySelectorAll('.dashboard-section').forEach(section => {
                     section.style.display = 'block';
                 });
@@ -309,5 +279,3 @@
       
 </body>
 </html>
-
-
