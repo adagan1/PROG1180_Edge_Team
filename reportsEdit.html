@@ -159,9 +159,6 @@
                     <label for="warrantyEnd">Warranty End:</label>
                     <input type="date" id="warrantyEnd" placeholder="Select warranty end date">
 
-                    <label for="warrantyDetails">Warranty Details:</label>
-                    <input type="text" id="warrantyDetails" placeholder="Enter warranty details">
-
                     <label for="additionalWarrantyInfo">Additional Warranty Info:</label>
                     <textarea id="additionalWarrantyInfo" placeholder="Enter additional warranty info" rows="5" cols="50"></textarea>
                 </div>
@@ -243,7 +240,6 @@
     const reportTotalInput = document.getElementById("reportTotal");
     const warrantyStartInput = document.getElementById("warrantyStart");
     const warrantyEndInput = document.getElementById("warrantyEnd");
-    const warrantyDetailsInput = document.getElementById("warrantyDetails");
     const additionalWarrantyInfoInput = document.getElementById("additionalWarrantyInfo");
 
     // Include order fields
@@ -267,7 +263,6 @@
         warrantyOwnerInput.value = selectedReport.owner || "";
         warrantyStartInput.value = selectedReport.warrantyStart || "";
         warrantyEndInput.value = selectedReport.warrantyEnd || "";
-        warrantyDetailsInput.value = selectedReport.warrantyDetails || "";
         additionalWarrantyInfoInput.value = selectedReport.additionalWarrantyInfo || "";
     } 
 
@@ -281,7 +276,7 @@
     document.getElementById('totalSales').value = selectedReport.totalSales || "";
     document.getElementById('totalRepairs').value = selectedReport.totalRepairs || "";
     document.getElementById('inventoryUsed').value = selectedReport.inventoryUsed || "";
-}
+    }
 
 
     //sales
@@ -315,7 +310,6 @@
             total: reportTotalInput.value,
             warrantyStart: warrantyStartInput.value,
             warrantyEnd: warrantyEndInput.value,
-            warrantyDetails: warrantyDetailsInput.value,
             additionalWarrantyInfo: additionalWarrantyInfoInput.value,
         };
 
