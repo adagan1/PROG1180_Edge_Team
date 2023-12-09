@@ -47,7 +47,7 @@
         <option value="all">All</option>
         <option value="sales">Sales</option>
         <option value="warranty">Warranty</option>
-        <option value="orders">Orders</option>
+        <option value="weeklyReport">Weekly Report</option> 
     </select>
 </div>
 
@@ -60,7 +60,7 @@
         <table id="reportTable">
             <thead>
                 <tr>
-                    <th>Owner/Brand</th>
+                    <th>Owner/Company</th>
                     <th>Category</th>
                     <th>Date</th>
                     <th>Controls</th>
@@ -85,17 +85,14 @@ const hardCodedReports = [
         total: 4.52
     },
     {
-        //Is actually brand
-        owner: "Honda",
-        category: "Orders",
-        equipment: "Honda Bagged Lawnmower",
-        orderDetails: "Ordered a new honda lawnmower.",
-        date: "2023-02-15",
-        arrivalDate: "2023-04-1",
-        orderStatus: "Pending",
-        quantity: 1,
-        price: 199.95,
-        total: 225.94
+        owner: "Emma's Small Engines",
+        category: "Weekly Report",
+        date: "2023-03-10",
+        totalSales: "1500",
+        totalRepairs: "10",
+        inventoryUsed: "Screws, Nuts",
+        startReportDate: "2023-03-03",
+        endReportDate: "2023-03-10"
     },
     {
         owner: "Julio Mendes",

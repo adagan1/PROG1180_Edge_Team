@@ -169,47 +169,35 @@
         `
     }
 
-    // Check if the report is a order
-    if (selectedReport.category == "Orders") {
-        reportDetailsTable.innerHTML += `
-            <tr>
-                <th>Brand</th>
-                <td>${selectedReport.owner}</td>
-            </tr>
-            <tr>
-                <th>Equipment</th>
-                <td>${selectedReport.equipment}</td>
-            </tr>
-            <tr>
-                <th>Order Details</th>
-                <td>${selectedReport.orderDetails}</td>
-            </tr>
-            <tr>
-                <th>Order Date</th>
-                <td>${selectedReport.date}</td>
-            </tr>
-            <tr>
-                <th>Arrival Date</th>
-                <td>${selectedReport.arrivalDate}</td>
-            </tr>
-            <tr>
-                <th>Order Status</th>
-                <td>${selectedReport.orderStatus}</td>
-            </tr>
-            <tr>
-                <th>Quantity</th>
-                <td>${selectedReport.quantity}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>${selectedReport.price}</td>
-            </tr>
-            <tr>
-                <th>Total</th>
-                <td>${selectedReport.total}</td>
-            </tr>
-        `
-    }
+    // Check if the report is a weekly report
+if (selectedReport.category == "Weekly Report") {
+    reportDetailsTable.innerHTML += `
+        <tr>
+            <th>Owner</th>
+            <td>${selectedReport.owner}</td>
+        </tr>
+        <tr>
+            <th>Start Date</th>
+            <td>${selectedReport.startReportDate}</td>
+        </tr>
+        <tr>
+            <th>End Date</th>
+            <td>${selectedReport.endReportDate}</td>
+        </tr>
+        <tr>
+            <th>Total Sales</th>
+            <td>${selectedReport.totalSales}</td>
+        </tr>
+        <tr>
+            <th>Total Repairs</th>
+            <td>${selectedReport.totalRepairs}</td>
+        </tr>
+        <tr>
+            <th>Inventory Used</th>
+            <td>${selectedReport.inventoryUsed}</td>
+        </tr>
+    `;
+}
 });
 
 function goToReportsPage() {
