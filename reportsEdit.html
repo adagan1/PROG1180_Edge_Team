@@ -138,6 +138,8 @@
         <form id="reportEditForm">
             <div class="edit-container">
 
+                                
+                <!-- warranty Page -->
                 <div id="warrantyFields" style="display: none;">
                     <div id="ownerInfo">
                         <label for="warrantyOwner">Owner:</label>
@@ -146,12 +148,11 @@
                             <option value="Joe Jawndel">
                             <option value="Billy Talent">
                             <option value="Julio Mendes">
-                            <!-- Add more owners here -->
                         </datalist>
                     </div>
     
                     <label for="reportDate">Date:</label>
-                    <input type="date" id="reportDate" placeholder="Select a date" required>
+                    <input type="date" id="warrantyReportDate" placeholder="Select a date" required>
 
                     <label for="warrantyStart">Warranty Start:</label>
                     <input type="date" id="warrantyStart" placeholder="Select warranty start date">
@@ -162,7 +163,8 @@
                     <label for="additionalWarrantyInfo">Additional Warranty Info:</label>
                     <textarea id="additionalWarrantyInfo" placeholder="Enter additional warranty info" rows="5" cols="50"></textarea>
                 </div>
-
+                            
+                <!-- Sales Page -->
                 <div id="salesFields">
                     <div id="ownerInfo">
                         <label for="salesOwner">Owner:</label>
@@ -176,7 +178,7 @@
                     </div>
     
                     <label for="reportDate">Date:</label>
-                    <input type="date" id="reportDate" placeholder="Select a date" required>
+                    <input type="date" id="salesReportDate" placeholder="Select a date" required>
 
                     <label for="reportDescription">Description:</label>
                     <textarea id="reportDescription" name="reportDescription" placeholder="Enter item description" rows="5" cols="50"></textarea>
@@ -233,7 +235,8 @@
     // Populate the form fields with the selected report data
     const reportOwnerInput = document.getElementById("salesOwner");
     const warrantyOwnerInput = document.getElementById("warrantyOwner");
-    const reportDateInput = document.getElementById("reportDate");
+    const salesReportDateInput = document.getElementById("salesReportDate");
+    const warrantyReportDateInput = document.getElementById("warrantyReportDate");
     const reportDescriptionInput = document.getElementById("reportDescription");
     const reportPriceInput = document.getElementById("reportPrice");
     const reportQuantityInput = document.getElementById("reportQuantity");
@@ -252,14 +255,41 @@
     const statusInput = document.getElementById("status");
     const orderPriceInput = document.getElementById("orderPrice");
 
+
+    // Function to display or hide fields based on report category
+function displayFieldsBasedOnCategory(category) {
+    const salesFields = document.getElementById('salesFields');
+    const warrantyFields = document.getElementById('warrantyFields');
+    const weeklyReportFields = document.getElementById('weeklyReportFields');
+
+    if (category.toLowerCase() === 'sales') {
+        salesFields.style.display = 'block';
+        warrantyFields.style.display = 'none';
+        weeklyReportFields.style.display = 'none';
+    } else if (category.toLowerCase() === 'warranty') {
+        salesFields.style.display = 'none';
+        warrantyFields.style.display = 'block';
+        weeklyReportFields.style.display = 'none';
+    } else if (category.toLowerCase() === 'weekly report') {
+        salesFields.style.display = 'none';
+        warrantyFields.style.display = 'none';
+        weeklyReportFields.style.display = 'block';
+    } else {
+        salesFields.style.display = 'none';
+        warrantyFields.style.display = 'none';
+        weeklyReportFields.style.display = 'none';
+    }
+}
+
+// Determine the category of the selected report and display the fields accordingly
+displayFieldsBasedOnCategory(selectedReport.category);
     //warranty
     if (selectedReport.category.toLowerCase() === 'warranty') {
-        // Populate the sales fields with the selected report data
-        document.getElementById('salesFields').style.display = 'none'; // Hide sales fields
-        document.getElementById('warrantyFields').style.display = 'block'; // Show warranty fields
-        document.getElementById('orderFields').style.display = 'none'; // Hide order fields
+        
 
         // Populate the warranty fields with the example data
+        warrantyReportDateInput.value = selectedReport.date || "";
+
         warrantyOwnerInput.value = selectedReport.owner || "";
         warrantyStartInput.value = selectedReport.warrantyStart || "";
         warrantyEndInput.value = selectedReport.warrantyEnd || "";
@@ -281,12 +311,10 @@
 
     //sales
     else if (selectedReport.category.toLowerCase() === 'sales') {
-        document.getElementById('salesFields').style.display = 'block'; // Show sales fields
-        document.getElementById('warrantyFields').style.display = 'none'; // Hide warranty fields
-        document.getElementById('orderFields').style.display = 'none'; // hide order fields
+        
 
         reportOwnerInput.value = selectedReport.owner || "";
-        reportDateInput.value = selectedReport.date || "";
+        salesReportDateInput.value = selectedReport.date || "";
         reportDescriptionInput.value = selectedReport.description || "";
         reportPriceInput.value = selectedReport.price || "";
         reportQuantityInput.value = selectedReport.quantity || "";
