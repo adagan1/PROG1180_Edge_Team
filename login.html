@@ -150,10 +150,18 @@
 
     <div class="login-form" id="loginForm">
         <h2> Emma's Small Engines Login</h2>
-        <input type="" id="username" class="login-input" placeholder="Username"><br>
+        <input type="" id="username" class="login-input" placeholder="Username" onkeydown="handleKeyDown(event)"><br>
         <button class="login-button" onclick="login()">Login</button>
     </div>
     <script>
+
+        function handleKeyDown(event) {
+            // Check if the key pressed is Enter (keyCode 13)
+            if (event.keyCode === 13) {
+            // Call your function here
+            login();
+            }
+        }
 
             function login() {
                 var username = document.getElementById('username').value;
