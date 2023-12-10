@@ -142,9 +142,7 @@
 
                 <label for="equipment">Equipment S/N:</label>
                 <input type="text" id="equipment" name="equipment" list="equipmentList" placeholder="Enter equipment S/N" required>
-                
-                
-                
+
             </div>
 
             <div id="weeklyFields" style="display: none;">
@@ -186,7 +184,7 @@
         </form>
     </main>
 
-    <script>
+    <script> 
     function toggleFields() {
         const reportCategory = document.getElementById("reportCategory");
         const warrantyFields = document.getElementById("warrantyFields");
@@ -214,52 +212,23 @@
         window.location.href = "reports.html";
     }
 
-    // Check for roles
-    const userRole = sessionStorage.getItem('userRole');
-    if (userRole === 'sales') {
-        document.getElementById('customerLink').style.display = 'block';
-    } else if (userRole === 'tech') {
-        document.getElementById('repairsLink').style.display = 'block';
-        document.getElementById('reportsLink').style.display = 'block';
-    } else if (userRole === 'admin') {
-        document.getElementById('customerLink').style.display = 'block';
-        document.getElementById('maintenanceLink').style.display = 'block';
-        document.getElementById('reportsLink').style.display = 'block';
-        document.getElementById('repairsLink').style.display = 'block';
-    } else {
-        // Redirect to login page if user role is not set
-        window.location.href = 'main.html';
-    }
-
-    function addProductField() {
-    const productFields = document.getElementById("productFields");
-    
-    const newProductField = document.createElement("div");
-    newProductField.classList.add("product-field");
-
-    newProductField.innerHTML = `
-        <label for="product">Product:</label>
-        <input type="search" class="product" name="product" list="productList" placeholder="Search for a product" required>
-        <datalist id="productList">
-            <option value="Air Filter - 30965">
-            <option value="Oil - 20394">
-            <option value="Spark Plug - 30459">
-        </datalist>
-        <button type="button" onclick="removeProductField(this)">Remove Item</button>
-    `;
-
-    productFields.appendChild(newProductField);
-}
-
-function removeProductField(button) {
-    const productField = button.parentNode;
-    const productFields = document.getElementById("productFields");
-
-    // Ensure there is at least one product field before removing
-    if (productFields.children.length > 1) {
-        productFields.removeChild(productField);
-    }
-}
+    //check for roles
+        const userRole = sessionStorage.getItem('userRole');
+        if (userRole === 'sales') {
+            document.getElementById('customerLink').style.display = 'block';
+            document.getElementById('reportsLink').style.display = 'block';
+        } else if (userRole === 'tech') {
+            document.getElementById('repairsLink').style.display = 'block';
+            document.getElementById('reportsLink').style.display = 'block';
+        } else if (userRole === 'admin') {
+            document.getElementById('customerLink').style.display = 'block';
+            document.getElementById('maintenanceLink').style.display = 'block';
+            document.getElementById('reportsLink').style.display = 'block';
+            document.getElementById('repairsLink').style.display = 'block';
+        } else {
+            // Redirect to login page if user role is not set
+            window.location.href = 'main.html';
+        }
     </script>
 </body>
 </html>

@@ -163,19 +163,25 @@
                 <p>Click the button to create or view customers.</p>
                 <button onclick="location.href='customer.html'">View Customers</button>
             </div>
-                       
-            <div style="display: none;" class="dashboard-section" id="createReportSection">
-                <h2>Manage Reports</h2>
-                <p>Click the button to create or view reports.</p>
-                <button onclick="location.href='reports.html'">View Reports</button>
-            </div>
-        
+                     
             <div style="display: none;" class="dashboard-section" id="repairsSection">
                 <h2>Manage Repairs</h2>
                 <p>Click the button to view or manage repairs.</p>
                 <button onclick="location.href='repairs.html'">View Repairs</button>
             </div>
-            
+
+            <div style="display: none;" class="dashboard-section" id="createReportSection">
+                <h2>Manage Reports</h2>
+                <p>Click the button to create or view reports.</p>
+                <button onclick="location.href='reports.html'">View Reports</button>
+            </div>
+
+            <div style="display: none;" class="dashboard-section" id="accessMaintanence">
+                <h2>Manage Maintenance</h2>
+                <p>Click the button to view maintenance.</p>
+                <button onclick="location.href='tables.html'">View Maintenance</button>
+            </div>
+
         </div>
     </main>
 
@@ -184,6 +190,7 @@
         const userRole = sessionStorage.getItem('userRole');
             if (userRole === 'sales') {
                 document.getElementById('customerLink').style.display = 'block';
+                document.getElementById('reportsLink').style.display = 'block';
                 showOnlyAddCustomer()
             } else if (userRole === 'tech') {
                 document.getElementById('repairsLink').style.display = 'block';
@@ -236,6 +243,7 @@
             function showOnlyAddCustomer() {
                 hideAllSections();
                 document.getElementById('addCustomerSection').style.display = 'block';
+                document.getElementById('createReportSection').style.display = 'block';
                 document.getElementById('customerLink').style.display = 'block';
                 updateWelcomeSection('sales');
             }
