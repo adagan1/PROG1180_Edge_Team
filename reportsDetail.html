@@ -208,6 +208,7 @@ function goToReportsPage() {
 const userRole = sessionStorage.getItem('userRole');
     if (userRole === 'sales') {
         document.getElementById('customerLink').style.display = 'block';
+        document.getElementById('reportsLink').style.display = 'block';
     } else if (userRole === 'tech') {
         document.getElementById('repairsLink').style.display = 'block';
         document.getElementById('reportsLink').style.display = 'block';

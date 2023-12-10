@@ -211,21 +211,22 @@
         }
 
         //check for roles
-        const userRole = sessionStorage.getItem('userRole');
-            if (userRole === 'sales') {
-                document.getElementById('customerLink').style.display = 'block';
-            } else if (userRole === 'tech') {
-                document.getElementById('repairsLink').style.display = 'block';
-                document.getElementById('reportsLink').style.display = 'block';
-            } else if (userRole === 'admin') {
-                document.getElementById('customerLink').style.display = 'block';
-                document.getElementById('maintenanceLink').style.display = 'block';
-                document.getElementById('reportsLink').style.display = 'block';
-                document.getElementById('repairsLink').style.display = 'block';
-            } else {
-                // Redirect to login page if user role is not set
-                window.location.href = 'main.html';
-            }
+const userRole = sessionStorage.getItem('userRole');
+    if (userRole === 'sales') {
+        document.getElementById('customerLink').style.display = 'block';
+        document.getElementById('reportsLink').style.display = 'block';
+    } else if (userRole === 'tech') {
+        document.getElementById('repairsLink').style.display = 'block';
+        document.getElementById('reportsLink').style.display = 'block';
+    } else if (userRole === 'admin') {
+        document.getElementById('customerLink').style.display = 'block';
+        document.getElementById('maintenanceLink').style.display = 'block';
+        document.getElementById('reportsLink').style.display = 'block';
+        document.getElementById('repairsLink').style.display = 'block';
+    } else {
+        // Redirect to login page if user role is not set
+        window.location.href = 'main.html';
+    }
     </script>
     
 </body>
