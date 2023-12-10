@@ -86,10 +86,6 @@
             background-color: #3a3a3a;
         }
 
-        .invalid-input {
-            border: 1px solid red;
-        }
-
         button[id="cancelButton"] {
             background-color: red;
         }
@@ -127,7 +123,7 @@
                 <option value="sales">Sales</option>
             </select>                       
 
-                <div id="warrantyFields" style="display: none;">
+            <div id="warrantyFields" style="display: none;">
                 <label for="owner">Manufacturer:</label>
                 <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for manufacturer" required>
                 <datalist id="ownerList">
@@ -135,391 +131,92 @@
                     <option value="Dewalt">
                     <option value="John Deere">
                 </datalist>
-
-                <label for="equipment">Equipment:</label>
-                <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
-                <datalist id="equipmentList">
-                    <option value="Lawnmower">
-                    <option value="Drill">
-                    <option value="Electric Lawnmower">
-                </datalist>
-
-                <label for="reportDate">Date:</label>
-                <input type="date" id="reportDate" required>
-                <label for="warrantyStart">Warranty Start:</label>
-                <input type="date" id="warrantyStart" placeholder="Enter warranty period">
-                <label for="warrantyEnd">Warranty End:</label>
-                <input type="date" id="warrantyEnd" placeholder="Enter warranty period">
-                <label for="warrantyDetails">Additional Details:</label>
-                <textarea id="warrantyDetails" placeholder="Enter warranty details" rows="5" cols="50"></textarea>
                 
-            </div>
-
-            <div id="weeklyFields" style="display: none;">
-                <label for="ownerWeekly">Name:</label>
-                <input type="search" id="ownerWeekly" name="ownerWeekly" list="ownerListWeekly" placeholder="Enter name" required>
-                <datalist id="ownerListWeekly">
-                    <option value="Joe Jawndel">
-                    <option value="Billy Talent">
-                    <option value="Julio Mendes">
-                </datalist>
-    
-                <label for="reportDateWeekly">Date:</label>
-                <input type="date" id="reportDateWeekly" required>
-    
-                <label for="startReportDate">Start Date:</label>
-                <input type="date" id="startReportDate" required>
-    
-                <label for="endReportDate">End Date:</label>
-                <input type="date" id="endReportDate" required>
-    
-                <label for="totalSales">Total Sales:</label>
-                <input type="text" id="totalSales" placeholder="Enter total sales" required>
-    
-                <label for="totalRepairs">Total Repairs:</label>
-                <input type="text" id="totalRepairs" placeholder="Enter total repairs" required>
-    
-                <label for="inventoryUsed">Inventory Used:</label>
-                <input type="text" id="inventoryUsed" placeholder="Enter inventory used" required>
-            </div>
-
-            <div id="salesFields" style="display: none;">
-                <label for="brand">Brand:</label>
-                <select id="brand" name="brand" required>
-                    <option value="" disabled selected>Select a brand</option>
-                    <option value="Brand1">Craftsman</option>
-                    <option value="Brand2">Dewalt</option>
-                    <option value="Brand3">Honda</option>
-                    <option value="Brand4">John Deere</option>
-                </select>
-            
-                <label for="product">Product:</label>
+                <label for="product">Equipment:</label>
                 <input type="search" id="product" name="product" list="productList" placeholder="Search for a product" required>
                 <datalist id="productList">
                     <option value="Lawnmower">
                     <option value="Drill">
                     <option value="Electric Lawnmower">
                 </datalist>
-            
-                <label for="orderDetails">Order Details:</label>
-                <textarea id="orderDetails" placeholder="Enter order details" rows="5" cols="50"></textarea>
-            
-                <label for="orderQuantity">Quantity:</label>
-                <input type="number" id="orderQuantity" placeholder="Enter quantity" required>
-            
-                <label for="orderDate">Order Date:</label>
-                <input type="date" id="orderDate" required>
-            
-                <label for="arrivalDate">Arrival date:</label>
-                <input type="date" id="arrivalDate" required>
-            
-                <label for="status">Status:</label>
-                <select id="status" name="status" required>
-                    <option value="" disabled selected>Select a status</option>
-                    <option value="Completed">Completed</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Back-ordered">Back-ordered</option>
-                </select>
-            
-                <label for="reportPriceOrder">Price:</label>
-                <input type="number" id="reportPriceOrder" placeholder="Enter price" required>
-            </div>            
 
+                <label for="equipment">Equipment S/N:</label>
+                <input type="text" id="equipment" name="equipment" list="equipmentList" placeholder="Enter equipment S/N" required>
+                
+                
+                
+            </div>
 
-            <div id="errorContainer"></div>
-            <button type="button" id="createButton" hidden>Save Changes</button>
+            <div id="weeklyFields" style="display: none;">
+                <label for="startReportDate">Start Date:</label>
+                <input type="date" id="startReportDate" required>
+    
+                <label for="endReportDate">End Date:</label>
+                <input type="date" id="endReportDate" required>
+    
+            </div>
+
+            <div id="salesFields" style="display: none;">
+                <label for="customer">Customer:</label>
+                <input type="search" id="customer" name="customer" list="customerList" placeholder="Search for a customer" required>
+                <datalist id="customerList">
+                    <option value="Joe Jawndel">
+                    <option value="Julio Mendez">
+                    <option value="Billy Talent">
+                </datalist>
+            
+                <label for="product">Equipment:</label>
+                <input type="search" id="product" name="product" list="productList" placeholder="Search for a product" required>
+                <datalist id="productList">
+                    <option value="Lawnmower">
+                    <option value="Drill">
+                    <option value="Electric Lawnmower">
+                </datalist>
+
+                <label for="fix">Fix:</label>
+                <input type="search" id="fix" name="fix" list="fixList" placeholder="Search for a fix" required>
+                <datalist id="fixList">
+                    <option value="Tire Change">
+                    <option value="Oil Change">
+                    <option value="Engine Rebuild">
+                </datalist>
+            </div>
+
+            <button type="button" id="generateButton" hidden>Generate</button>
             <button type="button" id="cancelButton" onclick="goToReportsPage()">Cancel</button>
         </form>
     </main>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const categoryDropdown = document.getElementById("reportCategory");
-        const errorContainer = document.getElementById("errorContainer");
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById("reportDate").value = today;
-        document.getElementById("reportDateWeekly").value = today;
-        document.getElementById("orderDate").value = today;
+    function toggleFields() {
+        const reportCategory = document.getElementById("reportCategory");
+        const warrantyFields = document.getElementById("warrantyFields");
+        const weeklyFields = document.getElementById("weeklyFields");
+        const salesFields = document.getElementById("salesFields");
+        const generateButton = document.getElementById("generateButton");
+        const cancelButton = document.getElementById("cancelButton");
 
-        // Function to toggle the visibility of input fields based on the selected category
-        function toggleFields() {
-            const createButton = document.getElementById("createButton");
-            const cancelButton = document.getElementById("cancelButton");
-            const errorContainer = document.getElementById("errorContainer");
+        warrantyFields.style.display = reportCategory.value === "warranty" ? "block" : "none";
+        weeklyFields.style.display = reportCategory.value === "weeklyReport" ? "block" : "none";
+        salesFields.style.display = reportCategory.value === "sales" ? "block" : "none";
 
-            // Reset previous validation styles and error messages
-            resetValidationStyles();
-            errorContainer.innerHTML = "";
-
-            if (categoryDropdown.value === "warranty" || categoryDropdown.value === "weeklyReport" || categoryDropdown.value === "sales") {
-                warrantyFields.style.display = categoryDropdown.value === "warranty" ? "block" : "none";
-                weeklyFields.style.display = categoryDropdown.value === "weeklyReport" ? "block" : "none";
-                salesFields.style.display = categoryDropdown.value === "sales" ? "block" : "none";
-
-                // Show the buttons when a category is selected
-                createButton.removeAttribute("hidden");
-                cancelButton.removeAttribute("hidden");
-            } else {
-                warrantyFields.style.display = "none";
-                weeklyFields.style.display = "none";
-                salesFields.style.display = "none";
-
-                // Hide the buttons when no category is selected
-                createButton.setAttribute("hidden", true);
-            }
+        // Show the buttons when a category is selected
+        if (reportCategory.value === "warranty" || reportCategory.value === "weeklyReport" || reportCategory.value === "sales") {
+            generateButton.removeAttribute("hidden");
+            cancelButton.removeAttribute("hidden");
+        } else {
+            // Hide the buttons when no category is selected
+            generateButton.setAttribute("hidden", true);
         }
+    }
 
-        // Attach the toggleFields function to the change event of the category dropdown
-        categoryDropdown.addEventListener("change", toggleFields);
+    function goToReportsPage() {
+        console.log("Redirecting to reports.html");
+        window.location.href = "reports.html";
+    }
 
-        const saveButton = document.getElementById("createButton");
-        saveButton.addEventListener("click", function (event) {
-            event.preventDefault(); // Prevent the default form submission behavior
-
-            // Get the report data
-            const reportCategory = categoryDropdown.value;
-            const reportOwnerInput = document.getElementById("owner");
-            const reportDateInput = document.getElementById("reportDate");
-            const reportDescriptionInput = document.getElementById("reportDescription");
-            const reportPriceInput = document.getElementById("reportPrice");
-            const reportQuantityInput = document.getElementById("reportQuantity");
-            const reportTotalInput = document.getElementById("reportTotal");
-            const warrantyStartInput = document.getElementById("warrantyStart");
-            const warrantyEndInput = document.getElementById("warrantyEnd");
-            const warrantyDetailsInput = document.getElementById("warrantyDetails");
-            const equipmentDetailsInput = document.getElementById("equipment");
-            const salesDetailsInput = document.getElementById("salesDetails");
-            const salesQuantityInput = document.getElementById("salesQuantity");
-            const salesDateInput = document.getElementById("salesDate");
-            const arrivalDateInput = document.getElementById("arrivalDate");
-            const salesStatusInput = document.getElementById("status");
-            const salesBrandInput = document.getElementById("brand");
-            const additionalWarrantyInfoInput = document.getElementById("additionalWarrantyInfo");
-
-            // Reset previous validation styles and error messages
-            resetValidationStyles();
-            errorContainer.innerHTML = "";
-
-            // Depending on the selected category, get the corresponding input values
-            let reportAdditionalInfo;
-            if (reportCategory === "warranty") {
-                // Get warranty-specific input values
-                reportAdditionalInfo = {
-                    warrantyStart: warrantyStartInput.value,
-                    warrantyEnd: warrantyEndInput.value,
-                    warrantyDetails: warrantyDetailsInput.value,
-                    additionalWarrantyInfo: additionalWarrantyInfoInput.value,
-                    equipmentList: equipmentDetailsInput.value
-                };
-
-                if (reportAdditionalInfo.warrantyStart.trim() !== "" && reportAdditionalInfo.warrantyEnd.trim() !== "") {
-                    const start = new Date(reportAdditionalInfo.warrantyStart);
-                    const end = new Date(reportAdditionalInfo.warrantyEnd);
-
-                    if (start > end) {
-                        markInvalidInput(warrantyStartInput);
-                        markInvalidInput(warrantyEndInput);
-                        displayError("Warranty start date cannot be after the warranty end date.");
-                    }
-                }
-            }
-
-            // Get weekly report-specific input values
-            if (reportCategory === "weeklyReport") {
-                reportAdditionalInfo = {
-                    startReportDate: document.getElementById("startReportDate").value,
-                    endReportDate: document.getElementById("endReportDate").value,
-                    totalSales: document.getElementById("totalSales").value,
-                    totalRepairs: document.getElementById("totalRepairs").value,
-                    inventoryUsed: document.getElementById("inventoryUsed").value
-                };
-            }
-
-            // Get sales-specific input values
-            if (reportCategory === "sales") {
-                reportAdditionalInfo = {
-                    salesDetails: salesDetailsInput.value,
-                    salesQuantity: salesQuantityInput.value,
-                    salesDate: salesDateInput.value,
-                    arrivalDate: arrivalDateInput.value,
-                    salesStatus: salesStatusInput.value,
-                    salesBrand: salesBrandInput.value
-                };
-            }
-
-            //non-specific
-            const report = {
-                category: reportCategory,
-                owner: reportOwnerInput.value,
-                date: reportDateInput.value,
-                description: reportDescriptionInput.value,
-                additionalInfo: reportAdditionalInfo
-            };
-
-            // Perform form validation
-            if (validateForm(report)) {
-                window.location.href = "reports.html";
-            }
-        });
-
-        function validateForm(report) {
-            // Flag to track whether the form is valid
-            let isValid = true;
-
-            // Validation for warranty
-            if (report.category === "warranty") {
-
-                if (report.owner.trim() === "") {
-                    markInvalidInput(document.getElementById("owner"));
-                    displayError("Please select the owner's name.");
-                    isValid = false;
-                }
-
-                if (report.additionalInfo.equipmentList.trim() === "") {
-                    markInvalidInput(document.getElementById("equipment"));
-                    displayError("Please select the equipment.");
-                    isValid = false;
-                }
-
-                if (report.date.trim() === "") {
-                    markInvalidInput(document.getElementById("reportDate"));
-                    displayError("Please enter the report date.");
-                    isValid = false;
-                }
-
-                if (report.additionalInfo.warrantyStart.trim() === "") {
-                    markInvalidInput(document.getElementById("warrantyStart"));
-                    displayError("Please enter the warranty start date.");
-                    isValid = false;
-                }
-
-                if (report.additionalInfo.warrantyEnd.trim() === "") {
-                    markInvalidInput(document.getElementById("warrantyEnd"));
-                    displayError("Please enter the warranty end date.");
-                    isValid = false;
-                }
-
-                if (report.additionalInfo.warrantyDetails.trim() === "") {
-                    markInvalidInput(document.getElementById("warrantyDetails"));
-                    displayError("Please enter the warranty details.");
-                    isValid = false;
-                }
-            }
-
-            // Weekly Report validation
-            if (report.category === "weeklyReport") {
-
-                if (report.owner.trim() === "") {
-                    markInvalidInput(document.getElementById("owner"));
-                    displayError("Please enter the owner's name.");
-                    isValid = false;
-                }
-
-                if (report.date.trim() === "") {
-                    markInvalidInput(document.getElementById("reportDate"));
-                    displayError("Please enter the report date.");
-                    isValid = false;
-                }
-
-                if (report.additionalInfo.startReportDate.trim() === "") {
-                    markInvalidInput(document.getElementById("startReportDate"));
-                    displayError("Please enter the start date for the weekly report.");
-                    isValid = false;
-                }
-
-                if (report.additionalInfo.endReportDate.trim() === "") {
-                    markInvalidInput(document.getElementById("endReportDate"));
-                    displayError("Please enter the end date for the weekly report.");
-                    isValid = false;
-                }
-
-                if (report.additionalInfo.totalSales.trim() === "") {
-                    markInvalidInput(document.getElementById("totalSales"));
-                    displayError("Please enter the total sales for the week.");
-                    isValid = false;
-                }
-
-                if (report.additionalInfo.totalRepairs.trim() === "") {
-                    markInvalidInput(document.getElementById("totalRepairs"));
-                    displayError("Please enter the total repairs for the week.");
-                    isValid = false;
-                }
-
-                if (report.additionalInfo.inventoryUsed.trim() === "") {
-                    markInvalidInput(document.getElementById("inventoryUsed"));
-                    displayError("Please enter the details of inventory used.");
-                    isValid = false;
-                }
-            }
-
-            // Sales validation
-            if (report.category === "sales") {
-                if (report.additionalInfo.salesBrand.trim() === "") {
-                    markInvalidInput(document.getElementById("brand"));
-                    displayError("Please enter the brand.");
-                    isValid = false;
-                }
-
-                if (report.additionalInfo.salesDetails.trim() === "") {
-                    markInvalidInput(document.getElementById("salesDetails"))
-                    displayError("Please enter sales details.")
-                    isValid = false;
-                }
-
-                if (report.additionalInfo.salesQuantity.trim() === "") {
-                    markInvalidInput(document.getElementById("salesQuantity"))
-                    displayError("Please enter a quantity.")
-                    isValid = false;
-                }
-
-                if (report.additionalInfo.salesDate.trim() === "") {
-                    markInvalidInput(document.getElementById("salesDate"))
-                    displayError("Please enter the sales date.")
-                    isValid = false;
-                }
-
-                if (report.additionalInfo.arrivalDate.trim() === "") {
-                    markInvalidInput(document.getElementById("arrivalDate"))
-                    displayError("Please enter the arrival date.")
-                    isValid = false;
-                }
-
-                if (report.additionalInfo.salesStatus.trim() === "") {
-                    markInvalidInput(document.getElementById("status"))
-                    displayError("Please enter the status.")
-                    isValid = false;
-                }
-            }
-
-            return isValid;
-        }
-
-        function markInvalidInput(inputElement) {
-            inputElement.classList.add("invalid-input");
-        }
-
-        function resetValidationStyles() {
-            const invalidInputs = document.querySelectorAll(".invalid-input");
-            invalidInputs.forEach((input) => {
-                input.classList.remove("invalid-input");
-            });
-        }
-
-        function displayError(message) {
-            const errorDiv = document.createElement("div");
-            errorDiv.classList.add("error-message");
-            errorDiv.textContent = message;
-            document.getElementById("errorContainer").appendChild(errorDiv);
-        }
-    });
-
-
-function goToReportsPage() {
-    window.location.href = "reports.html";
-}
-
-//check for roles
-const userRole = sessionStorage.getItem('userRole');
+    // Check for roles
+    const userRole = sessionStorage.getItem('userRole');
     if (userRole === 'sales') {
         document.getElementById('customerLink').style.display = 'block';
     } else if (userRole === 'tech') {
@@ -534,8 +231,6 @@ const userRole = sessionStorage.getItem('userRole');
         // Redirect to login page if user role is not set
         window.location.href = 'main.html';
     }
-</script>
-    
-
+    </script>
 </body>
 </html>
