@@ -142,9 +142,7 @@
 
                 <label for="equipment">Equipment S/N:</label>
                 <input type="text" id="equipment" name="equipment" list="equipmentList" placeholder="Enter equipment S/N" required>
-                
-                
-                
+
             </div>
 
             <div id="weeklyFields" style="display: none;">
@@ -181,13 +179,15 @@
                     <option value="Engine Rebuild">
                 </datalist>
             </div>
+            <div id="errorContainer"></div> <!-- Container for error messages -->
+            <div>
 
-            <button type="button" id="generateButton" hidden>Generate</button>
+            <button type="button" id="generateButton" hidden onclick="createReport()">Generate</button>
             <button type="button" id="cancelButton" onclick="goToReportsPage()">Cancel</button>
         </form>
     </main>
 
-    <script>
+    <script> 
     function toggleFields() {
         const reportCategory = document.getElementById("reportCategory");
         const warrantyFields = document.getElementById("warrantyFields");
