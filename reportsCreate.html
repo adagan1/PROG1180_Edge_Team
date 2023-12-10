@@ -229,6 +229,36 @@
             // Redirect to login page if user role is not set
             window.location.href = 'main.html';
         }
+
+        function addProductField() {
+    const productFields = document.getElementById("productFields");
+    
+    const newProductField = document.createElement("div");
+    newProductField.classList.add("product-field");
+
+    newProductField.innerHTML = `
+        <label for="product">Product:</label>
+        <input type="search" class="product" name="product" list="productList" placeholder="Search for a product" required>
+        <datalist id="productList">
+            <option value="Air Filter - 30965">
+            <option value="Oil - 20394">
+            <option value="Spark Plug - 30459">
+        </datalist>
+        <button type="button" onclick="removeProductField(this)">Remove Item</button>
+    `;
+
+    productFields.appendChild(newProductField);
+}
+
+function removeProductField(button) {
+    const productField = button.parentNode;
+    const productFields = document.getElementById("productFields");
+
+    // Ensure there is at least one product field before removing
+    if (productFields.children.length > 1) {
+        productFields.removeChild(productField);
+    }
+}
     </script>
 </body>
 </html>
