@@ -53,14 +53,14 @@
 
 <div class="add-report-button-container" 
      style="margin-top: 20px;">
-    <button onclick="createReport()">Add Report</button>
+    <button onclick="createReport()">Generate Report</button>
 </div>
 
 
         <table id="reportTable">
             <thead>
                 <tr>
-                    <th>Owner/Company</th>
+                    <th>Company</th>
                     <th>Category</th>
                     <th>Date</th>
                     <th>Controls</th>
@@ -142,8 +142,7 @@ function fillTableWithReportData() {
                 <td>${report.category}</td>
                 <td>${report.date}</td>
                 <td>
-                    <button onclick="editReport(${i})">Edit</button>
-                    <button onclick="detailReport(${i})">Detail</button>
+                    <button onclick="detailReport(${i})">View/Print</button>
                 </td>
             `;
             tbody.appendChild(row);
@@ -158,14 +157,25 @@ function detailReport(index) {
     // Get the report data to display
     const reportData = hardCodedReports[index];
 
+    // Define the mappings of categories to their respective HTML pages
+    const categoryPageMappings = {
+        "Weekly Report": "reportsWeekly.html",
+        "Sales": "reportsSales.html",
+        "Warranty": "reportsWarranty.html",
+        // Add other mappings here as needed
+    };
+
+    // Determine the correct page based on the report's category
+    const targetPage = categoryPageMappings[reportData.category] || "defaultReportPage.html"; // Replace 'defaultReportPage.html' with your default page
+
     // Convert the report data to a JSON string
     const reportDataString = JSON.stringify(reportData);
 
     // Store the selected report data in sessionStorage for access on the new page
     sessionStorage.setItem("selectedReport", reportDataString);
 
-    // Redirect to the reportDetail.html page
-    window.location.href = "reportsDetail.html";
+    // Redirect to the appropriate page based on the report's category
+    window.location.href = targetPage;
 }
 
 function editReport(index) {
