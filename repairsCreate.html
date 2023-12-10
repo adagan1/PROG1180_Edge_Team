@@ -187,7 +187,7 @@
 
                 <div>
                     <button type="button" id="createRepairsButton">Send to Pending Repairs</button>
-                    <button type="button" id="cancelButton" onclick="goToRepairsPage()">Cancel</button>
+                    <button type="button" id="cancelButton" onclick="goToCustDetails()">Cancel</button>
                 </div>
             </form>
         </div>
@@ -236,7 +236,7 @@
                     console.log("New RepairsReport Data:", newRepairsReport);
 
                     // Redirect back to the repairs page
-                    window.location.href = "repairs.html";
+                    window.location.href = "customer.html";
                 }
             });
         });
@@ -267,7 +267,7 @@
             });
         }
 
-        function goToRepairsPage() {
+        function goToCustDetails() {
             window.location.href = "customer.html";
         }
         //check for roles
