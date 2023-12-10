@@ -132,9 +132,9 @@
                     <option value="John Deere">
                 </datalist>
                 
-                <label for="product">Equipment:</label>
-                <input type="search" id="product" name="product" list="productList" placeholder="Search for a product" required>
-                <datalist id="productList">
+                <label for="equipment">Equipment:</label>
+                <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for a product" required>
+                <datalist id="equipmentList">
                     <option value="Lawnmower">
                     <option value="Drill">
                     <option value="Electric Lawnmower">
@@ -165,23 +165,22 @@
                     <option value="Billy Talent">
                 </datalist>
             
-                <label for="product">Equipment:</label>
-                <input type="search" id="product" name="product" list="productList" placeholder="Search for a product" required>
-                <datalist id="productList">
-                    <option value="Lawnmower">
-                    <option value="Drill">
-                    <option value="Electric Lawnmower">
-                </datalist>
-
-                <label for="fix">Fix:</label>
-                <input type="search" id="fix" name="fix" list="fixList" placeholder="Search for a fix" required>
-                <datalist id="fixList">
-                    <option value="Tire Change">
-                    <option value="Oil Change">
-                    <option value="Engine Rebuild">
-                </datalist>
+                <div id="productFields">
+                    <div class="product-field">
+                        <label for="product">Product:</label>
+                        <input type="search" class="product" name="product" list="productList" placeholder="Search for a product" required>
+                        <datalist id="productList">
+                            <option value="Air Filter - 30965">
+                            <option value="Oil - 20394">
+                            <option value="Spark Plug - 30459">
+                        </datalist>
+                        <button type="button" onclick="removeProductField(this)">Remove Item</button>
+                    </div>
+                </div>
+            
+                <button type="button" onclick="addProductField()">Add Item</button>
             </div>
-
+<br>
             <button type="button" id="generateButton" hidden>Generate</button>
             <button type="button" id="cancelButton" onclick="goToReportsPage()">Cancel</button>
         </form>
@@ -231,6 +230,36 @@
         // Redirect to login page if user role is not set
         window.location.href = 'main.html';
     }
+
+    function addProductField() {
+    const productFields = document.getElementById("productFields");
+    
+    const newProductField = document.createElement("div");
+    newProductField.classList.add("product-field");
+
+    newProductField.innerHTML = `
+        <label for="product">Product:</label>
+        <input type="search" class="product" name="product" list="productList" placeholder="Search for a product" required>
+        <datalist id="productList">
+            <option value="Air Filter - 30965">
+            <option value="Oil - 20394">
+            <option value="Spark Plug - 30459">
+        </datalist>
+        <button type="button" onclick="removeProductField(this)">Remove Item</button>
+    `;
+
+    productFields.appendChild(newProductField);
+}
+
+function removeProductField(button) {
+    const productField = button.parentNode;
+    const productFields = document.getElementById("productFields");
+
+    // Ensure there is at least one product field before removing
+    if (productFields.children.length > 1) {
+        productFields.removeChild(productField);
+    }
+}
     </script>
 </body>
 </html>
