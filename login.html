@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Emma's Small Engines</title>
+    <style>
+        main {
+            font-size: 20px; /* Base font size for the body */
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            padding-left: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns */
+            grid-gap: 1rem; /* Space between boxes */
+            max-width: 900px; /* Adjust width as needed */
+            margin: 2rem auto; /* Center the dashboard with automatic margins */
+        }
+
+        .dashboard-section {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Center text inside the sections */
+        }
+
+        .dashboard-section button {
+            width: 80%; /* Full width */
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px; 
+        }
+
+        .dashboard-section button:hover {
+            background-color: #555;
+        }
+
+        @media (max-width: 600px) {
+            .dashboard {
+                grid-template-columns: 1fr; 
+            }
+        }
+
+        .login-form {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .login-input {
+            width: 50%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login-button {
+            width: 85%;
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #555;
+        }
+        /* Style for login dropdown */
+        .login-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .login-dropdown-content {
+            display: none;
+            position: absolute;
+            left: 0; 
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+
+        .login-dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .login-dropdown-content a:hover {background-color: #f1f1f1;}
+
+        .login-dropdown:hover .login-dropdown-content {
+            display: block;
+        }
+
+        .login-button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .login-button:hover, .login-button:focus {
+            background-color: #555;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Emma's Small Engines</a></h1>
+        <nav id="headerContent">
+            <ul>
+                <li><a href="main.html">Home</a></li>
+                <li style="display: none;" id="customerLink"><a href="customer.html">Customer</a></li>
+                <li style="display: none;" id="repairsLink"><a href="repairs.html">Repairs</a></li>
+                <li style="display: none;" id="reportsLink"><a href="reports.html">Reports</a></li>
+                <li style="display: none;" id="maintenanceLink"><a href="tables.html">Maintenance</a></li>  
+            </ul>
+        </nav>
+    </header>
+
+    <div class="login-form" id="loginForm">
+        <h2> Emma's Small Engines Login</h2>
+
+        <select id="username" class="login-input" name="username" required>
+            <option value="" disabled selected>Login here...</option>
+            <option>sales</option>
+            <option>tech</option>
+            <option>admin</option>
+        </select>
+
+        <button class="login-button" onclick="login()">Login</button>
+    </div>
+    <script>
+            function login() {
+                var username = document.getElementById('username').value;
+                    if (username === 'sales') {
+                        sessionStorage.setItem('userRole', 'sales');
+                        window.location.href = 'main.html';
+                    } 
+                    if (username === 'tech') {
+                        sessionStorage.setItem('userRole', 'tech');
+                        window.location.href = 'main.html';
+                    } 
+                    if (username === 'admin') {
+                        sessionStorage.setItem('userRole', 'admin');
+                        window.location.href = 'main.html';
+                    } 
+            }
+</script>
+      
+</body>
+</html>

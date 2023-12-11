@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -5,22 +6,21 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Emma's Small Engines</title>
     <style>
-        /* Add CSS for larger text size */
         main {
             font-size: 20px; /* Base font size for the body */
         }
-        
+
         header {
             background-color: #333;
             color: #fff;
             padding: 1rem;
             padding-left: 50px;
             display: flex;
-            justify-content: space-between; /* Align content horizontally */
-            align-items: center; /* Center content vertically */
+            justify-content: space-between;
+            align-items: center;
             width: 100%;
         }
-        /* Adjusting the dashboard layout to fit 2x2 */
+
         .dashboard {
             display: grid;
             grid-template-columns: repeat(2, 1fr); /* Two columns */
@@ -29,7 +29,6 @@
             margin: 2rem auto; /* Center the dashboard with automatic margins */
         }
 
-        /* Style for individual dashboard sections */
         .dashboard-section {
             border: 1px solid #ddd;
             border-radius: 4px;
@@ -38,7 +37,6 @@
             text-align: center; /* Center text inside the sections */
         }
 
-        /* Style for buttons inside the dashboard sections */
         .dashboard-section button {
             width: 80%; /* Full width */
             padding: 10px 15px;
@@ -54,74 +52,223 @@
             background-color: #555;
         }
 
-        /* Responsive adjustments for very narrow screens */
         @media (max-width: 600px) {
             .dashboard {
                 grid-template-columns: 1fr; 
             }
         }
+
+        .login-form {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .login-input {
+            width: 50%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login-button {
+            width: 85%;
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #555;
+        }
+        /* Style for login dropdown */
+        .login-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .login-dropdown-content {
+            display: none;
+            position: absolute;
+            left: 0; 
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+
+        .login-dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .login-dropdown-content a:hover {background-color: #f1f1f1;}
+
+        .login-dropdown:hover .login-dropdown-content {
+            display: block;
+        }
+
+        .login-button {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .login-button:hover, .login-button:focus {
+            background-color: #555;
+        }
     </style>
-    
 </head>
 <body>
     <header>
         <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
-        <nav>
+        <nav id="headerContent">
             <ul>
                 <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
-                <li><a href="customer.html">Customer</a></li>
-                <li><a href="tables.html">Maintenance</a></li>
-                <li><a href="reports.html">Reports</a></li>
-                <li><a href="repairs.html">Repairs</a></li>
+                <li style="display: none;" id="customerLink"><a href="customer.html">Customer</a></li>
+                <li style="display: none;" id="repairsLink"><a href="repairs.html">Repairs</a></li>
+                <li style="display: none;" id="reportsLink"><a href="reports.html">Reports</a></li>
+                <li style="display: none;" id="maintenanceLink"><a href="tables.html">Maintenance</a></li>  
             </ul>
         </nav>
     </header>
-    <main>
+
+    <button class="logout-button" id="logoutButton" onclick="logout()" style="position: fixed; top: 70px; right: 10px;">Logout</button>
+
+    <main id="mainContent">
         <section id="employee-welcome">
-            <h2>Welcome Employees</h2>
+            <h2 id="welcome-title">Welcome Employees</h2>
             <ul>
-                <li>Welcome to Emma's Small Engines Employee Portal.</li>
-                
+                <li id="welcome-message">Welcome to Emma's Small Engines Employee Portal.</li>
             </ul>
-           
         </section>
         
         <div class="dashboard">
-            <div class="dashboard-section">
-                <h2>Add a Customer</h2>
-                <p>Click the button to quickly add a customer.</p>
-                <button onclick="location.href='customerCreate.html'">Add a Customer</button>
+            <div style="display: none;" class="dashboard-section" id="addCustomerSection">
+                <h2>Manage Customers</h2>
+                <p>Click the button to create or view customers.</p>
+                <button onclick="location.href='customer.html'">View Customers</button>
             </div>
-            
-            <div class="dashboard-section">
-                <h2>Create an Equipment</h2>
-                <p>Click the button to quickly create an appliance.</p>
-                <button onclick="location.href='inventoryCreate.html'">Add Equipment</button>
-            </div>
-            
-            <div class="dashboard-section">
-                <h2>Create a Report</h2>
-                <p>Click the button to quickly Generate a report.</p>
-                <button onclick="location.href='reportsCreate.html'">Generate a Report</button>
+                     
+            <div style="display: none;" class="dashboard-section" id="repairsSection">
+                <h2>Manage Repairs</h2>
+                <p>Click the button to view or manage repairs.</p>
+                <button onclick="location.href='repairs.html'">View Repairs</button>
             </div>
 
-            <div class="dashboard-section">
-                <h2>Start a Repair Form</h2>
-                <p>Click the button to quickly start a repair.</p>
-                <button onclick="location.href='repairsCreate.html'">New Repair Request</button>
+            <div style="display: none;" class="dashboard-section" id="createReportSection">
+                <h2>Manage Reports</h2>
+                <p>Click the button to create or view reports.</p>
+                <button onclick="location.href='reports.html'">View Reports</button>
             </div>
+
+            <div style="display: none;" class="dashboard-section" id="accessMaintanence">
+                <h2>Manage Maintenance</h2>
+                <p>Click the button to view maintenance.</p>
+                <button onclick="location.href='tables.html'">View Maintenance</button>
+            </div>
+
         </div>
+    </main>
 
-        <script>
-            window.addEventListener("scroll", function() {
-                const title = document.querySelector(".centered-title");
-                if (title) {
-                    title.style.display = window.scrollY > 0 ? "block" : "none";
+    <script>
+        //check for roles
+        const userRole = sessionStorage.getItem('userRole');
+            if (userRole === 'sales') {
+                document.getElementById('customerLink').style.display = 'block';
+                document.getElementById('reportsLink').style.display = 'block';
+                showOnlyAddCustomer()
+            } else if (userRole === 'tech') {
+                document.getElementById('repairsLink').style.display = 'block';
+                document.getElementById('reportsLink').style.display = 'block';
+                showTechnicianSections()
+            } else if (userRole === 'admin') {
+                document.getElementById('customerLink').style.display = 'block';
+                document.getElementById('maintenanceLink').style.display = 'block';
+                document.getElementById('reportsLink').style.display = 'block';
+                document.getElementById('repairsLink').style.display = 'block';
+                showAllSections()
+            } else {
+                // Redirect to login page if user role is not set
+                window.location.href = 'main.html';
+            }
+
+        function logout() {
+            window.location.href = "login.html";
+        }
+
+            function resetLoginForm() {
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('headerContent').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'none';
+                document.getElementById('logoutButton').style.display = 'none';
+
+            }
+
+            function updateWelcomeSection(role) {
+                const welcomeTitle = document.getElementById('welcome-title');
+                const welcomeMessage = document.getElementById('welcome-message');
+                if (role === 'sales') {
+                    welcomeTitle.textContent = 'Welcome Sales Associate';
+                    welcomeMessage.textContent = 'Access your sales associate tools here.';
+                } else if (role === 'tech') {
+                    welcomeTitle.textContent = 'Welcome Technician';
+                    welcomeMessage.textContent = 'Access your technician tools here.';
+                } else if (role === 'admin') {
+                    welcomeTitle.textContent = 'Welcome Admin';
+                    welcomeMessage.textContent = 'Access your admin tools here.';
                 }
-            });
-        </script>
-    
+            }
+
+            function hideAllSections() {
+                document.querySelectorAll('.dashboard-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+            }
+
+            function showOnlyAddCustomer() {
+                hideAllSections();
+                document.getElementById('addCustomerSection').style.display = 'block';
+                document.getElementById('createReportSection').style.display = 'block';
+                document.getElementById('customerLink').style.display = 'block';
+                updateWelcomeSection('sales');
+            }
+
+            function showTechnicianSections() {
+                hideAllSections();
+                document.getElementById('createReportSection').style.display = 'block';
+                document.getElementById('repairsSection').style.display = 'block';
+                document.getElementById('repairsLink').style.display = 'block';
+                document.getElementById('reportsLink').style.display = 'block';
+                updateWelcomeSection('tech');
+            }
+
+            function showAllSections() {
+                document.getElementById('customerLink').style.display = 'block';
+                document.getElementById('maintenanceLink').style.display = 'block';
+                document.getElementById('reportsLink').style.display = 'block';
+                document.getElementById('repairsLink').style.display = 'block';
+
+                document.querySelectorAll('.dashboard-section').forEach(section => {
+                    section.style.display = 'block';
+                });
+                updateWelcomeSection('admin');
+            }
+</script>
+      
 </body>
 </html>
-

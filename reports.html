@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="reports.js"></script>
     <title>Reports</title>
 </head>
 <style>
@@ -24,17 +23,19 @@
 <body>
     <header>
         <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
-        <nav>
+        <nav id="headerContent">
             <ul>
                 <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
-                <li><a href="customer.html">Customer</a></li>
-                <li><a href="tables.html">Maintenance</a></li>
-                <li><a href="reports.html">Reports</a></li>
-                <li><a href="repairs.html">Repairs</a></li>
+                <li style="display: none;" id="customerLink"><a href="customer.html">Customer</a></li>
+                <li style="display: none;" id="repairsLink"><a href="repairs.html">Repairs</a></li>
+                <li style="display: none;" id="reportsLink"><a href="reports.html">Reports</a></li>
+                <li style="display: none;" id="maintenanceLink"><a href="tables.html">Maintenance</a></li>  
             </ul>
         </nav>
     </header>
+
+    <button class="logout-button" id="logoutButton" onclick="location.href='login.html'" style="position: fixed; top: 70px; right: 10px;">Logout</button>
+
     <main>
         <h1>Reports</h1>
         <div class="search-bar">
@@ -46,20 +47,20 @@
         <option value="all">All</option>
         <option value="sales">Sales</option>
         <option value="warranty">Warranty</option>
-        <option value="orders">Orders</option>
+        <option value="weeklyReport">Weekly Report</option> 
     </select>
 </div>
 
 <div class="add-report-button-container" 
      style="margin-top: 20px;">
-    <button onclick="createReport()">Add Report</button>
+    <button onclick="createReport()">Generate Report</button>
 </div>
 
 
         <table id="reportTable">
             <thead>
                 <tr>
-                    <th>Owner/Brand</th>
+                    <th>Company/Customer</th>
                     <th>Category</th>
                     <th>Date</th>
                     <th>Controls</th>
@@ -72,16 +73,159 @@
     </main>
 
     <script>
-        function addNewCategory() {
-            var newCategory = prompt("Please enter the new category name:");
-            if (newCategory) {
-                var select = document.getElementById("categoryFilter");
-                var option = document.createElement("option");
-                option.value = newCategory.toLowerCase();
-                option.text = newCategory;
-                select.add(option);
-            }
+// Sample data for reports
+const hardCodedReports = [
+    {
+        owner: "Joe Jawndel",
+        category: "Sales",
+        date: "2023-01-15",
+        description: "Nuts",
+        price: .50,
+        quantity: 8,
+        total: 4.52
+    },
+    {
+        owner: "Emma's Small Engines",
+        category: "Weekly Report",
+        date: "2023-03-10",
+        totalSales: "1500",
+        totalRepairs: "10",
+        inventoryUsed: "Screws, Nuts",
+        startReportDate: "2023-03-03",
+        endReportDate: "2023-03-10"
+    },
+    {
+        owner: "Honda",
+        equipment: "N/A",
+        category: "Warranty",
+        date: "2023-02-15",
+        warrantyStart: "2023-03-15",
+        warrantyEnd: "2023-06-10",
+        warrantyDetails: "Warranty is for the Screws",
+        additionalWarrantyInfo: "N/A"
+    },
+];
+
+// Function to add a new report category
+function addNewCategory() {
+    var newCategory = prompt("Please enter the new category name:");
+    if (newCategory) {
+        var select = document.getElementById("categoryFilter");
+        var option = document.createElement("option");
+        option.value = newCategory.toLowerCase();
+        option.text = newCategory;
+        select.add(option);
+    }
+}
+
+// Function to fill the table with report data, including "Edit" and "Detail" buttons
+function fillTableWithReportData() {
+    const table = document.getElementById("reportTable");
+    const tbody = table.getElementsByTagName("tbody")[0];
+    const searchInput = document.getElementById("searchInput");
+    const searchTerm = searchInput.value.toLowerCase();
+    const categoryFilter = document.getElementById("categoryFilter").value;
+
+    // Clear the table
+    tbody.innerHTML = '';
+
+    for (let i = 0; i < hardCodedReports.length; i++) {
+        const report = hardCodedReports[i];
+        const reportString = JSON.stringify(report).toLowerCase();
+
+        // Check if the search term matches any part of the report data and the category matches
+        if ((reportString.includes(searchTerm) || searchTerm === '') &&
+            (categoryFilter === 'all' || report.category.toLowerCase() === categoryFilter)) {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${report.owner}</td>
+                <td>${report.category}</td>
+                <td>${report.date}</td>
+                <td>
+                    <button onclick="detailReport(${i})">View/Print</button>
+                </td>
+            `;
+            tbody.appendChild(row);
         }
+    }
+}
+
+
+
+// Function to display report details when the "Detail" button is clicked
+function detailReport(index) {
+    // Get the report data to display
+    const reportData = hardCodedReports[index];
+
+    // Define the mappings of categories to their respective HTML pages
+    const categoryPageMappings = {
+        "Weekly Report": "reportsWeekly.html",
+        "Sales": "reportsSales.html",
+        "Warranty": "reportsWarranty.html",
+        // Add other mappings here as needed
+    };
+
+    // Determine the correct page based on the report's category
+    const targetPage = categoryPageMappings[reportData.category] || "defaultReportPage.html"; // Replace 'defaultReportPage.html' with your default page
+
+    // Convert the report data to a JSON string
+    const reportDataString = JSON.stringify(reportData);
+
+    // Store the selected report data in sessionStorage for access on the new page
+    sessionStorage.setItem("selectedReport", reportDataString);
+
+    // Redirect to the appropriate page based on the report's category
+    window.location.href = targetPage;
+}
+
+function editReport(index) {
+    // Get the report data to edit
+    const reportToEdit = hardCodedReports[index];
+
+    // Convert the report data to a JSON string
+    const reportDataString = JSON.stringify(reportToEdit);
+
+    // Store the selected report data in sessionStorage for access on the reportsEdit page
+    sessionStorage.setItem("selectedReport", reportDataString);
+
+    // Redirect to the reportsEdit.html page
+    window.location.href = "reportsEdit.html";
+}
+
+// Function to navigate to the reportCreate.html page
+function createReport() {
+    // Redirect to the reportCreate.html page
+    window.location.href = "reportsCreate.html";
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    fillTableWithReportData();
+
+    // Add an event listener to the search input for real-time filtering
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", function() {
+        fillTableWithReportData();
+    });
+});
+
+
+//check for roles
+const userRole = sessionStorage.getItem('userRole');
+    if (userRole === 'sales') {
+        document.getElementById('customerLink').style.display = 'block';
+        document.getElementById('reportsLink').style.display = 'block';
+    } else if (userRole === 'tech') {
+        document.getElementById('repairsLink').style.display = 'block';
+        document.getElementById('reportsLink').style.display = 'block';
+    } else if (userRole === 'admin') {
+        document.getElementById('customerLink').style.display = 'block';
+        document.getElementById('maintenanceLink').style.display = 'block';
+        document.getElementById('reportsLink').style.display = 'block';
+        document.getElementById('repairsLink').style.display = 'block';
+    } else {
+        // Redirect to login page if user role is not set
+        window.location.href = 'main.html';
+    }
     </script>
 </body>
 </html>

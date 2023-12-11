@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="reportsCreate.js"></script>
     <title>Create Report</title>
     <style>
         h1 {
@@ -87,10 +86,6 @@
             background-color: #3a3a3a;
         }
 
-        .invalid-input {
-            border: 1px solid red;
-        }
-
         button[id="cancelButton"] {
             background-color: red;
         }
@@ -104,135 +99,229 @@
 <body>
     <header>
         <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
-        <nav>
+        <nav id="headerContent">
             <ul>
                 <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
-                <li><a href="customer.html">Customer</a></li>
-                <li><a href="tables.html">Maintenance</a></li>
-                <li><a href="reports.html">Reports</a></li>
-                <li><a href="repairs.html">Repairs</a></li>
+                <li style="display: none;" id="customerLink"><a href="customer.html">Customer</a></li>
+                <li style="display: none;" id="repairsLink"><a href="repairs.html">Repairs</a></li>
+                <li style="display: none;" id="reportsLink"><a href="reports.html">Reports</a></li>
+                <li style="display: none;" id="maintenanceLink"><a href="tables.html">Maintenance</a></li>  
             </ul>
         </nav>
     </header>
 
+    <button class="logout-button" id="logoutButton" onclick="location.href='login.html'" style="position: fixed; top: 70px; right: 10px;">Logout</button>
+
     <main>
-        <h1>Create Report</h1>
+        <h1>Generate Report</h1>
         <form id="reportCreateForm">
             <label for="reportCategory">Category:</label>
             <select id="reportCategory" onchange="toggleFields()">
                 <option value="" disabled selected>Select a category</option>
                 <option value="warranty">Warranty</option>
-                <option value="sale">Sale</option>
-                <option value="orders">Orders</option>
-            </select>
+                <option value="weeklyReport">Weekly Report</option>
+                <option value="sales">Sales</option>
+            </select>                       
 
-                <div id="warrantyFields" style="display: none;">
-                <label for="owner">Brand:</label>
-                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
+            <div id="warrantyFields" style="display: none;">
+                <label for="owner">Manufacturer:</label>
+                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for customer" required>
                 <datalist id="ownerList">
-                    <option value="Joe Jawndel">
-                    <option value="Billy Talent">
-                    <option value="Julio Mendes">
+                    <option value="Honda">
+                    <option value="Craftsman">
+                    <option value="Dewalt">
+                    <option value="John Deere">
                 </datalist>
-
-                <label for="equipment">Equipment:</label>
-                <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
-                <datalist id="equipmentList">
-                    <option value="Honda bagged Lawnmower">
-                    <option value="Dewalt Drill">
-                    <option value="John Deere Electric Lawnmower">
-                </datalist>
-
-                <label for="reportDate">Date:</label>
-                <input type="date" id="reportDate" required>
-                <label for="warrantyStart">Warranty Start:</label>
-                <input type="date" id="warrantyStart" placeholder="Enter warranty period">
-                <label for="warrantyEnd">Warranty End:</label>
-                <input type="date" id="warrantyEnd" placeholder="Enter warranty period">
-                <label for="warrantyDetails">Warranty Details:</label>
-                <textarea id="warrantyDetails" placeholder="Enter warranty details" rows="5" cols="50"></textarea>
-                <label for="additionalWarrantyInfo">Additional Warranty Info:</label>
-                <input type="text" id="additionalWarrantyInfo" placeholder="Enter additional warranty info">
             </div>
 
-            <div id="saleFields" style="display: none;">
-                <label for="owner">Owner:</label>
-                <input type="search" id="owner" name="owner" list="ownerList" placeholder="Search for an owner" required>
-                <datalist id="ownerList">
-                    <option value="Joe Jawndel">
-                    <option value="Billy Talent">
-                    <option value="Julio Mendes">
-                </datalist>
-                <label for="reportDate">Date:</label>
-                <input type="date" id="reportDate" required>
-                <label for="reportDescription">Item(s):</label>
-                <textarea id="reportDescription" name="reportDescription" required placeholder="Enter item description" rows="5" cols="50"></textarea>
-                <label for="reportPrice">Price:</label>
-                <input type="number" id="reportPrice" placeholder="Enter price" required>
-                <label for="reportQuantity">Quantity:</label>
-                <input type="number" id="reportQuantity" placeholder="Enter quantity" required>
-                <label for="reportTotal">Total:</label>
-                <input type="number" id="reportTotal" placeholder="Enter total" required>
+            <div id="weeklyFields" style="display: none;">
+                <label for="startReportDate">Start Date:</label>
+                <input type="date" id="startReportDate" required>
+    
+                <label for="endReportDate">End Date:</label>
+                <input type="date" id="endReportDate" required>
+    
             </div>
 
-            <div id="orderFields" style="display: none;">
-                <div id="brandInfo">
-                    <label for="brand">Brand:</label>
-                    <select id="brand" name="brand" required>
-                        <option value="" disabled selected>Select a brand</option>
-                        <option value="Brand1">Craftsman</option>
-                        <option value="Brand2">Dewalt</option>
-                        <option value="Brand3">Honda</option>
-                        <option value="Brand4">John Deere</option>
-                    </select>
+            <div id="salesFields" style="display: none;">
+                <label for="customer">Customer:</label>
+                <input type="search" id="customer" name="customer" list="customerList" placeholder="Search for a customer" required>
+                <datalist id="customerList">
+                    <option value="Joe Jawndel">
+                    <option value="Julio Mendez">
+                    <option value="Billy Talent">
+                </datalist>
+            
+                <div id="productFields">
+                    <div class="product-field">
+                        <label for="product">Product:</label>
+                        <input type="search" class="product" name="product" list="productList" placeholder="Search for a product" required id="product">
+                        <datalist id="productList">
+                            <option value="Air Filter - 30965">
+                            <option value="Oil - 20394">
+                            <option value="Spark Plug - 30459">
+                        </datalist>
+                        <button type="button" onclick="removeProductField(this)">Remove Item</button>
+                    </div>
                 </div>
-                <label for="equipment">Equipment:</label>
-                <input type="search" id="equipment" name="equipment" list="equipmentList" placeholder="Search for equipment" required>
-                <datalist id="equipmentList">
-                    <option value="Honda bagged Lawnmower">
-                    <option value="Dewalt Drill">
-                    <option value="John Deere Electric Lawnmower">
-                </datalist>
-
-                <label for="parts">Parts:</label>
-                <input type="search" id="parts" name="parts" list="partList" placeholder="Search for parts" required>
-                <datalist id="partList">
-                    <option value="Bolt">
-                    <option value="Screw">
-                    <option value="Washer">
-                    <option value="Nut">
-                    <option value="Spring">
-                </datalist>
-
-                <label for="orderDetails">Order Details:</label>
-                <textarea id="orderDetails" placeholder="Enter order details" rows="5" cols="50"></textarea>
-
-                <label for="orderQuantity">Quantity:</label>
-                <input type="number" id="orderQuantity" placeholder="Enter quantity" required>
-
-                <label for="orderDate">Order Date:</label>
-                <input type="date" id="orderDate" required>
-
-                <label for="arrivalDate">Arrival date:</label>
-                <input type="date" id="arrivalDate" required>
-
-                <label for="status">Status:</label>
-                <input type="search" id="status" name="status" list="statusList" placeholder="Select a status" required>
-                <datalist id="statusList">
-                    <option value="Completed">
-                    <option value="Pending">
-                    <option value="Back-ordered">
-                </datalist>
-
-                <label for="reportPrice">Price:</label>
-                <input type="number" id="reportPrice" placeholder="Enter price" required>
+            
+                <button type="button" onclick="addProductField()">Add Item</button>
             </div>
+<br>
 
             <div id="errorContainer"></div>
-            <button type="button" id="createButton" hidden>Save Changes</button>
+            <button type="button" id="generateButton" hidden>Generate</button>
             <button type="button" id="cancelButton" onclick="goToReportsPage()">Cancel</button>
         </form>
     </main>
+
+    <script>
+    
+    function toggleFields() {
+    const reportCategory = document.getElementById("reportCategory").value;
+    const warrantyFields = document.getElementById("warrantyFields");
+    const weeklyFields = document.getElementById("weeklyFields");
+    const salesFields = document.getElementById("salesFields");
+    const generateButton = document.getElementById("generateButton");
+    const cancelButton = document.getElementById("cancelButton");
+    const errorContainer = document.getElementById("errorContainer");
+
+    warrantyFields.style.display = reportCategory === "warranty" ? "block" : "none";
+    weeklyFields.style.display = reportCategory === "weeklyReport" ? "block" : "none";
+    salesFields.style.display = reportCategory === "sales" ? "block" : "none";
+
+    // Show the buttons when a category is selected
+    if (reportCategory === "warranty" || reportCategory === "weeklyReport" || reportCategory === "sales") {
+        generateButton.removeAttribute("hidden");
+        cancelButton.removeAttribute("hidden");
+    } else {
+        // Hide the buttons when no category is selected
+        generateButton.setAttribute("hidden", true);
+    }
+
+    // Clear previous error messages
+    errorContainer.innerHTML = "";
+
+    // Check if the Generate button was clicked
+    if (generateButton.clicked) {
+        //warranty
+        if (reportCategory === "warranty") {
+            const manufacturerField = document.getElementById("owner");
+
+            if (!manufacturerField.value.trim()) {
+                displayError("Manufacturer field is required.");
+                return; // Stop further execution if there is an error
+            }
+        }
+        //weekly
+        if (reportCategory === "weeklyReport") {
+            const startDate = document.getElementById("startReportDate")
+            const endDate = document.getElementById("endReportDate")
+
+            if(!startDate.value.trim()) {
+                displayError("Please select a start date.")
+                return;
+            }
+            else if(!endDate.value.trim()) {
+                displayError("Please select a end date.")
+                return
+            }
+        }
+        //sales
+        if (reportCategory === "sales") {
+            const customer = document.getElementById("customer")
+            const product = document.getElementById("product")
+
+            if(!customer.value.trim()) {
+                displayError("Please select a customer.")
+                return;
+            }
+            else if(!product.value.trim()) {
+                displayError("Please select a product.")
+                return
+            }
+        }
+        window.location.href = "reports.html";
+    }
+}
+
+function displayError(message) {
+    const errorContainer = document.getElementById("errorContainer");
+    errorContainer.innerHTML = `<p class="error-message">${message}</p>`;
+}
+
+document.getElementById("generateButton").addEventListener("click", function() {
+    this.clicked = true;
+    toggleFields();
+});
+
+function displayError(message) {
+    const errorContainer = document.getElementById("errorContainer");
+    errorContainer.innerHTML = `<p class="error-message">${message}</p>`;
+}
+
+document.getElementById("generateButton").addEventListener("click", function() {
+    this.clicked = true;
+    toggleFields();
+});
+
+function displayError(message) {
+    const errorContainer = document.getElementById("errorContainer");
+    errorContainer.innerHTML = `<p class="error-message">${message}</p>`;
+}
+
+    function goToReportsPage() {
+        console.log("Redirecting to reports.html");
+        window.location.href = "reports.html";
+    }
+
+    function addProductField() {
+    const productFields = document.getElementById("productFields");
+    
+    const newProductField = document.createElement("div");
+    newProductField.classList.add("product-field");
+
+    newProductField.innerHTML = `
+        <label for="product">Product:</label>
+        <input type="search" class="product" name="product" list="productList" placeholder="Search for a product" required>
+        <datalist id="productList">
+            <option value="Air Filter - 30965">
+            <option value="Oil - 20394">
+            <option value="Spark Plug - 30459">
+        </datalist>
+        <button type="button" onclick="removeProductField(this)">Remove Item</button>
+    `;
+
+    productFields.appendChild(newProductField);
+}
+
+function removeProductField(button) {
+    const productField = button.parentNode;
+    const productFields = document.getElementById("productFields");
+
+    // Ensure there is at least one product field before removing
+    if (productFields.children.length > 1) {
+        productFields.removeChild(productField);
+    }
+}
+
+//check for roles
+const userRole = sessionStorage.getItem('userRole');
+        if (userRole === 'sales') {
+            document.getElementById('customerLink').style.display = 'block';
+            document.getElementById('reportsLink').style.display = 'block';
+        } else if (userRole === 'tech') {
+            document.getElementById('repairsLink').style.display = 'block';
+            document.getElementById('reportsLink').style.display = 'block';
+        } else if (userRole === 'admin') {
+            document.getElementById('customerLink').style.display = 'block';
+            document.getElementById('maintenanceLink').style.display = 'block';
+            document.getElementById('reportsLink').style.display = 'block';
+            document.getElementById('repairsLink').style.display = 'block';
+        } else {
+            // Redirect to login page if user role is not set
+            window.location.href = 'main.html';
+        }
+    </script>
 </body>
 </html>

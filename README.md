@@ -16,11 +16,18 @@ Paperwork Manager: Mohammad Khan
 Lead Designer: Kyle Zizian
 Lead Developer: Daniel Baptiste
 
-In P3 your goals are as follows:
+For the Final Presentation, the goals are as follows:
 
-- Update the storyboard
-- Complete Ideation
-- Update the repairs page
-- make customers' names searchable instead of dropdown
-- make equipment names searchable instead of dropdown
+- Update the storyboard to show how the repair would go through.
+- Complete User Stories
+- finish all the repairs that Dave told us to.
+- finish up reports
+- Practice the pitch. ( we are convincing him on why he should select us and our software)
 
+Test
+
+rahhh
+
+dagan test
+
+dagan test 2

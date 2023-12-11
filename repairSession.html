@@ -133,21 +133,25 @@
 <body>
     <header>
         <h1><a href="main.html" id="logo-link">Emma's Small Engines</a></h1>
-        <nav>
+        <nav id="headerContent">
             <ul>
                 <li><a href="main.html">Home</a></li>
-                <li><a href="inventory.html">Equipment</a></li>
-                <li><a href="customer.html">Customer</a></li>
-                <li><a href="tables.html">Maintenance</a></li>
-                <li><a href="reports.html">Reports</a></li>
-                <li><a href="repairs.html">Repairs</a></li>
+                <li style="display: none;" id="customerLink"><a href="customer.html">Customer</a></li>
+                <li style="display: none;" id="repairsLink"><a href="repairs.html">Repairs</a></li>
+                <li style="display: none;" id="reportsLink"><a href="reports.html">Reports</a></li>
+                <li style="display: none;" id="maintenanceLink"><a href="tables.html">Maintenance</a></li>  
             </ul>
         </nav>
     </header>
+
+    <button class="logout-button" id="logoutButton" onclick="location.href='login.html'" style="position: fixed; top: 70px; right: 10px;">Logout</button>
+
     <main>
         <h1 id="repairTitle">Repair Session</h1>
         <form id="editForm">
             <label id="repairIdLabel"></label>
+
+            <label id="serialNumberLabel"></label>
 
             <label for="warranty">Warranty:</label>
                 <input type="checkbox">
@@ -161,7 +165,7 @@
                 <div id="parts-list">
                     <div class="part-row">
                         <select class="part-select">
-                            <option value="">Select Part</option>
+                            <option value="" disabled selected>Select Part</option>
                             <!-- Add other part options here -->
                         </select>
                         <input type="number" class="quantity-input" value="1" min="1">
@@ -177,24 +181,37 @@
             <div id="time-list">
                 <div class="time-row">
                     <h3>Session 1</h3>
+                    <select class="repair-select">
+                        <option value="" disabled selected>Select Repair Type</option>
+                        <!-- Add other repair options here -->
+                    </select>
                     <label for="startTime">Start Time:</label>
-                    <input type="time" class="startTime">
-                    <input type="date" class="startDate">
+                    <input id="startTime" type="time" class="startTime">
+                    <input id="startDate" type="date" class="startDate">
+                  
                     <label for="endTime">End Time:</label>
                     <input type="time" class="endTime">
                     <input type="date" class="endDate">
                     
                 </div>
             </div>
-            <button type="button" class="add-time-button" onclick="addTimeRow()">Add Time</button>
+            <button type="button" class="add-time-button" onclick="addTimeRow()">Add Session</button>
         </div>
              <!-- Technician and Time Information -->
             <label for="technician">Technician:</label>
-            <select id="technician">
-                <option value="">Select Technician</option>
-                <option value="Eugene">Eugene</option>
-                <option value="Sarah">Sarah</option>
-            </select>
+            <div id="technician-list">
+                <div class="technician-row">
+                    <select id="technician">
+                        <option value="" disabled selected>Select Technician</option>
+                        <option value="Eugene">Eugene</option>
+                        <option value="Sarah">Sarah</option>
+                        <option value="Will">Will</option>
+                        <option value="Bill">Bill</option>
+                        <option value="Jill">Jill</option>
+                    </select>
+                </div>
+            </div>
+            <button type="button" class="add-technician-button" onclick="addTechnicianRow()">Add Technician</button>
             <!-- Technician Notes -->
             <label for="technicianNotes">Technician Notes:</label>
             <textarea id="technicianNotes" placeholder="Notes from the technician" rows="7" cols="70"></textarea>
@@ -202,7 +219,7 @@
             <div id="errorContainer"></div>
             
             <button type="button" id="completeButton">Complete</button>
-            <button type="button" id="saveButton">Save Changes</button>
+            <button type="button" id="saveButton" onclick="goToRepairsPage()">Save Changes</button>
             <button type="button" id="cancelButton" onclick="goToRepairsPage()">Cancel</button>
         </form>
     </main>
@@ -217,6 +234,21 @@
     { name: 'Spring' },
 ];
 
+    const repairTypesData = [
+    { name: 'Oil change' },
+    { name: 'Tire change' },
+    { name: 'Sharpening' },
+    { name: 'Engine repair' },
+]
+
+const technicianData = [
+    { name: 'Eugene' },
+    { name: 'Sarah' },
+    { name: 'Will' },
+    { name: 'Bill' },
+    { name: 'Jill' }
+]
+
 document.addEventListener("DOMContentLoaded", function () {
     // Get the equipment data from the URL parameter as a JSON string
     const urlParams = new URLSearchParams(window.location.search);
@@ -230,12 +262,22 @@ document.addEventListener("DOMContentLoaded", function () {
         option.text = part.name;
         initialPartsDropdown.appendChild(option);
     });
+
+    // Populate initial repairs dropdown
+    const initialRepairsDropdown = document.querySelector(".repair-select");
+    repairTypesData.forEach(repair => {
+        const option = document.createElement("option");
+        option.value = repair.name;
+        option.text = repair.name;
+        initialRepairsDropdown.appendChild(option);
+    });
     // Automatically fill start time
     var currentDateTime = new Date();
     var currentDate = currentDateTime.toISOString().split('T')[0];
     var currentTime = currentDateTime.toTimeString().split(' ')[0].substring(0, 5);
 
-    
+    document.getElementById('startDate').value = currentDate;
+    document.getElementById('startTime').value = currentTime;
 
     // Retrieve and parse the repair session data
     let repairData = null;
@@ -270,6 +312,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Display Repair ID in a label
             document.getElementById("repairIdLabel").textContent = "Repair ID: " + repairToEdit.repairid;
+
+            // Display serial number
+            document.getElementById("serialNumberLabel").textContent = "Serial number: " + repairToEdit.serial;
 
             document.getElementById("description").value = repairToEdit.description;
 
@@ -347,7 +392,7 @@ function addPartRow() {
 
     newRow.innerHTML = `
         <select class="part-select">
-            <option value="">Select Part</option>
+            <option value="" disabled selected>Select Part</option>
             ${partsData.map(part => `<option value="${part.name}">${part.name}</option>`).join('')}
         </select>
         <input type="number" class="quantity-input" value="1" min="1">
@@ -373,6 +418,11 @@ function addTimeRow() {
 
     newRow.innerHTML = `
         <h3>Session ${sessionCounter}</h3>
+        <select class="repair-select">
+                        <option value="" disabled selected>Select Repair Type</option>
+                        ${repairTypesData.map(repair => `<option value="${repair.name}">${repair.name}</option>`).join('')}
+                    </select>
+
         <label for="startTime">Start Time:</label>
         <input type="time" class="startTime">
         <input type="date" class="startDate">
@@ -398,6 +448,46 @@ function renumberSessions() {
         row.querySelector('h3').textContent = `Session ${index + 1}`;
     });
 }
+
+function addTechnicianRow() {
+    const technicianList = document.getElementById("technician-list");
+    const newRow = document.createElement("div");
+    newRow.className = 'technician-row';
+
+    newRow.innerHTML = `
+        <select class="technician-select">
+            <option value="" disabled selected>Select Technician</option>
+            ${technicianData.map(technician => `<option value="${technician.name}">${technician.name}</option>`).join('')}
+        </select>
+        <button type="button" class="remove-part-button" onclick="removeThisPartRow(this)">-</button>
+    `;
+
+    technicianList.appendChild(newRow);
+}
+
+function removeThisTimeRow(button) {
+    const timeRow = button.parentElement;
+    timeRow.remove();
+    renumberSessions(); // Renumber sessions after removing one
+}
+
+//check for roles
+const userRole = sessionStorage.getItem('userRole');
+    if (userRole === 'sales') {
+        document.getElementById('customerLink').style.display = 'block';
+        document.getElementById('reportsLink').style.display = 'block';
+    } else if (userRole === 'tech') {
+        document.getElementById('repairsLink').style.display = 'block';
+        document.getElementById('reportsLink').style.display = 'block';
+    } else if (userRole === 'admin') {
+        document.getElementById('customerLink').style.display = 'block';
+        document.getElementById('maintenanceLink').style.display = 'block';
+        document.getElementById('reportsLink').style.display = 'block';
+        document.getElementById('repairsLink').style.display = 'block';
+    } else {
+        // Redirect to login page if user role is not set
+        window.location.href = 'main.html';
+    }
 </script>
 
 </body>
