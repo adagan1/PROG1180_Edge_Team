@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emma's Small Engines - Sales Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            color: #000;
+        }
+        .invoice-box {
+            max-width: 800px; 
+            margin: auto;
+            padding: 50px; 
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            font-size: 20px; 
+            line-height: 28px; 
+        }
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+        .invoice-box table td {
+            padding: 10px; 
+            vertical-align: top;
+        }
+        .invoice-box table tr td:nth-child(n+2) {
+            text-align: right;
+        }
+        .invoice-box table tr.top table td {
+            padding-bottom: 40px; 
+        }
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+        .invoice-box table tr.details td {
+            padding-bottom: 40px; 
+        }
+        .invoice-box table tr.item td{
+            border-bottom: 1px solid #000000;
+        }
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+        }
+        .invoice-box table tr.total td:nth-child(2) {
+            border-top: 2px solid #000000;
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            color: #777;
+            padding: 40px 0; 
+        }
+        .footer p {
+            margin: 0;
+            font-size: 18px; 
+        }
+
+        .button {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.3s ease;
+        }
+
+        .button-back {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .button-print {
+            background-color: #000000;
+            color: white;
+        }
+
+        @media print {
+            .no-print, .no-print * {
+                display: none !important;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="4">
+                    Invoice #: 48579<br>
+                    Created: December 11th, 2023<br>
+                    <br>
+                    Emma's Small Engines<br>
+                    123 Grand Falcon Ave<br>
+                    Fonthill, ON W3E 4R5
+                </td>
+                <td>
+                    Joe Jawndel<br>
+                    123 Niagara College St.<br>
+                    Welland, ON Y6R 6Y5
+                </td>
+            </tr>
+            
+            <tr class="heading">
+                <td colspan="4">
+                    Payment Method
+                </td>
+                <td>
+                    Credit Card
+                </td>
+            </tr>
+            
+            <tr class="heading">
+                <td>Quantity</td>
+                <td>Description</td>
+                <td>Item #</td>
+                <td>Unit Price</td>
+                <td>Amount</td>
+            </tr>
+            
+            <tr class="item">
+                <td>1</td>
+                <td>Air filter</td>
+                <td>30546</td>
+                <td>$5.99</td>
+                <td>$5.99</td>
+            </tr>
+            
+            <tr class="total">
+                <td colspan="4">Subtotal</td>
+                <td>$5.99</td>
+            </tr>
+
+            <tr class="total">
+                <td colspan="4">Tax</td>
+                <td>$0.78</td>
+            </tr>
+
+            <tr class="total">
+                <td colspan="4">Total</td>
+                <td>$6.77</td>
+            </tr>
+        </table>
+        <div class="footer">
+            <p>Thank you for your business!</p>
+        </div>
+        <div class="no-print button-container">
+            <button onclick="goBack()" class="button button-back">Go Back</button>
+            <button onclick="printInvoice()" class="button button-print">Print</button>
+        </div>
+    
+        <script>
+            function goBack() {
+            window.location.href = 'reports.html';
+        }
+    
+            function printInvoice() {
+                window.print();
+            }
+        </script>
+    </div>
+</body>
+</html>
