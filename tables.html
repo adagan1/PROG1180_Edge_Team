@@ -169,19 +169,7 @@ function populateTable(tableId, data) {
         editButton.onclick = function () {
             editItem(row, tableId);
         };
-        controlsCell.appendChild(editButton);
-
-        // Create Order More button (only for parts and types tables)
-        if (tableId === 'partsTable' || tableId === 'typesTable') {
-            const orderMoreButton = document.createElement('button');
-            orderMoreButton.textContent = 'Order More';
-            // Optionally, add margin for order more button if needed
-            // orderMoreButton.style.marginLeft = '10px';
-            orderMoreButton.onclick = function () {
-                orderMorePartsOrTypes(item);
-            };
-            controlsCell.appendChild(orderMoreButton);
-        }
+        controlsCell.appendChild(editButton);    
     });
 }
 
