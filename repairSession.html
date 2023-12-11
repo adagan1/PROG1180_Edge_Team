@@ -188,6 +188,7 @@
                     <label for="startTime">Start Time:</label>
                     <input id="startTime" type="time" class="startTime">
                     <input id="startDate" type="date" class="startDate">
+                  
                     <label for="endTime">End Time:</label>
                     <input type="time" class="endTime">
                     <input type="date" class="endDate">
@@ -270,7 +271,6 @@ document.addEventListener("DOMContentLoaded", function () {
         option.text = repair.name;
         initialRepairsDropdown.appendChild(option);
     });
-
     // Automatically fill start time
     var currentDateTime = new Date();
     var currentDate = currentDateTime.toISOString().split('T')[0];
@@ -307,7 +307,6 @@ document.addEventListener("DOMContentLoaded", function () {
             // Parse the JSON data
             const repairToEdit = JSON.parse(repairDataString);
 
-            console.log(repairToEdit);
             // Populate the input fields with the equipment data
             document.getElementById("repairTitle").textContent = repairToEdit.customer + "'s " + repairToEdit.equipment;
 
@@ -318,7 +317,6 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("serialNumberLabel").textContent = "Serial number: " + repairToEdit.serial;
 
             document.getElementById("description").value = repairToEdit.description;
-
 
             // Handle the customer dropdown
             const customerDropdown = document.getElementById("customer");
@@ -424,6 +422,7 @@ function addTimeRow() {
                         <option value="" disabled selected>Select Repair Type</option>
                         ${repairTypesData.map(repair => `<option value="${repair.name}">${repair.name}</option>`).join('')}
                     </select>
+
         <label for="startTime">Start Time:</label>
         <input type="time" class="startTime">
         <input type="date" class="startDate">
